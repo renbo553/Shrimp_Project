@@ -1,10 +1,17 @@
 <?php
+/* Create a session only once
+ * 
+ * 
+ */
 if(!isset($_SESSION)) {
+	// session hasn't been created
 	session_start();
 	if(isset($_SESSION["userid"])) {
-		echo "Welcome"." "."{$_SESSION['username']}"." "."Authority"." "."{$_SESSION['authority']}";
+		// visit with an existing account
+		echo "Welcome {$_SESSION['username']} Authority {$_SESSION['authority']}";
 	}
-};
+}
+
 ?>
 
 <!DOCTYPE html>

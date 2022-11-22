@@ -1,114 +1,168 @@
 <?php
-// Include config file
-require_once "config.php";
+// Include config database file
+require_once "config_database.php";
 
-// Define variables and initialize with empty values
-$username = $password = "";
-$username_err = $password_err = "";
- 
-// Processing form data when form is submitted
+$username = null;
+$password = null;
+
+/* Processing form data */
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-    
-    // Check if username is empty
-    if(empty(trim($_POST["username"]))){
-        $username_err = "Please enter username.";
-		echo "<script type='text/javascript'>";
-		echo "window.alert('登入失敗  :  ".$username_err."');";
-		echo "</script>"; 
-    } else{
-        $username = trim($_POST["username"]);
-    }
-    
-    // Check if password is empty
-    if(empty(trim($_POST["password"]))){
-        $password_err = "Please enter your password.";
-		echo "<script type='text/javascript'>";
-		echo "window.alert('登入失敗  :  ".$password_err."');";
-		echo "</script>"; 
-    } else{
-        $password = trim($_POST["password"]);
-    }
-    
-    // Validate credentials
-    if(empty($username_err) && empty($password_err)){
-        // Prepare a select statement
-        $sql = "SELECT id, username, password ,authority FROM users WHERE username = ?";
-        if($stmt = $mysqli->prepare($sql)){
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("s", $param_username);
-            
-            // Set parameters
-            $param_username = $username;
-            
-            // Attempt to execute the prepared statement
-            if($stmt->execute()){
-                // Store result
-                $stmt->store_result();
-                
-                // Check if username exists, if yes then verify password
-                if($stmt->num_rows == 1){                    
-                    // Bind result variables
-                    $stmt->bind_result($id, $username, $hashed_password, $authority);
-                    if($stmt->fetch()){
-                        if(password_verify($password, $hashed_password)){
-                            // Password is correct, so start a new session
-//                            session_start();
-                            if(!isset($_SESSION)) {
-                                 session_start();
-                            };
-                            // Store data in session variables
-                            $_SESSION["loggedin"] = true;
-                            $_SESSION["id"] = $id;
-                            $_SESSION["username"] = $username;                            
-                            $_SESSION["userid"] = $id;
-							$_SESSION["authority"] = $authority;
-                            // Redirect user to schedule page
-                            //header("location: home");
-							$url = "home";
-							echo "<script type='text/javascript'>";
-							echo "window.alert('登入成功');";
-							echo "window.location.href='$url'";
-							echo "</script>"; 
-                        } else{
-                            // Display an error message if password is not valid
-                            $password_err = "The password you entered was not valid.";
-							$url = "login";
-							echo "<script type='text/javascript'>";
-							echo "window.alert('登入失敗  :  ".$password_err."');";
-							echo "window.location.href='$url'";
-							echo "</script>"; 
-                        }
-                    }
-                } else{
-                    // Display an error message if username doesn't exist
-                    $username_err = "No account found with that username.";
-					$url = "login";
-					echo "<script type='text/javascript'>";
-					echo "window.alert('登入失敗  :  ".$username_err."');";
-					echo "window.location.href='$url'";
-					echo "</script>"; 
-                }
-            } else{
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-        
-        // Close statement
-        $stmt->close();
-    }
-    
-    // Close connection
-    $mysqli->close();
+	// form data is submitted
+    login_process($mysqli);
 }
+
+/* login_process:
+ * 		verify username and password and log in
+ * param:
+ * 		mysqli: database object
+ */
+function login_process($mysqli) : void{
+	/* Check input username and password */
+	if(!login_get_string($username, $_POST["username"])){
+		// empty username
+		$msg = "登入失敗  :  Please enter username.";
+		login_window_msg($msg, null);
+		return;
+	}
+	if(!login_get_string($password, $_POST["password"])){
+		// empty password
+		$msg = "登入失敗  :  Please enter password.";
+		login_window_msg($msg, null);
+		return;
+	}
+	
+	/* Get username and password from database */
+	$sql = "SELECT id, username, password, authority FROM users WHERE username = ?";
+	// sql query string
+	$stmt = null;
+	if(!($stmt = $mysqli->prepare($sql))){
+		$msg = "登入失敗  :  Prepare failed.";
+		login_window_msg($msg, null);
+		return;
+	}
+	// bind parameters to the prepared statement
+	if(!($stmt->bind_param("s", $username))){
+		$stmt->close();
+		$msg = "登入失敗  :  Binding parameters failed.";
+		login_window_msg($msg, null);
+		return;
+	}
+	// execute the prepared statement
+	if(!$stmt->execute()){
+		$stmt->close();
+		$msg = "登入失敗  :  Execute failed.";
+		login_window_msg($msg, null);
+		return;
+	}
+	// store result
+	if(!$stmt->store_result()){
+		$stmt->close();
+		$msg = "登入失敗  :  Storing result failed.";
+		login_window_msg($msg, null);
+		return;
+	}
+	// check # rows of result
+	if($stmt->num_rows != 1){
+		// username doesn't exist
+		$stmt->close();
+		$msg = "登入失敗  :  The username is not found.";
+		$url = "login";
+		login_window_msg($msg, $url);
+		return;
+	}                
+	// bind result variables
+	if(!($stmt->bind_result($id, $username, $hashed_password, $authority))){
+		$stmt->close();
+		$msg = "登入失敗  :  Binding result failed.";
+		login_window_msg($msg, null);
+		return;
+	}
+	// fetch values
+	if(!$stmt->fetch()){
+		$stmt->close();
+		$msg = "登入失敗  :  Fetch result failed.";
+		login_window_msg($msg, null);
+		return;
+	}
+	// close connection
+	$stmt->close();
+	
+	/* verify password */
+	if(!password_verify($password, $hashed_password)){
+		// password is not correct
+		$msg = "登入失敗  :  The password is not correct.";
+		$url = "login";
+		login_window_msg($msg, $url);
+		return;
+	}
+
+	/* Correct password */
+	// create a new session
+	if(!isset($_SESSION)) {
+		 session_start();
+	}
+	// store data in session variables
+	$_SESSION["loggedin"] = true;
+	$_SESSION["id"] = $id;
+	$_SESSION["username"] = $username;                            
+	$_SESSION["userid"] = $id;
+	$_SESSION["authority"] = $authority;
+
+	// Redirect user to schedule page
+	//header("location: home");
+	$msg = "登入成功";
+	$url = "home";
+	login_window_msg($msg, $url);
+}
+
+
+/* login_get_string:
+ * 		check and assign input string
+ * param:
+ * 		str: assigned string (be modefied)
+ * 		input: input string
+ * return:
+ * 		true, if input string is not empty
+ * 		false, otherwise
+ */
+
+function login_get_string(string &$str, string $input) : bool{
+	if(empty(trim($input))){
+		// input is empty
+		return false;
+	}
+	$str = trim($input);
+	return true;
+}
+
+
+/* login_window_msg:
+ * 		show window message
+ * param:
+ * 		msg: output message
+ * 		url: destination url
+ */
+
+function login_window_msg(string $msg, string $url) : void{
+	echo "<script type='text/javascript'>";
+	echo "window.alert('{$msg}');";
+	if(!is_null($url)){
+		// url is not empty
+		echo "window.location.href='{$url}'";
+	}
+	echo "</script>";
+}
+
 ?>
 
 
 
 <!DOCTYPE html>
 <html lang="zxx">
+<!-- use for unknown language -->
 
 <head>
-	<title>Contact</title>
+	<title>Log in</title>
 	<!-- Meta Tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="utf-8">
