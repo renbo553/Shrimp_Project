@@ -1,0 +1,29 @@
+<!--js working-->
+<script src="js/jquery.min.js"></script>
+<!--//js working-->
+<!-- requried-jsfiles-for owl -->
+<!-- smooth scrolling -->
+<script type="text/javascript" src="js/move-top.js"></script>
+<script type="text/javascript" src="js/easing.js"></script>
+<!-- here stars scrolling icon -->
+<script type="text/javascript">
+	$(document).ready(function () {
+		$().UItoTop({ easingType: 'easeOutQuart' });
+	});
+</script>
+<!-- //here ends scrolling icon -->
+<!-- //smooth scrolling -->
+<!-- scrolling script -->
+<script type="text/javascript">
+	jQuery(document).ready(function ($) {
+		$(".scroll").click(function (event) {
+			event.preventDefault();
+				$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+		});
+	});
+</script>
+<!-- //scrolling script -->
+
+<!--bootstrap working-->
+<script src="js/bootstrap.min.js"></script>
+<!-- //bootstrap working-->
