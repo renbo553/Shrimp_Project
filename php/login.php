@@ -1,33 +1,39 @@
 <?php
-// Include config database file
-require_once "config_database.php";
+/* login.php
+ *      write the session after verifing username and password
+ */
 
-$username = null;
-$password = null;
+require_once "config.php";
+require_once "utility.php";
 
-/* Processing form data */
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 	// form data is submitted
     login_process($mysqli);
 }
 
+
+/*** function definition ***/
 /* login_process:
  * 		verify username and password and log in
  * param:
  * 		mysqli: database object
  */
+
 function login_process($mysqli) : void{
-	/* Check input username and password */
+    $username = null;
+    $password = null;
+	
+    /* Check input username and password */
 	if(!login_get_string($username, $_POST["username"])){
 		// empty username
 		$msg = "登入失敗  :  Please enter username.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	if(!login_get_string($password, $_POST["password"])){
 		// empty password
 		$msg = "登入失敗  :  Please enter password.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	
@@ -37,28 +43,28 @@ function login_process($mysqli) : void{
 	$stmt = null;
 	if(!($stmt = $mysqli->prepare($sql))){
 		$msg = "登入失敗  :  Prepare failed.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	// bind parameters to the prepared statement
 	if(!($stmt->bind_param("s", $username))){
 		$stmt->close();
 		$msg = "登入失敗  :  Binding parameters failed.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	// execute the prepared statement
 	if(!$stmt->execute()){
 		$stmt->close();
 		$msg = "登入失敗  :  Execute failed.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	// store result
 	if(!$stmt->store_result()){
 		$stmt->close();
 		$msg = "登入失敗  :  Storing result failed.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	// check # rows of result
@@ -67,32 +73,32 @@ function login_process($mysqli) : void{
 		$stmt->close();
 		$msg = "登入失敗  :  The username is not found.";
 		$url = "login";
-		login_window_msg($msg, $url);
+		utility_window_msg($msg, $url);
 		return;
 	}                
 	// bind result variables
 	if(!($stmt->bind_result($id, $username, $hashed_password, $authority))){
 		$stmt->close();
 		$msg = "登入失敗  :  Binding result failed.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	// fetch values
 	if(!$stmt->fetch()){
 		$stmt->close();
 		$msg = "登入失敗  :  Fetch result failed.";
-		login_window_msg($msg, null);
+		utility_window_msg($msg, null);
 		return;
 	}
 	// close connection
 	$stmt->close();
 	
-	/* verify password */
+	/* Verify password */
 	if(!password_verify($password, $hashed_password)){
 		// password is not correct
 		$msg = "登入失敗  :  The password is not correct.";
 		$url = "login";
-		login_window_msg($msg, $url);
+		utility_window_msg($msg, $url);
 		return;
 	}
 
@@ -107,9 +113,10 @@ function login_process($mysqli) : void{
 	$_SESSION["username"] = $username;                            
 	$_SESSION["userid"] = $id;
 	$_SESSION["authority"] = $authority;
-
 	// Redirect user to schedule page
 	//header("location: home");
+
+    /* Show message window */
 	$msg = "登入成功";
 	$url = "home";
 	login_window_msg($msg, $url);
@@ -126,7 +133,7 @@ function login_process($mysqli) : void{
  * 		false, otherwise
  */
 
-function login_get_string(string &$str, string $input) : bool{
+function login_get_string(&$str, $input) : bool{
 	if(empty(trim($input))){
 		// input is empty
 		return false;
@@ -135,61 +142,20 @@ function login_get_string(string &$str, string $input) : bool{
 	return true;
 }
 
-
-/* login_window_msg:
- * 		show window message
- * param:
- * 		msg: output message
- * 		url: destination url
- */
-
-function login_window_msg(string $msg, string $url) : void{
-	echo "<script type='text/javascript'>";
-	echo "window.alert('{$msg}');";
-	if(!is_null($url)){
-		// url is not empty
-		echo "window.location.href='{$url}'";
-	}
-	echo "</script>";
-}
-
 ?>
 
 
 
 <!DOCTYPE html>
 <html lang="zxx">
-<!-- use for unknown language -->
 
 <head>
 	<title>Log in</title>
-	<!-- Meta Tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="utf-8">
-	<meta name="keywords" content="" />
-	<script type="application/x-javascript">
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
-
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
-	<!-- // Meta Tags -->
-	<!--booststrap-->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-	<!--//booststrap end-->
-	<!-- font-awesome icons -->
-	<link href="css/fontawesome-all.css" rel="stylesheet">
-	<!-- //font-awesome icons -->
-	<!--stylesheets-->
-	<link href="css/style.css" rel='stylesheet' type='text/css' media="all">
-	<!--//stylesheets-->
-	<link href="http://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i"
-		rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
+	<!--Head-->
+	<?php require_once "head.html"?>
+    <!--//Head-->
 </head>
+
 <style>
 	/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
 	@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
@@ -386,39 +352,9 @@ function login_window_msg(string $msg, string $url) : void{
 </style>
 
 <body>
-
-	<!--/banner-->
-	<!-- banner -->
-	<header>
-		<div class="banner1">
-			<div class="header-bar">
-				<div class="container">
-					<nav class="navbar navbar-expand-lg navbar-light">
-						<h1><a class="navbar-brand" href="home">ICDSA</a></h1>
-						&nbsp;&nbsp;&nbsp;
-						<div class="hedder-up">
-							<img src="./img/EmbeddedImage.png" height="40">
-						</div>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-							<ul class="navbar-nav">
-								<li class="nav-item">
-									<a href="home" class="nav-link">首頁</a>
-								</li>
-								<li class="nav-item active">
-									<a href="login" class="nav-link">登入/註冊</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header>
+	<!--Header-->
+    <?php require_once "header.php" ?>
+    <!--//Header-->
 
 	<div class="overlay">
 		<!-- LOGN IN FORM by Omar Dsoky -->
@@ -473,90 +409,13 @@ function login_window_msg(string $msg, string $url) : void{
 		</form>
 	</div>
 
-	<!-- Footer -->
-	<footer>
-		<footer>
-			<section class="w3ls_address_mail_footer_grids">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6 w3ls_footer_grid_left">
-							<h5 class="sub-head">Address</h5>
-							<p>臺南市安南區媽祖宮里
-								<span>安明路３段５００號</span>
-							</p>
-						</div>
-						<div class="col-sm-6 w3ls_footer_grid_left">
-							<h5 class="sub-head">Contact Us</h5>
-							<p>電話 ： +886-6-2757575#58209
-								<span>傳真 ： +886-6-2766490</span>
-							</p>
-						</div>
-					</div>
+	<!--Footer-->
+    <?php require_once "footer.html" ?>
+    <!--//Footer-->
 
-				</div>
-			</section>
-		</footer>
-		<section class="copyright-wthree">
-			<div class="container">
-				<p>Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear())
-					</script>
-					國立成功大學前瞻蝦類養殖國際研發中心.
-				</p>
-				<div class="w3l-social">
-					<ul>
-						<li>
-							<a href="#" class="fab fa-facebook-f"></a>
-						</li>
-						<li>
-							<a href="#" class="fab fa-twitter"></a>
-						</li>
-						<li>
-							<a href="#" class="fab fa-google-plus-g"></a>
-						</li>
-						<li>
-							<a href="#" class="fab fa-instagram"></a>
-						<li>
-						<li>
-							<a href="#" class="fab fa-linkedin-in"></a>
-						<li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		<!-- //Footer -->
-
-
-		<!--js working-->
-		<script src="js/jquery.min.js"></script>
-		<!--//js working-->
-		<!-- requried-jsfiles-for owl -->
-		<!-- smooth scrolling -->
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
-		<!-- here stars scrolling icon -->
-		<script type="text/javascript">
-			$(document).ready(function () {
-				$().UItoTop({ easingType: 'easeOutQuart' });
-			});
-		</script>
-		<!-- //here ends scrolling icon -->
-		<!-- //smooth scrolling -->
-		<!-- scrolling script -->
-		<script type="text/javascript">
-			jQuery(document).ready(function ($) {
-				$(".scroll").click(function (event) {
-					event.preventDefault();
-					$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
-				});
-			});
-		</script>
-		<!-- //scrolling script -->
-
-		<!--bootstrap working-->
-		<script src="js/bootstrap.min.js"></script>
-		<!-- //bootstrap working-->
+    <!--Other Script-->
+	<?php require_once "other_script.html" ?>
+    <!--//Other Script-->
 </body>
 
 </html>

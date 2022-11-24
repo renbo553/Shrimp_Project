@@ -1,118 +1,157 @@
 <?php
-// Include config file
+/* register.php
+ *      insert a new account into database and redirect to login page
+ */
+
 require_once "config.php";
+require_once "utility.php";
 
-// Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
-$username_err = $password_err = $confirm_password_err = "";
-
-// Processing form data when form is submitted
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-
-    // Validate username
-    if (empty(trim($_POST["username"]))) {
-        $username_err = "Please enter a username.";
-		
-    } else {
-        // Prepare a select statement
-        $sql = "SELECT id FROM users WHERE username = ?";
-
-        if ($stmt = $mysqli->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("s", $param_username);
-
-            // Set parameters
-            $param_username = trim($_POST["username"]);
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                // store result
-                $stmt->store_result();
-
-                if ($stmt->num_rows == 1) {
-                    $username_err = "This username is already taken.";
-                } else {
-                    $username = trim($_POST["username"]);
-                }
-            } else {
-                echo "Oops! Something went wrong. Please try again later.";
-            }
-        }
-        // Close statement
-        $stmt->close();
-    }
-	if(!empty($username_err))
-	{
-		echo "<script type='text/javascript'>";
-		echo "window.alert('".$username_err."');";
-		echo "</script>"; 
-	}
-    // Validate password
-    if (empty(trim($_POST["password"]))) {
-        $password_err = "Please enter a password.";
-    } elseif (strlen(trim($_POST["password"])) < 6) {
-        $password_err = "Password must have atleast 6 characters.";
-    } else {
-        $password = trim($_POST["password"]);
-    }
-	if(!empty($password_err))
-	{
-		echo "<script type='text/javascript'>";
-		echo "window.alert('".$password_err."');";
-		echo "</script>"; 
-	}
-
-    // Validate confirm password
-    if (empty(trim($_POST["confirm_password"]))) {
-        $confirm_password_err = "Please confirm password.";
-    } else {
-        $confirm_password = trim($_POST["confirm_password"]);
-        if (empty($password_err) && ($password != $confirm_password)) {
-            $confirm_password_err = "Password did not match.";
-        }
-    }
-	if(!empty($confirm_password_err))
-	{
-		echo "<script type='text/javascript'>";
-		echo "window.alert('".$confirm_password_err."');";
-		echo "</script>"; 
-	}
-
-    // Check input errors before inserting in database
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err)) {
-
-        // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-
-        if ($stmt = $mysqli->prepare($sql)) {
-            // Bind variables to the prepared statement as parameters
-            $stmt->bind_param("ss", $param_username, $param_password);
-
-            // Set parameters
-            $param_username = $username;
-            $param_password = password_hash($password, PASSWORD_DEFAULT); // Creates a password hash
-
-            // Attempt to execute the prepared statement
-            if ($stmt->execute()) {
-                // Redirect to login page
-                //header("location: login");
-                $url = "login";
-                echo "<script type='text/javascript'>";
-                echo "window.alert('註冊成功 請重新輸入帳號密碼登入');";
-                echo "window.location.href='$url'";
-                echo "</script>"; 
-            } else {
-                echo "Something went wrong. Please try again later.";
-            }
-        }
-
-        // Close statement
-        $stmt->close();
-    }
-
-    // Close connection
-    $mysqli->close();
+if($_SERVER["REQUEST_METHOD"] == "POST"){
+    // form data is submitted
+    register_process($mysqli);
 }
+
+
+/*** function definition ***/
+/* register_process:
+ *      check input username and password and add a new accout
+ *      if input username has not existed.
+ * param:
+ *      mysqli: database object
+ */
+
+function register_process($mysqli) :void{
+    $username = null;
+    $password = null;
+    $confirm_password = null;
+
+    /* Check input username, password and confirm password */
+    if(!register_get_string($username, $_POST["username"])){
+        // empty username
+        $msg = "註冊失敗  :  Please enter username.";
+        utility_window_msg($msg, null);
+        return;
+    }
+    if(!register_get_string($password, $_POST["password"])){
+        // empty password
+        $msg = "註冊失敗  :  Please enter password.";
+        utility_window_msg($msg, null);
+        return;
+    }
+    elseif(strlen($password) < 6){
+        // password is too short
+        $msg = "註冊失敗  :  Password must have at least 6 characters.";
+        utility_window_msg($msg, null);
+        return;
+    }
+    if(!register_get_string($confirm_password, $_POST["confirm_password"])){
+        // confirm password is empty
+        $msg = "註冊失敗  :  Please enter confirm password.";
+        utility_window_msg($msg, null);
+        return;
+    }
+
+    /* Check whether input username has already existed */
+    $sql = "SELECT id FROM users WHERE username = ?";
+    // sql query string
+    $stmt = null;
+    if(!($stmt = $mysqli->prepare($sql))){
+        $msg = "註冊失敗  :  Prepare failed.";
+        utility_window_msg($msg, null);
+        return;
+    }
+	// bind parameters to the prepared statement
+    if(!($stmt->bind_param("s", $username))){
+		$stmt->close();
+		$msg = "註冊失敗  :  Binding parameters failed.";
+		utility_window_msg($msg, null);
+		return;
+	}
+    // execute the prepared statement
+	if(!$stmt->execute()){
+		$stmt->close();
+		$msg = "註冊失敗  :  Execute failed.";
+		utility_window_msg($msg, null);
+		return;
+	}
+	// store result
+	if(!$stmt->store_result()){
+		$stmt->close();
+		$msg = "註冊失敗  :  Storing result failed.";
+		utility_window_msg($msg, null);
+		return;
+	}
+	// check # rows of result
+	if($stmt->num_rows != 0){
+		// username doesn't exist
+		$stmt->close();
+		$msg = "註冊失敗  :  The username is already used.";
+		utility_window_msg($msg, null);
+		return;
+	}
+    // close connection
+    $stmt->close();
+
+    /* Check password and confirm password */
+    if($password != $confirm_password){
+        $msg = "註冊失敗  :  Two passwords doesn't match.";
+		utility_window_msg($msg, null);
+		return;
+    }
+
+    /* Insert a new account into database */
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+    // sql query string
+    $stmt = null;
+    if(!($stmt = $mysqli->prepare($sql))){
+        $msg = "註冊失敗  :  Prepare failed.";
+        utility_window_msg($msg, null);
+        return;
+    }
+	// bind parameters to the prepared statement
+    if(!($stmt->bind_param("ss", $username, $password))){
+		$stmt->close();
+		$msg = "註冊失敗  :  Binding parameters failed.";
+		utility_window_msg($msg, null);
+		return;
+	}
+    // execute the prepared statement
+	if(!$stmt->execute()){
+		$stmt->close();
+		$msg = "註冊失敗  :  Execute failed.";
+		utility_window_msg($msg, null);
+		return;
+	}
+    // close connection
+    $stmt->close();
+
+    /* Show message window */
+    $msg = "註冊成功 請再次輸入帳號密碼登入";
+    $url = "login";
+    utility_window_msg($msg, $url);
+}
+
+
+/* register_get_string:
+ * 		check and assign input string
+ * param:
+ * 		str: assigned string (be modefied)
+ * 		input: input string
+ * return:
+ * 		true, if input string is not empty
+ * 		false, otherwise
+ */
+
+function register_get_string(&$str, $input) : bool{
+	if(empty(trim($input))){
+		// input is empty
+		return false;
+	}
+	$str = trim($input);
+	return true;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -120,33 +159,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <title>Contact</title>
-	<!-- Meta Tags -->
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta charset="utf-8">
-	<meta name="keywords" content="" />
-	<script type="application/x-javascript">
-		addEventListener("load", function () {
-			setTimeout(hideURLbar, 0);
-		}, false);
-
-		function hideURLbar() {
-			window.scrollTo(0, 1);
-		}
-	</script>
-	<!-- // Meta Tags -->
-	<!--booststrap-->
-	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all">
-	<!--//booststrap end-->
-	<!-- font-awesome icons -->
-	<link href="css/fontawesome-all.css" rel="stylesheet">
-	<!-- //font-awesome icons -->
-	<!--stylesheets-->
-	<link href="css/style.css" rel='stylesheet' type='text/css' media="all">
-	<!--//stylesheets-->
-	<link href="http://fonts.googleapis.com/css?family=Josefin+Sans:100,100i,300,300i,400,400i,600,600i,700,700i"
-		rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
+	<!--Head-->
+	<?php require_once "head.html"?>
+    <!--//Head-->
 </head>
+
 <style>
 	/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
 	@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
@@ -338,37 +355,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		}
 	}
 </style>
+
 <body>
-<header>
-		<div class="banner1">
-			<div class="header-bar">
-				<div class="container">
-					<nav class="navbar navbar-expand-lg navbar-light">
-						<h1><a class="navbar-brand" href="home">ICDSA</a></h1>
-						&nbsp;&nbsp;&nbsp;
-						<div class="hedder-up">
-							<img src="./img/EmbeddedImage.png" height="40">
-						</div>
-						<button class="navbar-toggler" type="button" data-toggle="collapse"
-							data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-							aria-expanded="false" aria-label="Toggle navigation">
-							<span class="navbar-toggler-icon"></span>
-						</button>
-						<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
-							<ul class="navbar-nav">
-								<li class="nav-item">
-									<a href="home" class="nav-link">首頁</a>
-								</li>
-								<li class="nav-item active">
-									<a href="login" class="nav-link">登入/註冊</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
-			</div>
-		</div>
-	</header>
+    <!--Header-->
+    <?php require_once "header.php" ?>
+    <!--//Header-->
 
     <div class="overlay">
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
@@ -384,17 +375,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <span class="input-item">
                             <i class="fa fa-user-circle"></i>
                     </span>
-                    <input type="text" name="username" class="form-input" placeholder="@UserName" value="<?php echo $username; ?>">
+                    <input type="text" name="username" class="form-input" placeholder="@UserName">
                     <br>
                     <span class="input-item">
                         <i class="fa fa-key"></i>
                     </span>
-                    <input  name="password" class="form-input" type="password" placeholder="Password" id="pwd" value="<?php echo $password; ?>">
+                    <input  name="password" class="form-input" type="password" placeholder="Password" id="pwd">
                     <br>
                     <span class="input-item">
                         <i class="fa fa-key"></i>
                     </span>
-                    <input type="password" name="confirm_password" class="form-input" placeholder="Confirm Password" value="<?php echo $confirm_password; ?>">
+                    <input type="password" name="confirm_password" class="form-input" placeholder="Confirm Password">
                     <br>
                     <br>
                     <div class="form-group">
@@ -407,89 +398,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 
-	<!-- Footer -->
-	<footer>
-		<footer>
-			<section class="w3ls_address_mail_footer_grids">
-				<div class="container">
-					<div class="row">
-						<div class="col-sm-6 w3ls_footer_grid_left">
-							<h5 class="sub-head">Address</h5>
-							<p>臺南市安南區媽祖宮里
-								<span>安明路３段５００號</span>
-							</p>
-						</div>
-						<div class="col-sm-6 w3ls_footer_grid_left">
-							<h5 class="sub-head">Contact Us</h5>
-							<p>電話 ： +886-6-2757575#58209
-								<span>傳真 ： +886-6-2766490</span>
-							</p>
-						</div>
-					</div>
+	<!--Footer-->
+    <?php require_once "footer.html" ?>
+	<!--//Footer-->
 
-				</div>
-			</section>
-		</footer>
-		<section class="copyright-wthree">
-			<div class="container">
-				<p>Copyright &copy;
-					<script>
-						document.write(new Date().getFullYear())
-					</script>
-					國立成功大學前瞻蝦類養殖國際研發中心.
-				</p>
-				<div class="w3l-social">
-					<ul>
-						<li>
-							<a href="#" class="fab fa-facebook-f"></a>
-						</li>
-						<li>
-							<a href="#" class="fab fa-twitter"></a>
-						</li>
-						<li>
-							<a href="#" class="fab fa-google-plus-g"></a>
-						</li>
-						<li>
-							<a href="#" class="fab fa-instagram"></a>
-						<li>
-						<li>
-							<a href="#" class="fab fa-linkedin-in"></a>
-						<li>
-					</ul>
-				</div>
-			</div>
-		</section>
-		<!-- //Footer -->
-
-	<!--js working-->
-	<script src="js/jquery.min.js"></script>
-		<!--//js working-->
-		<!-- requried-jsfiles-for owl -->
-		<!-- smooth scrolling -->
-		<script type="text/javascript" src="js/move-top.js"></script>
-		<script type="text/javascript" src="js/easing.js"></script>
-		<!-- here stars scrolling icon -->
-		<script type="text/javascript">
-			$(document).ready(function () {
-				$().UItoTop({ easingType: 'easeOutQuart' });
-			});
-		</script>
-		<!-- //here ends scrolling icon -->
-		<!-- //smooth scrolling -->
-		<!-- scrolling script -->
-		<script type="text/javascript">
-			jQuery(document).ready(function ($) {
-				$(".scroll").click(function (event) {
-					event.preventDefault();
-					$('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
-				});
-			});
-		</script>
-		<!-- //scrolling script -->
-
-		<!--bootstrap working-->
-		<script src="js/bootstrap.min.js"></script>
-		<!-- //bootstrap working-->
+    <!--Other Script-->
+	<?php require_once "other_script.html" ?>
+    <!--//Other Script-->
 </body>
 
 

@@ -1,17 +1,20 @@
 <?php
-/*
- * Destroy the session.
- * Back to home page with a message window.
+/* logout.php
+ *      destroy the session and back to home page with a message window.
  */
+
+require_once "utility.php";
+
+
+/* destroy session */
 session_start();
 session_unset();
 session_destroy();
 
+/* show message window */
+$msg = "登出成功";
 $url = "home";
-echo "<script type='text/javascript'>";
-echo "window.alert('登出成功');";
-echo "window.location.href='$url'";
-echo "</script>"; 
+utility_window_msg($msg, $url);
 exit();// may not be necessary
 
 ?>

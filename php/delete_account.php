@@ -1,26 +1,50 @@
 <?php
-  if(!isset($_SESSION)) {
-    session_start();
-    if (!isset($_SESSION["userid"])||$_SESSION["authority"]!=0)
-        header("location:home");
-  };
-  require_once("config.php");
-  $id = $_GET['id'];
-  $sql = "DELETE FROM users WHERE id =" .$_GET['id'];
-  $stmt = $mysqli->prepare($sql);
-  if (!$stmt) {
-      die($mysqli->error);
-  }
-  if ($stmt->execute()) {
-      echo "Delete successfully";
-      $stmt->close();
-      $mysqli->close();
-    } else {
-      echo "Error deleting record: " . $mysqli->error;
+/* delete_account.php
+ *      delete an account from database
+ */
+
+require_once "config.php";
+require_once "utility.php";
+
+delete_account_process($mysqli);
+
+
+/*** function definition ***/
+/* delete_account_process:
+ *      delete an account
+ * param:
+ *      mysqli: database object
+ */
+
+function delete_account_process($mysqli) : void{
+    if(!isset($_SESSION)) {
+        session_start();
+        if (!isset($_SESSION["userid"]) || $_SESSION["authority"] != 0){
+            // not adminstrator
+            header("location:home");
+        }       
     }
-    
-  echo "<script type='text/javascript'>";
-  echo "window.alert('刪除成功');";
-  echo "history.back()";
-  echo "</script>"; 
+
+    /* Delete account */
+    $sql = "DELETE FROM users WHERE id ={$_GET['id']}";
+    // sql query string
+    $stmt = null;
+    if(!($stmt = $mysqli->prepare($sql))){
+        $msg = "刪除帳號失敗  :  Prepare failed.";
+		utility_window_msg($msg, null);
+		return;
+    }
+    if (!$stmt->execute()) {
+        $msg = "刪除帳號失敗  :  Execute failed.";
+		utility_window_msg($msg, null);
+		return;
+    } 
+    // close connection
+    $stmt->close();
+
+    /* show message window */
+    $msg = "刪除成功";
+    utility_window_msg_back($msg);
+}
+
 ?>
