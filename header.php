@@ -15,9 +15,7 @@
 					</button>
 					<div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
 						<ul class="navbar-nav">
-							<li class="nav-item active">
-								<a href="home" class="nav-link">首頁</a>
-							</li>
+							<a href="home" class="nav-item nav-link active">首頁</a>
 							<?php
 								if(isset($_SESSION["userid"]))
 								{
