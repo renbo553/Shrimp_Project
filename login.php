@@ -185,7 +185,7 @@ function login_get_string(&$str, $input) : bool{
 						<i class="fa fa-user-circle"></i>
 					</span>
 					<!--   user name Input-->
-					<input  name="username" class="form-input" id="txt-input" type="text" placeholder="@UserName"  value="<?php echo $username; ?>">
+					<input  name="username" class="form-input" id="txt-input" type="text" placeholder="@UserName">
 
 					<br>
 
@@ -195,7 +195,7 @@ function login_get_string(&$str, $input) : bool{
 						<i class="fa fa-key"></i>
 					</span>
 					<!--   Password Input-->
-					<input  name="password" class="form-input" type="password" placeholder="Password" id="txt-input" value="<?php echo $password; ?>">
+					<input  name="password" class="form-input" type="password" placeholder="Password" id="txt-input">
 
 					<!--      Show/hide password  -->
 					<!--<span>
