@@ -4,6 +4,7 @@
  */
 
 /*** function definition ***/
+
 /* utility_window_msg:
  * 		show window message
  * param:
@@ -14,6 +15,7 @@
 function utility_window_msg($msg, $url) : void{
 	echo "<script type='text/javascript'>";
 	echo "window.alert('{$msg}');";
+    // set url if need
 	if(!is_null($url)){
 		// url is not empty
 		echo "window.location.href='{$url}'";
@@ -34,5 +36,97 @@ function utility_window_msg_back($msg) : void{
 	echo "history.back()";
 	echo "</script>";
 }
+
+
+/* utility_input_textbox:
+ * 		create a input textbox
+ * param:
+ * 		name: the name and id of input item
+ *      label: the label text of input item
+ */
+
+function utility_input_textbox($name = "", $label = "") : void{
+    /* check arguments */
+    if($name == "" && $label == ""){
+        echo "utility_input_textbox error: this input item needs a name and label";
+        return;
+    }
+
+    /* create a input text box */
+    echo "<label for='{$name}'>{$label}</label>";
+    echo "<input type='text' class='form-control' name='{$name}' id='{$name}'>";
+}
+
+
+/* utility_input_date:
+ * 		create a input date
+ * param:
+ * 		name: the name and id of input item
+ *      label: the label text of input item
+ * note:
+ *      submission without selecting a date will insert a empty string into $_POST or $_GET
+ */
+
+function utility_input_date($name = "", $label = "") : void{
+    /* check arguments */
+    if($name == "" && $label == ""){
+        echo "utility_input_date error: this input item needs a name and label";
+        return;
+    }
+
+    /* create a input date item */
+    echo "<label for='{$name}'>{$label}</label>";
+    echo "<input type='date' class='form-control' name='{$name}' id='{$name}'>";
+}
+
+
+/* utility_input_selectbox:
+ * 		create a input select box
+ * param:
+ * 		name: the name and id of input item
+ *      label: the label text of input item
+ *      option_arr: option array,
+ *                  array key is option label, array value is option value
+ * note:
+ *      this function automatically add default option "none"
+ *      "none" option will not insert anything into $_POST and $_GET
+ *      Please use isset() to check whether a meaningful option was selected.
+ */
+
+function utility_input_selectbox($name = "", $label = "", $option_arr) : void{
+    /* check arguments */
+    if($name == "" && $label == ""){
+        echo "utility_input_select error: this input item needs a name and label";
+        return;
+    }
+    if(count($option_arr) == 0){
+        echo "utility_input_select error: this input item needs a option array";
+        return;
+    }
+
+    /* create html select box */
+    echo "<label for='{$name}'>{$label}</label>";
+    echo "<select class='form-control' name='{$name}' id='{$name}'>";
+    // create none option
+    echo "<option value='none' selected disabled hidden></option>";
+    // create options
+    foreach($option_arr as $key => $value)
+        echo "<option value='{$value}'>{$key}</option>";
+    echo "</select>";
+}
+
+
+/* utility_button:
+ * 		create a button
+ * param:
+ * 		type: a html button attribute
+ *            only three option: "button", "reset", "submit"
+ *      label: the text of button
+ */
+
+function utility_button($type, $label) : void{
+    echo "<button type='{$type}' class='btn btn-primary'>{$label}</button>";
+}
+
 
 ?>

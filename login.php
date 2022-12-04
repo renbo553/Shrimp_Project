@@ -119,7 +119,7 @@ function login_process($mysqli) : void{
     /* Show message window */
 	$msg = "登入成功";
 	$url = "home";
-	login_window_msg($msg, $url);
+	utility_window_msg($msg, $url);
 }
 
 
@@ -377,7 +377,7 @@ function login_get_string(&$str, $input) : bool{
 						<i class="fa fa-user-circle"></i>
 					</span>
 					<!--   user name Input-->
-					<input  name="username" class="form-input" id="txt-input" type="text" placeholder="@UserName"  value="<?php echo $username; ?>">
+					<input  name="username" class="form-input" id="txt-input" type="text" placeholder="@UserName">
 
 					<br>
 
@@ -387,7 +387,7 @@ function login_get_string(&$str, $input) : bool{
 						<i class="fa fa-key"></i>
 					</span>
 					<!--   Password Input-->
-					<input  name="password" class="form-input" type="password" placeholder="Password" id="txt-input" value="<?php echo $password; ?>">
+					<input  name="password" class="form-input" type="password" placeholder="Password" id="txt-input">
 
 					<!--      Show/hide password  -->
 					<!--<span>
