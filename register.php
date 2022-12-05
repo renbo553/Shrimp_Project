@@ -24,6 +24,7 @@ function register_process($mysqli) :void{
     $username = null;
     $password = null;
     $confirm_password = null;
+	$email = trim($_POST["email"]);
 
     /* Check input username, password and confirm password */
     if(!register_get_string($username, $_POST["username"])){
@@ -50,7 +51,21 @@ function register_process($mysqli) :void{
         utility_window_msg($msg, null);
         return;
     }
-
+	if($email == '') {
+		// confirm email is empty
+		$msg = "註冊失敗  :  Please enter your email.";
+		$url = "modify_password";
+		utility_window_msg($msg, $url);
+		return ;
+	}
+	if(!filter_var ( $email , FILTER_VALIDATE_EMAIL )){
+		// confirm email is not valid
+		$msg = "註冊失敗  :  請填寫正確的郵箱！";
+		$url = "modify_password";
+		utility_window_msg($msg, $url);
+		return ;
+	}
+	
     /* Check whether input username has already existed */
     $sql = "SELECT id FROM users WHERE username = ?";
     // sql query string
@@ -98,38 +113,13 @@ function register_process($mysqli) :void{
 		utility_window_msg($msg, null);
 		return;
     }
-
-    /* Insert a new account into database */
-    $password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO users (username, password) VALUES (?, ?)";
-    // sql query string
-    $stmt = null;
-    if(!($stmt = $mysqli->prepare($sql))){
-        $msg = "註冊失敗  :  Prepare failed.";
-        utility_window_msg($msg, null);
-        return;
-    }
-	// bind parameters to the prepared statement
-    if(!($stmt->bind_param("ss", $username, $password))){
-		$stmt->close();
-		$msg = "註冊失敗  :  Binding parameters failed.";
-		utility_window_msg($msg, null);
-		return;
-	}
-    // execute the prepared statement
-	if(!$stmt->execute()){
-		$stmt->close();
-		$msg = "註冊失敗  :  Execute failed.";
-		utility_window_msg($msg, null);
-		return;
-	}
-    // close connection
-    $stmt->close();
-
-    /* Show message window */
-    $msg = "註冊成功 請再次輸入帳號密碼登入";
-    $url = "login";
-    utility_window_msg($msg, $url);
+    
+    /*send mail to check identification*/
+    setcookie("username" , $username) ;
+    setcookie("password" , $password) ;
+    setcookie("email" , $email) ;
+	require_once "sendmail.php" ;
+    makemail($email , $username , 0) ;
 }
 
 
@@ -158,203 +148,12 @@ function register_get_string(&$str, $input) : bool{
 <html lang="en">
 
 <head>
-    <title>Contact</title>
+    <title>Sign up</title>
 	<!--Head-->
 	<?php require_once "head.html"?>
+	<?php require_once "login_box.html"?>
     <!--//Head-->
 </head>
-
-<style>
-	/* Fonts Form Google Font ::- https://fonts.google.com/  -:: */
-	@import url('https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Alegreya|Arima+Madurai|Dancing+Script|Dosis|Merriweather|Oleo+Script|Overlock|PT+Serif|Pacifico|Playball|Playfair+Display|Share|Unica+One|Vibur');
-
-	/* End Fonts */
-	/* Start Global rules */
-	* {
-		padding: 0;
-		margin: 0;
-		box-sizing: border-box;
-	}
-
-	/* End Global rules */
-
-	/* Start body rules */
-	body {
-		/* background-image: linear-gradient(-225deg, #E3FDF5 0%, #FFE6FA 100%);
-		background-image: linear-gradient(to top, #a8edea 0%, #fed6e3 100%); */
-		background-attachment: fixed;
-		background-repeat: no-repeat;
-
-		font-family: 'Vibur', cursive;
-		/*   the main font */
-		font-family: 'Abel', sans-serif;
-		opacity: .95;
-		/* background-image: linear-gradient(to top, #d9afd9 0%, #97d9e1 100%); */
-	}
-
-	/* End body rules */
-
-	/* Start form  attributes */
-	form {
-		width: 375px;
-		min-height: 500px;
-		height: auto;
-		border-radius: 5px;
-		margin: 2% auto;
-		box-shadow: 0 9px 50px hsla(20, 67%, 75%, 0.31);
-		padding: 2%;
-		background-image: linear-gradient(-225deg, #a0bcc0 50%, #b1a5ae 50%);
-	}
-
-	/* form Container */
-	form .con {
-		display: -webkit-flex;
-		display: flex;
-
-		-webkit-justify-content: space-around;
-		justify-content: space-around;
-
-		-webkit-flex-wrap: wrap;
-		flex-wrap: wrap;
-
-		margin: 0 auto;
-	}
-	/* Login title form form */
-	header h2 {
-		font-size: 250%;
-		font-family: 'Playfair Display', serif;
-		color: #3e403f;
-	}
-
-	/*  A welcome message or an explanation of the login form */
-	header p {
-		letter-spacing: 0.05em;
-	}
-
-	.input-item {
-		background: #fff;
-		color: #333;
-		padding: 14.5px 0px 15px 9px;
-		border-radius: 5px 0px 0px 5px;
-	}
-
-
-
-	/* Show/hide password Font Icon */
-	#eye {
-		background: #fff;
-		color: #333;
-
-		margin: 5.9px 0 0 0;
-		margin-left: -20px;
-		padding: 15px 9px 19px 0px;
-		border-radius: 0px 5px 5px 0px;
-
-		float: right;
-		position: relative;
-		right: 1%;
-		top: -.2%;
-		z-index: 5;
-
-		cursor: pointer;
-	}
-
-	/* inputs form  */
-	input[class="form-input"] {
-		width: 240px;
-		height: 50px;
-
-		margin-top: 2%;
-		padding: 15px;
-
-		font-size: 16px;
-		font-family: 'Abel', sans-serif;
-		color: #5E6472;
-
-		outline: none;
-		border: none;
-
-		border-radius: 0px 5px 5px 0px;
-		transition: 0.2s linear;
-
-	}
-
-	input[id="txt-input"] {
-		width: 250px;
-	}
-
-	/* focus  */
-	input:focus {
-		transform: translateX(-2px);
-		border-radius: 5px;
-	}
-
-	/* buttons  */
-	button {
-		
-	}
-
-	/* Submits */
-	.submits {
-		width: 70%;
-		display: inline-block;
-		text-align: center;
-		margin: 0 auto
-	}
-	.other{
-		margin: 0 auto;
-		text-align: center;
-	}
-	/*       Forgot Password button FAF3DD  */
-	.frgt-pass {
-		background: transparent;
-	}
-
-	/*     Sign Up button  */
-	.btn {
-		display: inline-block;
-		color: #252537;
-
-		width: 130px;
-		height: 50px;
-
-		padding: 0 20px;
-		background: #fff;
-		border-radius: 5px;
-
-		outline: none;
-		border: none;
-
-		cursor: pointer;
-		text-align: center;
-		transition: all 0.2s linear;
-
-		margin: 7% auto;
-		letter-spacing: 0.05em;
-	}
-
-
-	/* buttons hover */
-	button:hover {
-		transform: translatey(3px);
-		box-shadow: none;
-	}
-
-	/* buttons hover Animation */
-	button:hover {
-		animation: ani9 0.4s ease-in-out infinite alternate;
-	}
-
-	@keyframes ani9 {
-		0% {
-			transform: translateY(3px);
-		}
-
-		100% {
-			transform: translateY(5px);
-		}
-	}
-</style>
 
 <body>
     <!--Header-->
@@ -387,6 +186,11 @@ function register_get_string(&$str, $input) : bool{
                     </span>
                     <input type="password" name="confirm_password" class="form-input" placeholder="Confirm Password">
                     <br>
+					<span class="input-item">
+						<i class="fa fa-envelope"></i>
+					</span>
+					<input name="email" class="form-input" id="txt-input" type="text" placeholder="enter email">
+					<br>
                     <br>
                     <div class="form-group">
                         <input type="submit" class="btn btn-primary" value="Submit">
@@ -394,6 +198,7 @@ function register_get_string(&$str, $input) : bool{
                     </div>
                 </div>
 				<p>已經擁有帳號了嗎 ? 按此進行<?php echo '<a href=login>登入</a>' ?></p>
+				<p>忘記密碼/修改密碼 ? <?php echo '<a href=modify_password>請按此</a>'?></p>
             </div>
         </form>
     </div>
@@ -406,7 +211,4 @@ function register_get_string(&$str, $input) : bool{
 	<?php require_once "other_script.html" ?>
     <!--//Other Script-->
 </body>
-
-
-
 </html>

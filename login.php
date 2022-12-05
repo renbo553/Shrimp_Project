@@ -13,7 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
 $username = null;
 $password = null;
-$login_failer = false;
 
 /*** function definition ***/
 /* login_process:
