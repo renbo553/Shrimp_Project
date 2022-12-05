@@ -1,33 +1,94 @@
-<?php 
+<?php
     require_once "utility.php" ;
     require_once "config.php";
-    $email = '' ;
-
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         // form data is submitted
-        check_email($email);
+        check_email($mysqli);
     }
 
-    function check_email($email) : void {
-        $email = trim($_POST["email"]) ;
-        if($email == '' || !filter_var ( $email , FILTER_VALIDATE_EMAIL )){
+    function check_email($mysqli) : void {
+        $link = require_once "config.php" ;
+        $enter_email = trim($_POST["email"]) ;
+        $username = trim($_POST["username"]) ;
+        if($username == '') {
+            // confirm username is empty
+            $msg = "請填寫您的帳號！";
+		    utility_window_msg($msg, null);
+            return ;
+        }
+        if($enter_email == '' || !filter_var ( $enter_email , FILTER_VALIDATE_EMAIL )){
+            // confirm email is empty or email is not valid
             $msg = "請填寫正確的郵箱！";
-		    $url = "modify_password";
-		    utility_window_msg($msg, $url);
+		    utility_window_msg($msg, null);
+            return ;
         }
         else{
+            /* Check whether input username has already existed */
+            $sql = "SELECT id , email FROM users WHERE username = ?";
+            // sql query string
+            $stmt = null ;
+
+            if(!($stmt = $mysqli->prepare($sql))){
+                $msg = "Prepare failed.";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // bind parameters to the prepared statement
+            if(!($stmt->bind_param("s", $username))){
+                $stmt->close();
+                $msg = "Binding parameters failed.";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // execute the prepared statement
+            if(!$stmt->execute()){
+                $stmt->close();
+                $msg = "Execute failed.";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // store result
+            if(!$stmt->store_result()){
+                $stmt->close();
+                $msg = "Storing result failed.";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // check # rows of result
+            if($stmt->num_rows == 0){
+                // username doesn't exist
+                $stmt->close();
+                $msg = "The username does not exist";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // close connection
+            if(!($stmt->bind_result($id , $email))){
+                $stmt->close();
+                $msg = "Binding result failed.";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // fetch values
+            if(!$stmt->fetch()){
+                $stmt->close();
+                $msg = "Fetch result failed.";
+                utility_window_msg($msg, null);
+                return;
+            }
+            // close connection
+            $stmt->close();
+
+            if(strcmp($enter_email, $email) != 0){
+                // email is not correct
+                $msg = "The email is not as same as the email you register!";
+                utility_window_msg($msg,null);
+                return;
+            }
+            
+            /*send mail to check identification*/
             require_once "sendmail.php" ;
-            //$.post("sendmail.php" , {mail:email} , function(msg){
-                /*
-                if(msg=="noreg"){
-                $("#chkmsg").html("該郵箱尚未註冊！");
-                $("#sub_btn").removeAttr("disabled").val('提交').css("cursor","pointer");
-                }
-                else{
-                $(".demo").html("<h3>"+msg+"</h3>");
-                }
-                */
-            //}) ;
+            makemail($email , $username , 1) ;
         }
     }
 ?>
@@ -62,10 +123,15 @@
 				<!--     End  header Content  -->
 
 				<div class="field-set">
+                    <span class="input-item">
+						<i class="fa fa-user-circle"></i>
+					</span>
+					<input  name="username" class="form-input" id="txt-input" type="text" placeholder="@UserName">
+					<br>
 					<span class="input-item">
 						<i class="fa fa-envelope"></i>
 					</span>
-					<input name="email" class="form-input" id="txt-input" type="text" placeholder="enter email"  value="<?php echo $email; ?>">
+					<input name="email" class="form-input" id="txt-input" type="text" placeholder="enter email">
 					<br>
                     <button class="send"> Send to verify email </button>
 				</div>
