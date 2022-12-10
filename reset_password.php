@@ -27,6 +27,13 @@
             utility_window_msg($msg, null);
             return;
         }
+        require_once "check_password_strong.php" ;
+        $meter_value = password_strong($password) ;
+        if($meter_value < 2) {
+            $msg = "修改失敗  :  密碼強度不夠";
+            utility_window_msg($msg, null);
+            return;
+        }
         if(strcmp($new_confirm_password , $new_password) != 0) {
             // password is not correct
             $msg = "The two password is not same!";
@@ -87,6 +94,17 @@
                     <i class="fa fa-key"></i>
                     </span>
                     <input  name="password" class="form-input" type="password" placeholder="Password" id="pwd">
+                    <br>
+                    <meter id="meter" min="0" max="12" low="4" high="8" optimum="10" value="0"></meter>
+                    <script src="https://cdn.bootcdn.net/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+                    <script>
+                        pwd.addEventListener('input', function () {
+                            var value = this.value;
+                            meter.value = zxcvbn(value).guesses_log10;
+                            //setcookie('meter_value' , meter.value) ;
+                        });
+                    </script>
+                    <br>
                     <br>
                     <span class="input-item">
                         <i class="fa fa-key"></i>
