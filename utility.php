@@ -129,4 +129,49 @@ function utility_button($type, $label) : void{
 }
 
 
+/* utility_button_onclick:
+ * 		create a button with an onclick event
+ * param:
+ * 		url: the destination url (need file extension)
+ *      label: the text of button
+ */
+
+function utility_button_onclick($url, $label) : void{
+    echo "<button type='button' onclick=\"location.href='{$url}'\" class='btn btn-primary'>{$label}</button>";
+}
+
+
+/* utility_session_insert:
+ *      insert a variable into session
+ * param:
+ *      index: the index of variable in the session
+ *      var: the variable to be inserted
+ */
+
+function utility_session_insert($index, $var) : void{
+    if(!isset($_SESSION))
+        session_start();
+    if(isset($_SESSION[$index]))
+        unset($_SESSION[$index]);
+    $_SESSION[$index] = $var;
+}
+
+
+/* utility_session_check:
+ *      check if a variable is in the session
+ * param:
+ *      index: the index of variable in the session
+ * return:
+ *      true, if this index corresponds to a variable
+ *      false, otherwise
+ */
+
+function utility_session_check($index) : bool{
+    if(!isset($_SESSION))
+        session_start();
+    if(isset($_SESSION[$index]))
+        return true;
+    return false;    
+}
+
 ?>

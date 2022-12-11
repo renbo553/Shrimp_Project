@@ -64,6 +64,7 @@ if (!isset($_SESSION)) {
                 $stage_option_array["3"] = "3";
                 utility_input_selectbox("stage_select", "卵巢進展階段", $stage_option_array);
                 utility_button("submit", "查詢");
+                utility_button_onclick("export_breed.php", "匯出");
             ?>
         </div>
     </form>
@@ -71,6 +72,8 @@ if (!isset($_SESSION)) {
 
     <!--Data table-->
     <?php 
+
+    define("CACHE_QUERY", "search_breed_query");    
     
     require_once "config.php";
 
@@ -96,6 +99,9 @@ if (!isset($_SESSION)) {
 
         /* show result */
         show_breed_result($result);
+
+        /* store query into session */
+        utility_session_insert(CACHE_QUERY, $sql);
         
         $mysqli->close();
     }
@@ -175,6 +181,9 @@ if (!isset($_SESSION)) {
 
         /* show search result */
         show_breed_result($result);
+
+        /* store query into session */
+        utility_session_insert(CACHE_QUERY, $sql);
         
         $mysqli->close();
     }

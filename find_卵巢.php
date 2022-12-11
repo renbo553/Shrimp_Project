@@ -59,16 +59,20 @@ if (!isset($_SESSION)) {
                 $stage_option_array["淘汰"] = "淘汰";
                 utility_input_selectbox("stage_select", "階段", $stage_option_array);
                 utility_button("submit", "查詢");
+                utility_button_onclick("export_ovary.php", "匯出");
             ?>
         </div>
     </form>
     <!--//Search form-->
 
+
     <!--Data table-->
     <?php
     
-    require_once "config.php";
+    define("CACHE_QUERY", "search_ovary_query");
 
+    require_once "config.php";
+    
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         search_ovary_process($mysqli);
     }
@@ -90,6 +94,9 @@ if (!isset($_SESSION)) {
 
         /* show result */
         show_ovary_result($result);
+
+        /* store query into session */
+        utility_session_insert(CACHE_QUERY, $sql);
 
         $mysqli->close();
     }
@@ -141,6 +148,9 @@ if (!isset($_SESSION)) {
 
         /* show search result */
         show_ovary_result($result);
+
+        /* store query into session */
+        utility_session_insert(CACHE_QUERY, $sql);
 
         $mysqli->close();
     }
