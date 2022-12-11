@@ -49,6 +49,7 @@ if (!isset($_SESSION)) {
                 $tank_option_array["M4"] = "M4";
                 utility_input_selectbox("tank_select", "TankID", $tank_option_array);
                 utility_button("submit", "查詢");
+                utility_button_onclick("export_waterquality.php", "匯出");
             ?>
         </div>
     </form>
@@ -56,6 +57,8 @@ if (!isset($_SESSION)) {
 
     <!--Data table-->
     <?php
+
+    define("CACHE_QUERY", "search_waterquality_query");
 
     require_once "config.php";
 
@@ -82,6 +85,9 @@ if (!isset($_SESSION)) {
 
         /* show result */
         show_waterquality_result($result);
+
+        /* store query into session */
+        utility_session_insert(CACHE_QUERY, $sql);
         
         $mysqli->close();
     }
@@ -126,6 +132,9 @@ if (!isset($_SESSION)) {
 
         /* show result */
         show_waterquality_result($result);
+
+        /* store query into session */
+        utility_session_insert(CACHE_QUERY, $sql);
         
         $mysqli->close();
     }
