@@ -11,7 +11,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     register_process($mysqli);
 }
 
-
 /*** function definition ***/
 /* register_process:
  *      check input username and password and add a new accout
@@ -25,6 +24,8 @@ function register_process($mysqli) :void{
     $password = null;
     $confirm_password = null;
 	$email = trim($_POST["email"]);
+    //$meter_value = $_COOKIE["meter_value"] ;
+    //setcookie("meter_value" , "" , time()) ;
 
     /* Check input username, password and confirm password */
     if(!register_get_string($username, $_POST["username"])){
@@ -42,6 +43,13 @@ function register_process($mysqli) :void{
     elseif(strlen($password) < 6){
         // password is too short
         $msg = "註冊失敗  :  Password must have at least 6 characters.";
+        utility_window_msg($msg, null);
+        return;
+    }
+    require_once "check_password_strong.php" ;
+    $meter_value = password_strong($password) ;
+    if($meter_value < 2) {
+        $msg = "註冊失敗  :  密碼強度不夠";
         utility_window_msg($msg, null);
         return;
     }
@@ -180,6 +188,17 @@ function register_get_string(&$str, $input) : bool{
                         <i class="fa fa-key"></i>
                     </span>
                     <input  name="password" class="form-input" type="password" placeholder="Password" id="pwd">
+                    <br>
+                    <meter id="meter" min="0" max="12" low="4" high="8" optimum="10" value="0"></meter>
+                    <script src="https://cdn.bootcdn.net/ajax/libs/zxcvbn/4.4.2/zxcvbn.js"></script>
+                    <script>
+                        pwd.addEventListener('input', function () {
+                            var value = this.value;
+                            meter.value = zxcvbn(value).guesses_log10;
+                            //setcookie('meter_value' , meter.value) ;
+                        });
+                    </script>
+                    <br>
                     <br>
                     <span class="input-item">
                         <i class="fa fa-key"></i>

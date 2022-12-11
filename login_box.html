@@ -223,4 +223,67 @@
 			transform: translateY(5px);
 		}
 	}
+
+
+	/*password strong*/
+	meter:in-range ~ output::before {
+	content: '一般';
+	}
+	meter:out-of-range ~ output::before {
+		content: '弱';
+	}
+	/* 
+	::-webkit-meter-inner-element
+	::-webkit-meter-bar
+	::-webkit-meter-even-less-good-value
+	::-webkit-meter-optimum-value
+	::-webkit-meter-suboptimum-value */
+
+	meter {
+		width: 120px;
+		border: 0; /* Safari */
+		position: relative;
+		--gradient: linear-gradient(to right, red 39px, transparent 0 41px, orange 0 79px, transparent 0 81px, green 0);
+	}
+	meter::after {
+		content: '弱 中 强 aaaaaaaaaaaaaaaaaaaaaa';
+		position: absolute;
+		font-size: 14px;
+		line-height: 20px;
+		height: 20px;
+		overflow: hidden;
+		left: calc(20px - .5em);
+		right: calc(20px - .5em);
+		text-align: justify;
+		-webkit-text-fill-color: transparent;
+		background: var(--gradient) calc(.5em - 20px) / 120px;
+		-webkit-background-clip: text;
+	}
+	::-webkit-meter-bar {
+		height: 12px;
+		width: 120px;
+		/* border-radius: 0; */
+		border: 0;
+		background: #eee;
+		-webkit-mask: var(--gradient);
+		mask: var(--gradient);
+	}
+	_::-moz-meter-bar,
+	meter {
+		height: 12px;
+		width: 120px;
+		background: #eee;
+		/* border: 1px solid deepskyblue;
+		
+		appearance: none; */
+	}
+	::-webkit-meter-even-less-good-value {
+		background: red;
+	}
+	::-webkit-meter-suboptimum-value {
+		background: linear-gradient(to right, red 40px, orange 0);
+	}
+	::-webkit-meter-optimum-value {
+		background: linear-gradient(to right, red 40px, orange 0 80px, green 0);
+	}
 </style>
