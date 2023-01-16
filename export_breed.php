@@ -41,14 +41,20 @@ function export_breed_process($mysqli) : void{
     }
     $sql = $_SESSION[CACHE_QUERY];
 
+    $export_handler = new Export_Handler($mysqli);
+    $filename = FILENAME_PREFIX . '-spreadsheet-' . time() . '.xlsx';
+    $export_handler->export_breed($filename, $sql);
+
     /* fetch previous search result */
-    $result = $mysqli->query($sql);
+    //$result = $mysqli->query($sql);
 
     /* create a spreadsheet */
+    /*
     $spreadsheet = new Spreadsheet();
     $sheet = $spreadsheet->getActiveSheet();
     $sheet->setTitle(WORKSHEET_NAME);
-
+    */
+    /*
     $column_name = array();
     $column_name["家族"] = "家族";
     $column_name["眼標"] = "眼標";
@@ -58,17 +64,18 @@ function export_breed_process($mysqli) : void{
     $column_name["生產體重"] = "生產體重";
     $column_name["卵巢進展階段(Stage)"] = "卵巢進展階段";
     fill_vertical_spreadsheet($sheet, $column_name, $result);
-
+    */
 
     /* redirect output to a client's web browser (Xlsx) */
+    /*
     $filename = FILENAME_PREFIX . '-spreadsheet-' . time() . '.xlsx';
     header('Content-Type: application/vnd.ms-excel');
     header('Content-Disposition: attachment;filename="' . $filename . '"');
     $writer = new Xlsx($spreadsheet);
     $writer->save("php://output");
-
+    */
     /* close connection */
-    $mysqli->close();
+    //$mysqli->close();
 }
 
 ?>
