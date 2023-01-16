@@ -57,6 +57,7 @@ if (!isset($_SESSION)) {
                 $shrimp_option_array["公蝦+母蝦缸"] = "公蝦+母蝦缸";
                 utility_input_selectbox("shrimp_select", "蝦", $shrimp_option_array);
                 utility_button("submit", "查詢");
+                utility_button_onclick("export_feed.php", "匯出");
             ?>
         </div>
     </form>
@@ -65,6 +66,8 @@ if (!isset($_SESSION)) {
     <!--Data table-->
     <section>
         <?php
+
+        define("CACHE_QUERY", "search_feed_query"); 
         
         require_once "config.php";
 
@@ -90,6 +93,9 @@ if (!isset($_SESSION)) {
 
             /* show result */
             show_feed_result($result);
+
+            /* store query into session */
+            utility_session_insert(CACHE_QUERY, $sql);
             
             $mysqli->close();
         }
@@ -141,6 +147,9 @@ if (!isset($_SESSION)) {
 
             /* show result */
             show_feed_result($result);
+
+            /* store query into session */
+            utility_session_insert(CACHE_QUERY, $sql);
             
             $mysqli->close();
         }
