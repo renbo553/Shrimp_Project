@@ -21,7 +21,6 @@ if (!isset($_SESSION)) {
     <!--//Header-->
 
 	<section>
-
 		<?php
 		require_once "config.php";
 		$input_err = "";
@@ -92,24 +91,17 @@ if (!isset($_SESSION)) {
 		?>
 		<form id="myFile" method="post" enctype="multipart/form-data">
 			<table class="table">
-				<tr>
-					<td>上傳紙本圖片</td>
+					<th>上傳紙本圖片</th>
 					<td>
 						<input accept="image/*" type="file"  name="fileField" id="uploadimage">
 					</td>
-				</tr>
-				<tr>
-					<td>
-						圖片預覽
-					</td>
+					<tr></tr>
+					<th>圖片預覽</th>
 					<td>
 						<img id="show_image" src="">
 					</td>
-				</tr>
-				<tr>
-					<td>
-						眼標
-					</td>
+					<tr></tr>
+					<th>眼標</th>
 					<td>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -120,11 +112,8 @@ if (!isset($_SESSION)) {
 							<input id="text1" name="eye" placeholder="ex.W999" type="text" class="form-control">
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						家族
-					</td>
+					<tr></tr>
+					<th>家族</th>
 					<td>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -135,11 +124,8 @@ if (!isset($_SESSION)) {
 							<input id="text2" name="family" placeholder="ex.F1310" type="text" class="form-control">
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						剪眼日期
-					</td>
+					<tr></tr>
+					<th>剪眼日期</th>
 					<td>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -150,11 +136,8 @@ if (!isset($_SESSION)) {
 							<input id="text3" name="cutday" type="date">
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						剪眼體重
-					</td>
+					<tr></tr>
+					<th>剪眼體重</th>
 					<td>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -168,11 +151,8 @@ if (!isset($_SESSION)) {
 							</div>
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						進產卵室待產日期
-					</td>
+					<tr></tr>
+					<th>進產卵室待產日期</th>
 					<td>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -183,11 +163,8 @@ if (!isset($_SESSION)) {
 							<input id="text5" name="spawningroomdate" type="date">
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						生產體重
-					</td>
+					<tr></tr>
+					<th>生產體重</th>
 					<td>
 						<div class="input-group">
 							<div class="input-group-prepend">
@@ -201,11 +178,8 @@ if (!isset($_SESSION)) {
 							</div>
 						</div>
 					</td>
-				</tr>
-				<tr>
-					<td>
-						卵巢進展階段(Stage)
-					</td>
+					<tr></tr>
+					<th>卵巢進展階段(Stage)</th>
 					<td>
 						<select id="select1" name="ovarystate" class="custom-select">
 							<option value="none" selected disabled hidden></option>
@@ -219,7 +193,6 @@ if (!isset($_SESSION)) {
 							<option value="3">3</option>
 						</select>
 					</td>
-				</tr>
 			</table>
 		</form>
 
@@ -259,7 +232,7 @@ if (!isset($_SESSION)) {
 						console.log();
 						window.alert(backData);
 						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_生產';
+							window.location.href = 'add_生產';
 							$("#backmsg").html(backData);
 						}
 

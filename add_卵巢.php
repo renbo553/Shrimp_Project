@@ -24,39 +24,7 @@ if (!isset($_SESSION)) {
 	<section>
 		<form id="myFile" method="post" enctype="multipart/form-data">
 			<table class="table">
-				<tr>
-					<td>上傳紙本圖片</td>
-					<td>
-						<input accept="image/*" type="file"  name="fileField" id="uploadimage">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						圖片預覽
-					</td>
-					<td>
-						<img id="show_image" src="">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						眼標
-					</td>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-eye"></i>
-								</div>
-							</div>
-							<input id="text1" name="eye" placeholder="ex.W999" type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						日期
-					</td>
+					<th>日期</th>
 					<td>
 						<div class="input-group" id="autoclick">
 							<div class="input-group-prepend">
@@ -67,11 +35,18 @@ if (!isset($_SESSION)) {
 							<input  id="text2" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
 						</div>
 					</td>
-				</tr>
-				<tr>
+					<tr></tr>
+					<th>上傳紙本圖片</th>
 					<td>
-						卵巢狀態
+						<input accept="image/*" type="file"  name="fileField" id="uploadimage">
 					</td>
+					<tr></tr>
+					<th>圖片預覽</th>
+					<td>
+						<img id="show_image" src="">
+					</td>
+					<tr></tr>
+					<th>卵巢狀態</th>
 					<td>
 						<select id="select1" name="ovarystate" class="custom-select">
 							<option value="none" selected disabled hidden></option>
@@ -90,7 +65,18 @@ if (!isset($_SESSION)) {
 							<option value="淘汰">淘汰</option>
 						</select>
 					</td>
-				</tr>
+					<tr></tr>
+					<th>眼標</th>
+					<td>
+						<div class="input-group">
+							<div class="input-group-prepend">
+								<div class="input-group-text">
+									<i class="fa fa-eye"></i>
+								</div>
+							</div>
+							<input id="text1" name="eye" placeholder="ex.W999" type="text" class="form-control">
+						</div>
+					</td>
 			</table>
 		</form>
 
@@ -128,7 +114,7 @@ if (!isset($_SESSION)) {
 						console.log();
 						window.alert(backData);
 						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_卵巢';
+							window.location.href = 'add_卵巢';
 							$("#backmsg").html(backData);
 						}
 
