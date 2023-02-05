@@ -23,66 +23,99 @@ if (!isset($_SESSION)) {
 
 	<section>
 		<form id="myFile" method="post" enctype="multipart/form-data">
-			<table class="table">
-					<th>日期</th>
-					<td>
-						<div class="input-group" id="autoclick">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-calendar-o"></i>
-								</div>
-							</div>
-							<input  id="text2" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
-						</div>
-					</td>
-					<tr></tr>
-					<th>上傳紙本圖片</th>
-					<td>
-						<input accept="image/*" type="file"  name="fileField" id="uploadimage">
-					</td>
-					<tr></tr>
-					<th>圖片預覽</th>
-					<td>
-						<img id="show_image" src="">
-					</td>
-					<tr></tr>
-					<th>卵巢狀態</th>
-					<td>
-						<select id="select1" name="ovarystate" class="custom-select">
-							<option value="none" selected disabled hidden></option>
-							<option value=""></option>
-							<option value="0">0</option>
-							<option value="0-Ⅰ">0-1</option>
-							<option value="Ⅰ">1</option>
-							<option value="Ⅰ-Ⅱ">1-2</option>
-							<option value="Ⅱ">2</option>
-							<option value="Ⅱ-Ⅲ">2-3</option>
-							<option value="Ⅲ">3</option>
-							<option value="脫殼">脫殼</option>
-							<option value="受精">受精</option>
-							<option value="生產">生產</option>
-							<option value="死亡">死亡</option>
-							<option value="淘汰">淘汰</option>
-						</select>
-					</td>
-					<tr></tr>
-					<th>眼標</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-eye"></i>
-								</div>
-							</div>
-							<input id="text1" name="eye" placeholder="ex.W999" type="text" class="form-control">
-						</div>
-					</td>
-			</table>
-		</form>
+			<div class="form-inline" style = "width: 100%">
+				<div style = "height: 10px"> </div>
+			</div>
 
-		<button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
-		<div id="backmsg"></div>
-		<br>
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 98%">
+					<div> 日期 </div>
+					<input  id="text2" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "height: 10px"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 48%">
+					<div> 卵巢狀態 </div>
+					<select id="select1" name="ovarystate" class="custom-select">
+						<option value="none" selected disabled hidden></option>
+						<option value=""></option>
+						<option value="0">0</option>
+						<option value="0-Ⅰ">0-1</option>
+						<option value="Ⅰ">1</option>
+						<option value="Ⅰ-Ⅱ">1-2</option>
+						<option value="Ⅱ">2</option>
+						<option value="Ⅱ-Ⅲ">2-3</option>
+						<option value="Ⅲ">3</option>
+						<option value="脫殼">脫殼</option>
+						<option value="受精">受精</option>
+						<option value="生產">生產</option>
+						<option value="死亡">死亡</option>
+						<option value="淘汰">淘汰</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "height: 10px"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 48%">
+					<div> 眼標 </div>
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-eye"></i>
+							</div>
+						</div>
+						<input id="text1" name="eye" placeholder="ex.W999" type="text" class="form-control">
+					</div>
+				</div>
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: auto">
+					<div> 上傳紙本圖片 </div>
+				</div>
+				<div style = "width: 5px"> </div>
+				<div style = "width: 30%"> 
+					<input accept="image/*" type="file" name="fileField" id="uploadimage">
+				</div>
+			</div>
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: auto"> 
+					<div> 圖片預覽 </div>
+				</div>
+				<div style = "width: 5px"> </div>
+				<div style = "width: auto">
+					<img id="show_image" src="">
+				</div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: auto">
+					<button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+				</div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "height: 3px"> </div>
+			</div>
+			
+			<div id="backmsg"></div>
+		</form>
 	</section>
 
 	<!--Footer-->
