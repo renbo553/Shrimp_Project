@@ -25,40 +25,6 @@ if (!isset($_SESSION)) {
 		require_once "config.php";
 		$input_err = "";
 		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			// if (!strlen(trim($_POST["family"]))) {
-			// 	$input_err = "Please enter '家族'.";
-			// 	echo $input_err;
-			// }
-			// if (!strlen(trim($_POST["eye"]))) {
-			// 	$input_err = "Please enter '眼標'.";
-			// 	echo $input_err;
-			// }
-			// if (!strlen(trim($_POST["cutday"]))){
-			// 	$input_err = "Please follow the format of '剪眼日期'.</br>";
-			// 	echo $input_err;
-			// }
-			// if(!strlen(trim($_POST["cutweight"]))){
-			// 	$input_err = "Please enter '剪眼體重'.</br>";
-			// 	if(floatval (trim($_POST["cutweight"])<=0)){
-			// 		$input_err = "'剪眼體重' out of range.</br>";
-			// 	}
-			// 	echo $input_err;
-			// }
-			// if(strlen(trim($_POST["spawningroomdate"]))!=6){
-			// 	$input_err = "Please follow the format of '進產卵室待產日期'.</br>";
-			// 	echo $input_err;
-			// }
-			// if(!strlen(trim($_POST["spawningweight"]))){
-			// 	$input_err = "Please enter '生產體重'.</br>";
-			// 	if(floatval (trim($_POST["spawningweight"])<=0)){
-			// 		$input_err = "'生產體重' out of range.</br>";
-			// 	}
-			// 	echo $input_err;
-			// }
-			// if(!strlen(trim($_POST["ovarystate"]))){
-			// 	$input_err = "Please enter '卵巢進展階段(Stage)'.</br>";
-			// 	echo $input_err;
-			// }
 			if (!strlen($input_err)) {
 				$param1 = trim($_POST["family"]);
 				$param2 = trim($_POST["eye"]);
@@ -90,97 +56,114 @@ if (!isset($_SESSION)) {
 		}
 		?>
 		<form id="myFile" method="post" enctype="multipart/form-data">
-			<table class="table">
-					<th>上傳紙本圖片</th>
-					<td>
-						<input accept="image/*" type="file"  name="fileField" id="uploadimage">
-					</td>
-					<tr></tr>
-					<th>圖片預覽</th>
-					<td>
-						<img id="show_image" src="">
-					</td>
-					<tr></tr>
-					<th>眼標</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-eye"></i>
-								</div>
-							</div>
-							<input id="text1" name="eye" placeholder="ex.W999" type="text" class="form-control">
-						</div>
-					</td>
-					<tr></tr>
-					<th>家族</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-home"></i>
-								</div>
-							</div>
-							<input id="text2" name="family" placeholder="ex.F1310" type="text" class="form-control">
-						</div>
-					</td>
-					<tr></tr>
-					<th>剪眼日期</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-calendar-o"></i>
-								</div>
-							</div>
-							<input id="text3" name="cutday" type="date">
-						</div>
-					</td>
-					<tr></tr>
-					<th>剪眼體重</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-balance-scale"></i>
-								</div>
-							</div>
-							<input id="text4" name="cutweight" placeholder="ex.61.2" type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(g)</div>
+			<div class="form-inline" style = "width: 100%">
+				<div style = "height: 10px"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 48%">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-eye"></i>
 							</div>
 						</div>
-					</td>
-					<tr></tr>
-					<th>進產卵室待產日期</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-calendar-o"></i>
-								</div>
-							</div>
-							<input id="text5" name="spawningroomdate" type="date">
-						</div>
-					</td>
-					<tr></tr>
-					<th>生產體重</th>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-balance-scale"></i>
-								</div>
-							</div>
-							<input id="text6" name="spawningweight" placeholder="ex.81" type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(g)</div>
+						<input id="text1" name="eye" type="text" class="form-control" placeholder="眼標">
+					</div>
+				</div>
+				<div style = "width: 2%"> </div>
+				<div style = "width: 48%">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-home"></i>
 							</div>
 						</div>
-					</td>
-					<tr></tr>
-					<th>卵巢進展階段(Stage)</th>
-					<td>
+						<input id="text2" name="family" type="text" class="form-control"  placeholder="家族">
+					</div>
+				</div>
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 48%">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-balance-scale"></i>
+							</div>
+						</div>
+						<input id="text4" name="cutweight" type="text" class="form-control" placeholder="剪眼體重">
+						<div class="input-group-append">
+							<div class="input-group-text">(g)</div>
+						</div>
+					</div>
+				</div>
+				<div style = "width: 2%"> </div>
+				<div style = "width: 48%">
+					<div class="input-group">
+						<div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-balance-scale"></i>
+							</div>
+						</div>
+						<input id="text6" name="spawningweight" type="text" class="form-control" placeholder="生產體重">
+						<div class="input-group-append">
+							<div class="input-group-text">(g)</div>
+						</div>
+					</div>
+				</div>
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div class="input-group" style = "width: 98%">
+					<div class="input-group-prepend">
+						<div class="input-group-text">
+							<i class="fa fa-home"></i>
+						</div>
+					</div>
+					<input id="text7" name="family" type="text" class="form-control" placeholder="公蝦家族">
+				</div>
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 48%">
+					<div> 剪眼日期 </div>
+					<div class="input-group">
+						<!-- <div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-calendar-o"></i>
+							</div>
+						</div> -->
+						<input id="text3" name="cutday" type="date">
+					</div>
+				</div>
+				<div style = "width: 2%"> </div>
+				<div style = "width: 48%">
+					<div> 進產卵室待產日期 </div>
+					<div class="input-group">
+						<!-- <div class="input-group-prepend">
+							<div class="input-group-text">
+								<i class="fa fa-calendar-o"></i>
+							</div>
+						</div> -->
+						<input id="text5" name="spawningroomdate" type="date">
+					</div>
+				</div>
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: 48%">
+					<div> 卵巢進展階段(Stage) </div>
+					<div class="input-group">
 						<select id="select1" name="ovarystate" class="custom-select">
 							<option value="none" selected disabled hidden></option>
 							<option value=""></option>
@@ -192,14 +175,55 @@ if (!isset($_SESSION)) {
 							<option value="2-3">2-3</option>
 							<option value="3">3</option>
 						</select>
-					</td>
-			</table>
+					</div>
+				</div>
+				<div style = "width: 2%"> </div>
+				<div style = "width: 48%">
+					<div> 交配方式 </div>
+					<div class="input-group">
+						<select id="select2" name="mating" class="custom-select">
+							<option value="none" selected disabled hidden></option>
+							<option value=""></option>
+							<option value="自然交配">自然交配</option>
+							<option value="人工授精">人工授精</option>
+						</select>
+					</div>
+				</div>
+				<div style = "width: 1%"> </div>
+			</div>
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: auto">
+					<div> 上傳紙本圖片 </div>
+				</div>
+				<div style = "width: 5px"> </div>
+				<div style = "width: 30%"> 
+					<input accept="image/*" type="file" name="fileField" id="uploadimage">
+				</div>
+			</div>
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: auto"> 
+					<div> 圖片預覽 </div>
+				</div>
+				<div style = "width: 5px"> </div>
+				<div style = "width: auto">
+					<img id="show_image" src="">
+				</div>
+			</div>
+
+
+			<div class="form-inline" style = "width: 100%">
+				<div style = "width: 1%"> </div>
+				<div style = "width: auto">
+					<button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+				</div>
+			</div>
+			<div id="backmsg"></div>
+
+			<div style = "height: 3px"> </div>
 		</form>
-
-		<button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
-		<div id="backmsg"></div>
-		<br>
-
 	</section>
 
 	<!--Footer-->
