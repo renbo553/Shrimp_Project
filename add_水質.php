@@ -133,6 +133,10 @@ if (!isset($_SESSION)) {
 
 	<!-- table -->
     <div>
+        <?php
+
+        ?>
+        
         <span id="M1"></span>
         <span id="M2"></span>
         <span id="M3"></span>
@@ -156,17 +160,38 @@ if (!isset($_SESSION)) {
 						$input_err = "Please follow the format of '日期'.</br>";
 						echo $input_err;
 					}
-					if (!strlen(trim($_POST["location"]))) {
-						$input_err = "Please enter '位置(Tank)'.</br>";
-						echo $input_err;
-					}
 					if (!strlen($input_err)) {
 						$param1 = trim($_POST["date"]);
-						$param2 = trim($_POST["location"]);
+                        $param2 = trim($_POST["location"]);
+                        $param3 = trim($_POST["nh4"]);
+                        $param4 = trim($_POST["no2"]);
+                        $param5 = trim($_POST["no3"]);
+                        $param6 = trim($_POST["Salinity_1"]);
+                        $param7 = trim($_POST["Salinity_2"]);
+                        $param8 = trim($_POST["Salinity_3"]);
+                        $param9 = trim($_POST["pH_1"]);
+                        $param10 = trim($_POST["pH_2"]);
+                        $param11 = trim($_POST["pH_3"]);
+                        $param12 = trim($_POST["O2_1"]);
+                        $param13 = trim($_POST["O2_2"]);
+                        $param14 = trim($_POST["O2_3"]);
+                        $param15 = trim($_POST["ORP_1"]);
+                        $param16 = trim($_POST["ORP_2"]);
+                        $param17 = trim($_POST["ORP_3"]);
+                        $param18 = trim($_POST["Temp_1"]);
+                        $param19 = trim($_POST["Temp_2"]);
+                        $param20 = trim($_POST["Temp_3"]);
+                        $param21 = trim($_POST["Alkalinity"]);
+                        $param22 = trim($_POST["TCBS"]);
+                        $param23 = trim($_POST["綠菌"]);
+                        $param24 = trim($_POST["Marine"]);
+                        $param25 = trim($_POST["螢光菌TCBS"]);
+                        $param26 = trim($_POST["螢光菌Marine"]);
+                        $param27 = trim($_POST["Note"]);
 						$sql = "INSERT INTO waterquality (Date, TankID, NH4_N, NO2, NO3, Salinity_1, Salinity_2, Salinity_3, pH_1, pH_2, pH_3, O2_1, O2_2, O2_3, ORP_1, ORP_2, ORP_3, WTemp_1, WTemp_2, WTemp_3, Alkalinity, TCBS, TCBS綠菌, Marine, 螢光菌TCBS, 螢光菌Marine, Note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 						if ($stmt = $mysqli->prepare($sql)) {
-							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
+							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2 , $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
 							if ($stmt->execute()) {
 								echo "Upload successful!";
 								$stmt->close();
@@ -184,7 +209,9 @@ if (!isset($_SESSION)) {
 				}
 				?>
 				
-				<form id="myFile" method="post" enctype="multipart/form-data">
+				<form id="myFile_M1" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M1">
+
 					<div class="form-inline" style = "width: 100%">
                         <div style = "height: 5px"> </div>
                     </div>
@@ -205,7 +232,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-H">
+                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-N">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(mg/l)</div>
                                 </div>
@@ -454,7 +481,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M1">
                         </div>
                     </div>
 
@@ -469,7 +496,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image" src="">
+                            <img id="show_image_M1" src = "">
                         </div>
                     </div>
 
@@ -479,7 +506,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M1()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -502,17 +529,38 @@ if (!isset($_SESSION)) {
 						$input_err = "Please follow the format of '日期'.</br>";
 						echo $input_err;
 					}
-					if (!strlen(trim($_POST["location"]))) {
-						$input_err = "Please enter '位置(Tank)'.</br>";
-						echo $input_err;
-					}
 					if (!strlen($input_err)) {
 						$param1 = trim($_POST["date"]);
-						$param2 = trim($_POST["location"]);
+                        $param2 = trim($_POST["location"]);
+                        $param3 = trim($_POST["nh4"]);
+                        $param4 = trim($_POST["no2"]);
+                        $param5 = trim($_POST["no3"]);
+                        $param6 = trim($_POST["Salinity_1"]);
+                        $param7 = trim($_POST["Salinity_2"]);
+                        $param8 = trim($_POST["Salinity_3"]);
+                        $param9 = trim($_POST["pH_1"]);
+                        $param10 = trim($_POST["pH_2"]);
+                        $param11 = trim($_POST["pH_3"]);
+                        $param12 = trim($_POST["O2_1"]);
+                        $param13 = trim($_POST["O2_2"]);
+                        $param14 = trim($_POST["O2_3"]);
+                        $param15 = trim($_POST["ORP_1"]);
+                        $param16 = trim($_POST["ORP_2"]);
+                        $param17 = trim($_POST["ORP_3"]);
+                        $param18 = trim($_POST["Temp_1"]);
+                        $param19 = trim($_POST["Temp_2"]);
+                        $param20 = trim($_POST["Temp_3"]);
+                        $param21 = trim($_POST["Alkalinity"]);
+                        $param22 = trim($_POST["TCBS"]);
+                        $param23 = trim($_POST["綠菌"]);
+                        $param24 = trim($_POST["Marine"]);
+                        $param25 = trim($_POST["螢光菌TCBS"]);
+                        $param26 = trim($_POST["螢光菌Marine"]);
+                        $param27 = trim($_POST["Note"]);
 						$sql = "INSERT INTO waterquality (Date, TankID, NH4_N, NO2, NO3, Salinity_1, Salinity_2, Salinity_3, pH_1, pH_2, pH_3, O2_1, O2_2, O2_3, ORP_1, ORP_2, ORP_3, WTemp_1, WTemp_2, WTemp_3, Alkalinity, TCBS, TCBS綠菌, Marine, 螢光菌TCBS, 螢光菌Marine, Note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 						if ($stmt = $mysqli->prepare($sql)) {
-							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
+							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2 , $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
 							if ($stmt->execute()) {
 								echo "Upload successful!";
 								$stmt->close();
@@ -530,7 +578,9 @@ if (!isset($_SESSION)) {
 				}
 				?>
 				
-				<form id="myFile" method="post" enctype="multipart/form-data">
+				<form id="myFile_M2" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M2">
+
 					<div class="form-inline" style = "width: 100%">
                         <div style = "height: 5px"> </div>
                     </div>
@@ -551,7 +601,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-H">
+                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-N">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(mg/l)</div>
                                 </div>
@@ -800,7 +850,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M2">
                         </div>
                     </div>
 
@@ -815,7 +865,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image" src="">
+                            <img id="show_image_M2" src = "">
                         </div>
                     </div>
 
@@ -825,7 +875,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M2()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -848,17 +898,38 @@ if (!isset($_SESSION)) {
 						$input_err = "Please follow the format of '日期'.</br>";
 						echo $input_err;
 					}
-					if (!strlen(trim($_POST["location"]))) {
-						$input_err = "Please enter '位置(Tank)'.</br>";
-						echo $input_err;
-					}
 					if (!strlen($input_err)) {
 						$param1 = trim($_POST["date"]);
-						$param2 = trim($_POST["location"]);
+                        $param2 = trim($_POST["location"]);
+                        $param3 = trim($_POST["nh4"]);
+                        $param4 = trim($_POST["no2"]);
+                        $param5 = trim($_POST["no3"]);
+                        $param6 = trim($_POST["Salinity_1"]);
+                        $param7 = trim($_POST["Salinity_2"]);
+                        $param8 = trim($_POST["Salinity_3"]);
+                        $param9 = trim($_POST["pH_1"]);
+                        $param10 = trim($_POST["pH_2"]);
+                        $param11 = trim($_POST["pH_3"]);
+                        $param12 = trim($_POST["O2_1"]);
+                        $param13 = trim($_POST["O2_2"]);
+                        $param14 = trim($_POST["O2_3"]);
+                        $param15 = trim($_POST["ORP_1"]);
+                        $param16 = trim($_POST["ORP_2"]);
+                        $param17 = trim($_POST["ORP_3"]);
+                        $param18 = trim($_POST["Temp_1"]);
+                        $param19 = trim($_POST["Temp_2"]);
+                        $param20 = trim($_POST["Temp_3"]);
+                        $param21 = trim($_POST["Alkalinity"]);
+                        $param22 = trim($_POST["TCBS"]);
+                        $param23 = trim($_POST["綠菌"]);
+                        $param24 = trim($_POST["Marine"]);
+                        $param25 = trim($_POST["螢光菌TCBS"]);
+                        $param26 = trim($_POST["螢光菌Marine"]);
+                        $param27 = trim($_POST["Note"]);
 						$sql = "INSERT INTO waterquality (Date, TankID, NH4_N, NO2, NO3, Salinity_1, Salinity_2, Salinity_3, pH_1, pH_2, pH_3, O2_1, O2_2, O2_3, ORP_1, ORP_2, ORP_3, WTemp_1, WTemp_2, WTemp_3, Alkalinity, TCBS, TCBS綠菌, Marine, 螢光菌TCBS, 螢光菌Marine, Note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 						if ($stmt = $mysqli->prepare($sql)) {
-							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
+							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2 , $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
 							if ($stmt->execute()) {
 								echo "Upload successful!";
 								$stmt->close();
@@ -876,7 +947,9 @@ if (!isset($_SESSION)) {
 				}
 				?>
 				
-				<form id="myFile" method="post" enctype="multipart/form-data">
+				<form id="myFile_M3" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M3">
+
 					<div class="form-inline" style = "width: 100%">
                         <div style = "height: 5px"> </div>
                     </div>
@@ -897,7 +970,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-H">
+                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-N">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(mg/l)</div>
                                 </div>
@@ -1146,7 +1219,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M3">
                         </div>
                     </div>
 
@@ -1161,7 +1234,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image" src="">
+                            <img id="show_image_M3" src = "">
                         </div>
                     </div>
 
@@ -1171,7 +1244,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M3()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -1194,17 +1267,38 @@ if (!isset($_SESSION)) {
 						$input_err = "Please follow the format of '日期'.</br>";
 						echo $input_err;
 					}
-					if (!strlen(trim($_POST["location"]))) {
-						$input_err = "Please enter '位置(Tank)'.</br>";
-						echo $input_err;
-					}
 					if (!strlen($input_err)) {
 						$param1 = trim($_POST["date"]);
-						$param2 = trim($_POST["location"]);
+                        $param2 = trim($_POST["location"]);
+                        $param3 = trim($_POST["nh4"]);
+                        $param4 = trim($_POST["no2"]);
+                        $param5 = trim($_POST["no3"]);
+                        $param6 = trim($_POST["Salinity_1"]);
+                        $param7 = trim($_POST["Salinity_2"]);
+                        $param8 = trim($_POST["Salinity_3"]);
+                        $param9 = trim($_POST["pH_1"]);
+                        $param10 = trim($_POST["pH_2"]);
+                        $param11 = trim($_POST["pH_3"]);
+                        $param12 = trim($_POST["O2_1"]);
+                        $param13 = trim($_POST["O2_2"]);
+                        $param14 = trim($_POST["O2_3"]);
+                        $param15 = trim($_POST["ORP_1"]);
+                        $param16 = trim($_POST["ORP_2"]);
+                        $param17 = trim($_POST["ORP_3"]);
+                        $param18 = trim($_POST["Temp_1"]);
+                        $param19 = trim($_POST["Temp_2"]);
+                        $param20 = trim($_POST["Temp_3"]);
+                        $param21 = trim($_POST["Alkalinity"]);
+                        $param22 = trim($_POST["TCBS"]);
+                        $param23 = trim($_POST["綠菌"]);
+                        $param24 = trim($_POST["Marine"]);
+                        $param25 = trim($_POST["螢光菌TCBS"]);
+                        $param26 = trim($_POST["螢光菌Marine"]);
+                        $param27 = trim($_POST["Note"]);
 						$sql = "INSERT INTO waterquality (Date, TankID, NH4_N, NO2, NO3, Salinity_1, Salinity_2, Salinity_3, pH_1, pH_2, pH_3, O2_1, O2_2, O2_3, ORP_1, ORP_2, ORP_3, WTemp_1, WTemp_2, WTemp_3, Alkalinity, TCBS, TCBS綠菌, Marine, 螢光菌TCBS, 螢光菌Marine, Note) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
 						if ($stmt = $mysqli->prepare($sql)) {
-							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
+							$stmt->bind_param("sssssssssssssssssssssssssss", $param1, $param2 , $param3, $param4, $param5, $param6, $param7, $param8, $param9, $param10, $param11, $param12, $param13, $param14, $param15, $param16, $param17, $param18, $param19, $param20, $param21, $param22, $param23, $param24, $param25, $param26, $param27);
 							if ($stmt->execute()) {
 								echo "Upload successful!";
 								$stmt->close();
@@ -1222,7 +1316,9 @@ if (!isset($_SESSION)) {
 				}
 				?>
 				
-				<form id="myFile" method="post" enctype="multipart/form-data">
+				<form id="myFile_M4" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M4">
+
 					<div class="form-inline" style = "width: 100%">
                         <div style = "height: 5px"> </div>
                     </div>
@@ -1243,7 +1339,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-H">
+                                <input id="text2" name="nh4" type="text" class="form-control" placeholder = "NH4-N">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(mg/l)</div>
                                 </div>
@@ -1492,7 +1588,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M4">
                         </div>
                     </div>
 
@@ -1507,7 +1603,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image" src="">
+                            <img id="show_image_M4" src = "" >
                         </div>
                     </div>
 
@@ -1517,7 +1613,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M4()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -1542,11 +1638,12 @@ if (!isset($_SESSION)) {
     <!--//Other Script-->
 
 		<script>
-			function upload() {
+            // M1 javascript----------------------------------------------------------------
+			function upload_M1() {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-				var myForm = $("#myFile")[0];
+                var myForm = $("#myFile_M1")[0];
 				var formData = new FormData(myForm);
 
 				$.ajax({
@@ -1574,27 +1671,206 @@ if (!isset($_SESSION)) {
 				});
 			}
 
-			var imageProc = function(input) {
+            var imageProc_M1 = function(input) {
 				if (input.files && input.files[0]) {
 					// 建立一個 FileReader 物件
 					var reader = new FileReader();
 					// 當檔案讀取完後，所要進行的動作
 					reader.onload = function(e) {
 						// 顯示圖片
-						$('#show_image').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+                        var address = e.target.result ;
+						$('#show_image_M1').attr("src", e.target.result).css("height", "500px").css("width", "500px");
 						// // 將 DataURL 放到表單中
 						// $("input[name='imagestring']").val(e.target.result);
 					};
 					reader.readAsDataURL(input.files[0]);
 				}
 			}
+
 			$(document).ready(function() {
 				// 綁定事件
-				$("#uploadimage").change(function() {
-					imageProc(this);
+				$("#uploadimage_M1").change(function() {
+					imageProc_M1(this);
 				});
 
 			});
+            //-----------------------------------------------------------------------------
+
+            // M2 javascript----------------------------------------------------------------
+            function upload_M2() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+                var myForm = $("#myFile_M2")[0];
+				var formData = new FormData(myForm);
+
+				$.ajax({
+					url: 'Upload_水質.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
+
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'add_水質';
+							$("#backmsg").html(backData);
+						}
+
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+            var imageProc_M2 = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+                        var address = e.target.result ;
+						$('#show_image_M2').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_M2").change(function() {
+					imageProc_M2(this);
+				});
+
+			});
+            //-----------------------------------------------------------------------------
+
+            // M3 javascript----------------------------------------------------------------
+            function upload_M3() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+                var myForm = $("#myFile_M3")[0];
+				var formData = new FormData(myForm);
+
+				$.ajax({
+					url: 'Upload_水質.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
+
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'add_水質';
+							$("#backmsg").html(backData);
+						}
+
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+            var imageProc_M3 = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+                        var address = e.target.result ;
+						$('#show_image_M3').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_M3").change(function() {
+					imageProc_M3(this);
+				});
+
+			});
+            //-----------------------------------------------------------------------------
+
+            // M4 javascript----------------------------------------------------------------
+            function upload_M4() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+                var myForm = $("#myFile_M4")[0];
+				var formData = new FormData(myForm);
+
+				$.ajax({
+					url: 'Upload_水質.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
+
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'add_水質';
+							$("#backmsg").html(backData);
+						}
+
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+            var imageProc_M4 = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+                        var address = e.target.result ;
+						$('#show_image_M4').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_M4").change(function() {
+					imageProc_M4(this);
+				});
+
+			});
+            //-----------------------------------------------------------------------------
+
+			
 
 			$('#autoclick').click(function() {
 				$('input[type=date]').click();

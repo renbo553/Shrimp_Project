@@ -17,52 +17,58 @@ header("Content-Type:text/html; charset=utf-8");
 /* 指定要上傳的資料夾 */
 $target_dir = "images/";
 
-$tankid = $_POST["tankid"] ;
+$tankid = filter_input(INPUT_POST , "location");
+$date = filter_input(INPUT_POST, 'date');
+$shrimp = filter_input(INPUT_POST, 'tank_type');
+$time = filter_input(INPUT_POST , 'time');
+$work = filter_input(INPUT_POST , 'work');
+$else_work = filter_input(INPUT_POST , 'else_work') ;
+$male_shrimp = filter_input(INPUT_POST, 'male_shrimp');
+$female_shrimp = filter_input(INPUT_POST, 'female_shrimp');
+$dead_male_shrimp = filter_input(INPUT_POST, 'dead_male_shrimp');
+$dead_female_shrimp = filter_input(INPUT_POST, 'dead_female_shrimp');
+$peeling_male_shrimp = filter_input(INPUT_POST, 'peeling_male_shrimp');
+$peeling_female_shrimp = filter_input(INPUT_POST, 'peeling_female_shrimp');
+$avg_male_shrimp = filter_input(INPUT_POST, 'avg_male_shrimp');
+$avg_female_shrimp = filter_input(INPUT_POST, 'avg_female_shrimp');
+$total_weight = filter_input(INPUT_POST, 'total_weight');
+$food_weight = filter_input(INPUT_POST , "food_weight");
+$food_remain = filter_input(INPUT_POST , "food_remain");
+$FeedingRatio = filter_input(INPUT_POST , "FeedingRatio");
+$Observation = filter_input(INPUT_POST, 'Observation');
+$cleanDate = str_replace("/", "", $date);
+$eating = ((int)$food_weight - (int)$food_remain);
 
-// $tankid = filter_input(INPUT_POST, 'radio');
-$date = filter_input(INPUT_POST, 'date_M1');
-$shrimp = filter_input(INPUT_POST, 'radio1_M1');
-$male_shrimp = filter_input(INPUT_POST, 'male_shrimp_M1');
-$female_shrimp = filter_input(INPUT_POST, 'female_shrimp_M1');
-$dead_male_shrimp = filter_input(INPUT_POST, 'dead_male_shrimp_M1');
-$dead_female_shrimp = filter_input(INPUT_POST, 'dead_female_shrimp_M1');
-$peeling_male_shrimp = filter_input(INPUT_POST, 'peeling_male_shrimp_M1');
-$peeling_female_shrimp = filter_input(INPUT_POST, 'peeling_female_shrimp_M1');
-$avg_male_shrimp = filter_input(INPUT_POST, 'avg_male_shrimp_M1');
-$avg_female_shrimp = filter_input(INPUT_POST, 'avg_female_shrimp_M1');
-// $total_weight = filter_input(INPUT_POST, 'total_weight');
-// $food0900 = filter_input(INPUT_POST, 'food0900');
-// $weight0900 = filter_input(INPUT_POST, 'weight0900');
-// $remain0900 = filter_input(INPUT_POST, 'remain0900');
-// $eating0900 = ((int)$weight0900 - (int)$remain0900);
-// $food1100 = filter_input(INPUT_POST, 'food1100');
-// $weight1100 = filter_input(INPUT_POST, 'weight1100');
-// $remain1100 = filter_input(INPUT_POST, 'remain1100');
-// $eating1100 = ((int)$weight1100 - (int)$remain1100);
-// $food1400 = filter_input(INPUT_POST, 'food1400');
-// $weight1400 = filter_input(INPUT_POST, 'weight1400');
-// $remain1400 = filter_input(INPUT_POST, 'remain1400');
-// $eating1400 = ((int)$weight1400 - (int)$remain1400);
-// $food1600 = filter_input(INPUT_POST, 'food1600');
-// $weight1600 = filter_input(INPUT_POST, 'weight1600');
-// $remain1600 = filter_input(INPUT_POST, 'remain1600');
-// $eating1600 = ((int)$weight1600 - (int)$remain1600);
-// $food1900 = filter_input(INPUT_POST, 'food1900');
-// $weight1900 = filter_input(INPUT_POST, 'weight1900');
-// $remain1900 = filter_input(INPUT_POST, 'remain1900');
-// $eating1900 = ((int)$weight1900 - (int)$remain1900);
-// $food2300 = filter_input(INPUT_POST, 'food2300');
-// $weight2300 = filter_input(INPUT_POST, 'weight2300');
-// $remain2300 = filter_input(INPUT_POST, 'remain2300');
-// $eating2300 = ((int)$weight2300 - (int)$remain2300);
-// $food0300 = filter_input(INPUT_POST, 'food0300');
-// $weight0300 = filter_input(INPUT_POST, 'weight0300');
-// $remain0300 = filter_input(INPUT_POST, 'remain0300');
-// $eating0300 = ((int)$weight0300 - (int)$remain0300);
+// 2/6 未寫完，因為儲存的資料結構不同，因此需與夥伴討論 !(時間記錄的部分)
 
-// $FeedingRatio = filter_input(INPUT_POST, 'FeedingRatio');
-// $Observation = filter_input(INPUT_POST, 'Observation');
-// $cleanDate = str_replace("/", "", $date);
+$food0900 = 0 ;
+$weight0900 = 0 ;
+$remain0900 = 0 ;
+$eating0900 = 0 ;
+$food1100 = 0 ;
+$weight1100 = 0 ;
+$remain1100 = 0 ;
+$eating1100 = 0 ;
+$food1400 = 0 ;
+$weight1400 = 0 ;
+$remain1400 = 0 ;
+$eating1400 = 0 ;
+$food1600 = 0 ;
+$weight1600 = 0 ;
+$remain1600 = 0 ;
+$eating1600 = 0 ;
+$food1900 = 0 ;
+$weight1900 = 0 ;
+$remain1900 = 0 ;
+$eating1900 = 0 ;
+$food2300 = 0 ;
+$weight2300 = 0 ;
+$remain2300 = 0 ;
+$eating2300 = 0 ;
+$food0300 = 0 ;
+$weight0300 = 0 ;
+$remain0300 = 0 ;
+$eating0300 = 0 ;
 
 $fileType = $_FILES['fileField']['type']; //檔案類型
 $fileSize = $_FILES['fileField']['size']; //檔案大小（byte為單位）
@@ -128,7 +134,7 @@ else {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "INSERT INTO feed VALUES (null, '" . $cleanDate . "', '" . $tankid . "', '" . $shrimp . "', '" . $male_shrimp . "', '" . $female_shrimp . "', '" . $dead_male_shrimp . "', '" . $dead_female_shrimp . "', '" . $peeling_male_shrimp . "', '" . $peeling_female_shrimp . "', '" . $avg_male_shrimp . "', '" . $avg_female_shrimp . "', '" . $total_weight . "', '" . $food0900 . "', '" . $weight0900 . "', '" . $remain0900 . "', '" . $eating0900 . "', '" . $food1100 . "', '" . $weight1100 . "', '" . $remain1100 . "', '" . $eating1100 . "', '" . $food1400 . "', '" . $weight1400 . "', '" . $remain1400 . "', '" . $eating1400 . "', '" . $food1600 . "', '" . $weight1600 . "', '" . $remain1600 . "', '" . $eating1600 . "', '" . $food1900 . "', '" . $weight1900 . "', '" . $remain1900 . "', '" . $eating1900 . "', '" . $food2300 . "', '" . $weight2300 . "', '" . $remain2300 . "', '" . $eating2300 . "', '" . $food0300 . "', '" . $weight0300 . "', '" . $remain0300 . "', '" . $eating0300 . "', '" . $FeedingRatio . "', '" . $Observation . "', '" . $target_file ."');" ;
+    $insertStr = "INSERT INTO feed VALUES (null, '" . $cleanDate . "', '" . $tankid . "', '" . $shrimp . "', '" . $male_shrimp . "', '" . $female_shrimp . "', '" . $dead_male_shrimp . "', '" . $dead_female_shrimp . "', '" . $peeling_male_shrimp . "', '" . $peeling_female_shrimp . "', '" . $avg_male_shrimp . "', '" . $avg_female_shrimp . "', '" . $total_weight . "', '" . $time . "', '" . $work . "', '" . $else_work . "', '" . $food_weight . "', '" . $food_remain . "', '" . $eating . "', '" . $food0900 . "', '" . $weight0900 . "', '" . $remain0900 . "', '" . $eating0900 . "', '" . $food1100 . "', '" . $weight1100 . "', '" . $remain1100 . "', '" . $eating1100 . "', '" . $food1400 . "', '" . $weight1400 . "', '" . $remain1400 . "', '" . $eating1400 . "', '" . $food1600 . "', '" . $weight1600 . "', '" . $remain1600 . "', '" . $eating1600 . "', '" . $food1900 . "', '" . $weight1900 . "', '" . $remain1900 . "', '" . $eating1900 . "', '" . $food2300 . "', '" . $weight2300 . "', '" . $remain2300 . "', '" . $eating2300 . "', '" . $food0300 . "', '" . $weight0300 . "', '" . $remain0300 . "', '" . $eating0300 . "', '" . $FeedingRatio . "', '" . $Observation . "', '" . $target_file ."');" ;
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "新增資料庫成功\n";

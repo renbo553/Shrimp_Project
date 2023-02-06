@@ -149,6 +149,8 @@ if (!isset($_SESSION)) {
         <div class="tab-content-1"><p>
             <section>
                 <form id="M1_form" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M1">
+
                     <div class="form-inline" style = "width: 100% ; height: 75px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
@@ -181,20 +183,20 @@ if (!isset($_SESSION)) {
                             <select id="select_time" name="time" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
-                                <option value="9:00">9:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="03:00">03:00</option>
+                                <option value="9">9:00</option>
+                                <option value="11">11:00</option>
+                                <option value="14">14:00</option>
+                                <option value="16">16:00</option>
+                                <option value="19">19:00</option>
+                                <option value="23">23:00</option>
+                                <option value="3">03:00</option>
                             </select>
                             <div style = "height: 60px"> </div>
                         </div>
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div> 工作/餵食項目 </div>
-                            <select id="select_time" name="time" class="custom-select">
+                            <select id="select_work" name="work" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
                                 <option value="Polychaete">Polychaete</option>
@@ -223,7 +225,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="male_shrimp_M1" name="male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦數量">
+                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -232,7 +234,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="female_shrimp_M1" name="female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦數量">
+                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -245,7 +247,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_male_shrimp_M1" name="dead_male_shrimp_M1" type="text" class="form-control" placeholder = "死亡公蝦數量">
+                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -254,7 +256,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_female_shrimp_M1" name="dead_female_shrimp_M1" type="text" class="form-control" placeholder = "死亡母蝦數量">
+                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -267,7 +269,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                    <input id="peeling_male_shrimp_M1" name="peeling_male_shrimp_M1" type="text" class="form-control" placeholder = "脫皮公蝦">
+                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
                                     <div class="input-group-append">
                                         <div class="input-group-text">隻</div>
                                     </div>
@@ -276,7 +278,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="peeling_female_shrimp_M1" name="peeling_female_shrimp_M1" type="text" class="form-control" placeholder = "脫皮母蝦">
+                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -288,7 +290,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_male_shrimp_M1" name="avg_male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦均重">
+                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -297,7 +299,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_female_shrimp_M1" name="avg_female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦均重">
+                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -310,7 +312,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="total_weight_M1" name="total_weight_M1" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
+                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -319,7 +321,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="weight0900_M1" name="weight0900_M1" type="text" class="form-control" placeholder = "餵食量">
+                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -332,7 +334,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="remain0900_M1" name="remain0900_M1" type="text" class="form-control" placeholder = "殘餌量">
+                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -366,7 +368,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M1">
                         </div>
                     </div>
 
@@ -389,7 +391,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M1()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -403,10 +405,11 @@ if (!isset($_SESSION)) {
             </section>
         </p></div>
 
-        <!-- 與上面那個類似，只是還在修上面的部分，還在想要怎麼濃縮成一頁 -->
         <div class="tab-content-2"><p>
             <section>
-                <form id="M1_form" method="post" enctype="multipart/form-data">
+                <form id="M2_form" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M2">
+
                     <div class="form-inline" style = "width: 100% ; height: 75px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
@@ -439,20 +442,20 @@ if (!isset($_SESSION)) {
                             <select id="select_time" name="time" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
-                                <option value="9:00">9:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="03:00">03:00</option>
+                                <option value="9">9:00</option>
+                                <option value="11">11:00</option>
+                                <option value="14">14:00</option>
+                                <option value="16">16:00</option>
+                                <option value="19">19:00</option>
+                                <option value="23">23:00</option>
+                                <option value="3">03:00</option>
                             </select>
                             <div style = "height: 60px"> </div>
                         </div>
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div> 工作/餵食項目 </div>
-                            <select id="select_time" name="time" class="custom-select">
+                            <select id="select_work" name="work" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
                                 <option value="Polychaete">Polychaete</option>
@@ -481,7 +484,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="male_shrimp_M1" name="male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦數量">
+                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -490,7 +493,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="female_shrimp_M1" name="female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦數量">
+                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -503,7 +506,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_male_shrimp_M1" name="dead_male_shrimp_M1" type="text" class="form-control" placeholder = "死亡公蝦數量">
+                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -512,7 +515,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_female_shrimp_M1" name="dead_female_shrimp_M1" type="text" class="form-control" placeholder = "死亡母蝦數量">
+                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -525,7 +528,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                    <input id="peeling_male_shrimp_M1" name="peeling_male_shrimp_M1" type="text" class="form-control" placeholder = "脫皮公蝦">
+                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
                                     <div class="input-group-append">
                                         <div class="input-group-text">隻</div>
                                     </div>
@@ -534,7 +537,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="peeling_female_shrimp_M1" name="peeling_female_shrimp_M1" type="text" class="form-control" placeholder = "脫皮母蝦">
+                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -546,7 +549,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_male_shrimp_M1" name="avg_male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦均重">
+                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -555,7 +558,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_female_shrimp_M1" name="avg_female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦均重">
+                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -568,7 +571,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="total_weight_M1" name="total_weight_M1" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
+                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -577,7 +580,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="weight0900_M1" name="weight0900_M1" type="text" class="form-control" placeholder = "餵食量">
+                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -590,7 +593,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="remain0900_M1" name="remain0900_M1" type="text" class="form-control" placeholder = "殘餌量">
+                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -624,7 +627,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M2">
                         </div>
                     </div>
 
@@ -639,7 +642,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image_M1" src="">
+                            <img id="show_image_M2" src="">
                         </div>
                     </div>
 
@@ -647,7 +650,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M2()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -662,7 +665,9 @@ if (!isset($_SESSION)) {
         </p></div>
         <div class="tab-content-3"><p>
             <section>
-                <form id="M1_form" method="post" enctype="multipart/form-data">
+                <form id="M3_form" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M3">
+
                     <div class="form-inline" style = "width: 100% ; height: 75px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
@@ -695,20 +700,20 @@ if (!isset($_SESSION)) {
                             <select id="select_time" name="time" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
-                                <option value="9:00">9:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="03:00">03:00</option>
+                                <option value="9">9:00</option>
+                                <option value="11">11:00</option>
+                                <option value="14">14:00</option>
+                                <option value="16">16:00</option>
+                                <option value="19">19:00</option>
+                                <option value="23">23:00</option>
+                                <option value="3">03:00</option>
                             </select>
                             <div style = "height: 60px"> </div>
                         </div>
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div> 工作/餵食項目 </div>
-                            <select id="select_time" name="time" class="custom-select">
+                            <select id="select_work" name="work" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
                                 <option value="Polychaete">Polychaete</option>
@@ -737,7 +742,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="male_shrimp_M1" name="male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦數量">
+                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -746,7 +751,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="female_shrimp_M1" name="female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦數量">
+                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -759,7 +764,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_male_shrimp_M1" name="dead_male_shrimp_M1" type="text" class="form-control" placeholder = "死亡公蝦數量">
+                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -768,7 +773,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_female_shrimp_M1" name="dead_female_shrimp_M1" type="text" class="form-control" placeholder = "死亡母蝦數量">
+                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -781,7 +786,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                    <input id="peeling_male_shrimp_M1" name="peeling_male_shrimp_M1" type="text" class="form-control" placeholder = "脫皮公蝦">
+                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
                                     <div class="input-group-append">
                                         <div class="input-group-text">隻</div>
                                     </div>
@@ -790,7 +795,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="peeling_female_shrimp_M1" name="peeling_female_shrimp_M1" type="text" class="form-control" placeholder = "脫皮母蝦">
+                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -802,7 +807,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_male_shrimp_M1" name="avg_male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦均重">
+                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -811,7 +816,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_female_shrimp_M1" name="avg_female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦均重">
+                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -824,7 +829,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="total_weight_M1" name="total_weight_M1" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
+                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -833,7 +838,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="weight0900_M1" name="weight0900_M1" type="text" class="form-control" placeholder = "餵食量">
+                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -846,7 +851,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="remain0900_M1" name="remain0900_M1" type="text" class="form-control" placeholder = "殘餌量">
+                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -880,7 +885,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M3">
                         </div>
                     </div>
 
@@ -895,7 +900,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image_M1" src="">
+                            <img id="show_image_M3" src="">
                         </div>
                     </div>
 
@@ -903,7 +908,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M3()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -918,7 +923,9 @@ if (!isset($_SESSION)) {
         </p></div>
         <div class="tab-content-4"><p>
             <section>
-                <form id="M1_form" method="post" enctype="multipart/form-data">
+                <form id="M4_form" method="post" enctype="multipart/form-data">
+                    <input id = "location" name = "location" type = "hidden" value = "M4">
+
                     <div class="form-inline" style = "width: 100% ; height: 75px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
@@ -951,20 +958,20 @@ if (!isset($_SESSION)) {
                             <select id="select_time" name="time" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
-                                <option value="9:00">9:00</option>
-                                <option value="11:00">11:00</option>
-                                <option value="14:00">14:00</option>
-                                <option value="16:00">16:00</option>
-                                <option value="19:00">19:00</option>
-                                <option value="23:00">23:00</option>
-                                <option value="03:00">03:00</option>
+                                <option value="9">9:00</option>
+                                <option value="11">11:00</option>
+                                <option value="14">14:00</option>
+                                <option value="16">16:00</option>
+                                <option value="19">19:00</option>
+                                <option value="23">23:00</option>
+                                <option value="3">03:00</option>
                             </select>
                             <div style = "height: 60px"> </div>
                         </div>
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div> 工作/餵食項目 </div>
-                            <select id="select_time" name="time" class="custom-select">
+                            <select id="select_work" name="work" class="custom-select">
                                 <option value="none" selected disabled hidden></option>
                                 <option value=""></option>
                                 <option value="Polychaete">Polychaete</option>
@@ -993,7 +1000,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="male_shrimp_M1" name="male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦數量">
+                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -1002,7 +1009,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="female_shrimp_M1" name="female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦數量">
+                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -1015,7 +1022,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_male_shrimp_M1" name="dead_male_shrimp_M1" type="text" class="form-control" placeholder = "死亡公蝦數量">
+                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -1024,7 +1031,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="dead_female_shrimp_M1" name="dead_female_shrimp_M1" type="text" class="form-control" placeholder = "死亡母蝦數量">
+                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -1037,7 +1044,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                    <input id="peeling_male_shrimp_M1" name="peeling_male_shrimp_M1" type="text" class="form-control" placeholder = "脫皮公蝦">
+                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
                                     <div class="input-group-append">
                                         <div class="input-group-text">隻</div>
                                     </div>
@@ -1046,7 +1053,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="peeling_female_shrimp_M1" name="peeling_female_shrimp_M1" type="text" class="form-control" placeholder = "脫皮母蝦">
+                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
                                 <div class="input-group-append">
                                     <div class="input-group-text">隻</div>
                                 </div>
@@ -1058,7 +1065,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_male_shrimp_M1" name="avg_male_shrimp_M1" type="text" class="form-control" placeholder = "公蝦均重">
+                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -1067,7 +1074,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="avg_female_shrimp_M1" name="avg_female_shrimp_M1" type="text" class="form-control" placeholder = "母蝦均重">
+                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -1080,7 +1087,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="total_weight_M1" name="total_weight_M1" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
+                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -1089,7 +1096,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="weight0900_M1" name="weight0900_M1" type="text" class="form-control" placeholder = "餵食量">
+                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -1102,7 +1109,7 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div class="input-group">
-                                <input id="remain0900_M1" name="remain0900_M1" type="text" class="form-control" placeholder = "殘餌量">
+                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
                                 <div class="input-group-append">
                                     <div class="input-group-text">(g)</div>
                                 </div>
@@ -1136,7 +1143,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M4">
                         </div>
                     </div>
 
@@ -1151,7 +1158,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image_M1" src="">
+                            <img id="show_image_M4" src="">
                         </div>
                     </div>
 
@@ -1159,7 +1166,7 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="upload_M4()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
@@ -1184,86 +1191,40 @@ if (!isset($_SESSION)) {
     <!--//Other Script-->
 
         <script>
-            function setClick_M1()
-            {
-                if(document.getElementById("checkbox_other09_M1").disabled==false)
-                {
-                    document.getElementById("checkbox_other09_M1").disabled=true;
-                }
-                else{
-                    document.getElementById("checkbox_other09_M1").disabled=false;
-                }
-            }
-            function setClick_M2()
-            {
-                if(document.getElementById("checkbox_other09_M2").disabled==false)
-                {
-                    document.getElementById("checkbox_other09_M2").disabled=true;
-                }
-                else{
-                    document.getElementById("checkbox_other09_M2").disabled=false;
-                }
-            }
-            function setClick_M3()
-            {
-                if(document.getElementById("checkbox_other09_M3").disabled==false)
-                {
-                    document.getElementById("checkbox_other09_M3").disabled=true;
-                }
-                else{
-                    document.getElementById("checkbox_other09_M3").disabled=false;
-                }
-            }
-            function setClick_M4()
-            {
-                if(document.getElementById("checkbox_other09_M4").disabled==false)
-                {
-                    document.getElementById("checkbox_other09_M4").disabled=true;
-                }
-                else{
-                    document.getElementById("checkbox_other09_M4").disabled=false;
-                }
-            }
-
-			function upload() {
+            // M1 javascript------------------------------------------------------------
+            function upload_M1() {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-				
-                // $a = array("M1" , "M2" , "M3" , "M4") ;
-                // for($i = 0 ; $i < 4 ; $i ++ ) {
-                // $TankID = $a[$i] ;
-                    $TankID = "M1" ;
-                    $form_name = "#" + $TankID + "_form" ;
-                    var myForm = $($form_name)[0];
-				    var formData = new FormData(myForm);
-                    $.ajax({
-                        url: 'Upload_餵食.php',
-                        type: 'POST',
-                        data: {Data:formData , tankid:$TankID} ,
-                        cache: false,
-                        //下面兩者一定要false
-                        processData: false,
-                        contentType: false,
+				var myForm = $("#M1_form")[0];
+				var formData = new FormData(myForm);
 
-                        success: function(backData) {
-                            console.log();
-                            window.alert(backData);
-                            if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-                                window.location.href = 'add_餵食';
-                                $("#backmsg").html(backData);
-                            }
+				$.ajax({
+					url: 'Upload_餵食.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
 
-                        },
-                        error: function() {
-                            window.alert("上傳失敗...");
-                            $('#backmsg').html("上傳失敗...");
-                        },
-                    });
-                }
-			// }
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'find_餵食';
+							$("#backmsg").html(backData);
+						}
 
-			var imageProc = function(input) {
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+			var imageProc_M1 = function(input) {
 				if (input.files && input.files[0]) {
 					// 建立一個 FileReader 物件
 					var reader = new FileReader();
@@ -1277,16 +1238,180 @@ if (!isset($_SESSION)) {
 					reader.readAsDataURL(input.files[0]);
 				}
 			}
-
-            //注意!此處要改
 			$(document).ready(function() {
 				// 綁定事件
-				$("#uploadimage").change(function() {
-					imageProc(this);
+				$("#uploadimage_M1").change(function() {
+					imageProc_M1(this);
 				});
-
 			});
+            //---------------------------------------------------------------------------
+            
+            // M2 javascript------------------------------------------------------------
+            function upload_M2() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+				var myForm = $("##M2_form")[0];
+				var formData = new FormData(myForm);
 
+				$.ajax({
+					url: 'Upload_餵食.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
+
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'find_餵食';
+							$("#backmsg").html(backData);
+						}
+
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+			var imageProc_M2 = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+						$('#show_image_M2').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_M2").change(function() {
+					imageProc_M2(this);
+				});
+			});
+            //---------------------------------------------------------------------------
+            
+            // M3 javascript------------------------------------------------------------
+            function upload_M3() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+				var myForm = $("#M3_form")[0];
+				var formData = new FormData(myForm);
+
+				$.ajax({
+					url: 'Upload_餵食.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
+
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'find_餵食';
+							$("#backmsg").html(backData);
+						}
+
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+			var imageProc_M3 = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+						$('#show_image_M3').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_M3").change(function() {
+					imageProc_M3(this);
+				});
+			});
+            //---------------------------------------------------------------------------
+            
+            // M4 javascript------------------------------------------------------------
+            function upload_M4() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+				var myForm = $("#M4_form")[0];
+				var formData = new FormData(myForm);
+
+				$.ajax({
+					url: 'Upload_餵食.php',
+					type: 'POST',
+					data: formData,
+					cache: false,
+					//下面兩者一定要false
+					processData: false,
+					contentType: false,
+
+					success: function(backData) {
+						console.log();
+						window.alert(backData);
+						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+							window.location.href = 'find_餵食';
+							$("#backmsg").html(backData);
+						}
+
+					},
+					error: function() {
+						window.alert("上傳失敗...");
+						$('#backmsg').html("上傳失敗...");
+					},
+				});
+			}
+
+			var imageProc_M4 = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+						$('#show_image_M4').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_M4").change(function() {
+					imageProc_M4(this);
+				});
+			});
+            //---------------------------------------------------------------------------
+            
+            
 		</script>
 </body>
 

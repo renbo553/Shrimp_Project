@@ -24,6 +24,8 @@ $cutweight = filter_input(INPUT_POST, 'cutweight');
 $spawningroomdate = filter_input(INPUT_POST, 'spawningroomdate');
 $spawningweight = filter_input(INPUT_POST, 'spawningweight');
 $ovarystate = filter_input(INPUT_POST, 'ovarystate');
+$male_family = filter_input(INPUT_POST, 'male_family');
+$mating = filter_input(INPUT_POST, 'mating');
 
 $cleancutday = str_replace("/", "", $cutday);
 $cleanspawningroomdate = str_replace("/", "", $spawningroomdate);
@@ -92,7 +94,7 @@ else {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "INSERT INTO breed VALUES (null, '" . $family . "', '" . $eyetag .  "', '" . $cleancutday . "', '" . $cutweight . "', '" . $cleanspawningroomdate . "', '" . $spawningweight . "', '" . $ovarystate . "', '" . $target_file . "');";
+    $insertStr = "INSERT INTO breed VALUES (null, '" . $family . "', '" . $eyetag .  "', '" . $cleancutday . "', '" . $cutweight . "', '" . $cleanspawningroomdate . "', '" . $spawningweight . "', '" . $ovarystate . "', '" . $male_family . "', '" . $mating . "', '" . $target_file . "');";
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "新增資料庫成功\n";
