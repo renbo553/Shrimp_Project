@@ -33,10 +33,12 @@ if (!isset($_SESSION)) {
 				$param5 = trim($_POST["spawningroomdate"]);
 				$param6 = trim($_POST["spawningweight"]);
 				$param7 = trim($_POST["ovarystate"]);
-				$sql = "INSERT INTO breed (家族, 眼標, 剪眼日期, 剪眼體重, 進產卵室待產日期, 生產體重, 卵巢進展階段) VALUES (?, ?, ?, ?, ?, ?, ?)";
+				$param8 = trim($_POST["male_family"]);
+				$param9 = trim($_POST["mating"]);
+				$sql = "INSERT INTO breed (家族, 眼標, 剪眼日期, 剪眼體重, 進產卵室待產日期, 生產體重, 卵巢進展階段, 公蝦家族, 交配方式) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 				if ($stmt = $mysqli->prepare($sql)) {
 					// Bind variables to the prepared statement as parameters
-					$stmt->bind_param("sssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7);
+					$stmt->bind_param("sssssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9);
 
 					if ($stmt->execute()) {
 						// Redirect to login page
@@ -126,7 +128,7 @@ if (!isset($_SESSION)) {
 							<i class="fa fa-home"></i>
 						</div>
 					</div>
-					<input id="text7" name="family" type="text" class="form-control" placeholder="公蝦家族">
+					<input id="text7" name="male_family" type="text" class="form-control" placeholder="公蝦家族">
 				</div>
 				<div style = "width: 1%"> </div>
 			</div>
