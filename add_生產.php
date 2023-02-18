@@ -122,7 +122,7 @@ if (!isset($_SESSION)) {
 
 			<div class="form-inline" style = "width: 100%">
 				<div style = "width: 1%"> </div>
-				<div class="input-group" style = "width: 98%">
+				<div class="input-group" style = "width: 48%">
 					<div class="input-group-prepend">
 						<div class="input-group-text">
 							<i class="fa fa-home"></i>
@@ -143,7 +143,8 @@ if (!isset($_SESSION)) {
 								<i class="fa fa-calendar-o"></i>
 							</div>
 						</div> -->
-						<input id="text3" name="cutday" type="date">
+						<input width = "50px" id="text3" name="cutday" type="date" value="<?php echo date("Y-m-d"); ?>">
+						<!-- <input id="text3" name="cutday" type="date"> -->
 					</div>
 				</div>
 				<div style = "width: 2%"> </div>
@@ -155,7 +156,8 @@ if (!isset($_SESSION)) {
 								<i class="fa fa-calendar-o"></i>
 							</div>
 						</div> -->
-						<input id="text5" name="spawningroomdate" type="date">
+						<input width = "50px" id="text5" name="spawningroomdate" type="date" value="<?php echo date("Y-m-d"); ?>">
+						<!-- <input id="text5" name="spawningroomdate" type="date"> -->
 					</div>
 				</div>
 				<div style = "width: 1%"> </div>
