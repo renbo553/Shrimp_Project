@@ -21,42 +21,6 @@ if (!isset($_SESSION)) {
     <!--//Header-->
 
 	<section>
-		<?php
-		require_once "config.php";
-		$input_err = "";
-		if ($_SERVER["REQUEST_METHOD"] == "POST") {
-			if (!strlen($input_err)) {
-				$param1 = trim($_POST["family"]);
-				$param2 = trim($_POST["eye"]);
-				$param3 = trim($_POST["cutday"]);
-				$param4 = trim($_POST["cutweight"]);
-				$param5 = trim($_POST["spawningroomdate"]);
-				$param6 = trim($_POST["spawningweight"]);
-				$param7 = trim($_POST["ovarystate"]);
-				$param8 = trim($_POST["male_family"]);
-				$param9 = trim($_POST["mating"]);
-				$sql = "INSERT INTO breed (家族, 眼標, 剪眼日期, 剪眼體重, 進產卵室待產日期, 生產體重, 卵巢進展階段, 公蝦家族, 交配方式) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-				if ($stmt = $mysqli->prepare($sql)) {
-					// Bind variables to the prepared statement as parameters
-					$stmt->bind_param("sssssssss", $param1, $param2, $param3, $param4, $param5, $param6, $param7, $param8, $param9);
-
-					if ($stmt->execute()) {
-						// Redirect to login page
-						echo "Upload successful!";
-						$stmt->close();
-						$mysqli->close();
-						$url = "find_生產";
-						echo "<script type='text/javascript'>";
-						echo "window.alert('新增成功');";
-						echo "window.location.href='$url'";
-						echo "</script>";
-					} else {
-						echo "Something went wrong. Please try again later.";
-					}
-				}
-			}
-		}
-		?>
 		<form id="myFile" method="post" enctype="multipart/form-data">
 			<div class="form-inline" style = "width: 100%">
 				<div style = "height: 10px"> </div>
@@ -246,6 +210,72 @@ if (!isset($_SESSION)) {
 				// 底下是 jQuery 的寫法
 				var myForm = $("#myFile")[0];
 				var formData = new FormData(myForm);
+
+				// 2/20 空值檢查--------------------------------------------
+				var cutday = formData.get('cutday') ;
+				var spawningroomdate = formData.get('spawningroomdate') ;
+				var family = formData.get('family') ;
+				var cutweight = formData.get('cutweight') ;
+				var spawningweight = formData.get('spawningweight') ;
+				var male_family = formData.get('male_family') ;
+				var ovary_state = formData.get('ovarystate') ;
+				var mating = formData.get('mating') ;
+				var eye = formData.get('eye') ;
+				const map = new Map()
+				map.set("cutday" , "剪眼日期") ;
+				map.set("family" , "家族") ;
+				map.set("spawningroomdate" , "進產卵室待產日期") ;
+				map.set("male_family" , "公蝦家族") ;
+				map.set("ovary_state" , "卵巢進展階段") ;
+				map.set("eye" , "眼標") ;
+				map.set("mating" , "交配方式") ;
+				map.set("spawningweight" , "生產體重") ;
+				map.set("cutweight" , "剪眼體重") ;
+
+				// 計算有幾個沒填
+				var count = 0 ;
+				var show_message = "資訊尚未填寫完成，請填入" ;
+				if(cutday == null || cutday == "") {
+					show_message += (map.get("cutday") + '、') ;
+					count ++ ;
+				}
+				if(ovary_state == null || ovary_state == "") {
+					show_message += (map.get("ovary_state") + '、') ;
+					count ++ ;
+				}
+				if(eye == null || eye == "") {
+					show_message += (map.get("eye") + '、') ;
+					count ++ ;
+				}
+				if(family == null || family == "") {
+					show_message += (map.get("family") + '、') ;
+					count ++ ;
+				}
+				if(spawningroomdate == null || spawningroomdate == "") {
+					show_message += (map.get("spawningroomdate") + '、') ;
+					count ++ ;
+				}
+				if(cutweight == null || cutweight == "") {
+					show_message += (map.get("cutweight") + '、') ;
+					count ++ ;
+				}
+				if(spawningweight == null || spawningweight == "") {
+					show_message += (map.get("spawningweight") + '、') ;
+					count ++ ;
+				}
+				if(male_family == null || male_family == "") {
+					show_message += (map.get("male_family") + '、') ;
+					count ++ ;
+				}
+				if(mating == null || mating == "") {
+					show_message += (map.get("mating") + '、') ;
+					count ++ ;
+				}
+				if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
+				show_message += "!" ;
+				alert(show_message) ;
+				return ;
+				//----------------------------------------------------------
 
 				$.ajax({
 					url: 'Upload_生產.php',
