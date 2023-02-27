@@ -141,6 +141,7 @@ function utility_button_onclick($url, $label) : void{
     echo "<button type='button' onclick=\"location.href='{$url}'\" class='btn btn-primary'>{$label}</button>";
 }
 
+
 function utility_space() : void {
     echo "<div style = \"width : 5px ; display : inline-block\"> </div>" ;
 }
@@ -182,8 +183,6 @@ function utility_session_check($index) : bool{
         return true;
     return false;    
 }
-
-
 
 
 
@@ -254,7 +253,3 @@ function next_line() : void {
 }
 
 ?>
-
-
-
-

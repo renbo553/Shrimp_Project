@@ -242,7 +242,7 @@ if (!isset($_SESSION)) {
     function search_breed_process($mysqli) : void{
         /* fetch post input data */
         $family = trim($_POST["family_text"]);
-        
+    
         // 2/18 新增項目----------------------------------------------
         $male_family = trim($_POST["male_family_text"]);
         $breed_type = isset($_POST["breed_type_select"]) ? $_POST["breed_type_select"] : null;
@@ -310,6 +310,37 @@ if (!isset($_SESSION)) {
         else{
             $stage = "卵巢進展階段 = " . "'{$stage}'";
         }
+        if(empty($expectant_date)){
+            $expectant_date = "true";
+        }
+        else{
+            $expectant_date = "進產卵室待產日期 = " . "'{$expectant_date}'";
+        }
+        if(empty($breed_weight)){
+            $breed_weight = "true";
+        }
+        else{
+            $breed_weight = "生產體重 = " . "'{$breed_weight}'";
+        }
+        if(is_null($stage)){
+            $stage = "true";
+        }
+        else{
+            $stage = "卵巢進展階段 = " . "'{$stage}'";
+        }
+        if(is_null($sort_key)){
+            $sort_key = "id";
+        }
+        if(is_null($sort_order)){
+            $sort_order = "DESC";
+        }
+
+        /* search data from database */
+        $sql = "SELECT * FROM breed WHERE {$family} AND {$eyetag} AND {$ablation_date} AND {$ablation_weight} AND {$expectant_date} AND {$breed_weight} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
+        $result = $mysqli->query($sql);
+
+        /* show search result */
+        show_breed_result($result);
 
         // 2/18 新增項目----------
         if(is_null($breed_type)){
@@ -346,7 +377,6 @@ if (!isset($_SESSION)) {
      * param:
      *      result: sql select query result
      */
-
 
     // 2/18 未加加上去的兩個項目 !! ------------------------------------------
     function show_breed_result($result) : void{

@@ -127,6 +127,7 @@ if (!isset($_SESSION)) {
     <!--Data table-->
     <section>
         <?php
+        define("CACHE_QUERY", "search_feed_query"); 
         
         require_once "config.php";
 
@@ -152,6 +153,63 @@ if (!isset($_SESSION)) {
 
             /* show result */
             show_feed_result($result);
+
+            /* store query into session */
+            utility_session_insert(CACHE_QUERY, $sql);
+            
+            $mysqli->close();
+        }
+
+
+        /* search_feed_process:
+         * 		list searched feed data
+         * param:
+         * 		mysqli: database object
+         */
+
+        function search_feed_process($mysqli) : void{
+            /* fetch post input data */
+            $date = $_POST["date"];
+            $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
+            $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
+            $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
+            $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+            
+            /* concatenate sql where clause or set default value if not specified */
+            if(empty($date)){
+                $date = "true";
+            }
+            else{
+                $date = "Date = " . "'{$date}'";
+            }
+            if(is_null($tank)){
+                $tank = "true";
+            }
+            else{
+                $tank = "Tank = " . "'{$tank}'";
+            }
+            if(is_null($shrimp)){
+                $shrimp = "true";
+            }
+            else{
+                $shrimp = "shrimp = " . "'{$shrimp}'";
+            }
+            if(is_null($sort_key)){
+                $sort_key = "id";
+            }
+            if(is_null($sort_order)){
+                $sort_order = "DESC";
+            }
+
+            /* search data from database */
+            $sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            $result = $mysqli->query($sql);
+
+            /* show result */
+            show_feed_result($result);
+
+            /* store query into session */
+            utility_session_insert(CACHE_QUERY, $sql);
             
             $mysqli->close();
         }
@@ -207,7 +265,6 @@ if (!isset($_SESSION)) {
             $mysqli->close();
         }
 
-
         /* show_feed_result:
          *      list sql select query result
          * param:
@@ -220,6 +277,7 @@ if (!isset($_SESSION)) {
 
             // --- 顯示資料 --- //
             echo "<table style='text-align:center;' align='center' width='90%'  border='1px solid gray' text-align='center'>";
+
             echo "<thead>
                 <th>Index</th>
                 <th>日期</th>

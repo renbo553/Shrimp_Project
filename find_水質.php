@@ -202,6 +202,7 @@ if (!isset($_SESSION)) {
 
         // --- 顯示資料 --- //
         echo "<table style='text-align:center;'align='center'width='90%' border='1px solid gray'text-align='center'>";
+
         echo "<thead>
             <th>Index</th>
             <th>日期</th>
