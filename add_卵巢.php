@@ -134,6 +134,36 @@ if (!isset($_SESSION)) {
 				var myForm = $("#myFile")[0];
 				var formData = new FormData(myForm);
 
+				// 2/20 空值檢查--------------------------------------------
+				var date = formData.get('date') ;
+				var ovary_state = formData.get('ovarystate') ;
+				var eye = formData.get('eye') ;
+				const map = new Map()
+				map.set("date" , "日期") ;
+				map.set("ovary_state" , "卵巢狀態") ;
+				map.set("eye" , "眼標") ;
+
+				// 計算有幾個沒填
+				var count = 0 ;
+				var show_message = "資訊尚未填寫完成，請填入" ;
+				if(date == null || date == "") {
+					show_message += (map.get("date") + '、') ;
+					count ++ ;
+				}
+				if(ovary_state == null || ovary_state == "") {
+					show_message += (map.get("ovary_state") + '、') ;
+					count ++ ;
+				}
+				if(eye == null || eye == "") {
+					show_message += (map.get("eye") + '、') ;
+					count ++ ;
+				}
+				if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
+				show_message += "!" ;
+				alert(show_message) ;
+				return ;
+				//----------------------------------------------------------
+
 				$.ajax({
 					url: 'Upload_卵巢.php',
 					type: 'POST',

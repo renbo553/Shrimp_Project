@@ -151,215 +151,7 @@ if (!isset($_SESSION)) {
                 <form id="M1_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M1">
 
-                    <div class="form-inline" style = "width: 100% ; height: 75px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 蝦缸資訊 </div>
-                            <select id="select_type" name="tank_type" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="公蝦缸">公蝦缸</option>
-                                <option value="母蝦缸">母蝦缸</option>
-                                <option value="交配缸">交配缸</option>
-                                <option value="休養缸">休養缸</option>
-                            </select>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div style = "height: 10px"> </div>
-                            <div> 日期 </div>
-                            <div class="input-group">
-                                <div style="border-width:1px ; border-right-style:solid" class = "type_name">  </div>
-                                <input width = "50px" id="date" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 110px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 時間 </div>
-                            <select id="select_time" name="time" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="9">9:00</option>
-                                <option value="11">11:00</option>
-                                <option value="14">14:00</option>
-                                <option value="16">16:00</option>
-                                <option value="19">19:00</option>
-                                <option value="23">23:00</option>
-                                <option value="3">03:00</option>
-                            </select>
-                            <div style = "height: 60px"> </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div> 工作/餵食項目 </div>
-                            <select id="select_work" name="work" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="Polychaete">Polychaete</option>
-                                <option value="Crab(去殼)">Crab(去殼)</option>
-                                <option value="Squid">Squid</option>
-                                <option value="Mussel">Mussel</option>
-                                <option value="Epsilon">Epsilon</option>
-                                <option value="日本飼料">日本飼料</option>
-                                <option value="Krill">Krill</option>
-                                <option value="Clam(母)">Clam(母)</option>
-                                <option value="Ezmate(海膽+蟹卵)">Ezmate(海膽+蟹卵)</option>
-                                <option value="Ezmate(海膽+蟹白)">Ezmate(海膽+蟹白)</option>
-                                <option value="Ezmate(海膽+蟹黃)">Ezmate(海膽+蟹黃)</option>
-                                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                                <option value="其他">其他</option>
-                                <!-- 需確認選 "其他" 需填值 -->
-                            </select>
-                            <div class="input-group">
-                                <input id="else_work" name="else_work" placeholder="其他" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">隻</div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" placeholder = "Feeding Ratio">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">%</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <textarea id="Observation" name="Observation" cols="40" rows="5" class="form-control" placeholder = "備註"></textarea>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 10px"> </div>
-                    </div>
+                    <?php require "feed_table.html"?>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -387,8 +179,6 @@ if (!isset($_SESSION)) {
                         </div>
                     </div>
 
-
-
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M1()">上傳</button>
@@ -410,215 +200,7 @@ if (!isset($_SESSION)) {
                 <form id="M2_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M2">
 
-                    <div class="form-inline" style = "width: 100% ; height: 75px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 蝦缸資訊 </div>
-                            <select id="select_type" name="tank_type" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="公蝦缸">公蝦缸</option>
-                                <option value="母蝦缸">母蝦缸</option>
-                                <option value="交配缸">交配缸</option>
-                                <option value="休養缸">休養缸</option>
-                            </select>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div style = "height: 10px"> </div>
-                            <div> 日期 </div>
-                            <div class="input-group">
-                                <div style="border-width:1px ; border-right-style:solid" class = "type_name">  </div>
-                                <input width = "50px" id="date" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 110px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 時間 </div>
-                            <select id="select_time" name="time" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="9">9:00</option>
-                                <option value="11">11:00</option>
-                                <option value="14">14:00</option>
-                                <option value="16">16:00</option>
-                                <option value="19">19:00</option>
-                                <option value="23">23:00</option>
-                                <option value="3">03:00</option>
-                            </select>
-                            <div style = "height: 60px"> </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div> 工作/餵食項目 </div>
-                            <select id="select_work" name="work" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="Polychaete">Polychaete</option>
-                                <option value="Crab(去殼)">Crab(去殼)</option>
-                                <option value="Squid">Squid</option>
-                                <option value="Mussel">Mussel</option>
-                                <option value="Epsilon">Epsilon</option>
-                                <option value="日本飼料">日本飼料</option>
-                                <option value="Krill">Krill</option>
-                                <option value="Clam(母)">Clam(母)</option>
-                                <option value="Ezmate(海膽+蟹卵)">Ezmate(海膽+蟹卵)</option>
-                                <option value="Ezmate(海膽+蟹白)">Ezmate(海膽+蟹白)</option>
-                                <option value="Ezmate(海膽+蟹黃)">Ezmate(海膽+蟹黃)</option>
-                                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                                <option value="其他">其他</option>
-                                <!-- 需確認選 "其他" 需填值 -->
-                            </select>
-                            <div class="input-group">
-                                <input id="else_work" name="else_work" placeholder="其他" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">隻</div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" placeholder = "Feeding Ratio">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">%</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <textarea id="Observation" name="Observation" cols="40" rows="5" class="form-control" placeholder = "備註"></textarea>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 10px"> </div>
-                    </div>
+                    <?php require "feed_table.html"?>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -646,8 +228,6 @@ if (!isset($_SESSION)) {
                         </div>
                     </div>
 
-
-
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M2()">上傳</button>
@@ -668,215 +248,7 @@ if (!isset($_SESSION)) {
                 <form id="M3_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M3">
 
-                    <div class="form-inline" style = "width: 100% ; height: 75px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 蝦缸資訊 </div>
-                            <select id="select_type" name="tank_type" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="公蝦缸">公蝦缸</option>
-                                <option value="母蝦缸">母蝦缸</option>
-                                <option value="交配缸">交配缸</option>
-                                <option value="休養缸">休養缸</option>
-                            </select>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div style = "height: 10px"> </div>
-                            <div> 日期 </div>
-                            <div class="input-group">
-                                <div style="border-width:1px ; border-right-style:solid" class = "type_name">  </div>
-                                <input width = "50px" id="date" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 110px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 時間 </div>
-                            <select id="select_time" name="time" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="9">9:00</option>
-                                <option value="11">11:00</option>
-                                <option value="14">14:00</option>
-                                <option value="16">16:00</option>
-                                <option value="19">19:00</option>
-                                <option value="23">23:00</option>
-                                <option value="3">03:00</option>
-                            </select>
-                            <div style = "height: 60px"> </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div> 工作/餵食項目 </div>
-                            <select id="select_work" name="work" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="Polychaete">Polychaete</option>
-                                <option value="Crab(去殼)">Crab(去殼)</option>
-                                <option value="Squid">Squid</option>
-                                <option value="Mussel">Mussel</option>
-                                <option value="Epsilon">Epsilon</option>
-                                <option value="日本飼料">日本飼料</option>
-                                <option value="Krill">Krill</option>
-                                <option value="Clam(母)">Clam(母)</option>
-                                <option value="Ezmate(海膽+蟹卵)">Ezmate(海膽+蟹卵)</option>
-                                <option value="Ezmate(海膽+蟹白)">Ezmate(海膽+蟹白)</option>
-                                <option value="Ezmate(海膽+蟹黃)">Ezmate(海膽+蟹黃)</option>
-                                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                                <option value="其他">其他</option>
-                                <!-- 需確認選 "其他" 需填值 -->
-                            </select>
-                            <div class="input-group">
-                                <input id="else_work" name="else_work" placeholder="其他" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">隻</div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" placeholder = "Feeding Ratio">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">%</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <textarea id="Observation" name="Observation" cols="40" rows="5" class="form-control" placeholder = "備註"></textarea>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 10px"> </div>
-                    </div>
+                    <?php require "feed_table.html"?>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -904,8 +276,6 @@ if (!isset($_SESSION)) {
                         </div>
                     </div>
 
-
-
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M3()">上傳</button>
@@ -926,230 +296,7 @@ if (!isset($_SESSION)) {
                 <form id="M4_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M4">
 
-                    <div class="form-inline" style = "width: 100% ; height: 75px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 蝦缸資訊 </div>
-                            <select id="select_type" name="tank_type" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="公蝦缸">公蝦缸</option>
-                                <option value="母蝦缸">母蝦缸</option>
-                                <option value="交配缸">交配缸</option>
-                                <option value="休養缸">休養缸</option>
-                            </select>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div style = "height: 10px"> </div>
-                            <div> 日期 </div>
-                            <div class="input-group">
-                                <div style="border-width:1px ; border-right-style:solid" class = "type_name">  </div>
-                                <input width = "50px" id="date" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 110px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 時間 </div>
-                            <select id="select_time" name="time" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="9">9:00</option>
-                                <option value="11">11:00</option>
-                                <option value="14">14:00</option>
-                                <option value="16">16:00</option>
-                                <option value="19">19:00</option>
-                                <option value="23">23:00</option>
-                                <option value="3">03:00</option>
-                            </select>
-                            <div style = "height: 60px"> </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div> 工作/餵食項目 </div>
-                            <select id="select_work" name="work" class="custom-select">
-                                <option value="none" selected disabled hidden></option>
-                                <option value=""></option>
-                                <option value="Polychaete">Polychaete</option>
-                                <option value="Crab(去殼)">Crab(去殼)</option>
-                                <option value="Squid">Squid</option>
-                                <option value="Mussel">Mussel</option>
-                                <option value="Epsilon">Epsilon</option>
-                                <option value="日本飼料">日本飼料</option>
-                                <option value="Krill">Krill</option>
-                                <option value="Clam(母)">Clam(母)</option>
-                                <option value="Ezmate(海膽+蟹卵)">Ezmate(海膽+蟹卵)</option>
-                                <option value="Ezmate(海膽+蟹白)">Ezmate(海膽+蟹白)</option>
-                                <option value="Ezmate(海膽+蟹黃)">Ezmate(海膽+蟹黃)</option>
-                                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                                <option value="其他">其他</option>
-                                <!-- 需確認選 "其他" 需填值 -->
-                            </select>
-                            <div class="input-group">
-                                <input id="else_work" name="else_work" placeholder="其他" type="text" class="form-control">
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" placeholder = "公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" placeholder = "母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" placeholder = "死亡公蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" placeholder = "死亡母蝦數量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" placeholder = "脫皮公蝦">
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">隻</div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" placeholder = "脫皮母蝦">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">隻</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" placeholder = "公蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" placeholder = "母蝦均重">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="total_weight" name="total_weight" type="text" class="form-control" placeholder = "總重" style = "width: 1%">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_weight" name="food_weight" type="text" class="form-control" placeholder = "餵食量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 45px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="food_remain" name="food_remain" type="text" class="form-control" placeholder = "殘餌量">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">(g)</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div class="input-group">
-                                <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" placeholder = "Feeding Ratio">
-                                <div class="input-group-append">
-                                    <div class="input-group-text">%</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <textarea id="Observation" name="Observation" cols="40" rows="5" class="form-control" placeholder = "備註"></textarea>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 10px"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto">
-                            <div> 上傳紙本圖片 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M4">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 1px"> </div>
-                    </div>
+                    <?php require "feed_table.html"?>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -1161,8 +308,6 @@ if (!isset($_SESSION)) {
                             <img id="show_image_M4" src="">
                         </div>
                     </div>
-
-
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -1191,6 +336,7 @@ if (!isset($_SESSION)) {
     <!--//Other Script-->
 
         <script>
+            document.write('<script type="text/javascript" src="feed_check.js"></'+'script>');
             // M1 javascript------------------------------------------------------------
             function upload_M1() {
 				// 此處是 javascript 寫法
@@ -1199,29 +345,9 @@ if (!isset($_SESSION)) {
 				var myForm = $("#M1_form")[0];
 				var formData = new FormData(myForm);
 
-				$.ajax({
-					url: 'Upload_餵食.php',
-					type: 'POST',
-					data: formData,
-					cache: false,
-					//下面兩者一定要false
-					processData: false,
-					contentType: false,
-
-					success: function(backData) {
-						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_餵食';
-							$("#backmsg").html(backData);
-						}
-
-					},
-					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
-					},
-				});
+				var ret_message = check(formData) ;
+                if(ret_message == "") post(formData) ;
+                else alert(ret_message) ;
 			}
 
 			var imageProc_M1 = function(input) {
@@ -1254,29 +380,9 @@ if (!isset($_SESSION)) {
 				var myForm = $("##M2_form")[0];
 				var formData = new FormData(myForm);
 
-				$.ajax({
-					url: 'Upload_餵食.php',
-					type: 'POST',
-					data: formData,
-					cache: false,
-					//下面兩者一定要false
-					processData: false,
-					contentType: false,
-
-					success: function(backData) {
-						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_餵食';
-							$("#backmsg").html(backData);
-						}
-
-					},
-					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
-					},
-				});
+				var ret_message = check(formData) ;
+                if(ret_message == "") post(formData) ;
+                else alert(ret_message) ;
 			}
 
 			var imageProc_M2 = function(input) {
@@ -1309,29 +415,9 @@ if (!isset($_SESSION)) {
 				var myForm = $("#M3_form")[0];
 				var formData = new FormData(myForm);
 
-				$.ajax({
-					url: 'Upload_餵食.php',
-					type: 'POST',
-					data: formData,
-					cache: false,
-					//下面兩者一定要false
-					processData: false,
-					contentType: false,
-
-					success: function(backData) {
-						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_餵食';
-							$("#backmsg").html(backData);
-						}
-
-					},
-					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
-					},
-				});
+				var ret_message = check(formData) ;
+                if(ret_message == "") post(formData) ;
+                else alert(ret_message) ;
 			}
 
 			var imageProc_M3 = function(input) {
@@ -1364,29 +450,9 @@ if (!isset($_SESSION)) {
 				var myForm = $("#M4_form")[0];
 				var formData = new FormData(myForm);
 
-				$.ajax({
-					url: 'Upload_餵食.php',
-					type: 'POST',
-					data: formData,
-					cache: false,
-					//下面兩者一定要false
-					processData: false,
-					contentType: false,
-
-					success: function(backData) {
-						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_餵食';
-							$("#backmsg").html(backData);
-						}
-
-					},
-					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
-					},
-				});
+				var ret_message = check(formData) ;
+                if(ret_message == "") post(formData) ;
+                else alert(ret_message) ;
 			}
 
 			var imageProc_M4 = function(input) {

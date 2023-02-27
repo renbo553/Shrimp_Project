@@ -29,36 +29,97 @@ if (!isset($_SESSION)) {
 
     <!--Search form-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
-        <div class="table">
-            <?php 
-                require_once "utility.php";
-                $sort_option_array = array();
-                $sort_option_array["index"] = "id";
-                $sort_option_array["日期"] = "Date";
-                $sort_option_array["Tank"] = "Tank";
-                $sort_option_array["蝦"] = "shrimp";
-                utility_input_selectbox("sort_select", "排序項目", $sort_option_array);
-                $order_option_array = array();
-                $order_option_array["升序"] = "ASC";
-                $order_option_array["降序"] = "DESC";
-                utility_input_selectbox("order_select", "排序方式", $order_option_array);
-                utility_input_date("date", "日期");
-                $tank_option_array = array();
-                $tank_option_array["M1"] = "M1";
-                $tank_option_array["M2"] = "M2";
-                $tank_option_array["M3"] = "M3";
-                $tank_option_array["M4"] = "M4";
-                utility_input_selectbox("tank_select", "Tank", $tank_option_array);
-                $shrimp_option_array = array();
-                $shrimp_option_array["公蝦缸"] = "公蝦缸";
-                $shrimp_option_array["母蝦缸"] = "母蝦缸";
-                $shrimp_option_array["交配缸"] = "交配缸";
-                $shrimp_option_array["休養缸"] = "休養缸";
-                $shrimp_option_array["公蝦+母蝦缸"] = "公蝦+母蝦缸";
-                utility_input_selectbox("shrimp_select", "蝦", $shrimp_option_array);
-                utility_button("submit", "查詢");
-                utility_button_onclick("export_feed.php", "匯出");
-            ?>
+        <?php require_once "utility.php"; ?>
+
+        <!-- 2/18 修改之UI -->
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select", "排序項目", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select", "排序方式", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 日期 </div>
+                <div class="input-group">
+                    <?php 
+                        utility_date("date", "日期");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> TankID </div>
+                <div class="input-group">
+                    <?php
+                        $tank_option_array = array();
+                        $tank_option_array["M1"] = "M1";
+                        $tank_option_array["M2"] = "M2";
+                        $tank_option_array["M3"] = "M3";
+                        $tank_option_array["M4"] = "M4";
+                        utility_selectbox("tank_select", "Tank", $tank_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 蝦缸類別 </div>
+                <div class="input-group">
+                    <?php 
+                        $shrimp_option_array = array();
+                        $shrimp_option_array["公蝦缸"] = "公蝦缸";
+                        $shrimp_option_array["母蝦缸"] = "母蝦缸";
+                        $shrimp_option_array["交配缸"] = "交配缸";
+                        $shrimp_option_array["休養缸"] = "休養缸";
+                        utility_selectbox("shrimp_select", "蝦缸類別", $shrimp_option_array);
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 40px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: auto"> 
+                <?php
+                    utility_button("submit", "查詢");
+                ?>
+            </div>
+            <div style = "width: 1%"> </div>
+            <div style = "width: auto">
+                <?php
+                    // 放匯出功能做好時的匯出鍵
+                    // utility_button_onclick("export_waterquality.php", "匯出");
+                ?>
+            </div>
         </div>
     </form>
     <!--//Search form-->
@@ -66,7 +127,6 @@ if (!isset($_SESSION)) {
     <!--Data table-->
     <section>
         <?php
-
         define("CACHE_QUERY", "search_feed_query"); 
         
         require_once "config.php";
@@ -155,6 +215,56 @@ if (!isset($_SESSION)) {
         }
 
 
+        /* search_feed_process:
+         * 		list searched feed data
+         * param:
+         * 		mysqli: database object
+         */
+
+        function search_feed_process($mysqli) : void{
+            /* fetch post input data */
+            $date = $_POST["date"];
+            $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
+            $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
+            $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
+            $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+            
+            /* concatenate sql where clause or set default value if not specified */
+            if(empty($date)){
+                $date = "true";
+            }
+            else{
+                $date = "Date = " . "'{$date}'";
+            }
+            if(is_null($tank)){
+                $tank = "true";
+            }
+            else{
+                $tank = "Tank = " . "'{$tank}'";
+            }
+            if(is_null($shrimp)){
+                $shrimp = "true";
+            }
+            else{
+                $shrimp = "shrimp = " . "'{$shrimp}'";
+            }
+            if(is_null($sort_key)){
+                $sort_key = "id";
+            }
+            if(is_null($sort_order)){
+                $sort_order = "DESC";
+            }
+
+            /* search data from database */
+            $sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            $result = $mysqli->query($sql);
+
+            /* show result */
+            show_feed_result($result);
+            
+            $mysqli->close();
+        }
+
         /* show_feed_result:
          *      list sql select query result
          * param:
@@ -162,10 +272,12 @@ if (!isset($_SESSION)) {
          */
 
         function show_feed_result($result) : void{
+            echo "<div style = \"width : 1% ; display : inline-block\"> </div>" ;
             echo "資料表有 " . $result->num_rows . " 筆資料<br>";
 
             // --- 顯示資料 --- //
-            echo "<table style='text-align:center;' align='center' width='70%'  border='1px solid gray' text-align='center'>";
+            echo "<table style='text-align:center;' align='center' width='90%'  border='1px solid gray' text-align='center'>";
+
             echo "<thead>
                 <th>Index</th>
                 <th>日期</th>

@@ -29,28 +29,78 @@ if (!isset($_SESSION)) {
 
     <!--Search form-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
-        <div class="table">
-            <?php 
-                require_once "utility.php";
-                $sort_option_array = array();
-                $sort_option_array["index"] = "id";
-                $sort_option_array["日期"] = "Date";
-                $sort_option_array["TankID"] = "TankID";
-                utility_input_selectbox("sort_select", "排序項目", $sort_option_array);
-                $order_option_array = array();
-                $order_option_array["升序"] = "ASC";
-                $order_option_array["降序"] = "DESC";
-                utility_input_selectbox("order_select", "排序方式", $order_option_array);
-                utility_input_date("date", "日期");
-                $tank_option_array = array();
-                $tank_option_array["M1"] = "M1";
-                $tank_option_array["M2"] = "M2";
-                $tank_option_array["M3"] = "M3";
-                $tank_option_array["M4"] = "M4";
-                utility_input_selectbox("tank_select", "TankID", $tank_option_array);
-                utility_button("submit", "查詢");
-                utility_button_onclick("export_waterquality.php", "匯出");
-            ?>
+        <?php require_once "utility.php"; ?>
+
+        <!-- 2/18 修改之UI -->
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["TankID"] = "TankID";
+                        utility_selectbox("sort_select", "排序項目", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select", "排序方式", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 日期 </div>
+                <div class="input-group">
+                    <?php 
+                        utility_date("date", "日期");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> TankID </div>
+                <div class="input-group">
+                    <?php
+                        $tank_option_array = array();
+                        $tank_option_array["M1"] = "M1";
+                        $tank_option_array["M2"] = "M2";
+                        $tank_option_array["M3"] = "M3";
+                        $tank_option_array["M4"] = "M4";
+                        utility_selectbox("tank_select", "TankID", $tank_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 40px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: auto"> 
+                <?php
+                    utility_button("submit", "查詢");
+                ?>
+            </div>
+            <div style = "width: 1%"> </div>
+            <div style = "width: auto">
+                <?php
+                    utility_button_onclick("export_waterquality.php", "匯出");
+                ?>
+            </div>
         </div>
     </form>
     <!--//Search form-->
@@ -147,10 +197,12 @@ if (!isset($_SESSION)) {
      */
 
     function show_waterquality_result($result) : void{
+        echo "<div style = \"width : 1% ; display : inline-block\"> </div>" ;
         echo "資料表有 " . $result->num_rows . " 筆資料<br>";
 
         // --- 顯示資料 --- //
-        echo "<table style='text-align:center;'align='center'width='70%' border='1px solid gray'text-align='center'>";
+        echo "<table style='text-align:center;'align='center'width='90%' border='1px solid gray'text-align='center'>";
+
         echo "<thead>
             <th>Index</th>
             <th>日期</th>

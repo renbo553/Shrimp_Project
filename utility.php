@@ -142,6 +142,15 @@ function utility_button_onclick($url, $label) : void{
 }
 
 
+function utility_space() : void {
+    echo "<div style = \"width : 5px ; display : inline-block\"> </div>" ;
+}
+
+function utility_next_line() : void {
+    echo "<div style = \"height : 5px\"> </div>" ;
+}
+
+
 /* utility_session_insert:
  *      insert a variable into session
  * param:
@@ -173,6 +182,74 @@ function utility_session_check($index) : bool{
     if(isset($_SESSION[$index]))
         return true;
     return false;    
+}
+
+
+
+
+
+
+
+
+
+// 2/18 改查詢結果頁面 UI 所用之 function
+ function utility_textbox($name = "", $label = "") : void{
+    /* check arguments */
+    if($name == "" && $label == ""){
+        echo "utility_input_textbox error: this input item needs a name and label";
+        return;
+    }
+
+    /* create a input text box */
+    echo "<input type='text' class='form-control' name='{$name}' id='{$name}'>";
+}
+
+function utility_date($name = "", $label = "") : void{
+    /* check arguments */
+    if($name == "" && $label == ""){
+        echo "utility_input_date error: this input item needs a name and label";
+        return;
+    }
+
+    /* create a input date item */
+    echo "<input type='date' class='form-control' name='{$name}' id='{$name}'>";
+}
+
+function utility_selectbox($name = "", $label = "", $option_arr) : void{
+    /* check arguments */
+    if($name == "" && $label == ""){
+        echo "utility_input_select error: this input item needs a name and label";
+        return;
+    }
+    if(count($option_arr) == 0){
+        echo "utility_input_select error: this input item needs a option array";
+        return;
+    }
+
+    /* create html select box */
+    echo "<select class='form-control' name='{$name}' id='{$name}'>";
+    // create none option
+    echo "<option value='none' selected disabled hidden></option>";
+    // create options
+    foreach($option_arr as $key => $value)
+        echo "<option value='{$value}'>{$key}</option>";
+    echo "</select>";
+}
+
+function button($type, $label) : void{
+    echo "<button type='{$type}' class='btn btn-primary'>{$label}</button>";
+}
+
+function button_onclick($url, $label) : void{
+    echo "<button type='button' onclick=\"location.href='{$url}'\" class='btn btn-primary'>{$label}</button>";
+}
+
+function space() : void {
+    echo "<div style = \"width : 5px ; display : inline-block\"> </div>" ;
+}
+
+function next_line() : void {
+    echo "<div style = \"height : 5px\"> </div>" ;
 }
 
 ?>

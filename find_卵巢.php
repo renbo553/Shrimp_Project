@@ -29,38 +29,99 @@ if (!isset($_SESSION)) {
 
     <!--Search form-->
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
-        <div class="table">
-            <?php 
-                require_once "utility.php";
-                $sort_option_array = array();
-                $sort_option_array["index"] = "id";
-                $sort_option_array["眼標"] = "眼標";
-                $sort_option_array["日期"] = "Date";
-                $sort_option_array["階段"] = "Stage";
-                utility_input_selectbox("sort_select", "排序項目", $sort_option_array);
-                $order_option_array = array();
-                $order_option_array["升序"] = "ASC";
-                $order_option_array["降序"] = "DESC";
-                utility_input_selectbox("order_select", "排序方式", $order_option_array);
-                utility_input_textbox("eyetag_text", "眼標");
-                utility_input_date("date", "日期");
-                $stage_option_array = array();
-                $stage_option_array["0"] = "0";
-                $stage_option_array["0-1"] = "0-Ⅰ";
-                $stage_option_array["1"] = "Ⅰ";
-                $stage_option_array["1-2"] = "Ⅰ-Ⅱ";
-                $stage_option_array["2"] = "Ⅱ";
-                $stage_option_array["2-3"] = "Ⅱ-Ⅲ";
-                $stage_option_array["3"] = "Ⅲ";
-                $stage_option_array["脫殼"] = "脫殼";
-                $stage_option_array["受精"] = "受精";
-                $stage_option_array["生產"] = "生產";
-                $stage_option_array["死亡"] = "死亡";
-                $stage_option_array["淘汰"] = "淘汰";
-                utility_input_selectbox("stage_select", "階段", $stage_option_array);
-                utility_button("submit", "查詢");
-                utility_button_onclick("export_ovary.php", "匯出");
-            ?>
+        <?php require_once "utility.php"; ?>
+
+        <!-- 2/18 修改之UI -->
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["眼標"] = "眼標";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["階段"] = "Stage";
+                        utility_selectbox("sort_select", "排序項目", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 排序方式 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select", "排序方式", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 眼標 </div>
+                <div class="input-group">
+                    <?php 
+                        utility_textbox("eyetag_text", "眼標");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 日期 </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("date", "日期");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 卵巢階段 </div>
+                <div class="input-group">
+                    <?php 
+                        $stage_option_array = array();
+                        $stage_option_array["0"] = "0";
+                        $stage_option_array["0-1"] = "0-Ⅰ";
+                        $stage_option_array["1"] = "Ⅰ";
+                        $stage_option_array["1-2"] = "Ⅰ-Ⅱ";
+                        $stage_option_array["2"] = "Ⅱ";
+                        $stage_option_array["2-3"] = "Ⅱ-Ⅲ";
+                        $stage_option_array["3"] = "Ⅲ";
+                        $stage_option_array["脫殼"] = "脫殼";
+                        $stage_option_array["受精"] = "受精";
+                        $stage_option_array["生產"] = "生產";
+                        $stage_option_array["死亡"] = "死亡";
+                        $stage_option_array["淘汰"] = "淘汰";
+                        utility_selectbox("stage_select", "階段", $stage_option_array);        
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 40px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: auto"> 
+                <?php
+                    utility_button("submit", "查詢");
+                ?>
+            </div>
+            <div style = "width: 1%"> </div>
+            <div style = "width: auto">
+                <?php
+                    utility_button_onclick("export_ovary.php", "匯出");
+                ?>
+            </div>
         </div>
     </form>
     <!--//Search form-->
@@ -163,10 +224,11 @@ if (!isset($_SESSION)) {
      */
 
     function show_ovary_result($result) : void{
+        echo "<div style = \"width : 1% ; display : inline-block\"> </div>" ;
         echo "資料表有 " . $result->num_rows . " 筆資料<br>";
 
         // --- 顯示資料 --- //
-        echo "<table style='text-align:center;' align='center' width='80%'  border='1px solid gray' text-align='center'>";
+        echo "<table style='text-align:center;' align='center' width='90%'  border='1px solid gray' text-align='center'>";
         echo "<thead>
             <th>Index</th>
             <th>眼標</th>
