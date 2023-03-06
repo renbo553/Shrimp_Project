@@ -236,45 +236,48 @@ if (!isset($_SESSION)) {
 				var count = 0 ;
 				var show_message = "資訊尚未填寫完成，請填入" ;
 				if(cutday == null || cutday == "") {
-					show_message += (map.get("cutday") + '、') ;
+					show_message += (map.get("cutday") + '\n') ;
 					count ++ ;
 				}
 				if(ovary_state == null || ovary_state == "") {
-					show_message += (map.get("ovary_state") + '、') ;
+					show_message += (map.get("ovary_state") + '\n') ;
 					count ++ ;
 				}
 				if(eye == null || eye == "") {
-					show_message += (map.get("eye") + '、') ;
+					show_message += (map.get("eye") + '\n') ;
 					count ++ ;
 				}
 				if(family == null || family == "") {
-					show_message += (map.get("family") + '、') ;
+					show_message += (map.get("family") + '\n') ;
 					count ++ ;
 				}
 				if(spawningroomdate == null || spawningroomdate == "") {
-					show_message += (map.get("spawningroomdate") + '、') ;
+					show_message += (map.get("spawningroomdate") + '\n') ;
 					count ++ ;
 				}
 				if(cutweight == null || cutweight == "") {
-					show_message += (map.get("cutweight") + '、') ;
+					show_message += (map.get("cutweight") + '\n') ;
 					count ++ ;
 				}
 				if(spawningweight == null || spawningweight == "") {
-					show_message += (map.get("spawningweight") + '、') ;
+					show_message += (map.get("spawningweight") + '\n') ;
 					count ++ ;
 				}
 				if(male_family == null || male_family == "") {
-					show_message += (map.get("male_family") + '、') ;
+					show_message += (map.get("male_family") + '\n') ;
 					count ++ ;
 				}
 				if(mating == null || mating == "") {
-					show_message += (map.get("mating") + '、') ;
+					show_message += (map.get("mating") + '\n') ;
 					count ++ ;
 				}
-				if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
-				show_message += "!" ;
-				alert(show_message) ;
-				return ;
+				if(count != 0) {
+					show_message = show_message.slice(0 , show_message.length - 1) ;
+					show_message += "!" ;
+					alert(show_message) ;
+					return ;
+				}
+
 				//----------------------------------------------------------
 
 				$.ajax({

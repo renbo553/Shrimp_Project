@@ -148,7 +148,7 @@ if (!isset($_SESSION)) {
         <!– 頁籤的內容區塊 –>
         <div class="tab-content-1"><p>
 			<section>
-				<form id="myFile_M1" method="post" enctype="multipart/form-data">
+				<form id="M1_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M1">
 
                     <?php require "water_table.html"?>
@@ -185,6 +185,8 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="add_before_M1()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M1()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
@@ -192,15 +194,12 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100%">
                         <div style = "height: 1px"> </div>
                     </div>
-
-					<div id="backmsg"></div>
-					<br>
 				</form>
 			</section>
         </p></div>
         <div class="tab-content-2"><p>
 			<section>
-				<form id="myFile_M2" method="post" enctype="multipart/form-data">
+				<form id="M2_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M2">
 
 					<?php require "water_table.html"?>
@@ -237,6 +236,8 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="add_before_M2()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M2()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
@@ -244,15 +245,12 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100%">
                         <div style = "height: 1px"> </div>
                     </div>
-
-					<div id="backmsg"></div>
-					<br>
 				</form>
 			</section>
         </p></div>
         <div class="tab-content-3"><p>
 			<section>
-				<form id="myFile_M3" method="post" enctype="multipart/form-data">
+				<form id="M3_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M3">
 
 					<?php require "water_table.html"?>
@@ -289,6 +287,8 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="add_before_M3()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M3()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
@@ -296,15 +296,12 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100%">
                         <div style = "height: 1px"> </div>
                     </div>
-
-					<div id="backmsg"></div>
-					<br>
 				</form>
 			</section>
         </p></div>
         <div class="tab-content-4"><p>
 			<section>
-				<form id="myFile_M4" method="post" enctype="multipart/form-data">
+				<form id="M4_form" method="post" enctype="multipart/form-data">
                     <input id = "location" name = "location" type = "hidden" value = "M4">
 
 					<?php require "water_table.html"?>
@@ -341,6 +338,8 @@ if (!isset($_SESSION)) {
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="add_before_M4()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
                         <button type="button" class="btn btn-primary" onclick="upload_M4()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
@@ -348,9 +347,6 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100%">
                         <div style = "height: 1px"> </div>
                     </div>
-
-					<div id="backmsg"></div>
-					<br>
 				</form>
 			</section>
         </p></div>
@@ -372,13 +368,32 @@ if (!isset($_SESSION)) {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-                var myForm = $("#myFile_M1")[0];
+                var myForm = $("#M1_form")[0];
 				var formData = new FormData(myForm);
 
                 var ret_message = check(formData) ;
                 if(ret_message == "") post(formData) ;
                 else alert(ret_message) ;
 			}
+
+            function add_before_M1() {
+                var myForm = $("#M1_form")[0];
+				var formData = new FormData(myForm);
+                
+                //取得昨天資料前需先檢查日期與時間有沒有填入
+				var ret_message = add_check(formData) ;
+                if(ret_message == "") {
+                    var data = get_before(formData) ;
+                    var before_data_array = data[0] ;
+                    console.log(before_data_array) ;
+
+                    put_into_form(before_data_array);
+                }
+                else {
+                    alert(ret_message) ;
+                    return ;
+                }
+            }
 
             var imageProc_M1 = function(input) {
 				if (input.files && input.files[0]) {
@@ -410,13 +425,32 @@ if (!isset($_SESSION)) {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-                var myForm = $("#myFile_M2")[0];
+                var myForm = $("#M2_form")[0];
 				var formData = new FormData(myForm);
 
 				var ret_message = check(formData) ;
                 if(ret_message == "") post(formData) ;
                 else alert(ret_message) ;
 			}
+
+            function add_before_M2() {
+                var myForm = $("#M2_form")[0];
+				var formData = new FormData(myForm);
+                
+                //取得昨天資料前需先檢查日期與時間有沒有填入
+				var ret_message = add_check(formData) ;
+                if(ret_message == "") {
+                    var data = get_before(formData) ;
+                    var before_data_array = data[0] ;
+                    console.log(before_data_array) ;
+
+                    put_into_form(before_data_array);
+                }
+                else {
+                    alert(ret_message) ;
+                    return ;
+                }
+            }
 
             var imageProc_M2 = function(input) {
 				if (input.files && input.files[0]) {
@@ -448,13 +482,32 @@ if (!isset($_SESSION)) {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-                var myForm = $("#myFile_M3")[0];
+                var myForm = $("#M3_form")[0];
 				var formData = new FormData(myForm);
 
 				var ret_message = check(formData) ;
                 if(ret_message == "") post(formData) ;
                 else alert(ret_message) ;
 			}
+
+            function add_before_M3() {
+                var myForm = $("#M3_form")[0];
+				var formData = new FormData(myForm);
+                
+                //取得昨天資料前需先檢查日期與時間有沒有填入
+				var ret_message = add_check(formData) ;
+                if(ret_message == "") {
+                    var data = get_before(formData) ;
+                    var before_data_array = data[0] ;
+                    console.log(before_data_array) ;
+
+                    put_into_form(before_data_array);
+                }
+                else {
+                    alert(ret_message) ;
+                    return ;
+                }
+            }
 
             var imageProc_M3 = function(input) {
 				if (input.files && input.files[0]) {
@@ -486,13 +539,32 @@ if (!isset($_SESSION)) {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-                var myForm = $("#myFile_M4")[0];
+                var myForm = $("#M4_form")[0];
 				var formData = new FormData(myForm);
 
 				var ret_message = check(formData) ;
                 if(ret_message == "") post(formData) ;
                 else alert(ret_message) ;
 			}
+
+            function add_before_M4() {
+                var myForm = $("#M4_form")[0];
+				var formData = new FormData(myForm);
+                
+                //取得昨天資料前需先檢查日期與時間有沒有填入
+				var ret_message = add_check(formData) ;
+                if(ret_message == "") {
+                    var data = get_before(formData) ;
+                    var before_data_array = data[0] ;
+                    console.log(before_data_array) ;
+
+                    put_into_form(before_data_array);
+                }
+                else {
+                    alert(ret_message) ;
+                    return ;
+                }
+            }
 
             var imageProc_M4 = function(input) {
 				if (input.files && input.files[0]) {

@@ -145,25 +145,27 @@ if (!isset($_SESSION)) {
 
 				// 計算有幾個沒填
 				var count = 0 ;
-				var show_message = "資訊尚未填寫完成，請填入" ;
+				var show_message = "資訊尚未填寫完成，請填入\n" ;
 				if(date == null || date == "") {
-					show_message += (map.get("date") + '、') ;
+					show_message += (map.get("date") + '\n') ;
 					count ++ ;
 				}
 				if(ovary_state == null || ovary_state == "") {
-					show_message += (map.get("ovary_state") + '、') ;
+					show_message += (map.get("ovary_state") + '\n') ;
 					count ++ ;
 				}
 				if(eye == null || eye == "") {
-					show_message += (map.get("eye") + '、') ;
+					show_message += (map.get("eye") + '\n') ;
 					count ++ ;
 				}
-				if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
-				show_message += "!" ;
-				alert(show_message) ;
-				return ;
-				//----------------------------------------------------------
+				if(count != 0) {
+					show_message = show_message.slice(0 , show_message.length - 1) ;
+					show_message += "!" ;
+					alert(show_message) ;
+					return ;
+				}
 
+				//----------------------------------------------------------
 				$.ajax({
 					url: 'Upload_卵巢.php',
 					type: 'POST',
