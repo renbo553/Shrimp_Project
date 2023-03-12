@@ -25,3 +25,20 @@
 	rel="stylesheet">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:400,400i,700,700i" rel="stylesheet">
 
+<!-- Swal 所需要的模組 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type=“text/javascript” src="sweetalert2.all.min.js"></script>
+
+<script>
+	function Alert(msg) {
+	// 定義自定義的彈出框樣式和行為
+	// 可以是彈出一個模態框或在頁面上顯示一個自定義的消息框
+	// 在此處調用您想要使用的JavaScript函數或插件來創建自定義樣式的彈出框
+
+	// 例如，這裡使用 SweetAlert 插件來創建一個自定義的彈出框
+	Swal.fire({
+		title: msg,
+		confirmButtonText: "確認",
+		})
+}
+</script>

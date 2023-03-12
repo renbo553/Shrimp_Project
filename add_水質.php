@@ -167,9 +167,6 @@ if (!isset($_SESSION)) {
     <script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
     <script> document.write('<script type="text/javascript" src="water_check.js"></'+'script>'); </script>
     
-    <!-- Swal 所需要的模組 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script type=“text/javascript” src="sweetalert2.all.min.js"></script>
 	<script>
         // 在頁面加載完成後執行初始化操作
         window.onload = function() {
@@ -206,7 +203,6 @@ if (!isset($_SESSION)) {
             return ;
         }
 
-        // big ---------------------------------------------------------------
         function myAlert(msg , formData) {
             // 定義自定義的彈出框樣式和行為
             // 可以是彈出一個模態框或在頁面上顯示一個自定義的消息框
@@ -224,7 +220,8 @@ if (!isset($_SESSION)) {
                     }
                 })
         }
-
+        
+        // big ---------------------------------------------------------------
         function upload_big() {
             // 此處是 javascript 寫法
             // var myForm = document.getElementById('myFile');
@@ -237,7 +234,7 @@ if (!isset($_SESSION)) {
             else if(!ret_message.includes("尚未") && ret_message.includes("注意")){
                 myAlert(ret_message , formData) ;
             }
-            else alert(ret_message) ;
+            else Alert(ret_message) ;
         }
 
         //取得昨天資料
@@ -255,7 +252,7 @@ if (!isset($_SESSION)) {
                 put_into_form(before_data_array);
             }
             else {
-                alert(ret_message) ;
+                Alert(ret_message) ;
                 return ;
             }
         }
@@ -298,7 +295,7 @@ if (!isset($_SESSION)) {
             else if(!ret_message.includes("尚未") && ret_message.includes("注意")){
                 myAlert(ret_message , formData) ;
             }
-            else alert(ret_message) ;
+            else Alert(ret_message) ;
         }
 
         //取得昨天資料
@@ -316,7 +313,7 @@ if (!isset($_SESSION)) {
                 put_into_form(before_data_array);
             }
             else {
-                alert(ret_message) ;
+                Alert(ret_message) ;
                 return ;
             }
         }

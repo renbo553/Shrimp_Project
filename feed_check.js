@@ -136,16 +136,23 @@ function post (formData) {
 
         success: function(backData) {
             console.log();
-            window.alert(backData);
-            if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-                window.location.href = 'add_餵食';
-                $("#backmsg").html(backData);
-            }
-
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+                    window.location.href = 'add_餵食';
+                    $("#backmsg").html(backData);
+                }
+            });
         },
         error: function() {
-            window.alert("上傳失敗...");
-            $('#backmsg').html("上傳失敗...");
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("上傳失敗...");
+            });
         },
     });
 }
@@ -164,7 +171,7 @@ function add_check (formData) {
 
     // 計算有幾個沒填
     var count = 0 ;
-    var show_message = "要取得前天資料，請填入:" ;
+    var show_message = "要取得前天資料，請填入:\n" ;
     if(TankID == null || TankID == "") {
         show_message += (map.get("TankID") + '、') ;
         count ++ ;
@@ -203,8 +210,12 @@ function get_before (formData) {
             ret_data = backData ;
         },
         error: function() {
-            window.alert("取得資料失敗...");
-            $('#backmsg').html("取得資料失敗...");
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("取得資料失敗...");
+            });
         },
     });
     return ret_data ;

@@ -205,7 +205,7 @@ if (!isset($_SESSION)) {
 
             var ret_message = check(formData) ;
             if(ret_message == "") post(formData) ;
-            else alert(ret_message) ;
+            else Alert(ret_message) ;
         }
 
         //取得昨天資料
@@ -223,7 +223,7 @@ if (!isset($_SESSION)) {
                 put_into_form(before_data_array);
             }
             else {
-                alert(ret_message) ;
+                Alert(ret_message) ;
                 return ;
             }
         }
@@ -263,7 +263,7 @@ if (!isset($_SESSION)) {
 
             var ret_message = check(formData) ;
             if(ret_message == "") post(formData) ;
-            else alert(ret_message) ;
+            else Alert(ret_message) ;
         }
 
         //取得昨天資料
@@ -281,7 +281,7 @@ if (!isset($_SESSION)) {
                 put_into_form(before_data_array);
             }
             else {
-                alert(ret_message) ;
+                Alert(ret_message) ;
                 return ;
             }
         }

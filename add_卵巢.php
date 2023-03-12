@@ -145,23 +145,23 @@ if (!isset($_SESSION)) {
 
 				// 計算有幾個沒填
 				var count = 0 ;
-				var show_message = "資訊尚未填寫完成，請填入\n" ;
+				var show_message = "資訊尚未填寫完成，請填入:\n" ;
 				if(date == null || date == "") {
-					show_message += (map.get("date") + '\n') ;
+					show_message += (map.get("date") + '、') ;
 					count ++ ;
 				}
 				if(ovary_state == null || ovary_state == "") {
-					show_message += (map.get("ovary_state") + '\n') ;
+					show_message += (map.get("ovary_state") + '、') ;
 					count ++ ;
 				}
 				if(eye == null || eye == "") {
-					show_message += (map.get("eye") + '\n') ;
+					show_message += (map.get("eye") + '、') ;
 					count ++ ;
 				}
 				if(count != 0) {
 					show_message = show_message.slice(0 , show_message.length - 1) ;
 					show_message += "!" ;
-					alert(show_message) ;
+					Alert(show_message) ;
 					return ;
 				}
 
@@ -177,16 +177,23 @@ if (!isset($_SESSION)) {
 
 					success: function(backData) {
 						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'add_卵巢';
-							$("#backmsg").html(backData);
-						}
-
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+								window.location.href = 'add_卵巢';
+								$("#backmsg").html(backData);
+							}
+						});
 					},
 					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							$('#backmsg').html("上傳失敗...");
+						});
 					},
 				});
 			}

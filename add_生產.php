@@ -234,47 +234,47 @@ if (!isset($_SESSION)) {
 
 				// 計算有幾個沒填
 				var count = 0 ;
-				var show_message = "資訊尚未填寫完成，請填入\n" ;
+				var show_message = "資訊尚未填寫完成，請填入:\n" ;
 				if(cutday == null || cutday == "") {
-					show_message += (map.get("cutday") + '\n') ;
+					show_message += (map.get("cutday") + '、') ;
 					count ++ ;
 				}
 				if(ovary_state == null || ovary_state == "") {
-					show_message += (map.get("ovary_state") + '\n') ;
+					show_message += (map.get("ovary_state") + '、') ;
 					count ++ ;
 				}
 				if(eye == null || eye == "") {
-					show_message += (map.get("eye") + '\n') ;
+					show_message += (map.get("eye") + '、') ;
 					count ++ ;
 				}
 				if(family == null || family == "") {
-					show_message += (map.get("family") + '\n') ;
+					show_message += (map.get("family") + '、') ;
 					count ++ ;
 				}
 				if(spawningroomdate == null || spawningroomdate == "") {
-					show_message += (map.get("spawningroomdate") + '\n') ;
+					show_message += (map.get("spawningroomdate") + '、') ;
 					count ++ ;
 				}
 				if(cutweight == null || cutweight == "") {
-					show_message += (map.get("cutweight") + '\n') ;
+					show_message += (map.get("cutweight") + '、') ;
 					count ++ ;
 				}
 				if(spawningweight == null || spawningweight == "") {
-					show_message += (map.get("spawningweight") + '\n') ;
+					show_message += (map.get("spawningweight") + '、') ;
 					count ++ ;
 				}
 				if(male_family == null || male_family == "") {
-					show_message += (map.get("male_family") + '\n') ;
+					show_message += (map.get("male_family") + '、') ;
 					count ++ ;
 				}
 				if(mating == null || mating == "") {
-					show_message += (map.get("mating") + '\n') ;
+					show_message += (map.get("mating") + '、') ;
 					count ++ ;
 				}
 				if(count != 0) {
 					show_message = show_message.slice(0 , show_message.length - 1) ;
 					show_message += "!" ;
-					alert(show_message) ;
+					Alert(show_message) ;
 					return ;
 				}
 
@@ -291,16 +291,23 @@ if (!isset($_SESSION)) {
 
 					success: function(backData) {
 						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'add_生產';
-							$("#backmsg").html(backData);
-						}
-
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+								window.location.href = 'add_生產';
+								$("#backmsg").html(backData);
+							}
+						});
 					},
 					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							$('#backmsg').html("上傳失敗...");
+						});
 					},
 				});
 			}
