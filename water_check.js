@@ -55,121 +55,229 @@ function check (formData) {
 
     // 計算有幾個沒填
     var count = 0 ;
-    var show_message = "資訊尚未填寫完成，請填入" ;
+    var show_message = "資訊尚未填寫完成，請填入:\n " ;
     if(date == null || date == "") {
-        show_message += (map.get("date") + '\n') ;
+        show_message += (map.get("date") + '、') ;
         count ++ ;
     }
     if(nh4 == null || nh4 == "") {
-        show_message += (map.get("nh4") + '\n') ;
+        show_message += (map.get("nh4") + '、') ;
         count ++ ;
     }
     if(no2 == null || no2 == "") {
-        show_message += (map.get("no2") + '\n') ;
+        show_message += (map.get("no2") + '、') ;
         count ++ ;
     }
     if(no3 == null || no3 == "") {
-        show_message += (map.get("no3") + '\n') ;
+        show_message += (map.get("no3") + '、') ;
         count ++ ;
     }
     if(Salinity_1 == null || Salinity_1 == "") {
-        show_message += (map.get("Salinity_1") + '\n') ;
+        show_message += (map.get("Salinity_1") + '、') ;
         count ++ ;
     }
     if(Salinity_2 == null || Salinity_2 == "") {
-        show_message += (map.get("Salinity_2") + '\n') ;
+        show_message += (map.get("Salinity_2") + '、') ;
         count ++ ;
     }
     if(Salinity_3 == null || Salinity_3 == "") {
-        show_message += (map.get("Salinity_3") + '\n') ;
+        show_message += (map.get("Salinity_3") + '、') ;
         count ++ ;
     }
     if(pH_1 == null || pH_1 == "") {
-        show_message += (map.get("pH_1") + '\n') ;
+        show_message += (map.get("pH_1") + '、') ;
         count ++ ;
     }
     if(pH_2 == null || pH_2 == "") {
-        show_message += (map.get("pH_2") + '\n') ;
+        show_message += (map.get("pH_2") + '、') ;
         count ++ ;
     }
     if(pH_3 == null || pH_3 == "") {
-        show_message += (map.get("pH_3") + '\n') ;
+        show_message += (map.get("pH_3") + '、') ;
         count ++ ;
     }
     if(O2_1 == null || O2_1 == "") {
-        show_message += (map.get("O2_1") + '\n') ;
+        show_message += (map.get("O2_1") + '、') ;
         count ++ ;
     }
     if(O2_2 == null || O2_2 == "") {
-        show_message += (map.get("O2_2") + '\n') ;
+        show_message += (map.get("O2_2") + '、') ;
         count ++ ;
     }
     if(O2_3 == null || O2_3 == "") {
-        show_message += (map.get("O2_3") + '\n') ;
+        show_message += (map.get("O2_3") + '、') ;
         count ++ ;
     }
     if(no3 == null || no3 == "") {
-        show_message += (map.get("no3") + '\n') ;
+        show_message += (map.get("no3") + '、') ;
         count ++ ;
     }
     if(ORP_1 == null || ORP_1 == "") {
-        show_message += (map.get("ORP_1") + '\n') ;
+        show_message += (map.get("ORP_1") + '、') ;
         count ++ ;
     }
     if(ORP_2 == null || ORP_2 == "") {
-        show_message += (map.get("ORP_2") + '\n') ;
+        show_message += (map.get("ORP_2") + '、') ;
         count ++ ;
     }
     if(ORP_3 == null || ORP_3 == "") {
-        show_message += (map.get("ORP_3") + '\n') ;
+        show_message += (map.get("ORP_3") + '、') ;
         count ++ ;
     }
     if(Temp_1 == null || Temp_1 == "") {
-        show_message += (map.get("Temp_1") + '\n') ;
+        show_message += (map.get("Temp_1") + '、') ;
         count ++ ;
     }
     if(Temp_2 == null || Temp_2 == "") {
-        show_message += (map.get("Temp_2") + '\n') ;
+        show_message += (map.get("Temp_2") + '、') ;
         count ++ ;
     }
     if(Temp_3 == null || Temp_3 == "") {
-        show_message += (map.get("Temp_3") + '\n') ;
+        show_message += (map.get("Temp_3") + '、') ;
         count ++ ;
     }
     if(Alkalinity == null || Alkalinity == "") {
-        show_message += (map.get("Alkalinity") + '\n') ;
+        show_message += (map.get("Alkalinity") + '、') ;
         count ++ ;
     }
     if(TCBS == null || TCBS == "") {
-        show_message += (map.get("TCBS") + '\n') ;
+        show_message += (map.get("TCBS") + '、') ;
         count ++ ;
     }
     if(TCBS綠菌 == null || TCBS綠菌 == "") {
-        show_message += (map.get("TCBS綠菌") + '\n') ;
+        show_message += (map.get("TCBS綠菌") + '、') ;
         count ++ ;
     }
     if(Marine == null || Marine == "") {
-        show_message += (map.get("Marine") + '\n') ;
+        show_message += (map.get("Marine") + '、') ;
         count ++ ;
     }
     if(螢光菌TCBS == null || 螢光菌TCBS == "") {
-        show_message += (map.get("螢光菌TCBS") + '\n') ;
+        show_message += (map.get("螢光菌TCBS") + '、') ;
         count ++ ;
     }
     if(螢光菌Marine == null || 螢光菌Marine == "") {
-        show_message += (map.get("螢光菌Marine") + '\n') ;
+        show_message += (map.get("螢光菌Marine") + '、') ;
         count ++ ;
     }
 
     if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
-    show_message += "!" ;
+    else show_message = "" ;
 
-    if(count == 0) show_message = "" ;
-    return show_message ;
+    //check 輸入的值(最大最小)
+    var all_message = "" ;
+    count = 0 ;
+    if(show_message != "") all_message += "\n 以及"
+    all_message += "請注意以下欄位中輸入的值:\n " ;
+    if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
+        all_message += (map.get("nh4") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(no2) < 0 || parseInt(no2) > 0.5) {
+        all_message += (map.get("no2") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(no3) < 0 || parseInt(no3) > 500) {
+        all_message += (map.get("no3") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Salinity_1) < 20 || parseInt(Salinity_1) > 40) {
+        all_message += (map.get("Salinity_1") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Salinity_2) < 20 || parseInt(Salinity_2) > 40) {
+        all_message += (map.get("Salinity_2") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Salinity_3) < 20 || parseInt(Salinity_3) > 40) {
+        all_message += (map.get("Salinity_3") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(pH_1) < 6 || parseInt(pH_1) > 8) {
+        all_message += (map.get("pH_1") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(pH_2) < 6 || parseInt(pH_2) > 8) {
+        all_message += (map.get("pH_2") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(pH_3) < 6 || parseInt(pH_3) > 8) {
+        all_message += (map.get("pH_3") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(O2_1) < 2 || parseInt(O2_1) > 6) {
+        all_message += (map.get("O2_1") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(O2_2) < 2 || parseInt(O2_2) > 6) {
+        all_message += (map.get("O2_2") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
+        all_message += (map.get("O2_3") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(ORP_1) < 0 || parseInt(ORP_1) > 500) {
+        all_message += (map.get("ORP_1") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(ORP_2) < 0 || parseInt(ORP_2) > 500) {
+        all_message += (map.get("ORP_2") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(ORP_3) < 0 || parseInt(ORP_3) > 500) {
+        all_message += (map.get("ORP_3") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Temp_1) < 25 || parseInt(Temp_1) > 33) {
+        all_message += (map.get("Temp_1") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Temp_2) < 25 || parseInt(Temp_2) > 33) {
+        all_message += (map.get("Temp_2") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Temp_3) < 25 || parseInt(Temp_3) > 33) {
+        all_message += (map.get("Temp_3") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Alkalinity) < 0 || parseInt(Alkalinity) > 200) {
+        all_message += (map.get("Alkalinity") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(TCBS) < 0 || parseInt(TCBS) > 5000) {
+        all_message += (map.get("TCBS") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(TCBS綠菌) < 0 || parseInt(TCBS綠菌) > 5000) {
+        all_message += (map.get("TCBS綠菌") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(Marine) < 0 || parseInt(Marine) > 10000) {
+        all_message += (map.get("Marine") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(螢光菌TCBS) < 0 || parseInt(螢光菌TCBS) > 5000) {
+        all_message += (map.get("螢光菌TCBS") + '、') ;
+        count ++ ;
+    }
+    if(parseInt(螢光菌Marine) < 0 || parseInt(螢光菌Marine) > 10000) {
+        all_message += (map.get("螢光菌Marine") + '、') ;
+        count ++ ;
+    }
+
+    if(count != 0) {
+        all_message = all_message.slice(0 , all_message.length - 1) ;    
+    }
+    else all_message = "" ;
+
+
+    var ret_message = show_message + all_message ;
+    return ret_message ;
     //----------------------------------------------------------
 }
 
-function post (formData) {
+window.post = function (formData) {
     $.ajax({
         url: 'Upload_水質.php',
         type: 'POST',
@@ -197,23 +305,28 @@ function post (formData) {
 
 function add_check (formData) {
     // 3/5 獲取前一天資料--------------------------------------------
+    var TankID = formData.get('location') ;
     var date = formData.get('date') ;
 
     const map = new Map()
+    map.set("TankID" , "TankID") ;
     map.set("date" , "日期") ;
 
     // 計算有幾個沒填
     var count = 0 ;
-    var show_message = "要取得前天資料，請填入" ;
+    var show_message = "要取得前天資料，請填入:" ;
+    if(TankID == null || TankID == "") {
+        show_message += (map.get("TankID") + '、') ;
+        count ++ ;
+    }
     if(date == null || date == "") {
-        show_message += (map.get("date") + '\n') ;
+        show_message += (map.get("date") + '、') ;
         count ++ ;
     }
 
     if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
-    show_message += "!" ;
+    else show_message = "" ;
 
-    if(count == 0) show_message = "" ;
     return show_message ;
     //----------------------------------------------------------
 }
@@ -292,4 +405,34 @@ function put_into_form(before_data_array) {
     螢光菌TCBS.value = before_data_array["螢光菌TCBS"] ;
     let 螢光菌Marine = document.getElementById("螢光菌Marine") ;
     螢光菌Marine.value = before_data_array["螢光菌Marine"] ;
+}
+
+function data_transfer(from_data , form_id) {
+    document.getElementById(form_id).elements["location"].value = from_data.get("location") ;
+    document.getElementById(form_id).elements["date"].value = from_data.get('date') ;
+    document.getElementById(form_id).elements["nh4"].value = from_data.get('nh4') ;
+    document.getElementById(form_id).elements["no2"].value = from_data.get('no2') ;
+    document.getElementById(form_id).elements["no3"].value = from_data.get("no3") ;
+    document.getElementById(form_id).elements["Salinity_1"].value = from_data.get("Salinity_1") ;
+    document.getElementById(form_id).elements["Salinity_2"].value = from_data.get("Salinity_2") ;
+    document.getElementById(form_id).elements["Salinity_3"].value = from_data.get("Salinity_3") ;
+    document.getElementById(form_id).elements["pH_1"].value = from_data.get("pH_1") ;
+    document.getElementById(form_id).elements["pH_2"].value = from_data.get("pH_2") ;
+    document.getElementById(form_id).elements["pH_3"].value = from_data.get("pH_3") ;
+    document.getElementById(form_id).elements["O2_1"].value = from_data.get("O2_1") ;
+    document.getElementById(form_id).elements["O2_2"].value = from_data.get("O2_2") ;
+    document.getElementById(form_id).elements["O2_3"].value = from_data.get("O2_3") ;
+    document.getElementById(form_id).elements["ORP_1"].value = from_data.get("ORP_1") ;
+    document.getElementById(form_id).elements["ORP_2"].value = from_data.get("ORP_2") ;
+    document.getElementById(form_id).elements["ORP_3"].value = from_data.get("ORP_3") ;
+    document.getElementById(form_id).elements["Temp_1"].value = from_data.get("Temp_1") ;
+    document.getElementById(form_id).elements["Temp_2"].value = from_data.get("Temp_2") ;
+    document.getElementById(form_id).elements["Temp_3"].value = from_data.get("Temp_3") ;
+    document.getElementById(form_id).elements["Alkalinity"].value = from_data.get("Alkalinity") ;
+    document.getElementById(form_id).elements["TCBS"].value = from_data.get("TCBS") ;
+    document.getElementById(form_id).elements["TCBS綠菌"].value = from_data.get("TCBS綠菌") ;
+    document.getElementById(form_id).elements["Marine"].value = from_data.get("Marine") ;
+    document.getElementById(form_id).elements["螢光菌TCBS"].value = from_data.get("螢光菌TCBS") ;
+    document.getElementById(form_id).elements["螢光菌Marine"].value = from_data.get("螢光菌Marine") ;
+    document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
 }

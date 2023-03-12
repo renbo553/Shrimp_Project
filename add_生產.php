@@ -234,7 +234,7 @@ if (!isset($_SESSION)) {
 
 				// 計算有幾個沒填
 				var count = 0 ;
-				var show_message = "資訊尚未填寫完成，請填入" ;
+				var show_message = "資訊尚未填寫完成，請填入\n" ;
 				if(cutday == null || cutday == "") {
 					show_message += (map.get("cutday") + '\n') ;
 					count ++ ;
