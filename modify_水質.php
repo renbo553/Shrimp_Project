@@ -412,16 +412,23 @@ if (!isset($_SESSION)) {
 
 					success: function(backData) {
 						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_水質';
-							$("#backmsg").html(backData);
-						}
-
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+								window.location.href = 'find_水質';
+								$("#backmsg").html(backData);
+							}
+						});
 					},
 					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							$('#backmsg').html("上傳失敗...");
+						});
 					},
 				});
 			}

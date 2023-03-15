@@ -234,7 +234,7 @@ if (!isset($_SESSION)) {
 
 				// 計算有幾個沒填
 				var count = 0 ;
-				var show_message = "資訊尚未填寫完成，請填入" ;
+				var show_message = "資訊尚未填寫完成，請填入:\n" ;
 				if(cutday == null || cutday == "") {
 					show_message += (map.get("cutday") + '、') ;
 					count ++ ;
@@ -271,10 +271,13 @@ if (!isset($_SESSION)) {
 					show_message += (map.get("mating") + '、') ;
 					count ++ ;
 				}
-				if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
-				show_message += "!" ;
-				alert(show_message) ;
-				return ;
+				if(count != 0) {
+					show_message = show_message.slice(0 , show_message.length - 1) ;
+					show_message += "!" ;
+					Alert(show_message) ;
+					return ;
+				}
+
 				//----------------------------------------------------------
 
 				$.ajax({
@@ -288,16 +291,23 @@ if (!isset($_SESSION)) {
 
 					success: function(backData) {
 						console.log();
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'add_生產';
-							$("#backmsg").html(backData);
-						}
-
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+								window.location.href = 'add_生產';
+								$("#backmsg").html(backData);
+							}
+						});
 					},
 					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							$('#backmsg').html("上傳失敗...");
+						});
 					},
 				});
 			}

@@ -1,8 +1,8 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
-  if (!isset($_SESSION["userid"]) || $_SESSION["authority"] == 10)
-    header("location:home");
+    session_start();
+    if (!isset($_SESSION["userid"]) || $_SESSION["authority"] == 10)
+        header("location:home");
 };
 ?>
 <!DOCTYPE html>
@@ -21,137 +21,45 @@ if (!isset($_SESSION)) {
     <!--//Header-->
 
     <style>
-        /* span:target */
-        #M1:target,
-        #M2:target,
-        #M3:target,
-        #M4:target{
-        border: solid 1px red;
-        }
-        /*頁籤變換*/
-        #M1:target ~ #tab > ul li a[href$="#M1"],
-        #M2:target ~ #tab > ul li a[href$="#M2"],
-        #M3:target ~ #tab > ul li a[href$="#M3"],
-        #M4:target ~ #tab > ul li a[href$="#M4"] {
-            border: solid 1px black;
+        @media (min-width: 1024px) {
+            div.big_form{
+                border: solid 1px black;
+                animation: change 0s;
+            }
+            div.small_form{
+                display: none;
+            }
+
+            @keyframes change {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
         }
 
-        /*頁籤內容顯示*/
-        #M1:target ~ #tab > div.tab-content-1,
-        #M2:target ~ #tab > div.tab-content-2,
-        #M3:target ~ #tab > div.tab-content-3,
-        #M4:target ~ #tab > div.tab-content-4 {
-            border: solid 1px black;
-        }
+        @media (max-width: 1023px) {
+            div.big_form{
+                display: none;
+            }
+            div.small_form{
+                border: solid 1px black;
+                animation: change 0s;
+            }
 
-        #tab{
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0%);
-
-        width: auto;
-        background: gray;
-        border: solid 1px #333;
-        }
-        /* 頁籤ul */
-        #tab>ul{
-        overflow: hidden;
-        margin: 0;
-        padding: 10px 20px 0 20px;
-        }
-        #tab>ul>li{
-        list-style-type: none;
-        }
-        #tab>ul>li>a{
-        border: #333;
-        text-decoration: none;
-        font-size: 13px;
-        color: white;
-        float: left;
-        padding: 10px;
-        margin-left: 5px;
-        }
-
-        /*頁籤div內容*/
-        #tab>div {
-        border: #333;
-        clear:both;
-        padding:0 15px;
-        height:0;
-        overflow:hidden;
-        visibility:hidden;
-        -webkit-transition:all .4s ease-in-out;
-        -moz-transition:all .4s ease-in-out;
-        -ms-transition:all .4s ease-in-out;
-        -o-transition:all .4s ease-in-out;
-        transition:all .4s ease-in-out;
-        }
-
-        /* span:target */
-        #M1:target,
-        #M2:target,
-        #M3:target,
-        #M4:target{
-        border: solid 1px red;
-        }
-
-        /*第一筆的底色*/
-        span:target ~ #tab > ul li:first-child a {
-            background: gray;
-            color: #fff;
-        }
-        span:target ~ #tab > div:first-of-type {
-        visibility:hidden;
-        height:0;
-        padding:0 15px;
-        }
-
-        /*頁籤變換&第一筆*/
-        span ~ #tab > ul li:first-child a,
-        #M1:target ~ #tab > ul li a[href$="#M1"],
-        #M2:target ~ #tab > ul li a[href$="#M2"],
-        #M3:target ~ #tab > ul li a[href$="#M3"],
-        #M4:target ~ #tab > ul li a[href$="#M4"] {
-            background: white ;
-            color: #333 ;
-        }
-        
-        /*頁籤內容顯示&第一筆*/
-        span ~ #tab > div:first-of-type,
-        #M1:target ~ #tab > div.tab-content-1,
-        #M2:target ~ #tab > div.tab-content-2,
-        #M3:target ~ #tab > div.tab-content-3,
-        #M4:target ~ #tab > div.tab-content-4 {
-        border: solid 1px black;
-        visibility:visible;
-        height:auto;
-        width: auto;
-        background: #fff;
+            @keyframes change {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
         }
     </style>
-    <!-- table style -->
 
     <!-- table -->
     <div>
-        <span id="M1"></span>
-        <span id="M2"></span>
-        <span id="M3"></span>
-        <span id="M4"></span>
-        <div id="tab">
-        <!– 頁籤按鈕 –>
-        <ul>
-        <li><a href="#M1">M1</a></li>
-        <li><a href="#M2">M2</a></li>
-        <li><a href="#M3">M3</a></li>
-        <li><a href="#M4">M4</a></li>
-        </ul>
         <!– 頁籤的內容區塊 –>
-        <div class="tab-content-1"><p>
+        <!-- 大螢幕 -->
+        <div class="big_form"><p>
             <section>
-                <form id="M1_form" method="post" enctype="multipart/form-data">
-                    <input id = "location" name = "location" type = "hidden" value = "M1">
-
-                    <?php require "feed_table.html"?>
+                <form id="big_form" method="post" enctype="multipart/form-data">
+                    <?php require "big_feed_table.html"?>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -160,7 +68,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M1">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_big">
                         </div>
                     </div>
 
@@ -175,32 +83,29 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image_M1" src="">
+                            <img id="show_image_big" src="">
                         </div>
                     </div>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload_M1()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="add_before_big()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="upload_big()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
                     <div class="form-inline" style = "width: 100% ; height: 2px">
                         <div style = "height: 1px"> </div>
                     </div>
-                
                 </form>
-                <div id="backmsg"></div>
-                <br>
             </section>
         </p></div>
-
-        <div class="tab-content-2"><p>
+        <!-- 小螢幕 -->
+        <div class="small_form"><p>
             <section>
-                <form id="M2_form" method="post" enctype="multipart/form-data">
-                    <input id = "location" name = "location" type = "hidden" value = "M2">
-
-                    <?php require "feed_table.html"?>
+                <form id="small_form" method="post" enctype="multipart/form-data">
+                    <?php require "small_feed_table.html"?>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
@@ -209,7 +114,7 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M2">
+                            <input accept="image/*" type="file" name="fileField" id="uploadimage_small">
                         </div>
                     </div>
 
@@ -224,107 +129,24 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 5px"> </div>
                         <div style = "width: auto">
-                            <img id="show_image_M2" src="">
+                            <img id="show_image_small" src="">
                         </div>
                     </div>
 
                     <div class="form-inline" style = "width: 100%">
                         <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload_M2()">上傳</button>
+                        <button type="button" class="btn btn-primary" onclick="add_before_small()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="upload_small()">上傳</button>
                         <div id="backmsg"></div>
                     </div>
 
                     <div class="form-inline" style = "width: 100% ; height: 2px">
                         <div style = "height: 1px"> </div>
                     </div>
-                
                 </form>
-                <div id="backmsg"></div>
-                <br>
             </section>
         </p></div>
-        <div class="tab-content-3"><p>
-            <section>
-                <form id="M3_form" method="post" enctype="multipart/form-data">
-                    <input id = "location" name = "location" type = "hidden" value = "M3">
-
-                    <?php require "feed_table.html"?>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto">
-                            <div> 上傳紙本圖片 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage_M3">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 1px"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto"> 
-                            <div> 圖片預覽 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: auto">
-                            <img id="show_image_M3" src="">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload_M3()">上傳</button>
-                        <div id="backmsg"></div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 2px">
-                        <div style = "height: 1px"> </div>
-                    </div>
-                
-                </form>
-                <div id="backmsg"></div>
-                <br>
-            </section>
-        </p></div>
-        <div class="tab-content-4"><p>
-            <section>
-                <form id="M4_form" method="post" enctype="multipart/form-data">
-                    <input id = "location" name = "location" type = "hidden" value = "M4">
-
-                    <?php require "feed_table.html"?>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto"> 
-                            <div> 圖片預覽 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: auto">
-                            <img id="show_image_M4" src="">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload_M4()">上傳</button>
-                        <div id="backmsg"></div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 2px">
-                        <div style = "height: 1px"> </div>
-                    </div>
-                
-                </form>
-                <div id="backmsg"></div>
-                <br>
-            </section>
-        </p></div>
-
     </div>
 
     <!--Footer-->
@@ -332,153 +154,162 @@ if (!isset($_SESSION)) {
     <!--//Footer-->
 
     <!--Other Script-->
-	<?php require_once "other_script.html" ?>
+    <?php require_once "other_script.html" ?>
     <!--//Other Script-->
 
-        <script>
-            document.write('<script type="text/javascript" src="feed_check.js"></'+'script>');
-            // M1 javascript------------------------------------------------------------
-            function upload_M1() {
-				// 此處是 javascript 寫法
-				// var myForm = document.getElementById('myFile');
-				// 底下是 jQuery 的寫法
-				var myForm = $("#M1_form")[0];
-				var formData = new FormData(myForm);
+    <script>
+        document.write('<script type="text/javascript" src="feed_check.js"></'+'script>');
+        
+        // 在頁面加載完成後執行初始化操作
+        window.onload = function() {
+            // 獲取要應用動畫的div元素
+            var big = document.querySelector("div.big_form") ;
+            var small = document.querySelector("div.small_form") ;
+            // 監聽animationend事件
+            big.addEventListener('animationend' , function() {
+                // 在動畫結束後執行javascript函數
+                change_to_big() ;
+            });
+            small.addEventListener('animationend' , function() {
+                // 在動畫結束後執行javascript函數
+                change_to_small() ;
+            });
+        }
+        // 避免視窗大小不同時使用之form不同所導致的bug => 當改變視窗大小時傳輸檔案
+        function change_to_big() {
+            var big_Form = $("#big_form")[0];
+            var small_Form = $("#small_form")[0];
+            var big_Data = new FormData(big_Form);
+            var small_Data = new FormData(small_Form);
 
-				var ret_message = check(formData) ;
-                if(ret_message == "") post(formData) ;
-                else alert(ret_message) ;
-			}
+            data_transfer(small_Data , "big_form") ;
+            return ;
+        }
+        function change_to_small() {
+            var big_Form = $("#big_form")[0];
+            var small_Form = $("#small_form")[0];
+            var big_Data = new FormData(big_Form);
+            var small_Data = new FormData(small_Form);
 
-			var imageProc_M1 = function(input) {
-				if (input.files && input.files[0]) {
-					// 建立一個 FileReader 物件
-					var reader = new FileReader();
-					// 當檔案讀取完後，所要進行的動作
-					reader.onload = function(e) {
-						// 顯示圖片
-						$('#show_image_M1').attr("src", e.target.result).css("height", "500px").css("width", "500px");
-						// // 將 DataURL 放到表單中
-						// $("input[name='imagestring']").val(e.target.result);
-					};
-					reader.readAsDataURL(input.files[0]);
-				}
-			}
-			$(document).ready(function() {
-				// 綁定事件
-				$("#uploadimage_M1").change(function() {
-					imageProc_M1(this);
-				});
-			});
-            //---------------------------------------------------------------------------
+            data_transfer(big_Data , "small_form") ;
+            return ;
+        }
+
+        // big ---------------------------------------------------------------
+        function upload_big() {
+            // 此處是 javascript 寫法
+            // var myForm = document.getElementById('myFile');
+            // 底下是 jQuery 的寫法
+            var myForm = $("#big_form")[0];
+            var formData = new FormData(myForm);
+
+            var ret_message = check(formData) ;
+            if(ret_message == "") post(formData) ;
+            else Alert(ret_message) ;
+        }
+
+        //取得昨天資料
+        function add_before_big() {
+            var myForm = $("#big_form")[0];
+            var formData = new FormData(myForm);
             
-            // M2 javascript------------------------------------------------------------
-            function upload_M2() {
-				// 此處是 javascript 寫法
-				// var myForm = document.getElementById('myFile');
-				// 底下是 jQuery 的寫法
-				var myForm = $("##M2_form")[0];
-				var formData = new FormData(myForm);
+            //取得昨天資料前需先檢查日期與時間有沒有填入
+            var ret_message = add_check(formData) ;
+            if(ret_message == "") {
+                var data = get_before(formData) ;
+                var before_data_array = data[0] ;
+                console.log(before_data_array) ;
 
-				var ret_message = check(formData) ;
-                if(ret_message == "") post(formData) ;
-                else alert(ret_message) ;
-			}
+                put_into_form(before_data_array);
+            }
+            else {
+                Alert(ret_message) ;
+                return ;
+            }
+        }
 
-			var imageProc_M2 = function(input) {
-				if (input.files && input.files[0]) {
-					// 建立一個 FileReader 物件
-					var reader = new FileReader();
-					// 當檔案讀取完後，所要進行的動作
-					reader.onload = function(e) {
-						// 顯示圖片
-						$('#show_image_M2').attr("src", e.target.result).css("height", "500px").css("width", "500px");
-						// // 將 DataURL 放到表單中
-						// $("input[name='imagestring']").val(e.target.result);
-					};
-					reader.readAsDataURL(input.files[0]);
-				}
-			}
-			$(document).ready(function() {
-				// 綁定事件
-				$("#uploadimage_M2").change(function() {
-					imageProc_M2(this);
-				});
-			});
-            //---------------------------------------------------------------------------
+        var imageProc_big = function(input) {
+            if (input.files && input.files[0]) {
+                // 建立一個 FileReader 物件
+                var reader = new FileReader();
+                // 當檔案讀取完後，所要進行的動作
+                reader.onload = function(e) {
+                    // 顯示圖片
+                    $('#show_image_big').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+                    // // 將 DataURL 放到表單中
+                    // $("input[name='imagestring']").val(e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(document).ready(function() {
+            // 綁定事件
+            $("#uploadimage_big").change(function() {
+                imageProc_small(this);
+                imageProc_big(this);
+            });
+        });
+        //---------------------------------------------------------------------------
+
+
+
+        // small ---------------------------------------------------------------
+        function upload_small() {
+            // 此處是 javascript 寫法
+            // var myForm = document.getElementById('myFile');
+            // 底下是 jQuery 的寫法
+            var myForm = $("#small_form")[0];
+            var formData = new FormData(myForm);
+
+            var ret_message = check(formData) ;
+            if(ret_message == "") post(formData) ;
+            else Alert(ret_message) ;
+        }
+
+        //取得昨天資料
+        function add_before_small() {
+            var myForm = $("#small_form")[0];
+            var formData = new FormData(myForm);
             
-            // M3 javascript------------------------------------------------------------
-            function upload_M3() {
-				// 此處是 javascript 寫法
-				// var myForm = document.getElementById('myFile');
-				// 底下是 jQuery 的寫法
-				var myForm = $("#M3_form")[0];
-				var formData = new FormData(myForm);
+            //取得昨天資料前需先檢查日期與時間有沒有填入
+            var ret_message = add_check(formData) ;
+            if(ret_message == "") {
+                var data = get_before(formData) ;
+                var before_data_array = data[0] ;
+                console.log(before_data_array) ;
 
-				var ret_message = check(formData) ;
-                if(ret_message == "") post(formData) ;
-                else alert(ret_message) ;
-			}
+                put_into_form(before_data_array);
+            }
+            else {
+                Alert(ret_message) ;
+                return ;
+            }
+        }
 
-			var imageProc_M3 = function(input) {
-				if (input.files && input.files[0]) {
-					// 建立一個 FileReader 物件
-					var reader = new FileReader();
-					// 當檔案讀取完後，所要進行的動作
-					reader.onload = function(e) {
-						// 顯示圖片
-						$('#show_image_M3').attr("src", e.target.result).css("height", "500px").css("width", "500px");
-						// // 將 DataURL 放到表單中
-						// $("input[name='imagestring']").val(e.target.result);
-					};
-					reader.readAsDataURL(input.files[0]);
-				}
-			}
-			$(document).ready(function() {
-				// 綁定事件
-				$("#uploadimage_M3").change(function() {
-					imageProc_M3(this);
-				});
-			});
-            //---------------------------------------------------------------------------
-            
-            // M4 javascript------------------------------------------------------------
-            function upload_M4() {
-				// 此處是 javascript 寫法
-				// var myForm = document.getElementById('myFile');
-				// 底下是 jQuery 的寫法
-				var myForm = $("#M4_form")[0];
-				var formData = new FormData(myForm);
+        var imageProc_small = function(input) {
+            if (input.files && input.files[0]) {
+                // 建立一個 FileReader 物件
+                var reader = new FileReader();
+                // 當檔案讀取完後，所要進行的動作
+                reader.onload = function(e) {
+                    // 顯示圖片
+                    $('#show_image_small').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+                    // // 將 DataURL 放到表單中
+                    // $("input[name='imagestring']").val(e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $(document).ready(function() {
+            // 綁定事件
+            $("#uploadimage_small").change(function() {
+                imageProc_big(this);
+                imageProc_small(this);
+            });
+        });
+        //---------------------------------------------------------------------------
+    </script>
 
-				var ret_message = check(formData) ;
-                if(ret_message == "") post(formData) ;
-                else alert(ret_message) ;
-			}
-
-			var imageProc_M4 = function(input) {
-				if (input.files && input.files[0]) {
-					// 建立一個 FileReader 物件
-					var reader = new FileReader();
-					// 當檔案讀取完後，所要進行的動作
-					reader.onload = function(e) {
-						// 顯示圖片
-						$('#show_image_M4').attr("src", e.target.result).css("height", "500px").css("width", "500px");
-						// // 將 DataURL 放到表單中
-						// $("input[name='imagestring']").val(e.target.result);
-					};
-					reader.readAsDataURL(input.files[0]);
-				}
-			}
-			$(document).ready(function() {
-				// 綁定事件
-				$("#uploadimage_M4").change(function() {
-					imageProc_M4(this);
-				});
-			});
-            //---------------------------------------------------------------------------
-            
-            
-		</script>
 </body>
 
 </html>

@@ -1708,16 +1708,24 @@ if (!isset($_SESSION)) {
 					contentType: false,
 
 					success: function(backData) {
-						window.alert(backData);
-						if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-							window.location.href = 'find_餵食';
-							$("#backmsg").html(backData);
-						}
-
+						console.log();
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+								window.location.href = 'find_餵食';
+								$("#backmsg").html(backData);
+							}
+						});
 					},
 					error: function() {
-						window.alert("上傳失敗...");
-						$('#backmsg').html("上傳失敗...");
+						Swal.fire({
+							title: backData,
+							confirmButtonText: "確認",
+						}).then((result) => {
+							$('#backmsg').html("上傳失敗...");
+						});
 					},
 				});
 			}
