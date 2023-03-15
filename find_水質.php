@@ -49,7 +49,6 @@ if (!isset($_SESSION)) {
         position: relative;
         left: 50%;
         transform: translate(-50%, 0%);
-
         width: auto;
         background: gray;
         border: solid 1px #333;
@@ -250,6 +249,7 @@ if (!isset($_SESSION)) {
 
                 /* store query into session */
                 utility_session_insert(CACHE_QUERY, $sql);
+                utility_session_insert("chart_option", null);
                 
                 $mysqli->close();
             }
@@ -267,6 +267,7 @@ if (!isset($_SESSION)) {
                 $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
                 $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
                 $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+                $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
 
                 /* concatenate sql where clause or set default value if not specified */
                 if(empty($date)){
@@ -297,6 +298,7 @@ if (!isset($_SESSION)) {
 
                 /* store query into session */
                 utility_session_insert(CACHE_QUERY, $sql);
+                utility_session_insert("chart_option", $chart_option);
                 
                 $mysqli->close();
             }
