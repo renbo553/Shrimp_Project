@@ -16,7 +16,7 @@ delete_data_process($mysqli);
  *      mysqli: database object
  */
 
-function delete_account_process($mysqli) : void{
+function delete_data_process($mysqli) : void{
     if(!isset($_SESSION)) {
         session_start();
         if (!isset($_SESSION["userid"]) || $_SESSION["authority"] > 1){

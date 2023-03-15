@@ -48,8 +48,32 @@ if (!isset($_SESSION)) {
                 $tank_option_array["M3"] = "M3";
                 $tank_option_array["M4"] = "M4";
                 utility_input_selectbox("tank_select", "TankID", $tank_option_array);
+                $chart_option_array = array();
+                $chart_option_array["NH4_N"] = "NH4_N";
+                $chart_option_array["NO2"] = "NO2";
+                $chart_option_array["NO3"] = "NO3";
+                $chart_option_array["Salinity_1"] = "Salinity_1";
+                $chart_option_array["Salinity_2"] = "Salinity_2";
+                $chart_option_array["Salinity_3"] = "Salinity_3";
+                $chart_option_array["pH_1"] = "pH_1";
+                $chart_option_array["pH_2"] = "pH_2";
+                $chart_option_array["pH_3"] = "pH_3";
+                $chart_option_array["ORP_1"] = "ORP_1";
+                $chart_option_array["ORP_2"] = "ORP_2";
+                $chart_option_array["ORP_3"] = "ORP_3";
+                $chart_option_array["WTemp_1"] = "WTemp_1";
+                $chart_option_array["WTemp_2"] = "WTemp_2";
+                $chart_option_array["WTemp_3"] = "WTemp_3";
+                $chart_option_array["Alkalinity"] = "Alkalinity";
+                $chart_option_array["TCBS"] = "TCBS";
+                $chart_option_array["TCBS綠菌"] = "TCBS綠菌";
+                $chart_option_array["Marine"] = "Marine";
+                $chart_option_array["螢光菌TCBS"] = "螢光菌TCBS";
+                $chart_option_array["螢光菌Marine"] = "螢光菌Marine";
+                utility_input_selectbox("chart_select", "繪製項目", $chart_option_array);
                 utility_button("submit", "查詢");
                 utility_button_onclick("export_waterquality.php", "匯出");
+                utility_button_onclick("chart.php", "繪製");
             ?>
         </div>
     </form>
@@ -88,6 +112,8 @@ if (!isset($_SESSION)) {
 
         /* store query into session */
         utility_session_insert(CACHE_QUERY, $sql);
+        utility_session_insert("chart_option", null);
+
         
         $mysqli->close();
     }
@@ -105,6 +131,7 @@ if (!isset($_SESSION)) {
         $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
         $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
         $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+        $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
 
         /* concatenate sql where clause or set default value if not specified */
         if(empty($date)){
@@ -135,6 +162,7 @@ if (!isset($_SESSION)) {
 
         /* store query into session */
         utility_session_insert(CACHE_QUERY, $sql);
+        utility_session_insert("chart_option", $chart_option);
         
         $mysqli->close();
     }
