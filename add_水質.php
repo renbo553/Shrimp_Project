@@ -66,44 +66,6 @@ if (!isset($_SESSION)) {
 			<section>
 				<form id="big_form" method="post" enctype="multipart/form-data">
                     <?php require "big_water_table.html"?>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto">
-                            <div> 上傳紙本圖片 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage_big">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 1px"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto"> 
-                            <div> 圖片預覽 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: auto">
-                            <img id="show_image_big" src="">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="add_before_big()">取得昨天資料</button>
-                        <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload_big()">上傳</button>
-                        <div id="backmsg"></div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 2px">
-                        <div style = "height: 1px"> </div>
-                    </div>
 				</form>
 			</section>
         </p></div>
@@ -112,48 +74,9 @@ if (!isset($_SESSION)) {
 			<section>
 				<form id="small_form" method="post" enctype="multipart/form-data">
                     <?php require "small_water_table.html"?>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto">
-                            <div> 上傳紙本圖片 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: 30%"> 
-                            <input accept="image/*" type="file" name="fileField" id="uploadimage_small">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "height: 1px"> </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: auto"> 
-                            <div> 圖片預覽 </div>
-                        </div>
-                        <div style = "width: 5px"> </div>
-                        <div style = "width: auto">
-                            <img id="show_image_small" src="">
-                        </div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100%">
-                        <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="add_before_small()">取得昨天資料</button>
-                        <div style = "width: 1%"> </div>
-                        <button type="button" class="btn btn-primary" onclick="upload_small()">上傳</button>
-                        <div id="backmsg"></div>
-                    </div>
-
-                    <div class="form-inline" style = "width: 100% ; height: 2px">
-                        <div style = "height: 1px"> </div>
-                    </div>
 				</form>
 			</section>
         </p></div>
-
     </div>
 
 	<!--Footer-->
@@ -203,6 +126,23 @@ if (!isset($_SESSION)) {
             return ;
         }
 
+
+        
+
+        function all_data_msg(msg , formData) {
+            // 為上傳時最後確認的訊息
+            Swal.fire({
+                html: msg,
+                showCancelButton: true,
+                confirmButtonText: '確認!!!',
+                cancelButtonText: "再確認一下/修改一下",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        post(formData) ;   
+                    }
+                })
+        }
+
         function myAlert(msg , formData) {
             // 定義自定義的彈出框樣式和行為
             // 可以是彈出一個模態框或在頁面上顯示一個自定義的消息框
@@ -210,13 +150,13 @@ if (!isset($_SESSION)) {
 
             // 例如，這裡使用 SweetAlert 插件來創建一個自定義的彈出框
             Swal.fire({
-                title: msg,
+                html: msg,
                 showCancelButton: true,
-                confirmButtonText: '確認上傳',
-                cancelButtonText: "再確認一下",
+                confirmButtonText: '仍要上傳',
+                cancelButtonText: "再確認一下/修改一下",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        post(formData) ;   
+                        all_data_msg(html_show_all_data(formData) , formData) ;   
                     }
                 })
         }
@@ -230,9 +170,9 @@ if (!isset($_SESSION)) {
             var formData = new FormData(myForm);
 
             var ret_message = check(formData) ;
-            if(ret_message == "") post(formData) ;
-            else if(!ret_message.includes("尚未") && ret_message.includes("注意")){
-                myAlert(ret_message , formData) ;
+            if(ret_message == "") {
+                var msg = html_get(formData) ;
+                myAlert(msg , formData) ;
             }
             else Alert(ret_message) ;
         }
@@ -249,7 +189,7 @@ if (!isset($_SESSION)) {
                 var before_data_array = data[0] ;
                 console.log(before_data_array) ;
 
-                put_into_form(before_data_array);
+                put_into_form(before_data_array , "big_form");
             }
             else {
                 Alert(ret_message) ;
@@ -291,9 +231,9 @@ if (!isset($_SESSION)) {
             var formData = new FormData(myForm);
 
             var ret_message = check(formData) ;
-            if(ret_message == "") post(formData) ;
-            else if(!ret_message.includes("尚未") && ret_message.includes("注意")){
-                myAlert(ret_message , formData) ;
+            if(ret_message == "") {
+                var msg = html_get(formData) ;
+                myAlert(msg , formData) ;
             }
             else Alert(ret_message) ;
         }
@@ -310,7 +250,7 @@ if (!isset($_SESSION)) {
                 var before_data_array = data[0] ;
                 console.log(before_data_array) ;
 
-                put_into_form(before_data_array);
+                put_into_form(before_data_array , "small_form");
             }
             else {
                 Alert(ret_message) ;

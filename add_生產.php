@@ -22,146 +22,10 @@ if (!isset($_SESSION)) {
 
 	<section>
 		<form id="myFile" method="post" enctype="multipart/form-data">
-			<div class="form-inline" style = "width: 100%">
-				<div style = "height: 10px"> </div>
-			</div>
+			<?php require "big_breed_table.html"?>
 
 			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
-				<div style = "width: 48%">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fa fa-eye"></i>
-							</div>
-						</div>
-						<input id="text1" name="eye" type="text" class="form-control" placeholder="眼標">
-					</div>
-				</div>
-				<div style = "width: 2%"> </div>
-				<div style = "width: 48%">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fa fa-home"></i>
-							</div>
-						</div>
-						<input id="text2" name="family" type="text" class="form-control"  placeholder="家族">
-					</div>
-				</div>
-				<div style = "width: 1%"> </div>
-			</div>
-
-			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
-				<div style = "width: 48%">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fa fa-balance-scale"></i>
-							</div>
-						</div>
-						<input id="text4" name="cutweight" type="text" class="form-control" placeholder="剪眼體重">
-						<div class="input-group-append">
-							<div class="input-group-text">(g)</div>
-						</div>
-					</div>
-				</div>
-				<div style = "width: 2%"> </div>
-				<div style = "width: 48%">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fa fa-balance-scale"></i>
-							</div>
-						</div>
-						<input id="text6" name="spawningweight" type="text" class="form-control" placeholder="生產體重">
-						<div class="input-group-append">
-							<div class="input-group-text">(g)</div>
-						</div>
-					</div>
-				</div>
-				<div style = "width: 1%"> </div>
-			</div>
-
-			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
-				<div class="input-group" style = "width: 48%">
-					<div class="input-group-prepend">
-						<div class="input-group-text">
-							<i class="fa fa-home"></i>
-						</div>
-					</div>
-					<input id="text7" name="male_family" type="text" class="form-control" placeholder="公蝦家族">
-				</div>
-				<div style = "width: 1%"> </div>
-			</div>
-
-			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
-				<div style = "width: 48%">
-					<div> 剪眼日期 </div>
-					<div class="input-group">
-						<!-- <div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fa fa-calendar-o"></i>
-							</div>
-						</div> -->
-						<input width = "50px" id="text3" name="cutday" type="date" value="<?php echo date("Y-m-d"); ?>">
-						<!-- <input id="text3" name="cutday" type="date"> -->
-					</div>
-				</div>
-				<div style = "width: 2%"> </div>
-				<div style = "width: 48%">
-					<div> 進產卵室待產日期 </div>
-					<div class="input-group">
-						<!-- <div class="input-group-prepend">
-							<div class="input-group-text">
-								<i class="fa fa-calendar-o"></i>
-							</div>
-						</div> -->
-						<input width = "50px" id="text5" name="spawningroomdate" type="date" value="<?php echo date("Y-m-d"); ?>">
-						<!-- <input id="text5" name="spawningroomdate" type="date"> -->
-					</div>
-				</div>
-				<div style = "width: 1%"> </div>
-			</div>
-
-			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
-				<div style = "width: 48%">
-					<div> 卵巢進展階段(Stage) </div>
-					<div class="input-group">
-						<select id="select1" name="ovarystate" class="custom-select">
-							<option value="none" selected disabled hidden></option>
-							<option value=""></option>
-							<option value="0">0</option>
-							<option value="0-1">0-1</option>
-							<option value="1">1</option>
-							<option value="1-2">1-2</option>
-							<option value="2">2</option>
-							<option value="2-3">2-3</option>
-							<option value="3">3</option>
-						</select>
-					</div>
-				</div>
-				<div style = "width: 2%"> </div>
-				<div style = "width: 48%">
-					<div> 交配方式 </div>
-					<div class="input-group">
-						<select id="select2" name="mating" class="custom-select">
-							<option value="none" selected disabled hidden></option>
-							<option value=""></option>
-							<option value="自然交配">自然交配</option>
-							<option value="人工授精">人工授精</option>
-						</select>
-					</div>
-				</div>
-				<div style = "width: 1%"> </div>
-			</div>
-
-			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
+				<div style = "width: 3%"> </div>
 				<div style = "width: auto">
 					<div> 上傳紙本圖片 </div>
 				</div>
@@ -170,8 +34,13 @@ if (!isset($_SESSION)) {
 					<input accept="image/*" type="file" name="fileField" id="uploadimage">
 				</div>
 			</div>
+
+			<div class="form-inline" style = "width: 100% ; height: 1%">
+				<div style = "height: 1px"> </div>
+			</div>
+
 			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
+				<div style = "width: 3%"> </div>
 				<div style = "width: auto"> 
 					<div> 圖片預覽 </div>
 				</div>
@@ -181,16 +50,15 @@ if (!isset($_SESSION)) {
 				</div>
 			</div>
 
-
 			<div class="form-inline" style = "width: 100%">
-				<div style = "width: 1%"> </div>
-				<div style = "width: auto">
-					<button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
-				</div>
+				<div style = "width: 3%"> </div>
+				<button type="button" class="btn btn-primary" onclick="upload()">上傳</button>
+				<div id="backmsg"></div>
 			</div>
-			<div id="backmsg"></div>
 
-			<div style = "height: 3px"> </div>
+			<div class="form-inline" style = "width: 100% ; height: 2px">
+				<div style = "height: 1px"> </div>
+			</div>
 		</form>
 	</section>
 
@@ -202,8 +70,23 @@ if (!isset($_SESSION)) {
 	<?php require_once "other_script.html" ?>
     <!--//Other Script-->
 
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <script> document.write('<script type="text/javascript" src="breed_check.js"></'+'script>'); </script>
 
 		<script>
+			function all_data_msg(msg , formData) {
+				// 為上傳時最後確認的訊息
+				Swal.fire({
+					html: msg,
+					showCancelButton: true,
+					confirmButtonText: '確認上傳!!!',
+					cancelButtonText: "再確認一下/修改一下",
+					}).then((result) => {
+						if (result.isConfirmed) {
+							post(formData) ;   
+						}
+					})
+        	}
 			function upload() {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
@@ -211,105 +94,12 @@ if (!isset($_SESSION)) {
 				var myForm = $("#myFile")[0];
 				var formData = new FormData(myForm);
 
-				// 2/20 空值檢查--------------------------------------------
-				var cutday = formData.get('cutday') ;
-				var spawningroomdate = formData.get('spawningroomdate') ;
-				var family = formData.get('family') ;
-				var cutweight = formData.get('cutweight') ;
-				var spawningweight = formData.get('spawningweight') ;
-				var male_family = formData.get('male_family') ;
-				var ovary_state = formData.get('ovarystate') ;
-				var mating = formData.get('mating') ;
-				var eye = formData.get('eye') ;
-				const map = new Map()
-				map.set("cutday" , "剪眼日期") ;
-				map.set("family" , "家族") ;
-				map.set("spawningroomdate" , "進產卵室待產日期") ;
-				map.set("male_family" , "公蝦家族") ;
-				map.set("ovary_state" , "卵巢進展階段") ;
-				map.set("eye" , "眼標") ;
-				map.set("mating" , "交配方式") ;
-				map.set("spawningweight" , "生產體重") ;
-				map.set("cutweight" , "剪眼體重") ;
-
-				// 計算有幾個沒填
-				var count = 0 ;
-				var show_message = "資訊尚未填寫完成，請填入:\n" ;
-				if(cutday == null || cutday == "") {
-					show_message += (map.get("cutday") + '、') ;
-					count ++ ;
+				var ret_message = check(formData) ;
+				if(ret_message == "") {
+					var msg = html_show_all_data(formData) ;
+                	all_data_msg(msg , formData) ;
 				}
-				if(ovary_state == null || ovary_state == "") {
-					show_message += (map.get("ovary_state") + '、') ;
-					count ++ ;
-				}
-				if(eye == null || eye == "") {
-					show_message += (map.get("eye") + '、') ;
-					count ++ ;
-				}
-				if(family == null || family == "") {
-					show_message += (map.get("family") + '、') ;
-					count ++ ;
-				}
-				if(spawningroomdate == null || spawningroomdate == "") {
-					show_message += (map.get("spawningroomdate") + '、') ;
-					count ++ ;
-				}
-				if(cutweight == null || cutweight == "") {
-					show_message += (map.get("cutweight") + '、') ;
-					count ++ ;
-				}
-				if(spawningweight == null || spawningweight == "") {
-					show_message += (map.get("spawningweight") + '、') ;
-					count ++ ;
-				}
-				if(male_family == null || male_family == "") {
-					show_message += (map.get("male_family") + '、') ;
-					count ++ ;
-				}
-				if(mating == null || mating == "") {
-					show_message += (map.get("mating") + '、') ;
-					count ++ ;
-				}
-				if(count != 0) {
-					show_message = show_message.slice(0 , show_message.length - 1) ;
-					show_message += "!" ;
-					Alert(show_message) ;
-					return ;
-				}
-
-				//----------------------------------------------------------
-
-				$.ajax({
-					url: 'Upload_生產.php',
-					type: 'POST',
-					data: formData,
-					cache: false,
-					//下面兩者一定要false
-					processData: false,
-					contentType: false,
-
-					success: function(backData) {
-						console.log();
-						Swal.fire({
-							title: backData,
-							confirmButtonText: "確認",
-						}).then((result) => {
-							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-								window.location.href = 'add_生產';
-								$("#backmsg").html(backData);
-							}
-						});
-					},
-					error: function() {
-						Swal.fire({
-							title: backData,
-							confirmButtonText: "確認",
-						}).then((result) => {
-							$('#backmsg').html("上傳失敗...");
-						});
-					},
-				});
+				else Alert(ret_message) ;
 			}
 
 			var imageProc = function(input) {
@@ -331,7 +121,6 @@ if (!isset($_SESSION)) {
 				$("#uploadimage").change(function() {
 					imageProc(this);
 				});
-
 			});
 		</script>
 </body>

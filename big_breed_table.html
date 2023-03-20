@@ -1,0 +1,133 @@
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 眼標 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-eye"></i>
+                </div>
+            </div>
+            <input id="text1" name="eye" type="text" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 家族 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-home"></i>
+                </div>
+            </div>
+            <input id="text2" name="family" type="text" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 剪眼體重 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+            </div>
+            <input id="text4" name="cutweight" type="text" class="form-control" >
+            <div class="input-group-append">
+                <div class="input-group-text">(g)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 家族 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+            </div>
+            <input id="text6" name="spawningweight" type="text" class="form-control" placeholder="生產體重">
+            <div class="input-group-append">
+                <div class="input-group-text">(g)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 公蝦家族 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-home"></i>
+                </div>
+            </div>
+            <input id="text7" name="male_family" type="text" class="form-control" placeholder="公蝦家族">
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 剪眼日期 </div>
+    <div style = "width: 30%">
+        <input width = "75px" id="text3" name="cutday" type="date" value="<?php echo date("Y-m-d"); ?>">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 進產卵室待產日期 </div>
+    <div style = "width: 30%">
+        <input width = "75px" id="text5" name="spawningroomdate" type="date" value="<?php echo date("Y-m-d"); ?>">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 卵巢進展階段(Stage) </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <select id="select1" name="ovarystate" class="custom-select">
+                <option value="none" selected disabled hidden></option>
+                <option value=""></option>
+                <option value="0">0</option>
+                <option value="0-1">0-1</option>
+                <option value="1">1</option>
+                <option value="1-2">1-2</option>
+                <option value="2">2</option>
+                <option value="2-3">2-3</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 交配方式 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <select id="select2" name="mating" class="custom-select">
+                <option value="none" selected disabled hidden></option>
+                <option value=""></option>
+                <option value="自然交配">自然交配</option>
+                <option value="人工授精">人工授精</option>
+            </select>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 5px"></div>
