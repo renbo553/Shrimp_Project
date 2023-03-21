@@ -172,7 +172,8 @@ if (!isset($_SESSION)) {
             var ret_message = check(formData) ;
             if(ret_message == "") {
                 var msg = html_get(formData) ;
-                myAlert(msg , formData) ;
+                if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
+                else myAlert(msg , formData) ;
             }
             else Alert(ret_message) ;
         }
@@ -233,7 +234,8 @@ if (!isset($_SESSION)) {
             var ret_message = check(formData) ;
             if(ret_message == "") {
                 var msg = html_get(formData) ;
-                myAlert(msg , formData) ;
+                if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
+                else myAlert(msg , formData) ;
             }
             else Alert(ret_message) ;
         }

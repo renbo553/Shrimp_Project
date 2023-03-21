@@ -358,15 +358,30 @@ function html_show_all_data (formData) {
         var append_div = document.createElement('div') ;
 
         var first_span = document.createElement('span');
-        first_span.textContent = all_data_name[i] + ": " ;
+        first_span.textContent = all_data_name[i] ;
         first_span.style.color = 'black' ;
         append_div.append(first_span) ;
+
+        var third_span = document.createElement('span');
+        third_span.textContent = " ".repeat(2) + ":" + " ".repeat(2) ;
+        third_span.style.color = 'black' ;
+        append_div.append(third_span) ;
 
         var second_span = document.createElement('span');
         if(all_data_name[i] == "時間") second_span.textContent = all_data_num[i] + ":00" ;
         else second_span.textContent = all_data_num[i] ;
         second_span.style.color = 'black' ;
         append_div.append(second_span) ;
+
+        // 設定div中span的比例
+        append_div.style.display = "flex" ;
+        append_div.style.justifyContent = "center" ;
+        append_div.style.alignItems = "cneter" ;
+        append_div.firstElementChild.style.flexBasis = "35%" ;
+        append_div.firstElementChild.style.textAlign = "center" ;
+        append_div.lastElementChild.style.flexBasis = "35%" ;
+        append_div.lastElementChild.style.textAlign = "center" ;
+
 
         new_html.append(append_div) ;
     }

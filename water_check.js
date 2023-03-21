@@ -364,19 +364,35 @@ function html_get (formData) {
             var append_div = document.createElement('div') ;
 
             var first_span = document.createElement('span');
-            first_span.textContent = data_name[i] + ": " ;
+            first_span.textContent = data_name[i] ;
             first_span.style.color = 'black' ;
+            first_span.style.width = "120px" ;
             append_div.append(first_span) ;
+
+            var third_span = document.createElement('span');
+            third_span.textContent = " : ";
+            third_span.style.color = 'black' ;
+            append_div.append(third_span) ;
 
             var second_span = document.createElement('span');
             second_span.textContent = data_num[i] ;
             second_span.style.color = 'red' ;
             append_div.append(second_span) ;
 
+            // 設定div中span的比例
+            append_div.style.display = "flex" ;
+            append_div.style.justifyContent = "center" ;
+            append_div.style.alignItems = "cneter" ;
+            append_div.firstElementChild.style.flexBasis = "25%" ;
+            append_div.firstElementChild.style.textAlign = "center" ;
+            append_div.lastElementChild.style.flexBasis = "25%" ;
+            append_div.lastElementChild.style.textAlign = "center" ;
+
             new_html.append(append_div) ;
         }
     }
 
+    if(count == 0) new_html = null ;
     return new_html ;
 }
 
@@ -449,13 +465,12 @@ function html_show_all_data (formData) {
     all_data_name.push(map.get("O2_2")) ;
     all_data_name.push(map.get("O2_3")) ;
     all_data_name.push(map.get("TCBS")) ;
-    all_data_name.push(map.get("nh4")) ;
     all_data_name.push(map.get("ORP_1")) ;
     all_data_name.push(map.get("ORP_2")) ;
     all_data_name.push(map.get("ORP_3")) ;
-    all_data_name.push(map.get("TCBS綠菌")) ;
-    all_data_name.push(map.get("螢光菌TCBS")) ;
+    all_data_name.push(map.get("nh4")) ;
     all_data_name.push(map.get("Marine")) ;
+    all_data_name.push(map.get("TCBS綠菌")) ;
     all_data_name.push(map.get("Alkalinity")) ;
     all_data_name.push(map.get("Temp_1")) ;
     all_data_name.push(map.get("Temp_2")) ;
@@ -463,6 +478,7 @@ function html_show_all_data (formData) {
     all_data_name.push(map.get("Salinity_1")) ;
     all_data_name.push(map.get("Salinity_2")) ;
     all_data_name.push(map.get("Salinity_3")) ;
+    all_data_name.push(map.get("螢光菌TCBS")) ;
     all_data_name.push(map.get("螢光菌Marine")) ;
 
     all_data_num.push(date) ;
@@ -475,13 +491,12 @@ function html_show_all_data (formData) {
     all_data_num.push(O2_2) ;
     all_data_num.push(O2_3) ;
     all_data_num.push(TCBS) ;
-    all_data_num.push(nh4) ;
     all_data_num.push(ORP_1) ;
     all_data_num.push(ORP_2) ;
     all_data_num.push(ORP_3) ;
-    all_data_num.push(TCBS綠菌) ;
-    all_data_num.push(螢光菌TCBS) ;
+    all_data_num.push(nh4) ;
     all_data_num.push(Marine) ;
+    all_data_num.push(TCBS綠菌) ;
     all_data_num.push(Alkalinity) ;
     all_data_num.push(Temp_1) ;
     all_data_num.push(Temp_2) ;
@@ -489,6 +504,7 @@ function html_show_all_data (formData) {
     all_data_num.push(Salinity_1) ;
     all_data_num.push(Salinity_2) ;
     all_data_num.push(Salinity_3) ;
+    all_data_num.push(螢光菌TCBS) ;
     all_data_num.push(螢光菌Marine) ;
 
     var data_name = [] ;
@@ -620,27 +636,39 @@ function html_show_all_data (formData) {
     var new_html = document.createElement('div') ;
 
     //append 所有 data 上去
-    if(count != 0) {
-        var a_div = document.createElement('div') ;
-        a_div.textContent = "請確認所有資料:\n " ;
-        new_html.appendChild(a_div) ;
+    var a_div = document.createElement('div') ;
+    a_div.textContent = "請確認所有資料:\n " ;
+    new_html.appendChild(a_div) ;
 
-        for(var i = 0 ; i < all_data_name.length ; i ++ ) {
-            var append_div = document.createElement('div') ;
+    for(var i = 0 ; i < all_data_name.length ; i ++ ) {
+        var append_div = document.createElement('div') ;
 
-            var first_span = document.createElement('span');
-            first_span.textContent = all_data_name[i] + ": " ;
-            first_span.style.color = 'black' ;
-            append_div.append(first_span) ;
+        var first_span = document.createElement('span');
+        first_span.textContent = all_data_name[i] ;
+        first_span.style.color = 'black' ;
+        append_div.append(first_span) ;
 
-            var second_span = document.createElement('span');
-            second_span.textContent = all_data_num[i] ;
-            if(data_name.indexOf(all_data_name[i]) != -1) second_span.style.color = 'red' ;
-            else second_span.style.color = 'black' ;
-            append_div.append(second_span) ;
+        var third_span = document.createElement('span');
+        third_span.textContent = " ".repeat(2) + ":" + " ".repeat(2) ;
+        third_span.style.color = 'black' ;
+        append_div.append(third_span) ;
 
-            new_html.append(append_div) ;
-        }
+        var second_span = document.createElement('span');
+        second_span.textContent = all_data_num[i] ;
+        if(data_name.indexOf(all_data_name[i]) != -1) second_span.style.color = 'red' ;
+        else second_span.style.color = 'black' ;
+        append_div.append(second_span) ;
+
+        // 設定div中span的比例
+        append_div.style.display = "flex" ;
+        append_div.style.justifyContent = "center" ;
+        append_div.style.alignItems = "cneter" ;
+        append_div.firstElementChild.style.flexBasis = "35%" ;
+        append_div.firstElementChild.style.textAlign = "center" ;
+        append_div.lastElementChild.style.flexBasis = "35%" ;
+        append_div.lastElementChild.style.textAlign = "center" ;
+
+        new_html.append(append_div) ;
     }
 
     return new_html ;
