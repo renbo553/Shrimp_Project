@@ -1,7 +1,8 @@
+
 <div class="form-inline" style = "width: 100% ; height: 75px">
     <div style = "width: 1%"> </div>
-    <div style = "width: 23%">
-        <div> TankID </div>
+    <div style = "width: 10%"> TankID </div>
+    <div style = "width: 18%">
         <select id="location" name="location" class="custom-select">
             <option value="none" selected disabled hidden></option>
             <option value=""></option>
@@ -12,8 +13,8 @@
         </select>
     </div>
     <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 蝦缸資訊 </div>
+    <div style = "width: 10%"> 蝦缸資訊 </div>
+    <div style = "width: 18%">
         <select id="select_type" name="tank_type" class="custom-select">
             <option value="none" selected disabled hidden></option>
             <option value=""></option>
@@ -23,22 +24,21 @@
             <option value="休養缸">休養缸</option>
         </select>
     </div>
-    <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div style = "height: 10px"> </div>
-        <div> 日期 </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 日期 </div>
+    <div style = "width: 18%">
+        <div style = "width: 10% ;height: 15px;"> </div>
         <div class="input-group">
             <div style="border-width:1px ; border-right-style:solid" class = "type_name">  </div>
             <input width = "50px" id="date" name="date" type="date" value="<?php echo date("Y-m-d"); ?>">
         </div>
     </div>
-    <div style = "width: 1%"> </div>
-</div>
-
-<div class="form-inline" style = "width: 100% ; height: 110px">
-    <div style = "width: 1%"> </div>
-    <div style = "width: 23%">
-        <div> 時間 </div>
+    <div style = "width: 2%"> </div>
+    <div style = "width: 10%"> 時間 </div>
+    <div style = "width: 18%">
         <select id="select_time" name="time" class="custom-select">
             <option value="none" selected disabled hidden></option>
             <option value=""></option>
@@ -50,11 +50,10 @@
             <option value="23">23:00</option>
             <option value="3">03:00</option>
         </select>
-        <div style = "height: 60px"> </div>
     </div>
     <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 工作/餵食項目 </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
         <select id="select_work" name="work" class="custom-select">
             <option value="none" selected disabled hidden></option>
             <option value=""></option>
@@ -77,146 +76,137 @@
             <input id="else_work" name="else_work" placeholder="其他" type="text" class="form-control">
         </div>
     </div>
-    <div style = "width: 1%"> </div>
 </div>
 
 <div class="form-inline" style = "width: 100% ; height: 75px">
     <div style = "width: 1%"> </div>
-    <div style = "width: 23%">
-        <div> 公蝦數量 </div>
-        <div class="input-group">
-            <input id="male_shrimp" name="male_shrimp" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">隻</div>
-            </div>
-        </div>
-    </div>
+    <div style = "width: 10%"> 公蝦數量 </div>
+    <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="male_shrimp" style = "width: auto;">隻</div>
+
     <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 母蝦數量 </div>
-        <div class="input-group">
-            <input id="female_shrimp" name="female_shrimp" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">隻</div>
-            </div>
-        </div>
-    </div>
-    <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 死亡公蝦數量 </div>
-        <div class="input-group">
-            <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">隻</div>
-            </div>
-        </div>
-    </div>
-    <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 死亡母蝦數量 </div>
-        <div class="input-group">
-            <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">隻</div>
-            </div>
-        </div>
-    </div>
-    <div style = "width: 1%"> </div>
+
+    <div style = "width: 10%"> 母蝦數量 </div>
+    <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="female_shrimp" style = "width: auto;">隻</div>
 </div>
 
 <div class="form-inline" style = "width: 100% ; height: 75px">
     <div style = "width: 1%"> </div>
-    <div style = "width: 23%">
-        <div> 脫皮公蝦數量 </div>
-        <div class="input-group">
-                <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control">
-                <div class="input-group-append">
-                    <div class="input-group-text">隻</div>
-                </div>
-            </div>
-    </div>
+    <div style = "width: 10%"> 死亡公蝦數量 </div>
+    <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="dead_male_shrimp" style = "width: auto;">隻</div>
+
     <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 脫皮母蝦數量 </div>
-        <div class="input-group">
-            <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" >
-            <div class="input-group-append">
-                <div class="input-group-text">隻</div>
-            </div>
-        </div>
-    </div>
-    <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 公蝦均重 </div>
-        <div class="input-group">
-            <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">(g)</div>
-            </div>
-        </div>
-    </div>
-    <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 母蝦均重 </div>
-        <div class="input-group">
-            <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">(g)</div>
-            </div>
-        </div>
-    </div>
+
+    <div style = "width: 10%"> 死亡母蝦數量 </div>
+    <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="dead_female_shrimp" style = "width: auto;">隻</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 73px">
     <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 脫皮公蝦數量 </div>
+    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="peeling_male_shrimp" style = "width: auto;">隻</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 脫皮母蝦數量 </div>
+    <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="peeling_female_shrimp" style = "width: auto;">隻</div>
 </div>
 
 <div class="form-inline" style = "width: 100% ; height: 75px">
     <div style = "width: 1%"> </div>
-    <div style = "width: 23%">
-        <div> 總重 </div>
-        <div class="input-group">
-            <input id="total_weight" name="total_weight" type="text" class="form-control" style = "width: 1%">
-            <div class="input-group-append">
-                <div class="input-group-text">(g)</div>
-            </div>
-        </div>
-    </div>
+    <div style = "width: 10%"> 公蝦均重 </div>
+    <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="avg_male_shrimp" style = "width: auto;">(g)</div>
+
     <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 餵食量 </div>
-        <div class="input-group">
-            <input id="food_weight" name="food_weight" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">(g)</div>
-            </div>
-        </div>
-    </div>
+
+    <div style = "width: 10%"> 母蝦均重 </div>
+    <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="avg_female_shrimp" style = "width: auto;">(g)</div>
+
     <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> 殘餌量 </div>
-        <div class="input-group">
-            <input id="food_remain" name="food_remain" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">(g)</div>
-            </div>
-        </div>
-    </div>
-    <div style = "width: 2%"> </div>
-    <div style = "width: 23%">
-        <div> Feeding Ratio </div>
-        <div class="input-group">
-            <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control">
-            <div class="input-group-append">
-                <div class="input-group-text">%</div>
-            </div>
-        </div>
-    </div>
+
     <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 總重 </div>
+    <input id="total_weight" name="total_weight" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="total_weight" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="food_weight" name="food_weight" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="food_weight" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="food_remain" name="food_remain" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="food_remain" style = "width: auto;">(g)</div>
+    
+    <div style = "width: 2%"> </div>
+    
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> Feeding Ratio </div>
+    <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" style = "width: 15%;">
+    <div class="input-group-text" for="FeedingRatio" style = "width: auto;">(%)</div>
 </div>
 
 <div class="form-inline" style = "width: 100%">
     <div style = "width: 1%"> </div>
-    <textarea id="Observation" name="Observation" cols="40" rows="5" class="form-control" placeholder = "備註"></textarea>
+    <div style = "width: 10%"> 備註 </div>
+    <div style = "width: 40%">
+        <textarea id="Observation" name="Observation" cols="40" rows="5" class="form-control"></textarea>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
 </div>
 
 <div class="form-inline" style = "width: 100%">
-    <div style = "height: 10px"> </div>
+    <div style = "width: 1%"> </div>
+    <div style = "width: auto">
+        <div> 上傳紙本圖片 </div>
+    </div>
+    <div style = "width: 5px"> </div>
+    <div style = "width: 30%"> 
+        <input accept="image/*" type="file" name="fileField" id="uploadimage_big">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 5px">
+    <div style = "height: 1px"> </div>
+</div>
+
+<div class="form-inline" style = "width: 100%">
+    <div style = "width: 1%"> </div>
+    <div style = "width: auto"> 
+        <div> 圖片預覽 </div>
+    </div>
+    <div style = "width: 5px"> </div>
+    <div style = "width: auto">
+        <img id="show_image_big" src="">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 5px">
+    <div style = "height: 1px"> </div>
+</div>
+
+<div class="form-inline" style = "width: 100%">
+    <div style = "width: 1%"> </div>
+    <button type="button" class="btn btn-primary" onclick="add_before_big()">取得昨天資料</button>
+    <div style = "width: 1%"> </div>
+    <button type="button" class="btn btn-primary" onclick="upload_big()">上傳</button>
+    <div id="backmsg"></div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 1px"> </div>
 </div>
