@@ -65,10 +65,36 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 日期 </div>
+                <div> 起始日期 </div>
                 <div class="input-group">
                     <?php 
-                        utility_date("date", "日期");
+                        utility_date("start_date", "起始日期");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 結束日期 </div>
+                <div class="input-group">
+                    <?php 
+                        utility_date("end_date", "結束日期");
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 蝦缸類別 </div>
+                <div class="input-group">
+                    <?php 
+                        $shrimp_option_array = array();
+                        $shrimp_option_array["公蝦缸"] = "公蝦缸";
+                        $shrimp_option_array["母蝦缸"] = "母蝦缸";
+                        $shrimp_option_array["交配缸"] = "交配缸";
+                        $shrimp_option_array["休養缸"] = "休養缸";
+                        utility_selectbox("shrimp_select", "蝦缸類別", $shrimp_option_array);
                     ?>
                 </div>
             </div>
@@ -87,23 +113,6 @@ if (!isset($_SESSION)) {
                 </div>
             </div>
             <div style = "width: 1%"> </div>
-        </div>
-
-        <div class="form-inline" style = "width: 100% ; height: 65px">
-            <div style = "width: 1%"> </div>
-            <div style = "width: 48%">
-                <div> 蝦缸類別 </div>
-                <div class="input-group">
-                    <?php 
-                        $shrimp_option_array = array();
-                        $shrimp_option_array["公蝦缸"] = "公蝦缸";
-                        $shrimp_option_array["母蝦缸"] = "母蝦缸";
-                        $shrimp_option_array["交配缸"] = "交配缸";
-                        $shrimp_option_array["休養缸"] = "休養缸";
-                        utility_selectbox("shrimp_select", "蝦缸類別", $shrimp_option_array);
-                    ?>
-                </div>
-            </div>
         </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">
@@ -169,18 +178,36 @@ if (!isset($_SESSION)) {
 
         function search_feed_process($mysqli) : void{
             /* fetch post input data */
-            $date = $_POST["date"];
+            //$date = $_POST["date"];
+            $start_date = $_POST["start_date"];
+            $end_date = $_POST["end_date"];
             $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
             $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
             $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
             $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
             
             /* concatenate sql where clause or set default value if not specified */
+            /*
             if(empty($date)){
                 $date = "true";
             }
             else{
                 $date = "Date = " . "'{$date}'";
+            }*/
+            
+            if(empty($start_date)){
+                $start_date = "true";
+            }
+            else{
+                $start_date = str_replace('-', '', $start_date);
+                $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
+            }
+            if(empty($end_date)){
+                $end_date = "true";
+            }
+            else{
+                $end_date = str_replace('-', '', $end_date);
+                $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
             }
             if(is_null($tank)){
                 $tank = "true";
@@ -202,7 +229,8 @@ if (!isset($_SESSION)) {
             }
 
             /* search data from database */
-            $sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            //$sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
             $result = $mysqli->query($sql);
 
             /* show result */
@@ -215,55 +243,7 @@ if (!isset($_SESSION)) {
         }
 
 
-        /* search_feed_process:
-         * 		list searched feed data
-         * param:
-         * 		mysqli: database object
-         */
-
-        function search_feed_process($mysqli) : void{
-            /* fetch post input data */
-            $date = $_POST["date"];
-            $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
-            $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
-            $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
-            $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
-            
-            /* concatenate sql where clause or set default value if not specified */
-            if(empty($date)){
-                $date = "true";
-            }
-            else{
-                $date = "Date = " . "'{$date}'";
-            }
-            if(is_null($tank)){
-                $tank = "true";
-            }
-            else{
-                $tank = "Tank = " . "'{$tank}'";
-            }
-            if(is_null($shrimp)){
-                $shrimp = "true";
-            }
-            else{
-                $shrimp = "shrimp = " . "'{$shrimp}'";
-            }
-            if(is_null($sort_key)){
-                $sort_key = "id";
-            }
-            if(is_null($sort_order)){
-                $sort_order = "DESC";
-            }
-
-            /* search data from database */
-            $sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
-            $result = $mysqli->query($sql);
-
-            /* show result */
-            show_feed_result($result);
-            
-            $mysqli->close();
-        }
+        
 
         /* show_feed_result:
          *      list sql select query result

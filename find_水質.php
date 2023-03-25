@@ -175,14 +175,26 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100% ; height: 65px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
-                            <div> 日期 </div>
+                            <div> 起始日期 </div>
                             <div class="input-group">
                                 <?php 
-                                    utility_date("date", "日期");
+                                    utility_date("start_date", "起始日期");
                                 ?>
                             </div>
                         </div>
                         <div style = "width: 2%"> </div>
+                        <div style = "width: 48%">
+                            <div> 結束日期 </div>
+                            <div class="input-group">
+                                <?php 
+                                    utility_date("end_date", "結束日期");
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 65px">
+                        <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div> TankID </div>
                             <div class="input-group">
@@ -263,18 +275,35 @@ if (!isset($_SESSION)) {
 
             function search_waterquality_process($mysqli) : void{
                 /* fetch post input data */
-                $date = $_POST["date"];
+                //$date = $_POST["date"];
+                $start_date = $_POST["start_date"];
+                $end_date = $_POST["end_date"];
                 $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
                 $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
                 $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
                 $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
 
                 /* concatenate sql where clause or set default value if not specified */
+                /*
                 if(empty($date)){
                     $date = "true";
                 }
                 else{
                     $date = "Date = " . "'{$date}'";
+                }*/
+                if(empty($start_date)){
+                    $start_date = "true";
+                }
+                else{
+                    $start_date = str_replace('-', '', $start_date);
+                    $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
+                }
+                if(empty($end_date)){
+                    $end_date = "true";
+                }
+                else{
+                    $end_date = str_replace('-', '', $end_date);
+                    $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
                 }
                 if(is_null($tank)){
                     $tank = "true";
@@ -290,7 +319,8 @@ if (!isset($_SESSION)) {
                 }
                 
                 /* search data from database */
-                $sql = "SELECT * FROM waterquality WHERE {$date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
+                //$sql = "SELECT * FROM waterquality WHERE {$date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
+                $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
                 $result = $mysqli->query($sql);
 
                 /* show result */
