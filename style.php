@@ -123,11 +123,6 @@
 		border-radius: 5px;
 	}
 
-	/* buttons  */
-	button {
-		
-	}
-
 	/* Submits */
 	.submits {
 		width: 70%;

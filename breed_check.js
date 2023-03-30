@@ -89,8 +89,8 @@ function html_show_all_data(formData) {
     map.set("cutweight" , "剪眼體重") ;
 
     //用 array 先把超過範圍的資料存起來
-    var data_name = ["剪眼日期" , "家族" , "進產卵室待產日期" , "公蝦家族" , "卵巢進展階段" , "眼標" , "交配方式" , "生產體重" , "剪眼體重"] ;
-    var data_num = [cutday , family , spawningroomdate , male_family , ovary_state , eye , mating , spawningweight , cutweight] ;
+    var all_data_name = ["眼標" , "家族" , "公蝦家族" , "生產體重" , "剪眼體重" , "卵巢進展階段" , "交配方式" , "剪眼日期" , "進產卵室待產日期"] ;
+    var all_data_num = [eye , family , male_family , spawningweight , cutweight , ovary_state , mating  , cutday , spawningroomdate] ;
 
     //建立一個新的html檔來當作提示訊息，append_div為要插入的訊息
     var new_html = document.createElement('div') ;
@@ -100,19 +100,33 @@ function html_show_all_data(formData) {
     new_html.appendChild(a_div) ;
 
     //append 所有資料上去
-    for(var i = 0 ; i < data_name.length ; i ++ ) {
-        // 先清空原本要 append 上去的 div，再append新的元素上去
+    for(var i = 0 ; i < all_data_name.length ; i ++ ) {
         var append_div = document.createElement('div') ;
 
         var first_span = document.createElement('span');
-        first_span.textContent = data_name[i] + ": " ;
+        first_span.textContent = all_data_name[i] ;
         first_span.style.color = 'black' ;
         append_div.append(first_span) ;
 
+        var third_span = document.createElement('span');
+        third_span.textContent = " ".repeat(2) + ":" + " ".repeat(2) ;
+        third_span.style.color = 'black' ;
+        append_div.append(third_span) ;
+
         var second_span = document.createElement('span');
-        second_span.textContent = data_num[i] ;
+        second_span.textContent = all_data_num[i] ;
         second_span.style.color = 'black' ;
         append_div.append(second_span) ;
+
+        // 設定div中span的比例
+        append_div.style.display = "flex" ;
+        append_div.style.justifyContent = "center" ;
+        append_div.style.alignItems = "cneter" ;
+        append_div.firstElementChild.style.flexBasis = "35%" ;
+        append_div.firstElementChild.style.textAlign = "center" ;
+        append_div.lastElementChild.style.flexBasis = "35%" ;
+        append_div.lastElementChild.style.textAlign = "center" ;
+
 
         new_html.append(append_div) ;
     }
@@ -151,4 +165,16 @@ function post (formData) {
             });
         },
     });
+}
+
+function data_transfer(from_data , form_id) {
+    document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
+    document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
+    document.getElementById(form_id).elements["male_family"].value = from_data.get("male_family") ;
+    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
+    document.getElementById(form_id).elements["spawningweight"].value = from_data.get("spawningweight") ;
+    document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
+    document.getElementById(form_id).elements["spawningroomdate"].value = from_data.get("spawningroomdate") ;
+    document.getElementById(form_id).elements["ovarystate"].value = from_data.get("ovarystate") ;
+    document.getElementById(form_id).elements["mating"].value = from_data.get("mating") ;
 }

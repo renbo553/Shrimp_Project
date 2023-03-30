@@ -9,7 +9,7 @@ if (!isset($_SESSION)) {
 <html lang="zxx">
 
 <head>
-	<title>About</title>
+	<title>新增 - 水質</title>
 	<!--Head-->
 	<?php require_once "head.html"?>
     <!--//Head-->
