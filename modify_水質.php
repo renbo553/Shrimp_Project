@@ -20,370 +20,100 @@ if (!isset($_SESSION)) {
     <?php require_once "header.php" ?>
     <!--//Header-->
 
-	<section>
+	<style>
+        @media (min-width: 1024px) {
+            div.big_form{
+                border: solid 1px black;
+                animation: change 0s;
+            }
+            div.small_form{
+                display: none;
+            }
 
-		<form id="myFile" method="post" enctype="multipart/form-data">
-		<?php	
-		echo 
-			'<table class="table">
-				<tr>
-					<td>上傳紙本圖片</td>
-					<td>
-						<input accept="image/*" type="file" name="fileField" id="uploadimage">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						圖片預覽
-					</td>
-					<td>
-						<img id="show_image" src="">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Index
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text" name="id"  value="'.$_GET['id'].'" class="form-control" readonly>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						日期
-					</td>
-					<td>
-						<div class="input-group">
-							<div class="input-group-prepend">
-								<div class="input-group-text">
-									<i class="fa fa-calendar-o"></i>
-								</div>
-							</div>
-							<input id="text1" name="date" type="date" value='.$_GET['date'].'>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						位置(Tank)
-					</td>
-					<td>
-						<select id="select1" name="location" class="custom-select">
-							<option value="'.$_GET['location'].'" selected disabled hidden>'.$_GET['location'].'</option>
-							<option value=""></option>
-							<option value="M1">M1</option>
-							<option value="M2">M2</option>
-							<option value="M3">M3</option>
-							<option value="M4">M4</option>
-						</select>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						NH<sub>4</sub>-H
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text2" name="nh4" value="' . $_GET["nh4"] . '"type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mg/l)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						NO<sub>2</sub>
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text3" name="no2" value="' . $_GET["no2"] . '" type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mg/l)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						NO<sub>3</sub>
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text4" name="no3" value="' . $_GET["no3"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mg/l)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Salinity_1
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text5" name="Salinity_1" value="' . $_GET["Salinity_1"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Salinity_2
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text6" name="Salinity_2" value="' . $_GET["Salinity_2"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Salinity_3
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text7" name="Salinity_3" value="' . $_GET["Salinity_3"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						pH_1
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text8" name="pH_1" value="' . $_GET["pH_1"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						pH_2
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text9" name="pH_2" value="' . $_GET["pH_2"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						pH_3
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text10" name="pH_3" value="' . $_GET["pH_3"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						O<sub>2</sub>_1
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text11" name="O2_1" value="' . $_GET["O2_1"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mg/l)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						O<sub>2</sub>_2
+            @keyframes change {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        }
 
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text12" name="O2_2" value="' . $_GET["O2_2"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mg/l)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						O<sub>2</sub>_3
+        @media (max-width: 1023px) {
+            div.big_form{
+                display: none;
+            }
+            div.small_form{
+                border: solid 1px black;
+                animation: change 0s;
+            }
 
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text13" name="O2_3" value="' . $_GET["O2_3"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mg/l)</div>
-							</div>
+            @keyframes change {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        }
+
+        #myswal{
+            position: fixed;
+            top : 5% ;
+            left : 50% ;
+        }
+    </style>
+
+	<!-- table -->
+    <div>
+        <!– 頁籤的內容區塊 –>
+        <!-- 大螢幕 -->
+        <div class="big_form"><p>
+			<section>
+				<form id="big_form" method="post" enctype="multipart/form-data">
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> Index </div>
+						<div style = "width: 17%">
+							<input id="id" name="id" class="form-control" readonly>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						ORP_1
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text14" name="ORP_1" value="' . $_GET["ORP_1"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mV)</div>
-							</div>
+					</div>
+
+					<?php require_once "big_water_table.html" ?>
+
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 1%"> </div>
+						<button type="button" class="btn btn-primary" onclick="upload_big()">修改</button>
+						<div id="backmsg"></div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 10px">
+						<div style = "height: 1px"> </div>
+					</div>
+				</form>
+			</section>
+        </p></div>
+        <!-- 小螢幕 -->
+        <div class="small_form"><p>
+			<section>
+				<form id="small_form" method="post" enctype="multipart/form-data">
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> Index </div>
+						<div style = "width: 40%">
+							<input id="id" name="id" class="form-control" readonly>
 						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						ORP_2
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text15" name="ORP_2" value="' . $_GET["ORP_2"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mV)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						ORP_3
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text16" name="ORP_3" value="' . $_GET["ORP_3"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(mV)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						W Temp_1
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text17" name="Temp_1" value="' . $_GET["Temp_1"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						W Temp_2
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text18" name="Temp_2" value="' . $_GET["Temp_2"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						W Temp_3
-					</td>
-					<td>
-						<div class="col-6">
-							<input id="text19" name="Temp_3" value="' . $_GET["Temp_3"] . '"  type="text" class="form-control">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Alkalinity
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text20" name="Alkalinity" value="' . $_GET["Alkalinity"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(ppm)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						TCBS
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text21" name="TCBS" value="' . $_GET["TCBS"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(CFU/ml)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						TCBS 綠菌
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text22" name="綠菌" value="' . $_GET["綠菌"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(CFU/ml)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						Marine
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text23" name="Marine" value="' . $_GET["Marine"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(CFU/ml)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						螢光菌TCBS
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text24" name="螢光菌TCBS" value="' . $_GET["螢光菌TCBS"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(CFU/ml)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						螢光菌Marine
-					</td>
-					<td>
-						<div class="input-group">
-							<input id="text25" name="螢光菌Marine" value="' . $_GET["螢光菌Marine"] . '"  type="text" class="form-control">
-							<div class="input-group-append">
-								<div class="input-group-text">(CFU/ml)</div>
-							</div>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						備註
-					</td>
-					<td>
-						<div class="col-6">
-							<textarea id="textarea1" name="Note"  cols="40" rows="5" class="form-control">' . $_GET["Note"] .'</textarea>
-						</div>
-					</td>
-				</tr>
-			</table>';
-			?>
-		</form>
-		<button type="button" class="btn btn-primary" onclick="upload()">修改</button>
-		<div id="backmsg"></div>
-		<br>
-	</section>
+					</div>
+
+                    <?php require "small_water_table.html"?>
+
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 5%"> </div>
+						<button type="button" class="btn btn-primary" onclick="upload_small()">修改</button>
+						<div id="backmsg"></div>
+					</div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 10px">
+                        <div style = "height: 1px"> </div>
+                    </div>
+				</form>
+			</section>
+        </p></div>
+    </div>
 
 	<!--Footer-->
     <?php require_once "footer.html" ?>
@@ -393,54 +123,107 @@ if (!isset($_SESSION)) {
 	<?php require_once "other_script.html" ?>
     <!--//Other Script-->
 
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <script> document.write('<script type="text/javascript" src="water_check.js"></'+'script>'); </script>
+
 		<script>
-			function upload() {
+			// 在頁面加載完成後執行初始化操作
+			window.onload = function() {
+				// 獲取要應用動畫的div元素
+				var big = document.querySelector("div.big_form") ;
+				var small = document.querySelector("div.small_form") ;
+				// 監聽animationend事件
+				big.addEventListener('animationend' , function() {
+					// 在動畫結束後執行javascript函數
+					change_to_big() ;
+				});
+				small.addEventListener('animationend' , function() {
+					// 在動畫結束後執行javascript函數
+					change_to_small() ;
+				});
+
+				var urlParams = new URLSearchParams(window.location.search);
+				modify_put_into_form(urlParams , "big_form" , 1);
+				modify_put_into_form(urlParams , "small_form" , 1);
+			}
+
+			// 避免視窗大小不同時使用之form不同所導致的bug => 當改變視窗大小時傳輸檔案
+			function change_to_big() {
+				var big_Form = $("#big_form")[0];
+				var small_Form = $("#small_form")[0];
+				var big_Data = new FormData(big_Form);
+				var small_Data = new FormData(small_Form);
+
+				data_transfer(small_Data , "big_form") ;
+				return ;
+			}
+			function change_to_small() {
+				var big_Form = $("#big_form")[0];
+				var small_Form = $("#small_form")[0];
+				var big_Data = new FormData(big_Form);
+				var small_Data = new FormData(small_Form);
+
+				data_transfer(big_Data , "small_form") ;
+				return ;
+			}
+			
+			function all_data_msg(msg , formData) {
+				// 為上傳時最後確認的訊息
+				Swal.fire({
+					html: msg,
+					showCancelButton: true,
+					confirmButtonText: '確認!!!',
+					cancelButtonText: "再確認一下/修改一下",
+					}).then((result) => {
+						if (result.isConfirmed) {
+							modify_post(formData) ;   
+						}
+					})
+			}
+
+			function myAlert(msg , formData) {
+				// 定義自定義的彈出框樣式和行為
+				// 可以是彈出一個模態框或在頁面上顯示一個自定義的消息框
+				// 在此處調用您想要使用的JavaScript函數或插件來創建自定義樣式的彈出框
+
+				// 例如，這裡使用 SweetAlert 插件來創建一個自定義的彈出框
+				Swal.fire({
+					html: msg,
+					showCancelButton: true,
+					confirmButtonText: '仍要上傳',
+					cancelButtonText: "再確認一下/修改一下",
+					}).then((result) => {
+						if (result.isConfirmed) {
+							all_data_msg(html_show_all_data(formData) , formData) ;   
+						}
+					})
+			}
+			
+			// big ---------------------------------------------------------------
+			function upload_big() {
 				// 此處是 javascript 寫法
 				// var myForm = document.getElementById('myFile');
 				// 底下是 jQuery 的寫法
-				var myForm = $("#myFile")[0];
+				var myForm = $("#big_form")[0];
 				var formData = new FormData(myForm);
 
-				$.ajax({
-					url: 'Update_水質.php',
-					type: 'POST',
-					data: formData,
-					cache: false,
-					//下面兩者一定要false
-					processData: false,
-					contentType: false,
-
-					success: function(backData) {
-						console.log();
-						Swal.fire({
-							title: backData,
-							confirmButtonText: "確認",
-						}).then((result) => {
-							if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
-								window.location.href = 'find_水質';
-								$("#backmsg").html(backData);
-							}
-						});
-					},
-					error: function() {
-						Swal.fire({
-							title: backData,
-							confirmButtonText: "確認",
-						}).then((result) => {
-							$('#backmsg').html("上傳失敗...");
-						});
-					},
-				});
+				var ret_message = check(formData) ;
+				if(ret_message == "") {
+					var msg = html_get(formData) ;
+					if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
+					else myAlert(msg , formData) ;
+				}
+				else Alert(ret_message) ;
 			}
 
-			var imageProc = function(input) {
+			var imageProc_big = function(input) {
 				if (input.files && input.files[0]) {
 					// 建立一個 FileReader 物件
 					var reader = new FileReader();
 					// 當檔案讀取完後，所要進行的動作
 					reader.onload = function(e) {
 						// 顯示圖片
-						$('#show_image').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						$('#show_image_big').attr("src", e.target.result).css("height", "500px").css("width", "500px");
 						// // 將 DataURL 放到表單中
 						// $("input[name='imagestring']").val(e.target.result);
 					};
@@ -449,11 +232,52 @@ if (!isset($_SESSION)) {
 			}
 			$(document).ready(function() {
 				// 綁定事件
-				$("#uploadimage").change(function() {
-					imageProc(this);
+				$("#uploadimage_big").change(function() {
+					imageProc_small(this);
+					imageProc_big(this);
 				});
-
 			});
+			//---------------------------------------------------------------------------
+
+			// small ---------------------------------------------------------------
+			function upload_small() {
+				// 此處是 javascript 寫法
+				// var myForm = document.getElementById('myFile');
+				// 底下是 jQuery 的寫法
+				var myForm = $("#small_form")[0];
+				var formData = new FormData(myForm);
+
+				var ret_message = check(formData) ;
+				if(ret_message == "") {
+					var msg = html_get(formData) ;
+					if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
+					else myAlert(msg , formData) ;
+				}
+				else Alert(ret_message) ;
+			}
+
+			var imageProc_small = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+						$('#show_image_small').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage_small").change(function() {
+					imageProc_big(this);
+					imageProc_small(this);
+				});
+			});
+			//---------------------------------------------------------------------------
 		</script>
 </body>
 

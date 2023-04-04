@@ -119,9 +119,6 @@ if (!isset($_SESSION)) {
             return ;
         }
 
-
-
-
         function all_data_msg(msg , formData) {
             // 為上傳時最後確認的訊息
             Swal.fire({

@@ -9,8 +9,7 @@ if (!isset($_SESSION)) {
 <html lang="zxx">
 
 <head>
-	<title>About</title>
-	<title>Services</title>
+	<title>詳細資料 - 水質</title>
 	<!--Head-->
 	<?php require_once "head.html"?>
     <!--//Head-->
@@ -21,270 +20,640 @@ if (!isset($_SESSION)) {
     <?php require_once "header.php" ?>
     <!--//Header-->
 
-	<section>
-		<form>
-			<br>
-			
-			<?php
+	<style>
+        @media (min-width: 1024px) {
+            div.big_form {
+                border: solid 1px black;
+                animation: change 0s;
+            }
 
-				echo
-					'<div class="form-group row">
-						<label for="text1" class="col-6 col-form-label">Index</label>
-						<div class="col-6">
+            div.small_form {
+                display: none;
+            }
+
+            @keyframes change {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+        }
+
+        @media (max-width: 1023px) {
+            div.big_form {
+                display: none;
+            }
+
+            div.small_form {
+                border: solid 1px black;
+                animation: change 0s;
+            }
+
+            @keyframes change {
+                from {
+                    opacity: 0;
+                }
+
+                to {
+                    opacity: 1;
+                }
+            }
+        }
+    </style>
+
+	<div>
+        <div class="big_form">
+			<section>
+				<form id="big_form" method="post" enctype="multipart/form-data">
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> Index </div>
+						<div style = "width: 17%">
+							<input id="id" name="id" class="form-control" readonly>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> TankID </div>
+						<div style = "width: 17%">
+							<select id="location" name="location" class="custom-select" disabled="disabled">
+								<option value=""></option>
+								<option value="M1">M1</option>
+								<option value="M2">M2</option>
+								<option value="M3">M3</option>
+								<option value="M4">M4</option>
+							</select>
+						</div>
+
+						<div style = "width: 2%"> </div>
+						<div style = "width: 5%"> 日期 </div>
+						<div style = "width: 17%">
+							<input id="date" name="date" type="date" disabled="disabled">
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> NH4-N </div>
+						<input id="nh4" name="nh4" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="nh4" style = "width: 5%;">(mg/l)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> NO2 </div>
+						<input id="no2" name="no2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="no2" style = "width: 5%;">(mg/l)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> NO3 </div>
+						<input id="no3" name="no3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="no3" style = "width: 5%;">(mg/l)</label>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> O2_1 </div>
+						<input id="O2_1" name="O2_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="O2_1" style = "width: 5%;">(mg/l)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> O2_2 </div>
+						<input id="O2_2" name="O2_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="O2_2" style = "width: 5%;">(mg/l)</label>
+
+						<div style = "width: 2%"> </div>
+						
+						<div style = "width: 5%"> O2_3 </div>
+						<input id="O2_3" name="O2_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="O2_3" style = "width: 5%;">(mg/l)</label>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> pH_1 </div>
+						<input id="pH_1" name="pH_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="pH_1" style = "width: 5%;">(pH值)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> pH_2 </div>
+						<input id="pH_2" name="pH_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="pH_2" style = "width: 5%;">(pH值)</label>
+						
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> pH_3 </div>
+						<input id="pH_3" name="pH_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="pH_3" style = "width: 5%;">(pH值)</label>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> ORP_1 </div>
+						<input id="ORP_1" name="ORP_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="ORP_1" style = "width: 5%;">(mV)</label>
+						
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> ORP_2 </div>
+						<input id="ORP_2" name="ORP_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="ORP_2" style = "width: 5%;">(mV)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> ORP_3 </div>
+						<input id="ORP_3" name="ORP_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="ORP_3" style = "width: 5%;">(mV)</label>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> 水溫_1 </div>
+						<input id="Temp_1" name="Temp_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Temp_1" style = "width: 5%;">(℃)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> 水溫_2 </div>
+						<input id="Temp_2" name="Temp_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Temp_2" style = "width: 5%;">(℃)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> 水溫_3 </div>
+						<input id="Temp_3" name="Temp_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Temp_3" style = "width: 5%;">(℃)</label>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> 鹽度_1 </div>
+						<input id="Salinity_1" name="Salinity_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Salinity_1" style = "width: 5%;">(‰)</label>
+						
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> 鹽度_2 </div>
+						<input id="Salinity_2" name="Salinity_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Salinity_2" style = "width: 5%;">(‰)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> 鹽度_3 </div>
+						<input id="Salinity_3" name="Salinity_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Salinity_3" style = "width: 5%;">(‰)</label>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> 鹼度 </div>
+						<input id="Alkalinity" name="Alkalinity" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+						<label class="input-group-text" for="Alkalinity" style = "width: 5%;">(ppm)</label>
+
+						<div style = "width: 2%"> </div>
+						
+						<div style = "width: 5%"> Marine </div>
+						<input id="Marine" name="Marine" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+						<label class="input-group-text" for="Marine" style = "width: 6%;">(CFU/ml)</label>
+
+						<div style = "width: 2%"> </div>
+						<div style = "width: 5%"> TCBS </div>
+						<input id="TCBS" name="TCBS" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+						<label class="input-group-text" for="TCBS" style = "width: 6%;">(CFU/ml)</label>
+					</div>
+						
+					<div class="form-inline" style = "width: 100% ; height: 75px">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> TCBS綠菌 </div>
+						<input id="TCBS綠菌" name="TCBS綠菌" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+						<label class="input-group-text" for="TCBS綠菌" style = "width: 6%;">(CFU/ml)</label>
+
+						<div style = "width: 2%"> </div>
+						
+						<div style = "width: 5%"> 螢光菌Marine </div>
+						<input id="螢光菌Marine" name="螢光菌Marine" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+						<label class="input-group-text" for="螢光菌Marine" style = "width: 6%;">(CFU/ml)</label>
+
+						<div style = "width: 2%"> </div>
+
+						<div style = "width: 5%"> 螢光菌TCBS </div>
+						<input id="螢光菌TCBS" name="螢光菌TCBS" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+						<label class="input-group-text" for="螢光菌TCBS" style = "width: 6%;">(CFU/ml)</label>
+
+					</div>
+
+					<div class="form-inline" style = "width: 100%">
+						<div style = "width: 1%"> </div>
+						<div style = "width: 5%"> 備註 </div>
+						<div style = "width: 40%">
+							<textarea id="Note" name="Note" cols="40" rows="5" class="form-control" disabled="disabled"></textarea>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 10px">
+						<div style = "height: 2%"> </div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 1%"> </div>
+						<button type="button" class="btn btn-primary" onclick="back()">返回查詢</button>
+						<div id="backmsg"></div>
+					</div>
+				</form>
+			</section>
+        </div>
+        <div class="small_form">
+            <section>
+				<form id="small_form" method="post" enctype="multipart/form-data">
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> Index </div>
+						<div style = "width: 40%">
+							<input id="id" name="id" class="form-control" readonly>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> TankID </div>
+						<div style = "width: 40%">
+							<select id="location" name="location" class="custom-select" disabled="disabled">
+								<option value=""></option>
+								<option value="M1">M1</option>
+								<option value="M2">M2</option>
+								<option value="M3">M3</option>
+								<option value="M4">M4</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 日期 </div>
+						<div style = "width: 40%">
+							<div style = "height: 13px ;"> </div>
 							<div class="input-group">
-								<input id="text" name="id"  value="'.$_GET['id'].'" class="form-control" readonly>
+								<div style="border-width:1px ; border-right-style:solid" class = "type_name">  </div>
+								<input width = "55px" id="date" name="date" type="date" value="<?php echo date("Y-m-d"); ?>" disabled="disabled">
 							</div>
 						</div>
 					</div>
-				<div class="form-group row">
-					<label for="text1" class="col-6 col-form-label">日期</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<div class="input-group-prepend">
-						<div class="input-group-text">
-							<i class="fa fa-calendar-o"></i>
-						</div>
-						</div> 
-						<input id="text1" name="date" value="'.$_GET['date'].'" type="text" class="form-control" readonly>
-					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text" class="col-6 col-form-label">位置</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text" name="location" value="'.$_GET['location'].'" type="text" class="form-control" readonly> 
-					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text2" class="col-6 col-form-label">NH4-H</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text2" name="nh4" value="'.$_GET['nh4'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mg/l)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> NO2 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="no2" name="no2" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mg/l)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text3" class="col-6 col-form-label">NO2</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text3" name="no2" value="'.$_GET['no2'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mg/l)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> NO3 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="no3" name="no3" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mg/l)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text4" class="col-6 col-form-label">NO3</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text4" name="no3"  value="'.$_GET['no3'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mg/l)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> pH_1 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="pH_1" name="pH_1" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(pH值)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text5" class="col-6 col-form-label">Salinity_1</label> 
-					<div class="col-6">
-					<input id="text5" name="Salinity_1" value="'.$_GET['Salinity_1'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text6" class="col-6 col-form-label">Salinity_2</label> 
-					<div class="col-6">
-					<input id="text6" name="Salinity_2" value="'.$_GET['Salinity_2'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text7" class="col-6 col-form-label">Salinity_3</label> 
-					<div class="col-6">
-					<input id="text7" name="Salinity_3" value="'.$_GET['Salinity_3'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text8" class="col-6 col-form-label">pH_1</label> 
-					<div class="col-6">
-					<input id="text8" name="pH_1" value="'.$_GET['pH_1'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text9" class="col-6 col-form-label">pH_2</label> 
-					<div class="col-6">
-					<input id="text9" name="pH_2" value="'.$_GET['pH_2'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text10" class="col-6 col-form-label">pH_3</label> 
-					<div class="col-6">
-					<input id="text10" name="pH_3" value="'.$_GET['pH_3'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text11" class="col-6 col-form-label">O2_1</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text11" name="O2_1" value="'.$_GET['O2_1'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mg/l)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> pH_2 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="pH_2" name="pH_2" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(pH值)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text12" class="col-6 col-form-label">O2_2</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text12" name="O2_2" value="'.$_GET['O2_2'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mg/l)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> pH_3 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="pH_3" name="pH_3" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(pH值)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text13" class="col-6 col-form-label">O2_3</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text13" name="O2_3" value="'.$_GET['O2_3'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mg/l)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> O2_1 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="O2_1" name="O2_1" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mg/l)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text14" class="col-6 col-form-label">ORP_1</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text14" name="ORP_1" value="'.$_GET['ORP_1'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mV)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> O2_2 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="O2_2" name="O2_2" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mg/l)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text15" class="col-6 col-form-label">ORP_2</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text15" name="ORP_2" value="'.$_GET['ORP_2'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mV)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> O2_3 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="O2_3" name="O2_3" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mg/l)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text16" class="col-6 col-form-label">ORP_3</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text16" name="ORP_3" value="'.$_GET['ORP_3'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(mV)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> NH4-N </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="nh4" name="nh4" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mg/l)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text17" class="col-6 col-form-label">W Temp_1</label> 
-					<div class="col-6">
-					<input id="text17" name="Temp_1" value="'.$_GET['Temp_1'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text18" class="col-6 col-form-label">W Temp_2</label> 
-					<div class="col-6">
-					<input id="text18" name="Temp_2" value="'.$_GET['Temp_2'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text19" class="col-6 col-form-label">W Temp_3</label> 
-					<div class="col-6">
-					<input id="text19" name="Temp_3" value="'.$_GET['Temp_3'].'" type="text" class="form-control" readonly>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text20" class="col-6 col-form-label">Alkalinity</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text20" name="Alkalinity" value="'.$_GET['Alkalinity'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(ppm)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> ORP_1 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="ORP_1" name="ORP_1" type="text" class="form-control" disabled="disabled">
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mV)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text21" class="col-6 col-form-label">TCBS</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text21" name="TCBS" value="'.$_GET['TCBS'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(CFU/ml)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> ORP_2 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="ORP_2" name="ORP_2" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mV)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text22" class="col-6 col-form-label">TCBS 綠菌</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text22" name="綠菌" value="'.$_GET['綠菌'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(CFU/ml)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> ORP_3 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="ORP_3" name="ORP_3" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(mV)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text23" class="col-6 col-form-label">Marine</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text23" name="Marine" value="'.$_GET['Marine'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(CFU/ml)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 水溫_1 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Temp_1" name="Temp_1" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(℃)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text24" class="col-6 col-form-label">螢光菌TCBS</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text24" name="螢光菌TCBS" value="'.$_GET['螢光菌TCBS'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(CFU/ml)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 水溫_2 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Temp_2" name="Temp_2" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(℃)</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					</div>
-				</div>
-				<div class="form-group row">
-					<label for="text25" class="col-6 col-form-label">螢光菌Marine</label> 
-					<div class="col-6">
-					<div class="input-group">
-						<input id="text25" name="螢光菌Marine" value="'.$_GET['螢光菌Marine'].'" type="text" class="form-control" readonly> 
-						<div class="input-group-append">
-						<div class="input-group-text">(CFU/ml)</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 水溫_3 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Temp_3" name="Temp_3" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(℃)</div>
+								</div>
+							</div>
 						</div>
 					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 鹽度_1 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Salinity_1" name="Salinity_1" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(‰)</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="form-group row">
-					<label for="textarea1" class="col-6 col-form-label">備註</label> 
-					<div class="col-6">
-					<textarea id="textarea1" name="Note"  cols="40" rows="5" class="form-control" readonly>'.$_GET['Note'].'</textarea>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 鹽度_2 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Salinity_2" name="Salinity_2" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(‰)</div>
+								</div>
+							</div>
+						</div>
 					</div>
-				</div> ';
-			?>
-		</form>
-	</section>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 鹽度_3 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Salinity_3" name="Salinity_3" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(‰)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 鹼度 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Alkalinity" name="Alkalinity" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(ppm)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> TCBS </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="TCBS" name="TCBS" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(CFU/ml)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> Marine </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="Marine" name="Marine" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(CFU/ml)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> TCBS綠菌 </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="TCBS綠菌" name="TCBS綠菌" type="text" class="form-control" disabled="disabled">  
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(CFU/ml)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 螢光菌TCBS </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="螢光菌TCBS" name="螢光菌TCBS" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(CFU/ml)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 55px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 螢光菌Marine </div>
+						<div style = "width: 40%">
+							<div class="input-group">
+								<input id="螢光菌Marine" name="螢光菌Marine" type="text" class="form-control" disabled="disabled"> 
+								<div class="input-group-append" style = "width: 20%;">
+									<div class="input-group-text">(CFU/ml)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 80px">
+						<div style = "width: 5%"> </div>
+						<div style = "width: 30%"> 備註 </div>
+						<div style = "width: 40%">
+							<textarea id="Note" name="Note" cols="30" rows="5" class="form-control" disabled="disabled"></textarea>
+						</div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 10px">
+						<div style = "height: 2%"> </div>
+					</div>
+
+					<div class="form-inline" style = "width: 100% ; height: 50px">
+						<div style = "width: 5%"> </div>
+						<button type="button" class="btn btn-primary" onclick="back()">返回查詢</button>
+						<div id="backmsg"></div>
+					</div>
+				</form>
+            </section>
+        </div>
+    </div>
+
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
+    <script> document.write('<script type="text/javascript" src="water_check.js"></'+'script>'); </script>
+
+	<script>
+		window.onload = function() {
+			//頁面載入後將資料放到form上面
+			var urlParams = new URLSearchParams(window.location.search);
+			modify_put_into_form(urlParams , "big_form" , 0);
+			modify_put_into_form(urlParams , "small_form" , 0);
+        }
+
+        function back() {
+            window.location.href='find_水質';
+        }
+    </script>
 
 	<!--Footer-->
     <?php require_once "footer.html" ?>

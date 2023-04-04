@@ -388,3 +388,84 @@ function html_show_all_data (formData) {
 
     return new_html ;
 }
+
+function modify_put_into_form (data , form_id , is_modify) {
+    //show data on 詳細資料_餵食
+    document.getElementById(form_id).elements["select_type"].value = data.get("shrimp") ;
+    document.getElementById(form_id).elements["id"].value = data.get("id") ;
+    document.getElementById(form_id).elements["date"].value = data.get("Date") ;
+    document.getElementById(form_id).elements["location"].value = data.get('Tank') ;
+    document.getElementById(form_id).elements["select_time"].value = data.get('time') ;
+    document.getElementById(form_id).elements["select_work"].value = data.get("work") ;
+    document.getElementById(form_id).elements["else_work"].value = data.get("else_work") ;
+    document.getElementById(form_id).elements["male_shrimp"].value = data.get("No_Shrimp_Male") ;
+    document.getElementById(form_id).elements["female_shrimp"].value = data.get("No_Shrimp_Female") ;
+    document.getElementById(form_id).elements["dead_male_shrimp"].value = data.get("No_Dead_Male") ;
+    document.getElementById(form_id).elements["dead_female_shrimp"].value = data.get("No_Dead_Female") ;
+    document.getElementById(form_id).elements["peeling_male_shrimp"].value = data.get("No_Moults_Male") ;
+    document.getElementById(form_id).elements["peeling_female_shrimp"].value = data.get("No_Moults_Female") ;
+    document.getElementById(form_id).elements["avg_male_shrimp"].value = data.get("Avg_Weight_Male") ;
+    document.getElementById(form_id).elements["avg_female_shrimp"].value = data.get("Avg_Weight_Female") ;
+    document.getElementById(form_id).elements["total_weight"].value = data.get("Total_Weight") ;
+    document.getElementById(form_id).elements["food_weight"].value = data.get("food_weight") ;
+    document.getElementById(form_id).elements["food_remain"].value = data.get("food_remain") ;
+    document.getElementById(form_id).elements["eating"].value = data.get("eating") ;
+    document.getElementById(form_id).elements["FeedingRatio"].value = data.get("Feeding_Ratio") ;
+    document.getElementById(form_id).elements["Observation"].value = data.get("Observation") ;
+}
+
+function modify_post(formData) {
+    $.ajax({
+        url: 'Update_餵食.php',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        //下面兩者一定要false
+        processData: false,
+        contentType: false,
+
+        success: function(backData) {
+            console.log();
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+                    window.location.href = 'find_餵食';
+                    $("#backmsg").html(backData);
+                }
+            });
+        },
+        error: function() {
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("上傳失敗...");
+            });
+        },
+    });
+}
+
+function modify_data_transfer(from_data , form_id) {
+    document.getElementById(form_id).elements["location"].value = from_data.get("location") ;
+    document.getElementById(form_id).elements["date"].value = from_data.get("date") ;
+    document.getElementById(form_id).elements["select_type"].value = from_data.get("tank_type") ;
+    document.getElementById(form_id).elements["select_time"].value = from_data.get("time") ;
+    document.getElementById(form_id).elements["select_work"].value = from_data.get("work") ;
+    document.getElementById(form_id).elements["else_work"].value = from_data.get("else_work") ;
+    document.getElementById(form_id).elements["male_shrimp"].value = from_data.get("male_shrimp") ;
+    document.getElementById(form_id).elements["female_shrimp"].value = from_data.get("female_shrimp") ;
+    document.getElementById(form_id).elements["dead_male_shrimp"].value = from_data.get("dead_male_shrimp") ;
+    document.getElementById(form_id).elements["dead_female_shrimp"].value = from_data.get("dead_female_shrimp") ;
+    document.getElementById(form_id).elements["peeling_male_shrimp"].value = from_data.get("peeling_male_shrimp") ;
+    document.getElementById(form_id).elements["peeling_female_shrimp"].value = from_data.get("peeling_female_shrimp") ;
+    document.getElementById(form_id).elements["avg_male_shrimp"].value = from_data.get("avg_male_shrimp") ;
+    document.getElementById(form_id).elements["avg_female_shrimp"].value = from_data.get("avg_female_shrimp") ;
+    document.getElementById(form_id).elements["total_weight"].value = from_data.get("total_weight") ;
+    document.getElementById(form_id).elements["food_weight"].value = from_data.get("food_weight") ;
+    document.getElementById(form_id).elements["food_remain"].value = from_data.get("food_remain") ;
+    document.getElementById(form_id).elements["FeedingRatio"].value = from_data.get("FeedingRatio") ;
+    document.getElementById(form_id).elements["Observation"].value = from_data.get("Observation") ;
+    document.getElementById(form_id).elements["eating"].value = from_data.get("eating") ;
+}

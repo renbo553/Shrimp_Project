@@ -167,6 +167,64 @@ function post (formData) {
     });
 }
 
+function modify_put_into_form(data , form_id , is_modify) {
+    document.getElementById(form_id).elements["id"].value = data.get("id") ;
+    document.getElementById(form_id).elements["family"].value = data.get("family") ;
+    document.getElementById(form_id).elements["male_family"].value = data.get('male_family') ;
+    document.getElementById(form_id).elements["eye"].value = data.get('eye') ;
+    document.getElementById(form_id).elements["cutday"].value = data.get("cutday") ;
+    document.getElementById(form_id).elements["cutweight"].value = data.get("cutweight") ;
+    document.getElementById(form_id).elements["spawningroomdate"].value = data.get("spawningroomdate") ;
+    document.getElementById(form_id).elements["spawningweight"].value = data.get("spawningweight") ;
+    document.getElementById(form_id).elements["ovarystate"].value = data.get("ovarystate") ;
+    document.getElementById(form_id).elements["mating"].value = data.get("breed_type") ;
+}
+
+function modify_data_transfer(from_data , form_id) {
+    document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
+    document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
+    document.getElementById(form_id).elements["male_family"].value = from_data.get("male_family") ;
+    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
+    document.getElementById(form_id).elements["spawningweight"].value = from_data.get("spawningweight") ;
+    document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
+    document.getElementById(form_id).elements["spawningroomdate"].value = from_data.get("spawningroomdate") ;
+    document.getElementById(form_id).elements["ovarystate"].value = from_data.get("ovarystate") ;
+    document.getElementById(form_id).elements["mating"].value = from_data.get("mating") ;
+}
+
+function modify_post (formData) {
+    $.ajax({
+        url: 'Update_生產.php',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        //下面兩者一定要false
+        processData: false,
+        contentType: false,
+
+        success: function(backData) {
+            console.log();
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+                    window.location.href = 'find_生產';
+                    $("#backmsg").html(backData);
+                }
+            });
+        },
+        error: function() {
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("上傳失敗...");
+            });
+        },
+    });
+}
+
 function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
     document.getElementById(form_id).elements["family"].value = from_data.get("family") ;

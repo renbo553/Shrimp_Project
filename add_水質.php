@@ -66,6 +66,18 @@ if (!isset($_SESSION)) {
 			<section>
 				<form id="big_form" method="post" enctype="multipart/form-data">
                     <?php require "big_water_table.html"?>
+
+                    <div class="form-inline" style = "width: 100%">
+                        <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="add_before_big()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="upload_big()">上傳</button>
+                        <div id="backmsg"></div>
+                    </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 10px">
+                        <div style = "height: 1px"> </div>
+                    </div>
 				</form>
 			</section>
         </p></div>
@@ -74,6 +86,18 @@ if (!isset($_SESSION)) {
 			<section>
 				<form id="small_form" method="post" enctype="multipart/form-data">
                     <?php require "small_water_table.html"?>
+
+                    <div class="form-inline" style = "width: 100%">
+                        <div style = "width: 5%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="add_before_small()">取得昨天資料</button>
+                        <div style = "width: 1%"> </div>
+                        <button type="button" class="btn btn-primary" onclick="upload_small()">上傳</button>
+                        <div id="backmsg"></div>
+                    </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 10px">
+                        <div style = "height: 1px"> </div>
+                    </div>
 				</form>
 			</section>
         </p></div>
@@ -125,10 +149,7 @@ if (!isset($_SESSION)) {
             data_transfer(big_Data , "small_form") ;
             return ;
         }
-
-
         
-
         function all_data_msg(msg , formData) {
             // 為上傳時最後確認的訊息
             Swal.fire({

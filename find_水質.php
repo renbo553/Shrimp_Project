@@ -49,7 +49,6 @@ if (!isset($_SESSION)) {
         position: relative;
         left: 50%;
         transform: translate(-50%, 0%);
-
         width: auto;
         background: gray;
         border: solid 1px #333;
@@ -176,14 +175,26 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100% ; height: 65px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
-                            <div> 日期 </div>
+                            <div> 起始日期 </div>
                             <div class="input-group">
                                 <?php 
-                                    utility_date("date", "日期");
+                                    utility_date("start_date", "起始日期");
                                 ?>
                             </div>
                         </div>
                         <div style = "width: 2%"> </div>
+                        <div style = "width: 48%">
+                            <div> 結束日期 </div>
+                            <div class="input-group">
+                                <?php 
+                                    utility_date("end_date", "結束日期");
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 65px">
+                        <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
                             <div> TankID </div>
                             <div class="input-group">
@@ -250,6 +261,7 @@ if (!isset($_SESSION)) {
 
                 /* store query into session */
                 utility_session_insert(CACHE_QUERY, $sql);
+                utility_session_insert("chart_option", null);
                 
                 $mysqli->close();
             }
@@ -263,17 +275,35 @@ if (!isset($_SESSION)) {
 
             function search_waterquality_process($mysqli) : void{
                 /* fetch post input data */
-                $date = $_POST["date"];
+                //$date = $_POST["date"];
+                $start_date = $_POST["start_date"];
+                $end_date = $_POST["end_date"];
                 $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
                 $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
                 $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+                $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
 
                 /* concatenate sql where clause or set default value if not specified */
+                /*
                 if(empty($date)){
                     $date = "true";
                 }
                 else{
                     $date = "Date = " . "'{$date}'";
+                }*/
+                if(empty($start_date)){
+                    $start_date = "true";
+                }
+                else{
+                    $start_date = str_replace('-', '', $start_date);
+                    $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
+                }
+                if(empty($end_date)){
+                    $end_date = "true";
+                }
+                else{
+                    $end_date = str_replace('-', '', $end_date);
+                    $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
                 }
                 if(is_null($tank)){
                     $tank = "true";
@@ -289,7 +319,8 @@ if (!isset($_SESSION)) {
                 }
                 
                 /* search data from database */
-                $sql = "SELECT * FROM waterquality WHERE {$date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
+                //$sql = "SELECT * FROM waterquality WHERE {$date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
+                $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
                 $result = $mysqli->query($sql);
 
                 /* show result */
@@ -297,6 +328,7 @@ if (!isset($_SESSION)) {
 
                 /* store query into session */
                 utility_session_insert(CACHE_QUERY, $sql);
+                utility_session_insert("chart_option", $chart_option);
                 
                 $mysqli->close();
             }
@@ -325,11 +357,135 @@ if (!isset($_SESSION)) {
                 while($row = $result->fetch_assoc()){
                     if(strlen($row["image"]) > 0){
                         printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["TankID"], $row["image"]);
-                        echo '<td><a href="view_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='.$row["Note"]. '&image='.$row["image"] .'">詳細</a></td><td><a href="modify_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='. $row["Note"] . '&image='. $row["image"] .'">修改</a></td><td><a href="delete?id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
+                        echo '<td><a href="view_水質?
+                        &id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '&image='.$row["image"] .
+                        '">詳細</a></td>
+                        <td><a href="modify_水質?
+                        &id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '&image='.$row["image"] .
+                        '">修改</a></td>
+                        <td><a href="delete?
+                        id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
                     }
                     else{
                         printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td></td>", $row["id"], $row["Date"], $row["TankID"], $row["image"]);
-                        echo '<td><a href="view_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='.$row["Note"]. '&image='. $row["image"] .'">詳細</a></td><td><a href="modify_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='.$row["Note"]. '&image='. $row["image"] .'">修改</a></td><td><a href="delete?id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
+                        echo '<td><a href="view_水質?
+                        &id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '">詳細</a></td>
+                        <td><a href="modify_水質?
+                        &id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '&image='. $row["image"] .
+                        '">修改</a></td>
+                        <td><a href="delete?id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
                     }
                 }
                 echo "</tbody></table>";

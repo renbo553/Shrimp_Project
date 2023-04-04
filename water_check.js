@@ -820,3 +820,79 @@ function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["螢光菌Marine"].value = from_data.get("螢光菌Marine") ;
     document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
 }
+
+function modify_post(formData) {
+    $.ajax({
+        url: 'Update_水質.php',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        //下面兩者一定要false
+        processData: false,
+        contentType: false,
+
+        success: function(backData) {
+            console.log();
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+                    window.location.href = 'find_水質';
+                    $("#backmsg").html(backData);
+                }
+            });
+        },
+        error: function() {
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("上傳失敗...");
+            });
+        },
+    });
+}
+
+function modify_put_into_form (from_data , form_id , is_modify) {
+    //show data on 詳細資料_水質
+    document.getElementById(form_id).elements["id"].value = from_data.get("id") ;
+    // if(is_modify == 1 && from_data.get('image') != null) {
+    //     console.log(from_data.get('image')) ;
+    //     if(form_id == "big_form") {
+    //         var big = document.getElementById("big_form").elements["show_image_big"] ;
+    //         big.src = from_data.get('image');
+    //     }
+    //     else {
+    //         var small = document.getElementById("small_form").elements["show_image_small"] ;
+    //         small.src = from_data.get('image');
+    //     }
+    // }
+    document.getElementById(form_id).elements["location"].value = from_data.get("Tank") ;
+    document.getElementById(form_id).elements["date"].value = from_data.get('Date') ;
+    document.getElementById(form_id).elements["nh4"].value = from_data.get('nh4') ;
+    document.getElementById(form_id).elements["no2"].value = from_data.get('no2') ;
+    document.getElementById(form_id).elements["no3"].value = from_data.get("no3") ;
+    document.getElementById(form_id).elements["Salinity_1"].value = from_data.get("Salinity_1") ;
+    document.getElementById(form_id).elements["Salinity_2"].value = from_data.get("Salinity_2") ;
+    document.getElementById(form_id).elements["Salinity_3"].value = from_data.get("Salinity_3") ;
+    document.getElementById(form_id).elements["pH_1"].value = from_data.get("pH_1") ;
+    document.getElementById(form_id).elements["pH_2"].value = from_data.get("pH_2") ;
+    document.getElementById(form_id).elements["pH_3"].value = from_data.get("pH_3") ;
+    document.getElementById(form_id).elements["O2_1"].value = from_data.get("O2_1") ;
+    document.getElementById(form_id).elements["O2_2"].value = from_data.get("O2_2") ;
+    document.getElementById(form_id).elements["O2_3"].value = from_data.get("O2_3") ;
+    document.getElementById(form_id).elements["ORP_1"].value = from_data.get("ORP_1") ;
+    document.getElementById(form_id).elements["ORP_2"].value = from_data.get("ORP_2") ;
+    document.getElementById(form_id).elements["ORP_3"].value = from_data.get("ORP_3") ;
+    document.getElementById(form_id).elements["Temp_1"].value = from_data.get("Temp_1") ;
+    document.getElementById(form_id).elements["Temp_2"].value = from_data.get("Temp_2") ;
+    document.getElementById(form_id).elements["Temp_3"].value = from_data.get("Temp_3") ;
+    document.getElementById(form_id).elements["Alkalinity"].value = from_data.get("Alkalinity") ;
+    document.getElementById(form_id).elements["TCBS"].value = from_data.get("TCBS") ;
+    document.getElementById(form_id).elements["TCBS綠菌"].value = from_data.get("TCBS綠菌") ;
+    document.getElementById(form_id).elements["Marine"].value = from_data.get("Marine") ;
+    document.getElementById(form_id).elements["螢光菌TCBS"].value = from_data.get("螢光菌TCBS") ;
+    document.getElementById(form_id).elements["螢光菌Marine"].value = from_data.get("螢光菌Marine") ;
+    document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
+}
