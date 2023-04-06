@@ -357,8 +357,7 @@ if (!isset($_SESSION)) {
                 while($row = $result->fetch_assoc()){
                     if(strlen($row["image"]) > 0){
                         printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["TankID"], $row["image"]);
-                        echo '<td><a href="view_水質?
-                        &id='.$row['id'].
+                        echo '<td><a href="view_水質?id='.$row['id'].
                         '&Date='.$row["Date"].
                         '&Tank='.$row["TankID"].
                         '&nh4='.$row["NH4_N"].
@@ -388,8 +387,7 @@ if (!isset($_SESSION)) {
                         '&Note='.$row["Note"]. 
                         '&image='.$row["image"] .
                         '">詳細</a></td>
-                        <td><a href="modify_水質?
-                        &id='.$row['id'].
+                        <td><a href="modify_水質?id='.$row['id'].
                         '&Date='.$row["Date"].
                         '&Tank='.$row["TankID"].
                         '&nh4='.$row["NH4_N"].
@@ -424,8 +422,7 @@ if (!isset($_SESSION)) {
                     }
                     else{
                         printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td></td>", $row["id"], $row["Date"], $row["TankID"], $row["image"]);
-                        echo '<td><a href="view_水質?
-                        &id='.$row['id'].
+                        echo '<td><a href="view_水質?id='.$row['id'].
                         '&Date='.$row["Date"].
                         '&Tank='.$row["TankID"].
                         '&nh4='.$row["NH4_N"].
@@ -454,8 +451,7 @@ if (!isset($_SESSION)) {
                         '&螢光菌Marine='.$row["螢光菌Marine"].
                         '&Note='.$row["Note"]. 
                         '">詳細</a></td>
-                        <td><a href="modify_水質?
-                        &id='.$row['id'].
+                        <td><a href="modify_水質?id='.$row['id'].
                         '&Date='.$row["Date"].
                         '&Tank='.$row["TankID"].
                         '&nh4='.$row["NH4_N"].

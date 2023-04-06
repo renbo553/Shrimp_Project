@@ -639,7 +639,6 @@ if (!isset($_SESSION)) {
         </div>
     </div>
 
-	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
     <script> document.write('<script type="text/javascript" src="water_check.js"></'+'script>'); </script>
 
 	<script>

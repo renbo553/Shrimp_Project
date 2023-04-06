@@ -20,8 +20,10 @@ $target_dir = "images/";
 $id = filter_input(INPUT_POST, 'id');
 $eyetag = filter_input(INPUT_POST, 'eye');
 $family = filter_input(INPUT_POST, 'family');
+$male_family = filter_input(INPUT_POST, 'male_family');
 $cutday = filter_input(INPUT_POST, 'cutday');
 $cutweight = filter_input(INPUT_POST, 'cutweight');
+$mating = filter_input(INPUT_POST, 'mating');
 $spawningroomdate = filter_input(INPUT_POST, 'spawningroomdate');
 $spawningweight = filter_input(INPUT_POST, 'spawningweight');
 $ovarystate = filter_input(INPUT_POST, 'ovarystate');
@@ -99,7 +101,7 @@ if ($fileSize == 0) {
         /* 定義 SQL 字串的變數 */
         /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
         /* 所以，可以直接設定它是 null */
-        $insertStr = "UPDATE breed SET 眼標 ='{$eyetag}',  家族='{$family}',   剪眼日期='{$cleancutday}',  剪眼體重 ='{$cutweight}',  進產卵室待產日期 ='{$cleanspawningroomdate}',  卵巢進展階段='{$spawningweight}',  卵巢進展階段='{$ovarystate}', image = '{$target_file}' WHERE id = $id";
+        $insertStr = "UPDATE breed SET 眼標 ='{$eyetag}',  家族='{$family}',   剪眼日期='{$cleancutday}',  剪眼體重 ='{$cutweight}',  進產卵室待產日期 ='{$cleanspawningroomdate}',  卵巢進展階段='{$spawningweight}',  卵巢進展階段='{$ovarystate}', 公蝦家族='{$male_family}', 交配方式='{$mating}', image = '{$target_file}' WHERE id = $id";
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

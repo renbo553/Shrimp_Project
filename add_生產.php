@@ -87,7 +87,6 @@ if (!isset($_SESSION)) {
 	<?php require_once "other_script.html" ?>
     <!--//Other Script-->
 
-	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.10.2/jquery-1.10.2.min.js"></script>
     <script> document.write('<script type="text/javascript" src="breed_check.js"></'+'script>'); </script>
 
 	<script>
@@ -140,9 +139,8 @@ if (!isset($_SESSION)) {
 					}
 				})
 		}
-		
-
-		// big ---------------------------------------------------------------
+            
+        // big ---------------------------------------------------------------
         function upload_big() {
             // 此處是 javascript 寫法
             // var myForm = document.getElementById('myFile');
@@ -150,7 +148,6 @@ if (!isset($_SESSION)) {
             var myForm = $("#big_form")[0];
             var formData = new FormData(myForm);
 
-			//確認是否填完
             var ret_message = check(formData) ;
             if(ret_message == "") all_data_msg(html_show_all_data(formData) , formData) ;
             else Alert(ret_message) ;
@@ -163,23 +160,32 @@ if (!isset($_SESSION)) {
                 // 當檔案讀取完後，所要進行的動作
                 reader.onload = function(e) {
                     // 顯示圖片
-                    $('#show_image_big').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+                    $('#show_image_big').attr("src", e.target.result).css("height", big_picture_height).css("width", big_picture_width);
                     // // 將 DataURL 放到表單中
                     // $("input[name='imagestring']").val(e.target.result);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
+            else {
+                document.getElementById("show_image_big").src = "";
+                document.getElementById("show_image_small").src = "";
+                document.getElementById("show_image_big").style.height = "0px";
+                document.getElementById("show_image_big").style.width = "0px";
+                document.getElementById("show_image_small").style.height = "0px";
+                document.getElementById("show_image_small").style.width = "0px";
+            }
         }
         $(document).ready(function() {
             // 綁定事件
             $("#uploadimage_big").change(function() {
+                //將新載入的image送給另一個form讀取
+                var from_image_filelist = this.files ;
+                document.getElementById("uploadimage_small").files = from_image_filelist ;
                 imageProc_small(this);
                 imageProc_big(this);
             });
         });
         //---------------------------------------------------------------------------
-
-
 
         // small ---------------------------------------------------------------
         function upload_small() {
@@ -189,7 +195,6 @@ if (!isset($_SESSION)) {
             var myForm = $("#small_form")[0];
             var formData = new FormData(myForm);
 
-			//確認是否填完
             var ret_message = check(formData) ;
             if(ret_message == "") all_data_msg(html_show_all_data(formData) , formData) ;
             else Alert(ret_message) ;
@@ -202,16 +207,27 @@ if (!isset($_SESSION)) {
                 // 當檔案讀取完後，所要進行的動作
                 reader.onload = function(e) {
                     // 顯示圖片
-                    $('#show_image_small').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+                    $('#show_image_small').attr("src", e.target.result).css("height", small_picture_height).css("width", small_picture_width);
                     // // 將 DataURL 放到表單中
                     // $("input[name='imagestring']").val(e.target.result);
                 };
                 reader.readAsDataURL(input.files[0]);
             }
+            else {
+                document.getElementById("show_image_big").src = "";
+                document.getElementById("show_image_small").src = "";
+                document.getElementById("show_image_big").style.height = "0px";
+                document.getElementById("show_image_big").style.width = "0px";
+                document.getElementById("show_image_small").style.height = "0px";
+                document.getElementById("show_image_small").style.width = "0px";
+            }
         }
         $(document).ready(function() {
             // 綁定事件
             $("#uploadimage_small").change(function() {
+                //將新載入的image送給另一個form讀取
+                var from_image_filelist = this.files ;
+                document.getElementById("uploadimage_big").files = from_image_filelist ;
                 imageProc_big(this);
                 imageProc_small(this);
             });

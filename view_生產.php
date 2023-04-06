@@ -194,13 +194,11 @@ if (!isset($_SESSION)) {
                         <div style = "width: 3%"> </div>
                         <div style = "width: 17%"> 交配方式 </div>
                         <div style = "width: 30%">
-                            <div class="input-group">
-                                <select id="mating" name="mating" class="custom-select" disabled="disabled">
-                                    <option value=""></option>
-                                    <option value="自然交配">自然交配</option>
-                                    <option value="人工授精">人工授精</option>
-                                </select>
-                            </div>
+                            <select id="mating" name="mating" class="custom-select" disabled="disabled">
+                                <option value=""></option>
+                                <option value="自然交配">自然交配</option>
+                                <option value="人工授精">人工授精</option>
+                            </select>
                         </div>
                     </div>
 
@@ -342,13 +340,11 @@ if (!isset($_SESSION)) {
                         <div style = "width: 5%"> </div>
                         <div style = "width: 30%"> 交配方式 </div>
                         <div style = "width: 60%">
-                            <div class="input-group">
-                                <select id="mating" name="mating" class="custom-select" disabled="disabled">
-                                    <option value=""></option>
-                                    <option value="自然交配">自然交配</option>
-                                    <option value="人工授精">人工授精</option>
-                                </select>
-                            </div>
+                            <select id="mating" name="mating" class="custom-select" disabled="disabled">
+                                <option value=""></option>
+                                <option value="自然交配">自然交配</option>
+                                <option value="人工授精">人工授精</option>
+                            </select>
                         </div>
                     </div>
 

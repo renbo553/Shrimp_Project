@@ -1,5 +1,6 @@
 function check (formData) {
     // 2/20 空值檢查--------------------------------------------
+    var TankID = formData.get('location')
     var date = formData.get('date') ;
     var nh4 = formData.get('nh4') ;
     var no2 = formData.get('no2') ;
@@ -27,6 +28,7 @@ function check (formData) {
     var 螢光菌Marine = formData.get('螢光菌Marine') ;
 
     const map = new Map()
+    map.set("tankid" , "TankID") ;
     map.set("date" , "日期") ;
     map.set("nh4" , "NH4-N") ;
     map.set("no2" , "NO2") ;
@@ -56,6 +58,10 @@ function check (formData) {
     // 計算有幾個沒填
     var count = 0 ;
     var show_message = "資訊尚未填寫完成，請填入:\n " ;
+    if(TankID == null || TankID == "") {
+        show_message += (map.get("tankid") + '、') ;
+        count ++ ;
+    }
     if(date == null || date == "") {
         show_message += (map.get("date") + '、') ;
         count ++ ;
@@ -398,6 +404,7 @@ function html_get (formData) {
 
 function html_show_all_data (formData) {
     // 3/17 show html在sweetalert2
+    var TankID = formData.get('location') ;
     var date = formData.get('date') ;
     var nh4 = formData.get('nh4') ;
     var no2 = formData.get('no2') ;
@@ -425,6 +432,7 @@ function html_show_all_data (formData) {
     var 螢光菌Marine = formData.get('螢光菌Marine') ;
 
     const map = new Map()
+    map.set("tankid" , "TankID") ;
     map.set("date" , "日期") ;
     map.set("nh4" , "NH4-N") ;
     map.set("no2" , "NO2") ;
@@ -454,7 +462,8 @@ function html_show_all_data (formData) {
     //用 array 先把超過範圍的資料存起來
     var all_data_name = [] ;
     var all_data_num = [] ;
-
+    
+    all_data_name.push(map.get("tankid")) ;
     all_data_name.push(map.get("date")) ;
     all_data_name.push(map.get("no2")) ;
     all_data_name.push(map.get("no3")) ;
@@ -481,6 +490,7 @@ function html_show_all_data (formData) {
     all_data_name.push(map.get("螢光菌TCBS")) ;
     all_data_name.push(map.get("螢光菌Marine")) ;
 
+    all_data_num.push(TankID)
     all_data_num.push(date) ;
     all_data_num.push(no2) ;
     all_data_num.push(no3) ;
@@ -854,20 +864,53 @@ function modify_post(formData) {
     });
 }
 
+//將資料庫的圖片載入至filereader中，才不會修改後圖片不見(因為update和upload都是看filereader中的內容)
+function FileListItems (files) {
+    var b = new ClipboardEvent("").clipboardData || new DataTransfer() ;
+    for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i]) ;
+    return b.files ;
+}
+
+//圖片load進去filereader中
+function place_picture(target_id , show_picture_id , picture_address) {
+    var reader = new FileReader();
+    // 當檔案讀取完後，所要進行的動作
+    reader.onload = function(e) {
+        // 顯示圖片
+        document.getElementById(show_picture_id).src = picture_address ;
+        if(target_id == "uploadimage_big") {
+            document.getElementById(show_picture_id).style.height = big_picture_height ;
+            document.getElementById(show_picture_id).style.width = big_picture_width ;
+        }
+        else {
+            document.getElementById(show_picture_id).style.height = small_picture_height ;
+            document.getElementById(show_picture_id).style.width = small_picture_width ;
+        }
+    };
+    //放入form裡面
+    reader.readAsDataURL(document.getElementById(target_id).files[0]);
+}
+
 function modify_put_into_form (from_data , form_id , is_modify) {
     //show data on 詳細資料_水質
+    if(is_modify == 1) {
+        if(from_data.get("image") != "") {
+            fetch(from_data.get("image"))
+                .then(response => response.blob())
+                .then(blob => {
+                    // 创建新的文件对象
+                    var files = [
+                        new File([blob], from_data.get("image") + ".jpg" , { type: 'image/jpeg' } )
+                    ];
+                    
+                    document.getElementById("uploadimage_big").files = new FileListItems(files) ;
+                    document.getElementById("uploadimage_small").files = new FileListItems(files) ;
+                    place_picture("uploadimage_big" , "show_image_big" , from_data.get("image")) ;
+                    place_picture("uploadimage_small" , "show_image_small" , from_data.get("image")) ;
+                });
+        }
+    }
     document.getElementById(form_id).elements["id"].value = from_data.get("id") ;
-    // if(is_modify == 1 && from_data.get('image') != null) {
-    //     console.log(from_data.get('image')) ;
-    //     if(form_id == "big_form") {
-    //         var big = document.getElementById("big_form").elements["show_image_big"] ;
-    //         big.src = from_data.get('image');
-    //     }
-    //     else {
-    //         var small = document.getElementById("small_form").elements["show_image_small"] ;
-    //         small.src = from_data.get('image');
-    //     }
-    // }
     document.getElementById(form_id).elements["location"].value = from_data.get("Tank") ;
     document.getElementById(form_id).elements["date"].value = from_data.get('Date') ;
     document.getElementById(form_id).elements["nh4"].value = from_data.get('nh4') ;

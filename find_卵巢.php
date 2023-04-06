@@ -74,10 +74,10 @@ if (!isset($_SESSION)) {
             </div>
             <div style = "width: 2%"> </div>
             <div style = "width: 48%">
-                <div> 日期 </div>
+                <div> 起始日期 </div>
                 <div class="input-group">
                     <?php
-                        utility_date("date", "日期");
+                        utility_date("start_date", "起始日期");
                     ?>
                 </div>
             </div>
@@ -107,6 +107,16 @@ if (!isset($_SESSION)) {
                     ?>
                 </div>
             </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 結束日期 </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("end_date", "結束日期");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
         </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">
@@ -172,7 +182,9 @@ if (!isset($_SESSION)) {
     function search_ovary_process($mysqli) : void{
         /* fetch post input data */
         $eyetag = trim($_POST["eyetag_text"]);
-        $date = $_POST["date"];
+        //$date = $_POST["date"];
+        $start_date = $_POST["start_date"];
+        $end_date = $_POST["end_date"];
         $stage = isset($_POST["stage_select"]) ? $_POST["stage_select"] : null;
         $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
         $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
@@ -184,12 +196,27 @@ if (!isset($_SESSION)) {
         else{
             $eyetag = "眼標 = " . "'{$eyetag}'";
         }
-        if(empty($date)){
+        /*if(empty($date)){
             $date = "true";
         }
         else{
             $date = "Date = " . "'{$date}'";
+        }*/
+        if(empty($start_date)){
+            $start_date = "true";
         }
+        else{
+            $start_date = str_replace('-', '', $start_date);
+            $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
+        }
+        if(empty($end_date)){
+            $end_date = "true";
+        }
+        else{
+            $end_date = str_replace('-', '', $end_date);
+            $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
+        }
+        
         if(is_null($stage)){
             $stage = "true";
         }
@@ -204,7 +231,8 @@ if (!isset($_SESSION)) {
         }
 
         /* search data from database */
-        $sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
+        //$sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
+        $sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$start_date} AND {$end_date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
         $result = $mysqli->query($sql);
 
         /* show search result */
@@ -233,7 +261,7 @@ if (!isset($_SESSION)) {
             <th>Index</th>
             <th>眼標</th>
             <th>日期</th>
-            <th>階段</th>
+            <th>卵巢階段</th>
             <th>紙本資料</th>
             </thead><tbody>";
         // echo "<br>顯示資料（MYSQLI_NUM，欄位數）：<br>";
@@ -241,12 +269,23 @@ if (!isset($_SESSION)) {
         while($row = $result->fetch_assoc()){
             if(strlen($row["image"]) > 0){
                 printf("<tr><td  style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["眼標"], $row["Date"], $row["Stage"], $row["image"]);
-                echo '<td><a href="modify_卵巢?id=' . $row['id'] . ' &eye=' . $row["眼標"] . ' &date=' . $row["Date"] . ' &ovarystate=' . $row["Stage"] . ' &image=' . $row["image"] .'">修改</a></td>
-                <td><a href="delete?id=' . $row['id'] . '&type=ovary" onclick="return confirm(\'確定要刪除ID : ' . $row['id'] . ' 嗎?\');">刪除</a></td>';
+                echo '<td><a href="modify_卵巢?&id='.$row['id']. 
+                '&eye='.$row["眼標"]. 
+                '&date='.$row["Date"]. 
+                '&ovarystate='.$row["Stage"]. 
+                '&image='.$row["image"].
+                '">修改</a></td>
+                <td><a href="delete?
+                &id='.$row['id']. '&type=ovary" onclick="return confirm(\'確定要刪除ID : ' . $row['id'] . ' 嗎?\');">刪除</a></td>';
             }
             else{
                 printf("<tr><td  style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td></td>", $row["id"], $row["眼標"], $row["Date"], $row["Stage"]);
-                echo '<td><a href="modify_卵巢?id=' . $row['id'] . ' &eye=' . $row["眼標"] . ' &date=' . $row["Date"] . ' &ovarystate=' . $row["Stage"] . ' &image=' . $row["image"] .'">修改</a></td>
+                echo '<td><a href="modify_卵巢?&id='.$row['id']. 
+                '&eye='.$row["眼標"]. 
+                '&date='.$row["Date"]. 
+                '&ovarystate='.$row["Stage"]. 
+                '&image='.$row["image"].
+                '">修改</a></td>
                 <td><a href="delete?id=' . $row['id'] . '&type=ovary" onclick="return confirm(\'確定要刪除ID : ' . $row['id'] . ' 嗎?\');">刪除</a></td>';
             }
         }

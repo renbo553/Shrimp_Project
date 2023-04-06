@@ -167,7 +167,63 @@ function post (formData) {
     });
 }
 
+function data_transfer(from_data , form_id) {
+    document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
+    document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
+    document.getElementById(form_id).elements["male_family"].value = from_data.get("male_family") ;
+    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
+    document.getElementById(form_id).elements["spawningweight"].value = from_data.get("spawningweight") ;
+    document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
+    document.getElementById(form_id).elements["spawningroomdate"].value = from_data.get("spawningroomdate") ;
+    document.getElementById(form_id).elements["ovarystate"].value = from_data.get("ovarystate") ;
+    document.getElementById(form_id).elements["mating"].value = from_data.get("mating") ;
+}
+
+//將資料庫的圖片載入至filereader中，才不會修改後圖片不見(因為update和upload都是看filereader中的內容)
+function FileListItems (files) {
+    var b = new ClipboardEvent("").clipboardData || new DataTransfer() ;
+    for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i]) ;
+    return b.files ;
+}
+
+//圖片load進去filereader中
+function place_picture(target_id , show_picture_id , picture_address) {
+    var reader = new FileReader();
+    // 當檔案讀取完後，所要進行的動作
+    reader.onload = function(e) {
+        // 顯示圖片
+        document.getElementById(show_picture_id).src = picture_address ;
+        if(target_id == "uploadimage_big") {
+            document.getElementById(show_picture_id).style.height = big_picture_height ;
+            document.getElementById(show_picture_id).style.width = big_picture_width ;
+        }
+        else {
+            document.getElementById(show_picture_id).style.height = small_picture_height ;
+            document.getElementById(show_picture_id).style.width = small_picture_width ;
+        }
+    };
+    //放入form裡面
+    reader.readAsDataURL(document.getElementById(target_id).files[0]);
+}
+
 function modify_put_into_form(data , form_id , is_modify) {
+    if(is_modify == 1) {
+        if(data.get("image") != "") {
+            fetch(data.get("image"))
+                .then(response => response.blob())
+                .then(blob => {
+                    // 创建新的文件对象
+                    var files = [
+                        new File([blob], data.get("image") + ".jpg" , { type: 'image/jpeg' } )
+                    ];
+                    
+                    document.getElementById("uploadimage_big").files = new FileListItems(files) ;
+                    document.getElementById("uploadimage_small").files = new FileListItems(files) ;
+                    place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
+                    place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
+                });
+        }
+    }
     document.getElementById(form_id).elements["id"].value = data.get("id") ;
     document.getElementById(form_id).elements["family"].value = data.get("family") ;
     document.getElementById(form_id).elements["male_family"].value = data.get('male_family') ;
@@ -178,18 +234,6 @@ function modify_put_into_form(data , form_id , is_modify) {
     document.getElementById(form_id).elements["spawningweight"].value = data.get("spawningweight") ;
     document.getElementById(form_id).elements["ovarystate"].value = data.get("ovarystate") ;
     document.getElementById(form_id).elements["mating"].value = data.get("breed_type") ;
-}
-
-function modify_data_transfer(from_data , form_id) {
-    document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
-    document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
-    document.getElementById(form_id).elements["male_family"].value = from_data.get("male_family") ;
-    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
-    document.getElementById(form_id).elements["spawningweight"].value = from_data.get("spawningweight") ;
-    document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
-    document.getElementById(form_id).elements["spawningroomdate"].value = from_data.get("spawningroomdate") ;
-    document.getElementById(form_id).elements["ovarystate"].value = from_data.get("ovarystate") ;
-    document.getElementById(form_id).elements["mating"].value = from_data.get("mating") ;
 }
 
 function modify_post (formData) {
@@ -223,16 +267,4 @@ function modify_post (formData) {
             });
         },
     });
-}
-
-function data_transfer(from_data , form_id) {
-    document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
-    document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
-    document.getElementById(form_id).elements["male_family"].value = from_data.get("male_family") ;
-    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
-    document.getElementById(form_id).elements["spawningweight"].value = from_data.get("spawningweight") ;
-    document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
-    document.getElementById(form_id).elements["spawningroomdate"].value = from_data.get("spawningroomdate") ;
-    document.getElementById(form_id).elements["ovarystate"].value = from_data.get("ovarystate") ;
-    document.getElementById(form_id).elements["mating"].value = from_data.get("mating") ;
 }
