@@ -7,20 +7,20 @@ require_once "jpgraph/jpgraph_date.php";
 require_once "config.php";
 require_once "utility.php";
 
-define("CACHE_QUERY", "search_waterquality_query");
+define("DRAW_QUERY", "draw_waterquality_query");
 define("CHART_WIDTH", 800);
 define("CHART_HEIGHT", 500);
+
 
 waterqualit_diagram_process($mysqli);
 
 
 function waterqualit_diagram_process($mysqli) : void{
-    //$sql = "SELECT * FROM waterquality where TankID='M1'";
-    if(!utility_session_check(CACHE_QUERY)){
+    if(!utility_session_check(DRAW_QUERY)){
         utility_window_msg_back("No search result!!!");
         return;
     }
-    $sql = $_SESSION[CACHE_QUERY];
+    $sql = $_SESSION[DRAW_QUERY];
     if(!utility_session_check("chart_option")){
         utility_window_msg_back("No chart option!!!");
         return;

@@ -261,9 +261,9 @@ if (!isset($_SESSION)) {
 
                 /* store query into session */
                 utility_session_insert(CACHE_QUERY, $sql);
-                utility_session_insert("chart_option", null);
+                //utility_session_insert("chart_option", null);
                 
-                $mysqli->close();
+                //$mysqli->close();
             }
 
 
@@ -281,7 +281,7 @@ if (!isset($_SESSION)) {
                 $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
                 $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
                 $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
-                $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
+                //$chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
 
                 /* concatenate sql where clause or set default value if not specified */
                 /*
@@ -328,9 +328,9 @@ if (!isset($_SESSION)) {
 
                 /* store query into session */
                 utility_session_insert(CACHE_QUERY, $sql);
-                utility_session_insert("chart_option", $chart_option);
+                //utility_session_insert("chart_option", $chart_option);
                 
-                $mysqli->close();
+                //$mysqli->close();
             }
 
 
@@ -505,26 +505,49 @@ if (!isset($_SESSION)) {
                     <div class="form-inline" style = "width: 100% ; height: 65px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
-                            <div> 排序項目 </div>
+                            <div> 繪製項目 </div>
                             <div class="input-group">
                                 <?php 
-                                    $sort_option_array = array();
-                                    $sort_option_array["index"] = "id";
-                                    $sort_option_array["日期"] = "Date";
-                                    $sort_option_array["TankID"] = "TankID";
-                                    utility_selectbox("sort_select", "排序項目", $sort_option_array);
+                                    $chart_option_array = array();
+                                    $chart_option_array["NH4_N"] = "NH4_N";
+                                    $chart_option_array["NO2"] = "NO2";
+                                    $chart_option_array["NO3"] = "NO3";
+                                    $chart_option_array["Salinity_1"] = "Salinity_1";
+                                    $chart_option_array["Salinity_2"] = "Salinity_2";
+                                    $chart_option_array["Salinity_3"] = "Salinity_3";
+                                    $chart_option_array["pH_1"] = "pH_1";
+                                    $chart_option_array["pH_2"] = "pH_2";
+                                    $chart_option_array["pH_3"] = "pH_3";
+                                    $chart_option_array["O2_1"] = "O2_1";
+                                    $chart_option_array["O2_2"] = "O2_2";
+                                    $chart_option_array["O2_3"] = "O2_3";
+                                    $chart_option_array["ORP_1"] = "ORP_1";
+                                    $chart_option_array["ORP_2"] = "ORP_2";
+                                    $chart_option_array["ORP_3"] = "ORP_3";
+                                    $chart_option_array["WTemp_1"] = "WTemp_1";
+                                    $chart_option_array["WTemp_2"] = "WTemp_2";
+                                    $chart_option_array["WTemp_3"] = "WTemp_3";
+                                    $chart_option_array["Alkalinity"] = "Alkalinity";
+                                    $chart_option_array["TCBS"] = "TCBS";
+                                    $chart_option_array["TCBS綠菌"] = "TCBS綠菌";
+                                    $chart_option_array["Marine"] = "Marine";
+                                    $chart_option_array["螢光菌TCBS"] = "螢光菌TCBS";
+                                    $chart_option_array["螢光菌Marine"] = "螢光菌Marine";
+                                    utility_selectbox("chart_select", "繪製項目", $chart_option_array);
                                 ?>
                             </div>
                         </div>
                         <div style = "width: 2%"> </div>
                         <div style = "width: 48%">
-                            <div> 排序方式 </div>
+                            <div> TankID </div>
                             <div class="input-group">
                                 <?php 
-                                    $order_option_array = array();
-                                    $order_option_array["升序"] = "ASC";
-                                    $order_option_array["降序"] = "DESC";
-                                    utility_selectbox("order_select", "排序方式", $order_option_array);
+                                    $tank_option_array = array();
+                                    $tank_option_array["M1"] = "M1";
+                                    $tank_option_array["M2"] = "M2";
+                                    $tank_option_array["M3"] = "M3";
+                                    $tank_option_array["M4"] = "M4";
+                                    utility_selectbox("tank_select", "TankID", $tank_option_array);
                                 ?>
                             </div>
                         </div>
@@ -537,7 +560,7 @@ if (!isset($_SESSION)) {
                             <div> 起始日期 </div>
                             <div class="input-group">
                                 <?php 
-                                    utility_date("begin_date", "起始日期");
+                                    utility_date("start_date", "起始日期");
                                 ?>
                             </div>
                         </div>
@@ -553,40 +576,68 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                     </div>
 
-                    <div class="form-inline" style = "width: 100% ; height: 65px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> TankID </div>
-                            <div class="input-group">
-                                <?php
-                                    $tank_option_array = array();
-                                    $tank_option_array["M1"] = "M1";
-                                    $tank_option_array["M2"] = "M2";
-                                    $tank_option_array["M3"] = "M3";
-                                    $tank_option_array["M4"] = "M4";
-                                    utility_selectbox("tank_select", "TankID", $tank_option_array);
-                                ?>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-inline" style = "width: 100% ; height: 40px">
                         <div style = "width: 1%"> </div>
-                        <div style = "width: auto"> 
+                        <div style = "width: auto">
                             <?php
-                                utility_button("submit", "查詢");
+                                utility_button("submit", "設定");
                             ?>
                         </div>
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
                             <?php
-                                utility_button_onclick("export_waterquality.php", "匯出");
+                                utility_button_onclick("chart.php", "繪製");
                             ?>
                         </div>
                     </div>
                 </form>
                 <!--//Search form-->
             </section>
+            <?php
+            
+            require_once "utility.php";
+            
+            define("DRAW_QUERY", "draw_waterquality_query");
+
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                draw_waterquality_process();
+            }
+            
+            function draw_waterquality_process() : void{
+                $start_date = $_POST["start_date"];
+                $end_date = $_POST["end_date"];
+                $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
+                $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
+                
+                if(empty($start_date)){
+                    $start_date = "true";
+                }
+                else{
+                    $start_date = str_replace('-', '', $start_date);
+                    $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
+                }
+                if(empty($end_date)){
+                    $end_date = "true";
+                }
+                else{
+                    $end_date = str_replace('-', '', $end_date);
+                    $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
+                }
+                if(is_null($tank)){
+                    $tank = "true";
+                }
+                else{
+                    $tank = "TankID = " . "'{$tank}'";
+                }
+                if(is_null($chart_option)){
+                    utility_window_msg_back("No chart option!!!");
+                    return;
+                }
+                $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank}";
+                utility_session_insert(DRAW_QUERY, $sql);
+                utility_session_insert("chart_option", $chart_option);
+            }
+            ?>
         </p></div>
     </div>
 
