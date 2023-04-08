@@ -357,11 +357,131 @@ if (!isset($_SESSION)) {
                 while($row = $result->fetch_assoc()){
                     if(strlen($row["image"]) > 0){
                         printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["TankID"], $row["image"]);
-                        echo '<td><a href="view_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='.$row["Note"]. '&image='.$row["image"] .'">詳細</a></td><td><a href="modify_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='. $row["Note"] . '&image='. $row["image"] .'">修改</a></td><td><a href="delete?id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
+                        echo '<td><a href="view_水質?id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '&image='.$row["image"] .
+                        '">詳細</a></td>
+                        <td><a href="modify_水質?id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '&image='.$row["image"] .
+                        '">修改</a></td>
+                        <td><a href="delete?
+                        id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
                     }
                     else{
                         printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td></td>", $row["id"], $row["Date"], $row["TankID"], $row["image"]);
-                        echo '<td><a href="view_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='.$row["Note"]. '&image='. $row["image"] .'">詳細</a></td><td><a href="modify_水質?id='.$row['id'].'&date='.$row["Date"].'&location='.$row["TankID"].'&nh4='.$row["NH4_N"].'&no2='.$row["NO2"].'&no3='.$row["NO3"].'&Salinity_1='.$row["Salinity_1"].'&Salinity_2='.$row["Salinity_2"].'&Salinity_3='.$row["Salinity_3"].'&pH_1='.$row["pH_1"].'&pH_2='.$row["pH_2"].'&pH_3='.$row["pH_3"].'&O2_1='.$row["O2_1"].'&O2_2='.$row["O2_2"].'&O2_3='.$row["O2_3"].'&ORP_1='.$row["ORP_1"].'&ORP_2='.$row["ORP_2"].'&ORP_3='.$row["ORP_3"].'&Temp_1='.$row["WTemp_1"].'&Temp_2='.$row["WTemp_2"].'&Temp_3='.$row["WTemp_3"].'&Alkalinity='.$row["Alkalinity"].'&TCBS='.$row["TCBS"].'&綠菌='.$row["TCBS綠菌"].'&Marine='.$row["Marine"].'&螢光菌TCBS='.$row["螢光菌TCBS"].'&螢光菌Marine='.$row["螢光菌Marine"].'&Note='.$row["Note"]. '&image='. $row["image"] .'">修改</a></td><td><a href="delete?id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
+                        echo '<td><a href="view_水質?id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '">詳細</a></td>
+                        <td><a href="modify_水質?id='.$row['id'].
+                        '&Date='.$row["Date"].
+                        '&Tank='.$row["TankID"].
+                        '&nh4='.$row["NH4_N"].
+                        '&no2='.$row["NO2"].
+                        '&no3='.$row["NO3"].
+                        '&Salinity_1='.$row["Salinity_1"].
+                        '&Salinity_2='.$row["Salinity_2"].
+                        '&Salinity_3='.$row["Salinity_3"].
+                        '&pH_1='.$row["pH_1"].
+                        '&pH_2='.$row["pH_2"].
+                        '&pH_3='.$row["pH_3"].
+                        '&O2_1='.$row["O2_1"].
+                        '&O2_2='.$row["O2_2"].
+                        '&O2_3='.$row["O2_3"].
+                        '&ORP_1='.$row["ORP_1"].
+                        '&ORP_2='.$row["ORP_2"].
+                        '&ORP_3='.$row["ORP_3"].
+                        '&Temp_1='.$row["WTemp_1"].
+                        '&Temp_2='.$row["WTemp_2"].
+                        '&Temp_3='.$row["WTemp_3"].
+                        '&Alkalinity='.$row["Alkalinity"].
+                        '&TCBS='.$row["TCBS"].
+                        '&TCBS綠菌='.$row["TCBS綠菌"].
+                        '&Marine='.$row["Marine"].
+                        '&螢光菌TCBS='.$row["螢光菌TCBS"].
+                        '&螢光菌Marine='.$row["螢光菌Marine"].
+                        '&Note='.$row["Note"]. 
+                        '&image='. $row["image"] .
+                        '">修改</a></td>
+                        <td><a href="delete?id='. $row['id'] . '&type=water" onclick="return confirm(\'確定要刪除ID : '.$row['id'].'嗎?\');">刪除</a></td>';
                     }
                 }
                 echo "</tbody></table>";

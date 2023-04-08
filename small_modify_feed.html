@@ -1,3 +1,11 @@
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 5%"> </div>
+    <div style = "width: 30%"> Index </div>
+    <div style = "width: 40%">
+        <input id="id" name="id" class="form-control" readonly>
+    </div>
+</div>
+
 <div class="form-inline" style = "width: 100% ; height: 55px">
     <div style = "width: 5%"> </div>
     <div style = "width: 30%"> TankID </div>
@@ -166,6 +174,13 @@
 
 <div class="form-inline" style = "width: 100% ; height: 55px">
     <div style = "width: 5%"> </div>
+    <div style = "width: 30%"> 食用量 </div>
+    <input id="eating" name="eating" type="text" class="form-control" style = "width: 40%;">
+    <div class="input-group-text" for="eating" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 55px">
+    <div style = "width: 5%"> </div>
     <div style = "width: 30%"> Feeding Ratio </div>
     <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" style = "width: 40%;">
     <div class="input-group-text" for="FeedingRatio" style = "width: auto;">(%)</div>
@@ -213,14 +228,12 @@
     <div style = "height: 1px"> </div>
 </div>
 
-<div class="form-inline" style = "width: 100%">
+<div class="form-inline" style = "width: 100% ; height: 50px">
     <div style = "width: 5%"> </div>
-    <button type="button" class="btn btn-primary" onclick="add_before_small()">取得昨天資料</button>
-    <div style = "width: 1%"> </div>
-    <button type="button" class="btn btn-primary" onclick="upload_small()">上傳</button>
+    <button type="button" class="btn btn-primary" onclick="upload_small()">修改</button>
     <div id="backmsg"></div>
 </div>
 
-<div class="form-inline" style = "width: 100% ; height: 5px">
+<div class="form-inline" style = "width: 100% ; height: 10px">
     <div style = "height: 1px"> </div>
 </div>

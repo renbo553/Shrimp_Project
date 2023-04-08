@@ -41,7 +41,7 @@ $Temp_2 = filter_input(INPUT_POST, 'Temp_2');
 $Temp_3 = filter_input(INPUT_POST, 'Temp_3');
 $Alkalinity = filter_input(INPUT_POST, 'Alkalinity');
 $TCBS = filter_input(INPUT_POST, 'TCBS');
-$TCBS綠菌 = filter_input(INPUT_POST, '綠菌');
+$TCBS綠菌 = filter_input(INPUT_POST, 'TCBS綠菌');
 $Marine = filter_input(INPUT_POST, 'Marine');
 $螢光菌TCBS = filter_input(INPUT_POST, '螢光菌TCBS');
 $螢光菌Marine = filter_input(INPUT_POST, '螢光菌Marine');
@@ -56,8 +56,35 @@ if ($fileSize == 0) {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "UPDATE waterquality SET Date ='{$cleanDate}', TankID='{$location}', NH4_N='{$nh4}' , NO2='{$no2}' , NO3='{$no3}' , Salinity_1='{$Salinity_1}' , Salinity_2='{$Salinity_2}' , Salinity_3='{$Salinity_3}' , pH_1='{$pH_1}' , pH_2='{$pH_2}' , pH_3='{$pH_3}' , O2_1='{$O2_1}' , O2_2='{$O2_2}' , O2_3='{$O2_3}' , ORP_1='{$ORP_1}' , ORP_2='{$ORP_2}' , ORP_3='{$ORP_3}' , WTemp_1='{$Temp_1}' , WTemp_2='{$Temp_2}' , WTemp_3='{$Temp_3}' , Alkalinity='{$Alkalinity}' , TCBS='{$TCBS}' ,TCBS綠菌 ='{$TCBS綠菌}' , Marine='{$Marine}' , 螢光菌TCBS='{$螢光菌TCBS}' , 螢光菌Marine='{$螢光菌Marine}' , Note='{$note}' WHERE id = $id";
-    echo $insertStr;
+    $insertStr = "UPDATE waterquality SET 
+        Date ='{$cleanDate}', 
+        TankID='{$location}', 
+        NH4_N='{$nh4}' , 
+        NO2='{$no2}' , 
+        NO3='{$no3}' , 
+        Salinity_1='{$Salinity_1}' , 
+        Salinity_2='{$Salinity_2}' , 
+        Salinity_3='{$Salinity_3}' , 
+        pH_1='{$pH_1}' , 
+        pH_2='{$pH_2}' , 
+        pH_3='{$pH_3}' , 
+        O2_1='{$O2_1}' , 
+        O2_2='{$O2_2}' , 
+        O2_3='{$O2_3}' , 
+        ORP_1='{$ORP_1}' , 
+        ORP_2='{$ORP_2}' , 
+        ORP_3='{$ORP_3}' , 
+        WTemp_1='{$Temp_1}' , 
+        WTemp_2='{$Temp_2}' , 
+        WTemp_3='{$Temp_3}' , 
+        Alkalinity='{$Alkalinity}' , 
+        TCBS='{$TCBS}' ,
+        TCBS綠菌 ='{$TCBS綠菌}' , 
+        Marine='{$Marine}' , 
+        螢光菌TCBS='{$螢光菌TCBS}' , 
+        螢光菌Marine='{$螢光菌Marine}' , 
+        Note='{$note}' 
+        WHERE id = $id";
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
@@ -118,7 +145,36 @@ if ($fileSize == 0) {
         /* 定義 SQL 字串的變數 */
         /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
         /* 所以，可以直接設定它是 null */
-        $insertStr = "UPDATE waterquality SET Date ='{$cleanDate}', TankID='{$location}', NH4_N='{$nh4}' , NO2='{$no2}' , NO3='{$no3}' , Salinity_1='{$Salinity_1}' , Salinity_2='{$Salinity_2}' , Salinity_3='{$Salinity_3}' , pH_1='{$pH_1}' , pH_2='{$pH_2}' , pH_3='{$pH_3}' , O2_1='{$O2_1}' , O2_2='{$O2_2}' , O2_3='{$O2_3}' , ORP_1='{$ORP_1}' , ORP_2='{$ORP_2}' , ORP_3='{$ORP_3}' , WTemp_1='{$Temp_1}' , WTemp_2='{$Temp_1}' , WTemp_3='{$Temp_3}' , Alkalinity='{$Alkalinity}' , TCBS='{$TCBS}' ,TCBS綠菌 ='{$TCBS綠菌}' , Marine='{$Marine}' , 螢光菌TCBS='{$螢光菌TCBS}' , 螢光菌Marine='{$螢光菌Marine}' , Note='{$note}' , image='{$target_file}' WHERE id = $id";
+        $insertStr = "UPDATE waterquality SET 
+            Date ='{$cleanDate}', 
+            TankID='{$location}', 
+            NH4_N='{$nh4}' , 
+            NO2='{$no2}' , 
+            NO3='{$no3}' , 
+            Salinity_1='{$Salinity_1}' , 
+            Salinity_2='{$Salinity_2}' , 
+            Salinity_3='{$Salinity_3}' , 
+            pH_1='{$pH_1}' , 
+            pH_2='{$pH_2}' , 
+            pH_3='{$pH_3}' , 
+            O2_1='{$O2_1}' , 
+            O2_2='{$O2_2}' , 
+            O2_3='{$O2_3}' , 
+            ORP_1='{$ORP_1}' , 
+            ORP_2='{$ORP_2}' , 
+            ORP_3='{$ORP_3}' , 
+            WTemp_1='{$Temp_1}' , 
+            WTemp_2='{$Temp_1}' , 
+            WTemp_3='{$Temp_3}' , 
+            Alkalinity='{$Alkalinity}' , 
+            TCBS='{$TCBS}' ,
+            TCBS綠菌 ='{$TCBS綠菌}' , 
+            Marine='{$Marine}' , 
+            螢光菌TCBS='{$螢光菌TCBS}' , 
+            螢光菌Marine='{$螢光菌Marine}' , 
+            Note='{$note}' , 
+            image='{$target_file}' 
+            WHERE id = $id";
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

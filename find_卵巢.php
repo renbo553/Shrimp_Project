@@ -261,7 +261,7 @@ if (!isset($_SESSION)) {
             <th>Index</th>
             <th>眼標</th>
             <th>日期</th>
-            <th>階段</th>
+            <th>卵巢階段</th>
             <th>紙本資料</th>
             </thead><tbody>";
         // echo "<br>顯示資料（MYSQLI_NUM，欄位數）：<br>";
@@ -269,12 +269,23 @@ if (!isset($_SESSION)) {
         while($row = $result->fetch_assoc()){
             if(strlen($row["image"]) > 0){
                 printf("<tr><td  style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["眼標"], $row["Date"], $row["Stage"], $row["image"]);
-                echo '<td><a href="modify_卵巢?id=' . $row['id'] . ' &eye=' . $row["眼標"] . ' &date=' . $row["Date"] . ' &ovarystate=' . $row["Stage"] . ' &image=' . $row["image"] .'">修改</a></td>
-                <td><a href="delete?id=' . $row['id'] . '&type=ovary" onclick="return confirm(\'確定要刪除ID : ' . $row['id'] . ' 嗎?\');">刪除</a></td>';
+                echo '<td><a href="modify_卵巢?&id='.$row['id']. 
+                '&eye='.$row["眼標"]. 
+                '&date='.$row["Date"]. 
+                '&ovarystate='.$row["Stage"]. 
+                '&image='.$row["image"].
+                '">修改</a></td>
+                <td><a href="delete?
+                &id='.$row['id']. '&type=ovary" onclick="return confirm(\'確定要刪除ID : ' . $row['id'] . ' 嗎?\');">刪除</a></td>';
             }
             else{
                 printf("<tr><td  style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td></td>", $row["id"], $row["眼標"], $row["Date"], $row["Stage"]);
-                echo '<td><a href="modify_卵巢?id=' . $row['id'] . ' &eye=' . $row["眼標"] . ' &date=' . $row["Date"] . ' &ovarystate=' . $row["Stage"] . ' &image=' . $row["image"] .'">修改</a></td>
+                echo '<td><a href="modify_卵巢?&id='.$row['id']. 
+                '&eye='.$row["眼標"]. 
+                '&date='.$row["Date"]. 
+                '&ovarystate='.$row["Stage"]. 
+                '&image='.$row["image"].
+                '">修改</a></td>
                 <td><a href="delete?id=' . $row['id'] . '&type=ovary" onclick="return confirm(\'確定要刪除ID : ' . $row['id'] . ' 嗎?\');">刪除</a></td>';
             }
         }

@@ -310,24 +310,6 @@ if (!isset($_SESSION)) {
         else{
             $stage = "卵巢進展階段 = " . "'{$stage}'";
         }
-        if(empty($expectant_date)){
-            $expectant_date = "true";
-        }
-        else{
-            $expectant_date = "進產卵室待產日期 = " . "'{$expectant_date}'";
-        }
-        if(empty($breed_weight)){
-            $breed_weight = "true";
-        }
-        else{
-            $breed_weight = "生產體重 = " . "'{$breed_weight}'";
-        }
-        if(is_null($stage)){
-            $stage = "true";
-        }
-        else{
-            $stage = "卵巢進展階段 = " . "'{$stage}'";
-        }
         if(is_null($sort_key)){
             $sort_key = "id";
         }
@@ -388,14 +370,7 @@ if (!isset($_SESSION)) {
         echo "<thead>
             <th>Index</th>
             <th>家族</th>
-            <th>公蝦家族</th>
             <th>眼標</th>
-            <th>剪眼日期</th>
-            <th>剪眼體重</th>
-            <th>進入產卵室待產日期</th>
-            <th>生產體重</th>
-            <th>卵巢進展階段</th>
-            <th>交配方式</th>
             <th>紙本資料</th>
             </thead><tbody>";
         // echo "<br>顯示資料（MYSQLI_NUM，欄位數）：<br>";
@@ -404,15 +379,63 @@ if (!isset($_SESSION)) {
         {
             if(strlen($row["image"]) > 0)
             {
-                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a>  </td>",$row["id"], $row["家族"], $row["公蝦家族"] , $row["眼標"], $row["剪眼日期"], $row["剪眼體重"], $row["進產卵室待產日期"], $row["生產體重"], $row["卵巢進展階段"], $row["交配方式"] , $row["image"]);
-                echo '<td><a href="modify_生產?id=' . $row['id'] . ' &family=' .$row["家族"] .  '&male_family=' .$row["公蝦家族"] . '&eye=' . $row["眼標"] . '&cutday=' . $row["剪眼日期"] . '&cutweight=' . $row["剪眼體重"] . '&spawningroomdate=' . $row["進產卵室待產日期"] . '&spawningweight=' . $row["生產體重"] . '&ovarystate=' . $row["卵巢進展階段"] . '&breed_type=' . $row["交配方式"] .'&image=' . $row["image"]  .'">
-                    修改</a></td>
+                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>",$row["id"], $row["家族"], $row["眼標"], $row["image"]);
+                echo '<td><a href="view_生產?
+                    &id=' . $row['id'] . 
+                    '&family=' .$row["家族"] .  
+                    '&male_family=' .$row["公蝦家族"] . 
+                    '&eye=' . $row["眼標"] . 
+                    '&cutday=' . $row["剪眼日期"] . 
+                    '&cutweight=' . $row["剪眼體重"] . 
+                    '&spawningroomdate=' . $row["進產卵室待產日期"] . 
+                    '&spawningweight=' . $row["生產體重"] . 
+                    '&ovarystate=' . $row["卵巢進展階段"] . 
+                    '&breed_type=' . $row["交配方式"] .
+                    '&image=' . $row["image"]  .
+                    '">詳細</a></td>
+                    <td><a href="modify_生產?
+                    &id=' . $row['id'] . 
+                    '&family=' .$row["家族"] .  
+                    '&male_family=' .$row["公蝦家族"] . 
+                    '&eye=' . $row["眼標"] . 
+                    '&cutday=' . $row["剪眼日期"] . 
+                    '&cutweight=' . $row["剪眼體重"] . 
+                    '&spawningroomdate=' . $row["進產卵室待產日期"] . 
+                    '&spawningweight=' . $row["生產體重"] . 
+                    '&ovarystate=' . $row["卵巢進展階段"] . 
+                    '&breed_type=' . $row["交配方式"] .
+                    '&image=' . $row["image"]  .
+                    '">修改</a></td>
                   <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
             }
             else{
-                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> </td>",$row["id"], $row["家族"], $row["公蝦家族"] , $row["眼標"], $row["剪眼日期"], $row["剪眼體重"], $row["進產卵室待產日期"], $row["生產體重"], $row["卵巢進展階段"], $row["交配方式"] , $row["image"]);
-                echo '<td><a href="modify_生產?id=' . $row['id'] . ' &family=' .$row["家族"] .  '&male_family=' .$row["公蝦家族"] . '&eye=' . $row["眼標"] . '&cutday=' . $row["剪眼日期"] . '&cutweight=' . $row["剪眼體重"] . '&spawningroomdate=' . $row["進產卵室待產日期"] . '&spawningweight=' . $row["生產體重"] . '&ovarystate=' . $row["卵巢進展階段"] . '&breed_type=' . $row["交配方式"] .'&image=' . $row["image"]  .'">
-                    修改</a></td>
+                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> </td>",$row["id"], $row["家族"], $row["眼標"] , $row["image"]);
+                echo '<td><a href="view_生產?
+                    &id=' . $row['id'] . 
+                    '&family=' .$row["家族"] .  
+                    '&male_family=' .$row["公蝦家族"] . 
+                    '&eye=' . $row["眼標"] . 
+                    '&cutday=' . $row["剪眼日期"] . 
+                    '&cutweight=' . $row["剪眼體重"] . 
+                    '&spawningroomdate=' . $row["進產卵室待產日期"] . 
+                    '&spawningweight=' . $row["生產體重"] . 
+                    '&ovarystate=' . $row["卵巢進展階段"] . 
+                    '&breed_type=' . $row["交配方式"] .
+                    '&image=' . $row["image"]  .
+                    '">詳細</a></td>
+                    <td><a href="modify_生產?
+                    &id=' . $row['id'] . 
+                    '&family=' .$row["家族"] .  
+                    '&male_family=' .$row["公蝦家族"] . 
+                    '&eye=' . $row["眼標"] . 
+                    '&cutday=' . $row["剪眼日期"] . 
+                    '&cutweight=' . $row["剪眼體重"] . 
+                    '&spawningroomdate=' . $row["進產卵室待產日期"] . 
+                    '&spawningweight=' . $row["生產體重"] . 
+                    '&ovarystate=' . $row["卵巢進展階段"] . 
+                    '&breed_type=' . $row["交配方式"] .
+                    '&image=' . $row["image"]  .
+                    '">修改</a></td>
                   <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';    
             }   
 

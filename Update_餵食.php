@@ -17,10 +17,13 @@ header("Content-Type:text/html; charset=utf-8");
 /* 指定要上傳的資料夾 */
 $target_dir = "images/";
 
-$id = filter_input(INPUT_POST, 'id');
-$tankid = filter_input(INPUT_POST, 'radio');
+$id = filter_input(INPUT_POST , "id");
+$tankid = filter_input(INPUT_POST , "location");
 $date = filter_input(INPUT_POST, 'date');
-$shrimp = filter_input(INPUT_POST, 'radio1');
+$shrimp = filter_input(INPUT_POST, 'tank_type');
+$time = filter_input(INPUT_POST , 'time');
+$work = filter_input(INPUT_POST , 'work');
+$else_work = filter_input(INPUT_POST , 'else_work') ;
 $male_shrimp = filter_input(INPUT_POST, 'male_shrimp');
 $female_shrimp = filter_input(INPUT_POST, 'female_shrimp');
 $dead_male_shrimp = filter_input(INPUT_POST, 'dead_male_shrimp');
@@ -30,38 +33,41 @@ $peeling_female_shrimp = filter_input(INPUT_POST, 'peeling_female_shrimp');
 $avg_male_shrimp = filter_input(INPUT_POST, 'avg_male_shrimp');
 $avg_female_shrimp = filter_input(INPUT_POST, 'avg_female_shrimp');
 $total_weight = filter_input(INPUT_POST, 'total_weight');
-$food0900 = filter_input(INPUT_POST, 'food0900');
-$weight0900 = filter_input(INPUT_POST, 'weight0900');
-$remain0900 = filter_input(INPUT_POST, 'remain0900');
-$eating0900 = ((int)$weight0900 - (int)$remain0900);
-$food1100 = filter_input(INPUT_POST, 'food1100');
-$weight1100 = filter_input(INPUT_POST, 'weight1100');
-$remain1100 = filter_input(INPUT_POST, 'remain1100');
-$eating1100 = ((int)$weight1100 - (int)$remain1100);
-$food1400 = filter_input(INPUT_POST, 'food1400');
-$weight1400 = filter_input(INPUT_POST, 'weight1400');
-$remain1400 = filter_input(INPUT_POST, 'remain1400');
-$eating1400 = ((int)$weight1400 - (int)$remain1400);
-$food1600 = filter_input(INPUT_POST, 'food1600');
-$weight1600 = filter_input(INPUT_POST, 'weight1600');
-$remain1600 = filter_input(INPUT_POST, 'remain1600');
-$eating1600 = ((int)$weight1600 - (int)$remain1600);
-$food1900 = filter_input(INPUT_POST, 'food1900');
-$weight1900 = filter_input(INPUT_POST, 'weight1900');
-$remain1900 = filter_input(INPUT_POST, 'remain1900');
-$eating1900 = ((int)$weight1900 - (int)$remain1900);
-$food2300 = filter_input(INPUT_POST, 'food2300');
-$weight2300 = filter_input(INPUT_POST, 'weight2300');
-$remain2300 = filter_input(INPUT_POST, 'remain2300');
-$eating2300 = ((int)$weight2300 - (int)$remain2300);
-$food0300 = filter_input(INPUT_POST, 'food0300');
-$weight0300 = filter_input(INPUT_POST, 'weight0300');
-$remain0300 = filter_input(INPUT_POST, 'remain0300');
-$eating0300 = ((int)$weight0300 - (int)$remain0300);
-
-$FeedingRatio = filter_input(INPUT_POST, 'FeedingRatio');
+$food_weight = filter_input(INPUT_POST , "food_weight");
+$food_remain = filter_input(INPUT_POST , "food_remain");
+$FeedingRatio = filter_input(INPUT_POST , "FeedingRatio");
 $Observation = filter_input(INPUT_POST, 'Observation');
 $cleanDate = str_replace("/", "", $date);
+$eating = ((int)$food_weight - (int)$food_remain);
+
+$food0900 = 0 ;
+$weight0900 = 0 ;
+$remain0900 = 0 ;
+$eating0900 = 0 ;
+$food1100 = 0 ;
+$weight1100 = 0 ;
+$remain1100 = 0 ;
+$eating1100 = 0 ;
+$food1400 = 0 ;
+$weight1400 = 0 ;
+$remain1400 = 0 ;
+$eating1400 = 0 ;
+$food1600 = 0 ;
+$weight1600 = 0 ;
+$remain1600 = 0 ;
+$eating1600 = 0 ;
+$food1900 = 0 ;
+$weight1900 = 0 ;
+$remain1900 = 0 ;
+$eating1900 = 0 ;
+$food2300 = 0 ;
+$weight2300 = 0 ;
+$remain2300 = 0 ;
+$eating2300 = 0 ;
+$food0300 = 0 ;
+$weight0300 = 0 ;
+$remain0300 = 0 ;
+$eating0300 = 0 ;
 
 $fileType = $_FILES['fileField']['type']; //檔案類型
 $fileSize = $_FILES['fileField']['size']; //檔案大小（byte為單位）
@@ -73,7 +79,57 @@ if ($fileSize == 0) {
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
 
-    $insertStr = "UPDATE feed SET  Date='{$cleanDate}', Tank='{$tankid}', shrimp='{$shrimp}', No_Shrimp_Male='{$male_shrimp}', No_Shrimp_Female='{$female_shrimp}', No_Dead_Male='{$dead_male_shrimp}', No_Dead_Female='{$dead_female_shrimp}', No_Moults_Male='{$peeling_male_shrimp}',No_Moults_Female ='{$peeling_female_shrimp}', Avg_Weight_Male='{$avg_male_shrimp}', Avg_Weight_Female='{$avg_female_shrimp}', Total_Weight='{$total_weight}', 9_species='{$food0900}', 9_weight='{$weight0900}', 9_remain='{$remain0900}', 9_eating='{$eating0900}', 11_species='{$food1100}', 11_weight='{$weight1100}', 11_remain='{$remain1100}', 11_eating='{$eating1100}', 14_species='{$food1400}', 14_weight='{$weight1400}', 14_remain='{$remain1400}', 14_eating='{$eating1400}',16_species='{$food1600}', 16_weight='{$weight1600}', 16_remain='{$remain1600}', 16_eating='{$eating1600}',19_species='{$food1900}', 19_weight='{$weight1900}', 19_remain='{$remain1900}', 19_eating='{$eating1900}',23_species='{$food2300}', 23_weight='{$weight2300}', 23_remain='{$remain2300}', 23_eating='{$eating2300}',3_species='{$food0300}', 3_weight='{$weight0300}', 3_remain='{$remain0300}', 3_eating='{$eating0300}',Feeding_Ratio='{$FeedingRatio}', Observation='{$Observation}' WHERE id = $id";
+    $insertStr = "UPDATE feed SET 
+        Date='{$cleanDate}', 
+        Tank='{$tankid}', 
+        shrimp='{$shrimp}', 
+        No_Shrimp_Male='{$male_shrimp}', 
+        No_Shrimp_Female='{$female_shrimp}', 
+        No_Dead_Male='{$dead_male_shrimp}', 
+        No_Dead_Female='{$dead_female_shrimp}', 
+        No_Moults_Male='{$peeling_male_shrimp}',
+        No_Moults_Female ='{$peeling_female_shrimp}', 
+        Avg_Weight_Male='{$avg_male_shrimp}', 
+        Avg_Weight_Female='{$avg_female_shrimp}', 
+        Total_Weight='{$total_weight}', 
+        time='{$time}', 
+        work='{$work}', 
+        else_work='{$else_work}', 
+        food_weight='{$food_weight}', 
+        food_remain='{$food_remain}',
+        eating='{$eating}',
+        9_species='{$food0900}', 
+        9_weight='{$weight0900}', 
+        9_remain='{$remain0900}', 
+        9_eating='{$eating0900}', 
+        11_species='{$food1100}', 
+        11_weight='{$weight1100}', 
+        11_remain='{$remain1100}', 
+        11_eating='{$eating1100}', 
+        14_species='{$food1400}', 
+        14_weight='{$weight1400}', 
+        14_remain='{$remain1400}', 
+        14_eating='{$eating1400}',
+        16_species='{$food1600}', 
+        16_weight='{$weight1600}', 
+        16_remain='{$remain1600}', 
+        16_eating='{$eating1600}',
+        19_species='{$food1900}', 
+        19_weight='{$weight1900}', 
+        19_remain='{$remain1900}', 
+        19_eating='{$eating1900}',
+        23_species='{$food2300}', 
+        23_weight='{$weight2300}', 
+        23_remain='{$remain2300}', 
+        23_eating='{$eating2300}',
+        3_species='{$food0300}', 
+        3_weight='{$weight0300}', 
+        3_remain='{$remain0300}', 
+        3_eating='{$eating0300}',
+        Feeding_Ratio='{$FeedingRatio}', 
+        Observation='{$Observation}'
+        WHERE id = $id";
+
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
@@ -135,7 +191,57 @@ else {
         /* 定義 SQL 字串的變數 */
         /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
         /* 所以，可以直接設定它是 null */
-        $insertStr = "UPDATE feed SET Date='{$cleanDate}', Tank='{$tankid}', shrimp='{$shrimp}', No_Shrimp_Male='{$male_shrimp}', No_Shrimp_Female='{$female_shrimp}', No_Dead_Male='{$dead_male_shrimp}', No_Dead_Female='{$dead_female_shrimp}', No_Moults_Male='{$peeling_male_shrimp}',No_Moults_Female ='{$peeling_female_shrimp}', Avg_Weight_Male='{$avg_male_shrimp}', Avg_Weight_Female='{$avg_female_shrimp}', Total_Weight='{$total_weight}', 9_species='{$food0900}', 9_weight='{$weight0900}', 9_remain='{$remain0900}', 9_eating='{$eating0900}', 11_species='{$food1100}', 11_weight='{$weight1100}', 11_remain='{$remain1100}', 11_eating='{$eating1100}', 14_species='{$food1400}', 14_weight='{$weight1400}', 14_remain='{$remain1400}', 14_eating='{$eating1400}',16_species='{$food1600}', 16_weight='{$weight1600}', 16_remain='{$remain1600}', 16_eating='{$eating1600}',19_species='{$food1900}', 19_weight='{$weight1900}', 19_remain='{$remain1900}', 19_eating='{$eating1900}',23_species='{$food2300}', 23_weight='{$weight2300}', 23_remain='{$remain2300}', 23_eating='{$eating2300}',3_species='{$food0300}', 3_weight='{$weight0300}', 3_remain='{$remain0300}', 3_eating='{$eating0300}',Feeding_Ratio='{$FeedingRatio}', Observation='{$Observation}', image='{$target_file}' WHERE id = $id";
+        $insertStr = "UPDATE feed SET 
+            Date='{$cleanDate}', 
+            Tank='{$tankid}', 
+            shrimp='{$shrimp}', 
+            No_Shrimp_Male='{$male_shrimp}', 
+            No_Shrimp_Female='{$female_shrimp}', 
+            No_Dead_Male='{$dead_male_shrimp}', 
+            No_Dead_Female='{$dead_female_shrimp}', 
+            No_Moults_Male='{$peeling_male_shrimp}',
+            No_Moults_Female ='{$peeling_female_shrimp}', 
+            Avg_Weight_Male='{$avg_male_shrimp}', 
+            Avg_Weight_Female='{$avg_female_shrimp}', 
+            Total_Weight='{$total_weight}', 
+            time='{$time}', 
+            work='{$work}', 
+            else_work='{$else_work}', 
+            food_weight='{$food_weight}', 
+            food_remain='{$food_remain}',
+            eating='{$eating}',
+            9_species='{$food0900}', 
+            9_weight='{$weight0900}', 
+            9_remain='{$remain0900}', 
+            9_eating='{$eating0900}', 
+            11_species='{$food1100}', 
+            11_weight='{$weight1100}', 
+            11_remain='{$remain1100}', 
+            11_eating='{$eating1100}', 
+            14_species='{$food1400}', 
+            14_weight='{$weight1400}', 
+            14_remain='{$remain1400}', 
+            14_eating='{$eating1400}',
+            16_species='{$food1600}', 
+            16_weight='{$weight1600}', 
+            16_remain='{$remain1600}', 
+            16_eating='{$eating1600}',
+            19_species='{$food1900}', 
+            19_weight='{$weight1900}', 
+            19_remain='{$remain1900}', 
+            19_eating='{$eating1900}',
+            23_species='{$food2300}', 
+            23_weight='{$weight2300}', 
+            23_remain='{$remain2300}', 
+            23_eating='{$eating2300}',
+            3_species='{$food0300}', 
+            3_weight='{$weight0300}', 
+            3_remain='{$remain0300}', 
+            3_eating='{$eating0300}',
+            Feeding_Ratio='{$FeedingRatio}', 
+            Observation='{$Observation}', 
+            image='{$target_file}' 
+            WHERE id = $id";
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

@@ -1,5 +1,6 @@
 function check (formData) {
     // 2/20 空值檢查--------------------------------------------
+    var TankID = formData.get('location')
     var date = formData.get('date') ;
     var nh4 = formData.get('nh4') ;
     var no2 = formData.get('no2') ;
@@ -27,6 +28,7 @@ function check (formData) {
     var 螢光菌Marine = formData.get('螢光菌Marine') ;
 
     const map = new Map()
+    map.set("tankid" , "TankID") ;
     map.set("date" , "日期") ;
     map.set("nh4" , "NH4-N") ;
     map.set("no2" , "NO2") ;
@@ -56,6 +58,10 @@ function check (formData) {
     // 計算有幾個沒填
     var count = 0 ;
     var show_message = "資訊尚未填寫完成，請填入:\n " ;
+    if(TankID == null || TankID == "") {
+        show_message += (map.get("tankid") + '、') ;
+        count ++ ;
+    }
     if(date == null || date == "") {
         show_message += (map.get("date") + '、') ;
         count ++ ;
@@ -398,6 +404,7 @@ function html_get (formData) {
 
 function html_show_all_data (formData) {
     // 3/17 show html在sweetalert2
+    var TankID = formData.get('location') ;
     var date = formData.get('date') ;
     var nh4 = formData.get('nh4') ;
     var no2 = formData.get('no2') ;
@@ -425,6 +432,7 @@ function html_show_all_data (formData) {
     var 螢光菌Marine = formData.get('螢光菌Marine') ;
 
     const map = new Map()
+    map.set("tankid" , "TankID") ;
     map.set("date" , "日期") ;
     map.set("nh4" , "NH4-N") ;
     map.set("no2" , "NO2") ;
@@ -454,7 +462,8 @@ function html_show_all_data (formData) {
     //用 array 先把超過範圍的資料存起來
     var all_data_name = [] ;
     var all_data_num = [] ;
-
+    
+    all_data_name.push(map.get("tankid")) ;
     all_data_name.push(map.get("date")) ;
     all_data_name.push(map.get("no2")) ;
     all_data_name.push(map.get("no3")) ;
@@ -481,6 +490,7 @@ function html_show_all_data (formData) {
     all_data_name.push(map.get("螢光菌TCBS")) ;
     all_data_name.push(map.get("螢光菌Marine")) ;
 
+    all_data_num.push(TankID)
     all_data_num.push(date) ;
     all_data_num.push(no2) ;
     all_data_num.push(no3) ;
@@ -794,6 +804,115 @@ function put_into_form(before_data_array , form_id) {
 function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["location"].value = from_data.get("location") ;
     document.getElementById(form_id).elements["date"].value = from_data.get('date') ;
+    document.getElementById(form_id).elements["nh4"].value = from_data.get('nh4') ;
+    document.getElementById(form_id).elements["no2"].value = from_data.get('no2') ;
+    document.getElementById(form_id).elements["no3"].value = from_data.get("no3") ;
+    document.getElementById(form_id).elements["Salinity_1"].value = from_data.get("Salinity_1") ;
+    document.getElementById(form_id).elements["Salinity_2"].value = from_data.get("Salinity_2") ;
+    document.getElementById(form_id).elements["Salinity_3"].value = from_data.get("Salinity_3") ;
+    document.getElementById(form_id).elements["pH_1"].value = from_data.get("pH_1") ;
+    document.getElementById(form_id).elements["pH_2"].value = from_data.get("pH_2") ;
+    document.getElementById(form_id).elements["pH_3"].value = from_data.get("pH_3") ;
+    document.getElementById(form_id).elements["O2_1"].value = from_data.get("O2_1") ;
+    document.getElementById(form_id).elements["O2_2"].value = from_data.get("O2_2") ;
+    document.getElementById(form_id).elements["O2_3"].value = from_data.get("O2_3") ;
+    document.getElementById(form_id).elements["ORP_1"].value = from_data.get("ORP_1") ;
+    document.getElementById(form_id).elements["ORP_2"].value = from_data.get("ORP_2") ;
+    document.getElementById(form_id).elements["ORP_3"].value = from_data.get("ORP_3") ;
+    document.getElementById(form_id).elements["Temp_1"].value = from_data.get("Temp_1") ;
+    document.getElementById(form_id).elements["Temp_2"].value = from_data.get("Temp_2") ;
+    document.getElementById(form_id).elements["Temp_3"].value = from_data.get("Temp_3") ;
+    document.getElementById(form_id).elements["Alkalinity"].value = from_data.get("Alkalinity") ;
+    document.getElementById(form_id).elements["TCBS"].value = from_data.get("TCBS") ;
+    document.getElementById(form_id).elements["TCBS綠菌"].value = from_data.get("TCBS綠菌") ;
+    document.getElementById(form_id).elements["Marine"].value = from_data.get("Marine") ;
+    document.getElementById(form_id).elements["螢光菌TCBS"].value = from_data.get("螢光菌TCBS") ;
+    document.getElementById(form_id).elements["螢光菌Marine"].value = from_data.get("螢光菌Marine") ;
+    document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
+}
+
+function modify_post(formData) {
+    $.ajax({
+        url: 'Update_水質.php',
+        type: 'POST',
+        data: formData,
+        cache: false,
+        //下面兩者一定要false
+        processData: false,
+        contentType: false,
+
+        success: function(backData) {
+            console.log();
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                if (backData.includes("抱歉") == false && backData.includes("失敗") == false) {
+                    window.location.href = 'find_水質';
+                    $("#backmsg").html(backData);
+                }
+            });
+        },
+        error: function() {
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("上傳失敗...");
+            });
+        },
+    });
+}
+
+//將資料庫的圖片載入至filereader中，才不會修改後圖片不見(因為update和upload都是看filereader中的內容)
+function FileListItems (files) {
+    var b = new ClipboardEvent("").clipboardData || new DataTransfer() ;
+    for (var i = 0, len = files.length; i<len; i++) b.items.add(files[i]) ;
+    return b.files ;
+}
+
+//圖片load進去filereader中
+function place_picture(target_id , show_picture_id , picture_address) {
+    var reader = new FileReader();
+    // 當檔案讀取完後，所要進行的動作
+    reader.onload = function(e) {
+        // 顯示圖片
+        document.getElementById(show_picture_id).src = picture_address ;
+        if(target_id == "uploadimage_big") {
+            document.getElementById(show_picture_id).style.height = big_picture_height ;
+            document.getElementById(show_picture_id).style.width = big_picture_width ;
+        }
+        else {
+            document.getElementById(show_picture_id).style.height = small_picture_height ;
+            document.getElementById(show_picture_id).style.width = small_picture_width ;
+        }
+    };
+    //放入form裡面
+    reader.readAsDataURL(document.getElementById(target_id).files[0]);
+}
+
+function modify_put_into_form (from_data , form_id , is_modify) {
+    //show data on 詳細資料_水質
+    if(is_modify == 1) {
+        if(from_data.get("image") != "") {
+            fetch(from_data.get("image"))
+                .then(response => response.blob())
+                .then(blob => {
+                    // 创建新的文件对象
+                    var files = [
+                        new File([blob], from_data.get("image") + ".jpg" , { type: 'image/jpeg' } )
+                    ];
+                    
+                    document.getElementById("uploadimage_big").files = new FileListItems(files) ;
+                    document.getElementById("uploadimage_small").files = new FileListItems(files) ;
+                    place_picture("uploadimage_big" , "show_image_big" , from_data.get("image")) ;
+                    place_picture("uploadimage_small" , "show_image_small" , from_data.get("image")) ;
+                });
+        }
+    }
+    document.getElementById(form_id).elements["id"].value = from_data.get("id") ;
+    document.getElementById(form_id).elements["location"].value = from_data.get("Tank") ;
+    document.getElementById(form_id).elements["date"].value = from_data.get('Date') ;
     document.getElementById(form_id).elements["nh4"].value = from_data.get('nh4') ;
     document.getElementById(form_id).elements["no2"].value = from_data.get('no2') ;
     document.getElementById(form_id).elements["no3"].value = from_data.get("no3") ;
