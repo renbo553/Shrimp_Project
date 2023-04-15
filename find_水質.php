@@ -655,15 +655,17 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
                             <?php
-                                utility_button("submit", "設定");
+                                utility_button("submit", "繪製");
                             ?>
                         </div>
+                        <!--
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
                             <?php
                                 utility_button_onclick("chart.php", "繪製");
                             ?>
                         </div>
+                        -->
                     </div>
 
                     <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
@@ -707,7 +709,8 @@ if (!isset($_SESSION)) {
                     $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
                 }
                 if(is_null($tank)){
-                    $tank = "true";
+                    utility_window_msg_back("No tank option!!!");
+                    return;
                 }
                 else{
                     $tank = "TankID = " . "'{$tank}'";
@@ -720,6 +723,10 @@ if (!isset($_SESSION)) {
                 $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank}";
                 utility_session_insert(DRAW_QUERY, $sql);
                 utility_session_insert("chart_option", $chart_option);
+                
+                echo "<script type='text/javascript'>";
+		        echo "window.location.href='chart'";
+	            echo "</script>";
             }
             ?>
         </p></div>
