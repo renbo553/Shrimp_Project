@@ -210,6 +210,8 @@ if (!isset($_SESSION)) {
                         </div>
                     </div>
 
+                    <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+
                     <div class="form-inline" style = "width: 100% ; height: 40px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto"> 
@@ -224,6 +226,8 @@ if (!isset($_SESSION)) {
                             ?>
                         </div>
                     </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
                 </form>
                 <!--//Search form-->
             </section>
@@ -502,58 +506,7 @@ if (!isset($_SESSION)) {
                     <?php require_once "utility.php"; ?>
 
                     <!-- 2/18 修改之UI -->
-                    <div class="form-inline" style = "width: 100% ; height: 65px">
-                        <div style = "width: 1%"> </div>
-                        <div style = "width: 48%">
-                            <div> 繪製項目 </div>
-                            <div class="input-group">
-                                <?php 
-                                    $chart_option_array = array();
-                                    $chart_option_array["NH4_N"] = "NH4_N";
-                                    $chart_option_array["NO2"] = "NO2";
-                                    $chart_option_array["NO3"] = "NO3";
-                                    $chart_option_array["Salinity_1"] = "Salinity_1";
-                                    $chart_option_array["Salinity_2"] = "Salinity_2";
-                                    $chart_option_array["Salinity_3"] = "Salinity_3";
-                                    $chart_option_array["pH_1"] = "pH_1";
-                                    $chart_option_array["pH_2"] = "pH_2";
-                                    $chart_option_array["pH_3"] = "pH_3";
-                                    $chart_option_array["O2_1"] = "O2_1";
-                                    $chart_option_array["O2_2"] = "O2_2";
-                                    $chart_option_array["O2_3"] = "O2_3";
-                                    $chart_option_array["ORP_1"] = "ORP_1";
-                                    $chart_option_array["ORP_2"] = "ORP_2";
-                                    $chart_option_array["ORP_3"] = "ORP_3";
-                                    $chart_option_array["WTemp_1"] = "WTemp_1";
-                                    $chart_option_array["WTemp_2"] = "WTemp_2";
-                                    $chart_option_array["WTemp_3"] = "WTemp_3";
-                                    $chart_option_array["Alkalinity"] = "Alkalinity";
-                                    $chart_option_array["TCBS"] = "TCBS";
-                                    $chart_option_array["TCBS綠菌"] = "TCBS綠菌";
-                                    $chart_option_array["Marine"] = "Marine";
-                                    $chart_option_array["螢光菌TCBS"] = "螢光菌TCBS";
-                                    $chart_option_array["螢光菌Marine"] = "螢光菌Marine";
-                                    utility_selectbox("chart_select", "繪製項目", $chart_option_array);
-                                ?>
-                            </div>
-                        </div>
-                        <div style = "width: 2%"> </div>
-                        <div style = "width: 48%">
-                            <div> TankID </div>
-                            <div class="input-group">
-                                <?php 
-                                    $tank_option_array = array();
-                                    $tank_option_array["M1"] = "M1";
-                                    $tank_option_array["M2"] = "M2";
-                                    $tank_option_array["M3"] = "M3";
-                                    $tank_option_array["M4"] = "M4";
-                                    utility_selectbox("tank_select", "TankID", $tank_option_array);
-                                ?>
-                            </div>
-                        </div>
-                        <div style = "width: 1%"> </div>
-                    </div>
-
+                    <!-- 4/10 radio button -->
                     <div class="form-inline" style = "width: 100% ; height: 65px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
@@ -575,7 +528,129 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 1%"> </div>
                     </div>
+                    <div class="form-inline" style = "width: 100% ; height: 65px">
+                        <div style = "width: 1%"> </div>
+                        <div style = "width: 48%">
+                            <div> TankID </div>
+                            <div class="input-group">
+                                <?php 
+                                    $tank_option_array = array();
+                                    $tank_option_array["M1"] = "M1";
+                                    $tank_option_array["M2"] = "M2";
+                                    $tank_option_array["M3"] = "M3";
+                                    $tank_option_array["M4"] = "M4";
+                                    utility_selectbox("tank_select", "TankID", $tank_option_array);
+                                ?>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="form-inline" style = "width: 100% ; height: auto">
+                        <div style = "width: 1%"> </div>
+                        <div style = "width: 95%">
+                            <div> 繪製項目 </div>
+                            <div class="input-group">
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="NH4_N" type="checkbox" class="custom-control-input" value="NH4_N">
+                                    <label for="NH4_N" class="custom-control-label">&emsp;&emsp;NH4_N</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="NO2" type="checkbox" class="custom-control-input" value="NO2">
+                                    <label for="NO2" class="custom-control-label">&emsp;&emsp;NO2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="NO3" type="checkbox" class="custom-control-input" value="NO3">
+                                    <label for="NO3" class="custom-control-label">&emsp;&emsp;NO3</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="Salinity_1" type="checkbox" class="custom-control-input" value="Salinity_1">
+                                    <label for="Salinity_1" class="custom-control-label">&emsp;&emsp;Salinity_1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="Salinity_2" type="checkbox" class="custom-control-input" value="Salinity_2">
+                                    <label for="Salinity_2" class="custom-control-label">&emsp;&emsp;Salinity_2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="Salinity_3" type="checkbox" class="custom-control-input" value="Salinity_3">
+                                    <label for="Salinity_3" class="custom-control-label">&emsp;&emsp;Salinity_3</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="pH_1" type="checkbox" class="custom-control-input" value="pH_1">
+                                    <label for="pH_1" class="custom-control-label">&emsp;&emsp;pH_1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="pH_2" type="checkbox" class="custom-control-input" value="pH_2">
+                                    <label for="pH_2" class="custom-control-label">&emsp;&emsp;pH_2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="pH_3" type="checkbox" class="custom-control-input" value="pH_3">
+                                    <label for="pH_3" class="custom-control-label">&emsp;&emsp;pH_3</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="O2_1" type="checkbox" class="custom-control-input" value="O2_1">
+                                    <label for="O2_1" class="custom-control-label">&emsp;&emsp;O2_1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="O2_2" type="checkbox" class="custom-control-input" value="O2_2">
+                                    <label for="O2_2" class="custom-control-label">&emsp;&emsp;O2_2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="O2_3" type="checkbox" class="custom-control-input" value="O2_3">
+                                    <label for="O2_3" class="custom-control-label">&emsp;&emsp;O2_3</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="ORP_1" type="checkbox" class="custom-control-input" value="ORP_1">
+                                    <label for="ORP_1" class="custom-control-label">&emsp;&emsp;ORP_1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="ORP_2" type="checkbox" class="custom-control-input" value="ORP_2">
+                                    <label for="ORP_2" class="custom-control-label">&emsp;&emsp;ORP_2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="ORP_3" type="checkbox" class="custom-control-input" value="ORP_3">
+                                    <label for="ORP_3" class="custom-control-label">&emsp;&emsp;ORP_3</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="WTemp_1" type="checkbox" class="custom-control-input" value="WTemp_1">
+                                    <label for="WTemp_1" class="custom-control-label">&emsp;&emsp;WTemp_1</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="WTemp_2" type="checkbox" class="custom-control-input" value="WTemp_2">
+                                    <label for="WTemp_2" class="custom-control-label">&emsp;&emsp;WTemp_2</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="WTemp_3" type="checkbox" class="custom-control-input" value="WTemp_3">
+                                    <label for="WTemp_3" class="custom-control-label">&emsp;&emsp;WTemp_3</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="Alkalinity" type="checkbox" class="custom-control-input" value="Alkalinity">
+                                    <label for="Alkalinity" class="custom-control-label">&emsp;&emsp;Alkalinity</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="TCBS" type="checkbox" class="custom-control-input" value="TCBS">
+                                    <label for="TCBS" class="custom-control-label">&emsp;&emsp;TCBS</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="TCBS綠菌" type="checkbox" class="custom-control-input" value="TCBS綠菌">
+                                    <label for="TCBS綠菌" class="custom-control-label">&emsp;&emsp;TCBS綠菌</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="Marine" type="checkbox" class="custom-control-input" value="Marine">
+                                    <label for="Marine" class="custom-control-label">&emsp;&emsp;Marine</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="螢光菌TCBS" type="checkbox" class="custom-control-input" value="螢光菌TCBS">
+                                    <label for="螢光菌TCBS" class="custom-control-label">&emsp;&emsp;螢光菌TCBS</label>
+                                </div>
+                                <div class="custom-control custom-checkbox custom-control-inline">
+                                    <input name="chart_select[]" id="螢光菌Marine" type="checkbox" class="custom-control-input" value="螢光菌Marine">
+                                    <label for="螢光菌Marine" class="custom-control-label">&emsp;&emsp;螢光菌Marine</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
                     <div class="form-inline" style = "width: 100% ; height: 40px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
@@ -590,6 +665,8 @@ if (!isset($_SESSION)) {
                             ?>
                         </div>
                     </div>
+
+                    <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
                 </form>
                 <!--//Search form-->
             </section>
@@ -607,7 +684,13 @@ if (!isset($_SESSION)) {
                 $start_date = $_POST["start_date"];
                 $end_date = $_POST["end_date"];
                 $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
-                $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
+
+                // $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
+                $chart_option = array() ;
+                foreach($_POST["chart_select"] as $selected) {
+                    array_push($chart_option , $selected) ;
+                }
+                print_r($chart_option);
                 
                 if(empty($start_date)){
                     $start_date = "true";
@@ -629,7 +712,8 @@ if (!isset($_SESSION)) {
                 else{
                     $tank = "TankID = " . "'{$tank}'";
                 }
-                if(is_null($chart_option)){
+
+                if(count($chart_option) == 0){
                     utility_window_msg_back("No chart option!!!");
                     return;
                 }
