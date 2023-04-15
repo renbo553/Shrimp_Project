@@ -30,7 +30,6 @@ function waterqualit_diagram_process($mysqli) : void{
     $result = $mysqli->query($sql);
 
     $data_array = array($data_option);
-
     // 此為使用select_box的code
     // create_waterquality_chart($result, $data_array);
     // 此為使用多選radio button的code

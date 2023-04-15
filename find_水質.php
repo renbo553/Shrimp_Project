@@ -528,7 +528,6 @@ if (!isset($_SESSION)) {
                         </div>
                         <div style = "width: 1%"> </div>
                     </div>
-
                     <div class="form-inline" style = "width: 100% ; height: 65px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: 48%">
@@ -652,7 +651,6 @@ if (!isset($_SESSION)) {
                     </div>
 
                     <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
-
                     <div class="form-inline" style = "width: 100% ; height: 40px">
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
@@ -686,6 +684,7 @@ if (!isset($_SESSION)) {
                 $start_date = $_POST["start_date"];
                 $end_date = $_POST["end_date"];
                 $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
+
                 // $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
                 $chart_option = array() ;
                 foreach($_POST["chart_select"] as $selected) {
@@ -713,6 +712,7 @@ if (!isset($_SESSION)) {
                 else{
                     $tank = "TankID = " . "'{$tank}'";
                 }
+
                 if(count($chart_option) == 0){
                     utility_window_msg_back("No chart option!!!");
                     return;
