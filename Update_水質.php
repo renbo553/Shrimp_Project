@@ -83,7 +83,8 @@ if ($fileSize == 0) {
         Marine='{$Marine}' , 
         螢光菌TCBS='{$螢光菌TCBS}' , 
         螢光菌Marine='{$螢光菌Marine}' , 
-        Note='{$note}' 
+        Note='{$note}',
+        image=''
         WHERE id = $id";
     $result = mysqli_query($link, $insertStr);
     if ($result) {

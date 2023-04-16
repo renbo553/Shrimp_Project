@@ -43,7 +43,7 @@
 													<div class=\"dropdown-divider\"></div>
 													<a class=\"dropdown-item\" href=\"add_水質\">水質</a>
 													<div class=\"dropdown-divider\"></div>
-													<a class=\"dropdown-item\" href=\"add_位置\">位置</a>
+													<a class=\"dropdown-item\" href=\"add_母種蝦資料\">母種蝦資料</a>
 												</div>	
 											</li>";
 										if($_SESSION["authority"] <= 1)
@@ -63,7 +63,7 @@
 														<div class=\"dropdown-divider\"></div>
 														<a class=\"dropdown-item\" href=\"find_水質\">水質</a>
 														<div class=\"dropdown-divider\"></div>
-														<a class=\"dropdown-item\" href=\"find_位置\">位置</a>
+														<a class=\"dropdown-item\" href=\"find_母種蝦資料\">母種蝦資料</a>
 													</div>	
 												</li>";
 										}

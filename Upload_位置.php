@@ -1,3 +1,4 @@
+<!-- 站存圖片的upload檔 -->
 <?php
 $db_host = '127.0.0.1';     //資料庫主機
 $db_user = 'root';          //資料庫使用者
@@ -84,7 +85,7 @@ if ($uploadOk == 0) {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "INSERT INTO location VALUES (null, '" . $eyetag . "', '" . $family . "', '" . $cleanbirthday . "', '" .  $cleancutdate . "', '" .  $cleanDate . "', '" . $tank . "', '" . $target_file . "');";
+    $insertStr = "INSERT INTO shrimp_info VALUES (null, '" . $eyetag . "', '" . $family . "', '" . $cleanbirthday . "', '" .  $cleancutdate . "', '" .  $cleanDate . "', '" . $tank . "', '" . $target_file . "');";
     
     $result = mysqli_query($link, $insertStr);
     if ($result) {

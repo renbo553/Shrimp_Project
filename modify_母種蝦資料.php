@@ -1,15 +1,15 @@
 <?php
 if (!isset($_SESSION)) {
 	session_start();
-	if (!isset($_SESSION["userid"])||$_SESSION["authority"]>1)
-      header("location:home");
+	if (!isset($_SESSION["userid"]) || $_SESSION["authority"] > 1)
+		header("location:home");
 };
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-	<title>修改 - 餵食</title>
+	<title>修改 - 母種蝦資料</title>
 	<!--Head-->
 	<?php require_once "head.html"?>
     <!--//Head-->
@@ -65,7 +65,7 @@ if (!isset($_SESSION)) {
         <div class="big_form"><p>
 			<section>
 				<form id="big_form" method="post" enctype="multipart/form-data">
-					<?php require_once "big_modify_feed.html" ?>
+					<?php require_once "big_modify_shrimp_info.html" ?>
 				</form>
 			</section>
         </p></div>
@@ -73,7 +73,7 @@ if (!isset($_SESSION)) {
         <div class="small_form"><p>
 			<section>
 				<form id="small_form" method="post" enctype="multipart/form-data">
-					<?php require_once "small_modify_feed.html"?>
+					<?php require_once "small_modify_shrimp_info.html"?>
 				</form>
 			</section>
         </p></div>
@@ -86,12 +86,12 @@ if (!isset($_SESSION)) {
     <!--Other Script-->
 	<?php require_once "other_script.html" ?>
     <!--//Other Script-->
-    
+
 		<script>
-			document.write('<script type="text/javascript" src="feed_check.js"></'+'script>');
+			document.write('<script type="text/javascript" src="shrimp_info_check.js"></'+'script>');
 
 			// 在頁面加載完成後執行初始化操作
-			window.onload = async function() {
+			window.onload = function() {
 				// 獲取要應用動畫的div元素
 				var big = document.querySelector("div.big_form") ;
 				var small = document.querySelector("div.small_form") ;
@@ -106,8 +106,8 @@ if (!isset($_SESSION)) {
 				});
 
 				var urlParams = new URLSearchParams(window.location.search);
-				await modify_put_into_form(urlParams , "big_form" , 1);
-				await modify_put_into_form(urlParams , "small_form" , 1);
+				modify_put_into_form(urlParams , "big_form" , 1);
+				modify_put_into_form(urlParams , "small_form" , 1);
 			}
 
 			// 避免視窗大小不同時使用之form不同所導致的bug => 當改變視窗大小時傳輸檔案
@@ -117,7 +117,7 @@ if (!isset($_SESSION)) {
 				var big_Data = new FormData(big_Form);
 				var small_Data = new FormData(small_Form);
 
-				modify_data_transfer(small_Data , "big_form") ;
+				data_transfer(small_Data , "big_form") ;
 				return ;
 			}
 			function change_to_small() {
@@ -126,10 +126,10 @@ if (!isset($_SESSION)) {
 				var big_Data = new FormData(big_Form);
 				var small_Data = new FormData(small_Form);
 
-				modify_data_transfer(big_Data , "small_form") ;
+				data_transfer(big_Data , "small_form") ;
 				return ;
 			}
-			
+
 			function all_data_msg(msg , formData) {
 				// 為上傳時最後確認的訊息
 				Swal.fire({
@@ -161,7 +161,7 @@ if (!isset($_SESSION)) {
 						}
 					})
 			}
-			
+
 			// big ---------------------------------------------------------------
 			function upload_big() {
 				// 此處是 javascript 寫法
@@ -197,62 +197,15 @@ if (!isset($_SESSION)) {
 					document.getElementById("show_image_small").style.width = "0px";
 				}
 			}
-			let fileCancel = false
 			$(document).ready(function() {
+				// 綁定事件
 				$("#uploadimage_big").change(function() {
-					fileCancel = false
+					//將新載入的image送給另一個form讀取
 					var from_image_filelist = this.files ;
 					document.getElementById("uploadimage_small").files = from_image_filelist ;
 					imageProc_small(this);
 					imageProc_big(this);
 				});
-				document.getElementById("uploadimage_big").addEventListener("click" , (e) => {
-					fileCancel = true ;
-					// 模擬取消事件
-					window.addEventListener(
-						'focus',
-						() => {
-							console.log("fuck")
-							setTimeout(() => {
-									if(fileCancel) {
-										document.getElementById("uploadimage_small").files = null ;
-										document.getElementById("uploadimage_big").files = null ;
-										document.getElementById("uploadimage_small").value = "" ;
-										document.getElementById("uploadimage_big").value = "" ;
-										document.getElementById("show_image_big").src = "";
-										document.getElementById("show_image_small").src = "";
-										document.getElementById("show_image_big").style.height = "0px";
-										document.getElementById("show_image_big").style.width = "0px";
-										document.getElementById("show_image_small").style.height = "0px";
-										document.getElementById("show_image_small").style.width = "0px";
-									}
-							}, 300)
-						},
-						{ once: true }
-					)
-				});
-				
-
-				// console.log("幹") ;
-				// document.getElementById("uploadimage_big").addEventListener("click" , (e) => {
-				// 	console.log("幹") ;
-				// 	console.log(document.getElementById("uploadimage_big").value) ;
-				// 	var from_image_filelist = document.getElementById("uploadimage_big").files ;
-				// 	console.log(from_image_filelist) ;
-				// 	document.getElementById("uploadimage_small").files = from_image_filelist ;
-				// 	imageProc_small(document.getElementById("uploadimage_big"));
-				// 	imageProc_big(document.getElementById("uploadimage_big"));
-				// }) ;
-				// // 綁定事件
-				// $("#uploadimage_big").change(function() {
-				// 	console.log("幹") ;
-    			// 	console.log(document.getElementById("uploadimage_big").files) ;
-				// 	//將新載入的image送給另一個form讀取
-				// 	var from_image_filelist = this.files ;
-                // 	document.getElementById("uploadimage_small").files = from_image_filelist ;
-				// 	imageProc_small(this);
-				// 	imageProc_big(this);
-				// });
 			});
 			//---------------------------------------------------------------------------
 

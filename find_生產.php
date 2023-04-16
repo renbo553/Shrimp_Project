@@ -177,6 +177,8 @@ if (!isset($_SESSION)) {
             </div>
         </div>
 
+        <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+
         <div class="form-inline" style = "width: 100% ; height: 40px">
             <div style = "width: 1%"> </div>
             <div style = "width: auto"> 

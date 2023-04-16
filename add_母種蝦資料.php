@@ -9,14 +9,14 @@ if (!isset($_SESSION)) {
 <html lang="zxx">
 
 <head>
-	<title> 新增 - 生產 </title>
+	<title>新增 - 母種蝦個體資料</title>
 	<!--Head-->
 	<?php require_once "head.html"?>
     <!--//Head-->
 </head>
 
 <body>
-    <!--Header-->
+	<!--Header-->
     <?php require_once "header.php" ?>
     <!--//Header-->
 
@@ -65,7 +65,7 @@ if (!isset($_SESSION)) {
 		<div class="big_form"><p>
 			<section>
 				<form id="big_form" method="post" enctype="multipart/form-data">
-					<?php require "big_breed_table.html"?>
+					<?php require "big_shrimp_info_table.html"?>
 				</form>
 			</section>
 		</p></div>
@@ -73,7 +73,7 @@ if (!isset($_SESSION)) {
 		<div class="small_form"><p>
 			<section>
 				<form id="small_form" method="post" enctype="multipart/form-data">
-					<?php require "small_breed_table.html"?>
+					<?php require "small_shrimp_info_table.html"?>
 				</form>
 			</section>
 		</p></div>
@@ -87,7 +87,7 @@ if (!isset($_SESSION)) {
 	<?php require_once "other_script.html" ?>
     <!--//Other Script-->
 
-    <script> document.write('<script type="text/javascript" src="breed_check.js"></'+'script>'); </script>
+	<script> document.write('<script type="text/javascript" src="shrimp_info_check.js"></'+'script>'); </script>
 
 	<script>
 		// 在頁面加載完成後執行初始化操作
@@ -178,6 +178,7 @@ if (!isset($_SESSION)) {
         $(document).ready(function() {
             // 綁定事件
             $("#uploadimage_big").change(function() {
+                console.log(this.files) ;
                 //將新載入的image送給另一個form讀取
                 var from_image_filelist = this.files ;
                 document.getElementById("uploadimage_small").files = from_image_filelist ;
@@ -233,7 +234,30 @@ if (!isset($_SESSION)) {
             });
         });
         //---------------------------------------------------------------------------
-	</script>
+
+			var imageProc = function(input) {
+				if (input.files && input.files[0]) {
+					// 建立一個 FileReader 物件
+					var reader = new FileReader();
+					// 當檔案讀取完後，所要進行的動作
+					reader.onload = function(e) {
+						// 顯示圖片
+						$('#show_image').attr("src", e.target.result).css("height", "500px").css("width", "500px");
+						// // 將 DataURL 放到表單中
+						// $("input[name='imagestring']").val(e.target.result);
+					};
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			$(document).ready(function() {
+				// 綁定事件
+				$("#uploadimage").change(function() {
+					imageProc(this);
+				});
+
+			});
+
+		</script>
 </body>
 
 </html>

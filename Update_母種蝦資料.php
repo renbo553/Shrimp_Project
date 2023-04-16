@@ -20,16 +20,15 @@ $target_dir = "images/";
 $id = filter_input(INPUT_POST, 'id');
 $eyetag = filter_input(INPUT_POST, 'eye');
 $family = filter_input(INPUT_POST, 'family');
-$male_family = filter_input(INPUT_POST, 'male_family');
+$birthday = filter_input(INPUT_POST, 'birthday');
 $cutday = filter_input(INPUT_POST, 'cutday');
-$cutweight = filter_input(INPUT_POST, 'cutweight');
-$mating = filter_input(INPUT_POST, 'mating');
-$spawningroomdate = filter_input(INPUT_POST, 'spawningroomdate');
-$spawningweight = filter_input(INPUT_POST, 'spawningweight');
-$ovarystate = filter_input(INPUT_POST, 'ovarystate');
-
+$enterday = filter_input(INPUT_POST, 'enterday');
+$live_or_die = filter_input(INPUT_POST, 'live_or_die');
+$weight = filter_input(INPUT_POST, 'weight');
+$tank = filter_input(INPUT_POST, 'location');
+$cleanbirthday = str_replace("/", "", $birthday);
 $cleancutday = str_replace("/", "", $cutday);
-$cleanspawningroomdate = str_replace("/", "", $spawningroomdate);
+$cleanenterday = str_replace("/", "", $enterday);
 
 $fileType = $_FILES['fileField']['type']; //檔案類型
 $fileSize = $_FILES['fileField']['size']; //檔案大小（byte為單位）
@@ -40,23 +39,22 @@ if ($fileSize == 0) {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "UPDATE breed SET 
-        眼標 ='{$eyetag}',
-        家族='{$family}',
-        剪眼日期='{$cleancutday}',
-        剪眼體重 ='{$cutweight}',
-        進產卵室待產日期 ='{$cleanspawningroomdate}',
-        生產體重='{$spawningweight}',
-        卵巢進展階段='{$ovarystate}',
-        公蝦家族='{$male_family}',
-        交配方式='{$mating}',
-        image=''
+    $insertStr = "UPDATE shrimp_info SET 
+        眼標 ='{$eyetag}', 
+        家族='{$family}', 
+        體重 = '{$weight}', 
+        生存狀態 = '{$live_or_die}' , 
+        出生日期='{$cleanbirthday}', 
+        剪眼日期='{$cleancutday}', 
+        進蝦日期='{$cleanenterday}', 
+        tankid='{$tank}',
+        image='' 
         WHERE id = $id";
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
     } else {
-        echo "無圖片上傳，修改資料庫失敗\n";
+        echo "修改資料庫失敗\n";
     }
 } else {
     /* 取得上傳檔案的副檔名 */
@@ -112,23 +110,22 @@ if ($fileSize == 0) {
         /* 定義 SQL 字串的變數 */
         /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
         /* 所以，可以直接設定它是 null */
-        $insertStr = "UPDATE breed SET 
-            眼標 ='{$eyetag}',
+        $insertStr = "UPDATE shrimp_info SET 
+            眼標 ='{$eyetag}', 
             家族='{$family}',
-            剪眼日期='{$cleancutday}',
-            剪眼體重 ='{$cutweight}',
-            進產卵室待產日期 ='{$cleanspawningroomdate}',
-            生產體重='{$spawningweight}',
-            卵巢進展階段='{$ovarystate}',
-            公蝦家族='{$male_family}',
-            交配方式='{$mating}', 
-            image = '{$target_file}' 
+            體重 = '{$weight}', 
+            生存狀態 = '{$live_or_die}' , 
+            出生日期='{$cleanbirthday}', 
+            剪眼日期='{$cleancutday}', 
+            進蝦日期='{$cleanenterday}', 
+            tankid='{$tank}' , 
+            image='{$target_file}' 
             WHERE id = $id";
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";
         } else {
-            echo "圖片上傳，修改資料庫失敗\n";
+            echo "修改資料庫失敗\n";
         }
     }
 }

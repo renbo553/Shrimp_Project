@@ -283,6 +283,7 @@ function html_show_all_data (formData) {
     var food_weight = formData.get('food_weight') ;
     var food_remain = formData.get('food_remain') ;
     var FeedingRatio = formData.get('FeedingRatio') ;
+    var Observation = formData.get('Observation') ;
 
     const map = new Map()
     map.set("TankID" , "TankID") ;
@@ -303,6 +304,7 @@ function html_show_all_data (formData) {
     map.set("food_weight" , "餵食量") ;
     map.set("food_remain" , "殘餌量") ;
     map.set("FeedingRatio" , "FeedingRatio") ;
+    map.set("Observation" , "備註") ;
 
     //用 array 先把超過範圍的資料存起來
     var all_data_name = [] ;
@@ -345,6 +347,11 @@ function html_show_all_data (formData) {
     all_data_num.push(food_weight) ;
     all_data_num.push(food_remain) ;
     all_data_num.push(FeedingRatio) ;
+    
+    if(Observation != "") {
+        all_data_name.push(map.get("Observation")) ;
+        all_data_num.push(Observation) ;
+    }
 
     //建立一個新的html檔來當作提示訊息，append_div為要插入的訊息
     var new_html = document.createElement('div') ;
@@ -416,23 +423,30 @@ function place_picture(target_id , show_picture_id , picture_address) {
     reader.readAsDataURL(document.getElementById(target_id).files[0]);
 }
 
-function modify_put_into_form (data , form_id , is_modify) {
+async function modify_put_into_form (data , form_id , is_modify) {
+    var Filelist ;
     //show data on 詳細資料_餵食
     if(is_modify == 1) {
         if(data.get("image") != "") {
-            fetch(data.get("image"))
+            Filelist = fetch(data.get("image"))
                 .then(response => response.blob())
                 .then(blob => {
-                    // 创建新的文件对象
+                    // 創建新的文件對象
                     var files = [
                         new File([blob], data.get("image") + ".jpg" , { type: 'image/jpeg' } )
                     ];
                     
-                    document.getElementById("uploadimage_big").files = new FileListItems(files) ;
-                    document.getElementById("uploadimage_small").files = new FileListItems(files) ;
-                    place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
-                    place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
+                    return new FileListItems(files) ;
+                    
                 });
+                // console.log(Filelist)
+                file = await Filelist.then((value) => {
+                    return value;
+                });
+                document.getElementById("uploadimage_big").files = file ;
+                document.getElementById("uploadimage_small").files = file ;
+                place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
+                place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
         }
     }
     document.getElementById(form_id).elements["select_type"].value = data.get("shrimp") ;

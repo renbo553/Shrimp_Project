@@ -125,10 +125,10 @@ if (!isset($_SESSION)) {
     </style>
     <!-- table style -->
 
-        <!-- table -->
-        <div>
-        <span id="M1"></span>
-        <span id="M2"></span>
+    <!-- table -->
+    <div>
+        <span id="M1" style="display: none; height: 0px; width: 0px;"></span>
+        <span id="M2" style="display: none; height: 0px; width: 0px;"></span>
         <div id="tab">
         <!– 頁籤按鈕 –>
         <ul>
@@ -655,15 +655,17 @@ if (!isset($_SESSION)) {
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
                             <?php
-                                utility_button("submit", "設定");
+                                utility_button("submit", "繪製");
                             ?>
                         </div>
+                        <!--
                         <div style = "width: 1%"> </div>
                         <div style = "width: auto">
                             <?php
                                 utility_button_onclick("chart.php", "繪製");
                             ?>
                         </div>
+                        -->
                     </div>
 
                     <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
@@ -687,10 +689,11 @@ if (!isset($_SESSION)) {
 
                 // $chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
                 $chart_option = array() ;
-                foreach($_POST["chart_select"] as $selected) {
-                    array_push($chart_option , $selected) ;
+                if(isset($_POST["chart_select"])) {
+                    foreach($_POST["chart_select"] as $selected) {
+                        array_push($chart_option , $selected) ;
+                    }
                 }
-                print_r($chart_option);
                 
                 if(empty($start_date)){
                     $start_date = "true";
@@ -707,19 +710,26 @@ if (!isset($_SESSION)) {
                     $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
                 }
                 if(is_null($tank)){
-                    $tank = "true";
+                    echo "<script> Alert('請選擇tankid'); </script>";
+                    echo "<script> window.location.href='find_水質.php#M2'; </script>";
+                    return;
                 }
                 else{
                     $tank = "TankID = " . "'{$tank}'";
                 }
 
                 if(count($chart_option) == 0){
-                    utility_window_msg_back("No chart option!!!");
+                    echo "<script> Alert('請選擇繪製項目(至少一個)'); </script>";
+                    echo "<script> window.location.href='find_水質.php#M2'; </script>";
                     return;
                 }
                 $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank}";
                 utility_session_insert(DRAW_QUERY, $sql);
                 utility_session_insert("chart_option", $chart_option);
+                
+                echo "<script type='text/javascript'>";
+		        echo "window.location.href='chart'";
+	            echo "</script>";
             }
             ?>
         </p></div>
