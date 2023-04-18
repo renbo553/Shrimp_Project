@@ -95,11 +95,11 @@ else {
     /* 所以，可以直接設定它是 null */
 
     /* Check whether input eyetag has already existed */
-    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = $eyetag" ;
+    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
     // sql query string
     $stmt = mysqli_query($link, $sql);
     $insertStr = "" ;
-    if($stmt==null) $insertStr = "INSERT INTO shrimp_info VALUES 
+    if(mysqli_num_rows($stmt) == 0) $insertStr = "INSERT INTO shrimp_info VALUES 
         (null, 
         '" . $eyetag . "', 
         '" . $family . "', 
@@ -120,7 +120,18 @@ else {
         進蝦日期='{$cleanenterday}', 
         tankid='{$tank}' , 
         image='{$target_file}' 
-        WHERE 眼標 = $eyetag";
+        WHERE 眼標 = '$eyetag'";
+
+    // 上傳的同時要更新生產的資料
+    // 先看有沒有該種蝦的生產紀錄
+    $sql = "SELECT 眼標 FROM breed WHERE 眼標 = '$eyetag'" ;
+    $stmt = mysqli_query($link, $sql);
+    if(mysqli_num_rows($stmt) != 0) {
+        $update_breed_str = "UPDATE breed SET
+            剪眼日期='{$cleancutday}'
+            WHERE 眼標 = '$eyetag'";
+        mysqli_query($link, $update_breed_str);
+    }
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "新增資料庫成功\n";

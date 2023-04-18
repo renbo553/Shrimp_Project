@@ -50,6 +50,17 @@ if ($fileSize == 0) {
         tankid='{$tank}',
         image='' 
         WHERE id = $id";
+    
+    // 上傳的同時要更新生產的資料
+    // 先看有沒有該種蝦的生產紀錄
+    $sql = "SELECT 眼標 FROM breed WHERE 眼標 = '$eyetag'" ;
+    $stmt = mysqli_query($link, $sql);
+    if(mysqli_num_rows($stmt) != 0) {
+        $update_breed_str = "UPDATE breed SET
+            剪眼日期='{$cleancutday}'
+            WHERE 眼標 = '{$eyetag}'";
+        mysqli_query($link, $update_breed_str);
+    }
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
@@ -121,6 +132,17 @@ if ($fileSize == 0) {
             tankid='{$tank}' , 
             image='{$target_file}' 
             WHERE id = $id";
+        
+        // 上傳的同時要更新生產的資料
+        // 先看有沒有該種蝦的生產紀錄
+        $sql = "SELECT 眼標 FROM breed WHERE 眼標 = '$eyetag'" ;
+        $stmt = mysqli_query($link, $sql);
+        if(mysqli_num_rows($stmt) != 0) {
+            $update_breed_str = "UPDATE breed SET
+                剪眼日期='{$cleancutday}'
+                WHERE 眼標 = '{$eyetag}'";
+            mysqli_query($link, $update_breed_str);
+        }
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

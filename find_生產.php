@@ -319,13 +319,6 @@ if (!isset($_SESSION)) {
             $sort_order = "DESC";
         }
 
-        /* search data from database */
-        $sql = "SELECT * FROM breed WHERE {$family} AND {$eyetag} AND {$ablation_date} AND {$ablation_weight} AND {$expectant_date} AND {$breed_weight} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
-        $result = $mysqli->query($sql);
-
-        /* show search result */
-        show_breed_result($result);
-
         // 2/18 新增項目----------
         if(is_null($breed_type)){
             $breed_type = "true";

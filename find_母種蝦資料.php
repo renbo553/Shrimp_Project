@@ -368,6 +368,7 @@ if (!isset($_SESSION)) {
                     '&tankid='.$row["tankid"] .
                     '&weight='.$row["體重"] .
                     '&live_or_die='.$row["生存狀態"] .
+                    '&image='. $row["image"] .
                     '">修改</a></td>
                     <td><a href="delete?id=' . $row['id'] . '&type=shrimp_info" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
             }

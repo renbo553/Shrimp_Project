@@ -197,8 +197,8 @@ if (!isset($_SESSION)) {
 					document.getElementById("show_image_small").style.width = "0px";
 				}
 			}
-			let fileCancel = false
 			$(document).ready(function() {
+				//實作按下取消即不選檔案
 				$("#uploadimage_big").change(function() {
 					fileCancel = false
 					var from_image_filelist = this.files ;
@@ -231,28 +231,6 @@ if (!isset($_SESSION)) {
 						{ once: true }
 					)
 				});
-				
-
-				// console.log("幹") ;
-				// document.getElementById("uploadimage_big").addEventListener("click" , (e) => {
-				// 	console.log("幹") ;
-				// 	console.log(document.getElementById("uploadimage_big").value) ;
-				// 	var from_image_filelist = document.getElementById("uploadimage_big").files ;
-				// 	console.log(from_image_filelist) ;
-				// 	document.getElementById("uploadimage_small").files = from_image_filelist ;
-				// 	imageProc_small(document.getElementById("uploadimage_big"));
-				// 	imageProc_big(document.getElementById("uploadimage_big"));
-				// }) ;
-				// // 綁定事件
-				// $("#uploadimage_big").change(function() {
-				// 	console.log("幹") ;
-    			// 	console.log(document.getElementById("uploadimage_big").files) ;
-				// 	//將新載入的image送給另一個form讀取
-				// 	var from_image_filelist = this.files ;
-                // 	document.getElementById("uploadimage_small").files = from_image_filelist ;
-				// 	imageProc_small(this);
-				// 	imageProc_big(this);
-				// });
 			});
 			//---------------------------------------------------------------------------
 
@@ -292,13 +270,38 @@ if (!isset($_SESSION)) {
 				}
 			}
 			$(document).ready(function() {
-				// 綁定事件
+				//實作按下取消即不選檔案
 				$("#uploadimage_small").change(function() {
-					//將新載入的image送給另一個form讀取
+					fileCancel = false
 					var from_image_filelist = this.files ;
 					document.getElementById("uploadimage_big").files = from_image_filelist ;
-					imageProc_big(this);
 					imageProc_small(this);
+					imageProc_big(this);
+				});
+				document.getElementById("uploadimage_small").addEventListener("click" , (e) => {
+					fileCancel = true ;
+					// 模擬取消事件
+					window.addEventListener(
+						'focus',
+						() => {
+							console.log("fuck")
+							setTimeout(() => {
+									if(fileCancel) {
+										document.getElementById("uploadimage_small").files = null ;
+										document.getElementById("uploadimage_big").files = null ;
+										document.getElementById("uploadimage_small").value = "" ;
+										document.getElementById("uploadimage_big").value = "" ;
+										document.getElementById("show_image_big").src = "";
+										document.getElementById("show_image_small").src = "";
+										document.getElementById("show_image_big").style.height = "0px";
+										document.getElementById("show_image_big").style.width = "0px";
+										document.getElementById("show_image_small").style.height = "0px";
+										document.getElementById("show_image_small").style.width = "0px";
+									}
+							}, 300)
+						},
+						{ once: true }
+					)
 				});
 			});
 			//---------------------------------------------------------------------------
