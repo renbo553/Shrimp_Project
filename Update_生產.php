@@ -52,6 +52,18 @@ if ($fileSize == 0) {
         交配方式='{$mating}',
         image=''
         WHERE id = $id";
+    
+    // 上傳的同時要更新母種蝦資料庫的資料
+    // 先看有沒有該種蝦的母種蝦資料庫的資料
+    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
+    $stmt = mysqli_query($link, $sql);
+    if(mysqli_num_rows($stmt) != 0) {
+        $update_breed_str = "UPDATE shrimp_info SET
+            剪眼日期='{$cleancutday}'
+            WHERE 眼標 = '$eyetag'";
+        mysqli_query($link, $update_breed_str);
+    }
+    
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
@@ -124,6 +136,18 @@ if ($fileSize == 0) {
             交配方式='{$mating}', 
             image = '{$target_file}' 
             WHERE id = $id";
+        
+        // 上傳的同時要更新母種蝦資料庫的資料
+        // 先看有沒有該種蝦的母種蝦資料庫的資料
+        $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
+        $stmt = mysqli_query($link, $sql);
+        if(mysqli_num_rows($stmt) != 0) {
+            $update_breed_str = "UPDATE shrimp_info SET
+                剪眼日期='{$cleancutday}'
+                WHERE 眼標 = '$eyetag'";
+            mysqli_query($link, $update_breed_str);
+        }
+
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

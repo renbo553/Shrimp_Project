@@ -93,7 +93,7 @@ function html_show_all_data(formData) {
     //先去察看母種蝦資料中是否有這個眼標-------------------------------------------------
     var shrimp_info_has_eyetag = 0 ;
     $.ajax({
-        url: 'check_shrimp_info_eyetag.php?eye='+eye,
+        url: 'check_eyetag.php?eye='+eye+'&UI_type='+"shrimp_info",
         type: 'POST',
         // data: {'eye' : eye},
         cache: false,
@@ -120,7 +120,7 @@ function html_show_all_data(formData) {
     //再去察看breed中是否有這個眼標-------------------------------------------------
     var breed_has_eyetag = 0 ;
     $.ajax({
-        url: 'check_breed_eyetag.php?eye='+eye,
+        url: 'check_eyetag.php?eye='+eye+'&UI_type='+"breed",
         type: 'POST',
         // data: {'eye' : eye},
         cache: false,

@@ -94,7 +94,30 @@ else {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "INSERT INTO breed VALUES (null, '" . $family . "', '" . $eyetag .  "', '" . $cleancutday . "', '" . $cutweight . "', '" . $cleanspawningroomdate . "', '" . $spawningweight . "', '" . $ovarystate . "', '" . $male_family . "', '" . $mating . "', '" . $target_file . "');";
+    $insertStr = "INSERT INTO breed VALUES 
+        (null, 
+        '" . $family . "',
+        '" . $eyetag .  "', 
+        '" . $cleancutday . "', 
+        '" . $cutweight . "', 
+        '" . $cleanspawningroomdate . "', 
+        '" . $spawningweight . "', 
+        '" . $ovarystate . "', 
+        '" . $male_family . "', 
+        '" . $mating . "', 
+        '" . $target_file . "');";
+
+    // 上傳的同時要更新母種蝦資料庫的資料
+    // 先看有沒有該種蝦的母種蝦資料庫的資料
+    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
+    $stmt = mysqli_query($link, $sql);
+    if(mysqli_num_rows($stmt) != 0) {
+        $update_breed_str = "UPDATE shrimp_info SET
+            剪眼日期='{$cleancutday}'
+            WHERE 眼標 = '$eyetag'";
+        mysqli_query($link, $update_breed_str);
+    }
+
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "新增資料庫成功\n";

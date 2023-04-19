@@ -96,8 +96,35 @@ function html_show_all_data(formData) {
     var new_html = document.createElement('div') ;
 
     var a_div = document.createElement('div') ;
-    a_div.textContent = "請確認所有資料:\n " ;
+    a_div.textContent = "請確認所有資料:\n(藍色剪眼日期是會影響到母種蝦資料庫中相同眼標的資料)\n " ;
     new_html.appendChild(a_div) ;
+
+    //先去察看母種蝦資料中是否有這個眼標-------------------------------------------------
+    var shrimp_info_has_eyetag = 0 ;
+    $.ajax({
+        url: 'check_eyetag.php?eye='+eye+'&UI_type='+"shrimp_info",
+        type: 'POST',
+        // data: {'eye' : eye},
+        cache: false,
+        dataType: 'json',
+        async: false,
+        //下面兩者一定要false
+        processData: false,
+        contentType: false,
+
+        success: function(backData) {
+            shrimp_info_has_eyetag = backData ;
+        },
+        error: function() {
+            Swal.fire({
+                title: backData,
+                confirmButtonText: "確認",
+            }).then((result) => {
+                $('#backmsg').html("取得資料失敗...");
+            });
+        },
+    });
+    //----------------------------------------------------------------------
 
     //append 所有資料上去
     for(var i = 0 ; i < all_data_name.length ; i ++ ) {
@@ -115,7 +142,8 @@ function html_show_all_data(formData) {
 
         var second_span = document.createElement('span');
         second_span.textContent = all_data_num[i] ;
-        second_span.style.color = 'black' ;
+        if(all_data_name[i] == "剪眼日期" && shrimp_info_has_eyetag == 1) second_span.style.color = 'blue' ;
+        else second_span.style.color = 'black' ;
         append_div.append(second_span) ;
 
         // 設定div中span的比例
