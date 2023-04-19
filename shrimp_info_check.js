@@ -277,6 +277,10 @@ async function modify_put_into_form(data , form_id , is_modify) {
                 place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
         }
     }
+    else {
+        document.getElementById(form_id).elements["hidden_tankid"].value = data.get("tankid") ;
+        document.getElementById(form_id).elements["hidden_eye"].value = data.get("eye") ;
+    }
     document.getElementById(form_id).elements["id"].value = data.get("id") ;
     document.getElementById(form_id).elements["family"].value = data.get("family") ;
     document.getElementById(form_id).elements["enterday"].value = data.get('enterday') ;

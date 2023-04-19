@@ -1,13 +1,5 @@
 <div class="form-inline" style = "width: 100% ; height: 50px">
     <div style = "width: 3%"> </div>
-    <div style = "width: 20%"> Index </div>
-    <div style = "width: 20%">
-        <input id="id" name="id" class="form-control" readonly>
-    </div>
-</div>
-
-<div class="form-inline" style = "width: 100% ; height: 50px">
-    <div style = "width: 3%"> </div>
     <div style = "width: 20%"> 日期 </div>
     <div style = "width: 20%">
         <input id="date" name="date" type="date" class="form-control" value = "<?php echo date("Y-m-d"); ?>">
@@ -16,18 +8,10 @@
 
 <div class="form-inline" style = "width: 100% ; height: 50px">
     <div style = "width: 3%"> </div>
-    <div style = "width: 20%"> 眼標 </div>
-    <div style = "width: 20%">
-        <input id="eye" name="eye" type="text" class="form-control">
-    </div>
-</div>
-
-<div class="form-inline" style = "width: 100% ; height: 50px">
-    <div style = "width: 3%"> </div>
     <div style = "width: 20%"> 卵巢狀態 </div>
     <div style = "width: 20%">
         <select id="ovarystate" name="ovarystate" class="custom-select">
-            <option value=""></option>
+            <option value="none" selected disabled hidden></option>
             <option value="0">0</option>
             <option value="0-Ⅰ">0-Ⅰ</option>
             <option value="Ⅰ">Ⅰ</option>
@@ -44,15 +28,11 @@
     </div>
 </div>
 
-<div class="form-inline" style = "width: 100% ; height: 5px">
-    <div style = "height: 1px"> </div>
-</div>
-
 <div class="form-inline" style = "width: 100% ; height: 50px">
     <div style = "width: 3%"> </div>
-    <div style = "width: 20%"> 上傳紙本圖片 </div>
+    <div style = "width: 20%"> 眼標 </div>
     <div style = "width: 20%">
-        <input accept="image/*" type="file"  name="fileField" id="uploadimage_big">
+        <input id="eye" name="eye" type="text" class="form-control">
     </div>
 </div>
 
@@ -62,10 +42,12 @@
 
 <div class="form-inline" style = "width: 100%">
     <div style = "width: 3%"> </div>
-    <div style = "width: 20%"> 圖片預覽 </div>
+    <div style = "width: 20%">
+        <div> 上傳紙本圖片 </div>
+    </div>
     <div style = "width: 5px"> </div>
-    <div style = "width: auto">
-        <img id="show_image_big">
+    <div style = "width: 30%"> 
+        <input accept="image/*" type="file" name="fileField" id="uploadimage_big">
     </div>
 </div>
 
@@ -73,8 +55,27 @@
     <div style = "height: 1px"> </div>
 </div>
 
-<div class="form-inline" style = "width: 100% ; height: 50px">
+<div class="form-inline" style = "width: 100%">
     <div style = "width: 3%"> </div>
-    <button type="button" class="btn btn-primary" onclick="upload_big()">修改</button>
+    <div style = "width: 20%"> 
+        <div> 圖片預覽 </div>
+    </div>
+    <div style = "width: 5px"> </div>
+    <div style = "width: auto">
+        <img id="show_image_big" src="">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 5px">
+    <div style = "height: 1px"> </div>
+</div>
+
+<div class="form-inline" style = "width: 100%">
+    <div style = "width: 3%"> </div>
+    <button type="button" class="btn btn-primary" onclick="upload_big()">上傳</button>
     <div id="backmsg"></div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 1px"> </div>
 </div>
