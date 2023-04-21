@@ -70,19 +70,25 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 家族 </div>
+                <div> 查詢方式("及" or "或") </div>
                 <div class="input-group">
-                    <?php
-                        utility_textbox("family", "家族");    
+                    <?php 
+                        $and_option_array = array();
+                        $and_option_array["及"] = "and";
+                        $and_option_array["或"] = "or";
+                        utility_selectbox("and_or", "查詢方式", $and_option_array);
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
-			<div style = "width: 48%">
-                <div> 體重 </div>
+            <div style = "width: 48%">
+                <div> 生存狀態 </div>
                 <div class="input-group">
                     <?php
-                        utility_textbox("weight", "體重");
+                        $live_option_array = array();
+                        $live_option_array["存活"] = "存活";
+                        $live_option_array["死亡"] = "死亡";
+                        utility_selectbox("live_or_die", "live_or_die", $live_option_array);
                     ?>
                 </div>
             </div>
@@ -117,19 +123,31 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 剪眼日期 </div>
+                <div> 家族 </div>
                 <div class="input-group">
                     <?php
-                        utility_date("cutday", "剪眼日期");    
+                        utility_textbox("family", "家族");    
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+			<div style = "width: 48%">
+                <div> 體重最小值 </div>
+                <div class="input-group">
+                    <?php
+                        utility_textbox("weight_min", "體重最小值");
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
 			<div style = "width: 48%">
-                <div> 出生日期 </div>
+                <div> 體重最大值 </div>
                 <div class="input-group">
                     <?php
-                        utility_date("birthday", "出生日期");
+                        utility_textbox("weight_max", "體重最大值");
                     ?>
                 </div>
             </div>
@@ -138,22 +156,61 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 進蝦日期 </div>
+                <div> 剪眼日期(起始) </div>
                 <div class="input-group">
                     <?php
-                        utility_date("enterday", "進蝦日期");    
+                        utility_date("cutday_begin", "剪眼日期(起始)");    
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
 			<div style = "width: 48%">
-                <div> 生存狀態 </div>
+                <div> 剪眼日期(結束) </div>
                 <div class="input-group">
                     <?php
-                        $live_option_array = array();
-                        $live_option_array["存活"] = "存活";
-                        $live_option_array["死亡"] = "死亡";
-                        utility_selectbox("live_or_die", "live_or_die", $live_option_array);
+                        utility_date("cutday_end", "剪眼日期(結束)");
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 出生日期(起始) </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("birthday_begin", "出生日期(起始)");    
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 出生日期(結束) </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("birthday_end", "出生日期(結束)");
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 進蝦日期(起始) </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("enterday_begin", "進蝦日期(起始)");    
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 進蝦日期(結束) </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("enterday_end", "進蝦日期(結束)");    
                     ?>
                 </div>
             </div>
@@ -224,64 +281,104 @@ if (!isset($_SESSION)) {
         /* fetch post input data */
         $eyetag = trim($_POST["eye"]);
         $family = trim($_POST["family"]);
-        $birthday = $_POST["birthday"];
-        $cutday = $_POST["cutday"];
-        $enterday = $_POST["enterday"];
-        $weight = $_POST["weight"];
+        $birthday_begin = $_POST["birthday_begin"];
+        $birthday_end = $_POST["birthday_end"];
+        $cutday_begin = $_POST["cutday_begin"];
+        $cutday_end = $_POST["cutday_end"];
+        $enterday_begin = $_POST["enterday_begin"];
+        $enterday_end = $_POST["enterday_end"];
+        $weight_min = $_POST["weight_min"];
+        $weight_max = $_POST["weight_max"];
         $live_or_die = isset($_POST["live_or_die"]) ? $_POST["live_or_die"] : null;
         $tankid = isset($_POST["tankid"]) ? $_POST["tankid"] : null;
         $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
         $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+        $and_or = isset($_POST["and_or"]) ? $_POST["and_or"] : "and";
         
         /* concatenate sql where clause or set default value if not specified */
         if(empty($eyetag)){
-            $eyetag = "true";
+            $eyetag = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $eyetag = "眼標 = " . "'{$eyetag}'";
         }
         if(empty($family)){
-            $family = "true";
+            $family = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $family = "家族 = " . "'{$family}'";
         }
-        if(empty($birthday)){
-            $birthday = "true";
-        }
-        else{
-            $birthday = "出生日期 = " . "'{$birthday}'";
-        }
-        if(empty($cutday)){
-            $cutday = "true";
-        }
-        else{
-            $cutday = "剪眼日期 = " . "'{$cutday}'";
-        }
-        if(empty($enterday)){
-            $enterday = "true";
-        }
-        else{
-            $enterday = "進蝦日期 = " . "'{$enterday}'";
-        }
         if(is_null($live_or_die)){
-            $live_or_die = "true";
+            $live_or_die = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $live_or_die = "生存狀態 = " . "'{$live_or_die}'";
         }
         if(is_null($tankid)){
-            $tankid = "true";
+            $tankid = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $tankid = "tankid = " . "'{$tankid}'";
         }
-        if(empty($weight)){
-            $weight = "true";
+
+        //日期-------------------------------------------------------------------------------------
+        if(empty($birthday_begin)){
+            $birthday_begin = ($and_or == "and") ? "true" : "false" ;
         }
         else{
-            $weight = "體重 = " . "'{$weight}'";
+            $birthday_begin = str_replace('-', '', $birthday_begin);
+            $birthday_begin = "CAST(REPLACE(出生日期, '-', '') AS UNSIGNED) >= {$birthday_begin}";
         }
+        if(empty($birthday_end)){
+            $birthday_end = ($and_or == "and" || ($birthday_begin != "true" && $birthday_begin != "false")) ? "true" : "false" ;
+        }
+        else{
+            $birthday_end = str_replace('-', '', $birthday_end);
+            $birthday_end = "CAST(REPLACE(出生日期, '-', '') AS UNSIGNED) <= {$birthday_end}";
+        }
+        if(empty($cutday_begin)){
+            $cutday_begin = ($and_or == "and") ? "true" : "false" ;
+        }
+        else{
+            $cutday_begin = str_replace('-', '', $cutday_begin);
+            $cutday_begin = "CAST(REPLACE(剪眼日期, '-', '') AS UNSIGNED) >= {$cutday_begin}";
+        }
+        if(empty($cutday_end)){
+            $cutday_end = ($and_or == "and" || ($cutday_begin != "true" && $cutday_begin != "false")) ? "true" : "false" ;
+        }
+        else{
+            $cutday_end = str_replace('-', '', $cutday_end);
+            $cutday_end = "CAST(REPLACE(剪眼日期, '-', '') AS UNSIGNED) <= {$cutday_end}";
+        }
+        if(empty($enterday_begin)){
+            $enterday_begin = ($and_or == "and") ? "true" : "false" ;
+        }
+        else{
+            $enterday_begin = str_replace('-', '', $enterday_begin);
+            $enterday_begin = "CAST(REPLACE(進蝦日期, '-', '') AS UNSIGNED) >= {$enterday_begin}";
+        }
+        if(empty($enterday_end)){
+            $enterday_end = ($and_or == "and" || ($enterday_begin != "true" && $enterday_begin != "false")) ? "true" : "false" ;
+        }
+        else{
+            $enterday_end = str_replace('-', '', $enterday_end);
+            $enterday_end = "CAST(REPLACE(進蝦日期, '-', '') AS UNSIGNED) <= {$enterday_end}";
+        }
+        // 體重----------------------------------------------------------------------------
+        if(empty($weight_min)){
+            $weight_min = ($and_or == "and") ? "true" : "false" ;
+        }
+        else{
+            $weight_min = "剪眼體重 >= " . "'{$weight_min}'" ;
+        }
+        if(empty($weight_max)){
+            $weight_max = ($and_or == "and" || ($weight_min != "true" && $weight_min != "false")) ? "true" : "false" ;
+        }
+        else{
+            $weight_max = "剪眼體重 <= " . "'{$weight_max}'" ;
+        }
+    
+
         if(is_null($sort_key)){
             $sort_key = "id";
         }
@@ -291,7 +388,26 @@ if (!isset($_SESSION)) {
 
 
         /* search data from database */
-        $sql = "SELECT * FROM shrimp_info WHERE {$eyetag} AND {$family} AND {$birthday} AND {$cutday} AND {$enterday} AND {$tankid} AND {$live_or_die} AND {$weight} ORDER BY {$sort_key} {$sort_order}";
+        if($and_or == "and") $sql = "SELECT * FROM shrimp_info WHERE 
+            BINARY {$eyetag} AND 
+            BINARY {$family} AND 
+            {$weight_min} AND {$weight_max} AND
+            {$birthday_begin} AND {$birthday_end} AND
+            {$cutday_begin} AND {$cutday_end} AND
+            {$enterday_begin} AND {$enterday_end} AND
+            {$tankid} AND 
+            {$live_or_die} 
+            ORDER BY {$sort_key} {$sort_order}";
+        else $sql = "SELECT * FROM shrimp_info WHERE 
+            BINARY {$eyetag} OR 
+            BINARY {$family} OR 
+            {$weight_min} AND {$weight_max} OR
+            {$birthday_begin} AND {$birthday_end} OR
+            {$cutday_begin} AND {$cutday_end} OR
+            {$enterday_begin} AND {$enterday_end} OR
+            {$tankid} OR 
+            {$live_or_die} 
+            ORDER BY {$sort_key} {$sort_order}";
         $result = $mysqli->query($sql);
 
         /* show search result */

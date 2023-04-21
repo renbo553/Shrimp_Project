@@ -93,14 +93,15 @@ if (!isset($_SESSION)) {
                 $tankid = trim($_POST["hidden_tankid"]) ;
                 $start_date = $_POST["start_date"];
                 $end_date = $_POST["end_date"];
-                if($UI_type == "卵巢成熟") search_ovary_process($mysqli , $eye , $start_date , $end_date) ;
-                if($UI_type == "生產") search_breed_process($mysqli , $eye , $start_date , $end_date) ;
-                if($UI_type == "餵食") search_feed_process($mysqli , $tankid , $start_date , $end_date) ;
-                if($UI_type == "水質") search_waterquality_process($mysqli , $tankid , $start_date , $end_date) ;
+                $and_or = $_POST["and_or"] ;
+                if($UI_type == "卵巢成熟") search_ovary_process($mysqli , $eye , $start_date , $end_date , $and_or) ;
+                if($UI_type == "生產") search_breed_process($mysqli , $eye , $start_date , $end_date , $and_or) ;
+                if($UI_type == "餵食") search_feed_process($mysqli , $tankid , $start_date , $end_date , $and_or) ;
+                if($UI_type == "水質") search_waterquality_process($mysqli , $tankid , $start_date , $end_date , $and_or) ;
             }
         }
 
-        function search_ovary_process($mysqli , $eye , $start_date , $end_date) : void{
+        function search_ovary_process($mysqli , $eye , $start_date , $end_date , $and_or) : void{
             if(empty($start_date)){
                 $start_date = "true";
             }
@@ -109,7 +110,7 @@ if (!isset($_SESSION)) {
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = "true";
+                $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
@@ -119,7 +120,8 @@ if (!isset($_SESSION)) {
 
             /* search data from database */
             //$sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
-            $sql = "SELECT * FROM ovary WHERE {$eye} AND {$start_date} AND {$end_date}" ;
+            if($and_or == "and") $sql = "SELECT * FROM ovary WHERE BINARY {$eye} AND {$start_date} AND {$end_date}" ;
+            else $sql = "SELECT * FROM ovary WHERE BINARY {$eye} OR {$start_date} AND {$end_date}" ;
             $result = $mysqli->query($sql);
     
             /* show search result */
@@ -131,7 +133,7 @@ if (!isset($_SESSION)) {
             $mysqli->close();
         }
 
-        function search_waterquality_process($mysqli , $tankid , $start_date , $end_date) : void{
+        function search_waterquality_process($mysqli , $tankid , $start_date , $end_date , $and_or) : void{
             if(empty($start_date)){
                 $start_date = "true";
             }
@@ -140,7 +142,7 @@ if (!isset($_SESSION)) {
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = "true";
+                $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
@@ -149,7 +151,8 @@ if (!isset($_SESSION)) {
             $tankid = "TankID = " . "'{$tankid}'";
             
             /* search data from database */
-            $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tankid}";
+            if($and_or == "and") $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tankid}";
+            else $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} OR {$tankid}";
             $result = $mysqli->query($sql);
 
             /* show result */
@@ -161,7 +164,7 @@ if (!isset($_SESSION)) {
             //$mysqli->close();
         }
 
-        function search_feed_process($mysqli , $tankid , $start_date , $end_date) : void{
+        function search_feed_process($mysqli , $tankid , $start_date , $end_date , $and_or) : void{
             if(empty($start_date)){
                 $start_date = "true";
             }
@@ -170,7 +173,7 @@ if (!isset($_SESSION)) {
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = "true";
+                $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
@@ -180,7 +183,8 @@ if (!isset($_SESSION)) {
 
             /* search data from database */
             //$sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
-            $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} AND {$tankid} ";
+            if($and_or == "and") $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} AND {$tankid} ";
+            else $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} OR {$tankid} ";
             $result = $mysqli->query($sql);
 
             /* show result */
@@ -192,7 +196,7 @@ if (!isset($_SESSION)) {
             $mysqli->close();
         }
 
-        function search_breed_process($mysqli , $eye , $start_date , $end_date) : void{
+        function search_breed_process($mysqli , $eye , $start_date , $end_date , $and_or) : void{
             // if(empty($start_date)){
             //     $start_date = "true";
             // }
@@ -201,7 +205,7 @@ if (!isset($_SESSION)) {
             //     $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             // }
             // if(empty($end_date)){
-            //     $end_date = "true";
+            //     $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             // }
             // else{
             //     $end_date = str_replace('-', '', $end_date);
@@ -210,7 +214,8 @@ if (!isset($_SESSION)) {
             $eye = "眼標 = " . "'{$eye}'" ;
 
             /* search data from database */
-            $sql = "SELECT * FROM breed WHERE {$eye}";
+            if($and_or == "and") $sql = "SELECT * FROM breed WHERE {$eye}";
+            else $sql = "SELECT * FROM breed WHERE {$eye}";
             $result = $mysqli->query($sql);
     
             /* show search result */

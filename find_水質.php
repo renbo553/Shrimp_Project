@@ -155,6 +155,35 @@ if (!isset($_SESSION)) {
                     </div>
                     <div style = "width: 1%"> </div>
                 </div>
+                
+                <div class="form-inline" style = "width: 100% ; height: 65px">
+                    <div style = "width: 1%"> </div>
+                    <div style = "width: 48%">
+                        <div> TankID </div>
+                        <div class="input-group">
+                            <?php
+                                $tank_option_array = array();
+                                $tank_option_array["M1"] = "M1";
+                                $tank_option_array["M2"] = "M2";
+                                $tank_option_array["M3"] = "M3";
+                                $tank_option_array["M4"] = "M4";
+                                utility_selectbox("tank_select", "TankID", $tank_option_array);
+                            ?>
+                        </div>
+                    </div>
+                    <div style = "width: 2%"> </div>
+                    <div style = "width: 48%">
+                        <div> 查詢方式("及" or "或") </div>
+                        <div class="input-group">
+                            <?php 
+                                $and_option_array = array();
+                                $and_option_array["及"] = "and";
+                                $and_option_array["或"] = "or";
+                                utility_selectbox("and_or", "查詢方式", $and_option_array);
+                            ?>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>
@@ -172,23 +201,6 @@ if (!isset($_SESSION)) {
                         <div class="input-group">
                             <?php 
                                 utility_date("end_date", "結束日期");
-                            ?>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-inline" style = "width: 100% ; height: 65px">
-                    <div style = "width: 1%"> </div>
-                    <div style = "width: 48%">
-                        <div> TankID </div>
-                        <div class="input-group">
-                            <?php
-                                $tank_option_array = array();
-                                $tank_option_array["M1"] = "M1";
-                                $tank_option_array["M2"] = "M2";
-                                $tank_option_array["M3"] = "M3";
-                                $tank_option_array["M4"] = "M4";
-                                utility_selectbox("tank_select", "TankID", $tank_option_array);
                             ?>
                         </div>
                     </div>
@@ -269,32 +281,28 @@ if (!isset($_SESSION)) {
             $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
             $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
             $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+            $and_or = isset($_POST["and_or"]) ? $_POST["and_or"] : null;
             //$chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
 
+            if(is_null($and_or)) $and_or = "and" ;
+
             /* concatenate sql where clause or set default value if not specified */
-            /*
-            if(empty($date)){
-                $date = "true";
-            }
-            else{
-                $date = "Date = " . "'{$date}'";
-            }*/
             if(empty($start_date)){
-                $start_date = "true";
+                $start_date = ($and_or == "and") ? "true" : "false" ;
             }
             else{
                 $start_date = str_replace('-', '', $start_date);
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = "true";
+                $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
                 $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
             }
             if(is_null($tank)){
-                $tank = "true";
+                $tank = ($and_or == "and") ? "true" : "false" ;
             }
             else{
                 $tank = "TankID = " . "'{$tank}'";
@@ -308,7 +316,8 @@ if (!isset($_SESSION)) {
             
             /* search data from database */
             //$sql = "SELECT * FROM waterquality WHERE {$date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
-            $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
+            if($and_or == "and") $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
+            else $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} OR {$tank} ORDER BY {$sort_key} {$sort_order}" ;
             $result = $mysqli->query($sql);
 
             /* show result */

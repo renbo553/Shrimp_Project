@@ -72,6 +72,30 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
+                <div> 眼標 </div>
+                <div class="input-group">
+                    <?php
+                        utility_textbox("eyetag_text", "眼標");   
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 查詢方式("及" or "或") </div>
+                <div class="input-group">
+                    <?php 
+                        $and_option_array = array();
+                        $and_option_array["及"] = "and";
+                        $and_option_array["或"] = "or";
+                        utility_selectbox("and_or", "查詢方式", $and_option_array);
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
                 <div> 家族 </div>
                 <div class="input-group">
                     <?php
@@ -92,20 +116,20 @@ if (!isset($_SESSION)) {
 
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
-            <div style = "width: 48%">
-                <div> 眼標 </div>
+			<div style = "width: 48%">
+                <div> 剪眼體重最小值 </div>
                 <div class="input-group">
                     <?php
-                        utility_textbox("eyetag_text", "眼標");   
+                        utility_textbox("cut_weight_min", "剪眼體重最小值"); 
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
 			<div style = "width: 48%">
-                <div> 剪眼體重 </div>
+                <div> 剪眼體重最大值 </div>
                 <div class="input-group">
                     <?php
-                        utility_textbox("ablation_weight", "剪眼體重"); 
+                        utility_textbox("cut_weight_max", "剪眼體重最大值"); 
                     ?>
                 </div>
             </div>
@@ -114,32 +138,61 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 生產體重 </div>
+                <div> 生產體重最小值 </div>
                 <div class="input-group">
                     <?php
-                        utility_textbox("breed_weight", "生產體重");
+                        utility_textbox("breed_weight_min", "生產體重最小值"); 
                     ?>
                 </div>
             </div>
-            <div style = "width: 1%"> </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 生產體重最大值 </div>
+                <div class="input-group">
+                    <?php
+                        utility_textbox("breed_weight_max", "生產體重最大值"); 
+                    ?>
+                </div>
+            </div>
         </div>
 
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 剪眼日期 </div>
+                <div> 剪眼日期(起始) </div>
                 <div class="input-group">
                     <?php
-                        utility_date("ablation_date", "剪眼日期");
+                        utility_date("cutday_begin", "剪眼日期(起始)");
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
 			<div style = "width: 48%">
-                <div> 進入產卵室待產日期 </div>
+                <div> 剪眼日期(結束) </div>
                 <div class="input-group">
                     <?php
-                        utility_date("expectant_date", "進入產卵室待產日期");
+                        utility_date("cutday_end", "剪眼日期(結束)");
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 進入產卵室待產日期(起始) </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("ablation_date_begin", "進入產卵室待產日期(起始)");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 進入產卵室待產日期(結束) </div>
+                <div class="input-group">
+                    <?php
+                        utility_date("ablation_date_end", "進入產卵室待產日期(結束)");
                     ?>
                 </div>
             </div>
@@ -251,83 +304,111 @@ if (!isset($_SESSION)) {
         //------------------------------------------------------------
 
         $eyetag = trim($_POST["eyetag_text"]);
-        $ablation_date = $_POST["ablation_date"];
-        $ablation_weight = trim($_POST["ablation_weight"]);
-        $expectant_date = $_POST["expectant_date"];
-        $breed_weight = trim($_POST["breed_weight"]);
+        $ablation_date_begin = $_POST["ablation_date_begin"];
+        $ablation_date_end = $_POST["ablation_date_end"];
+        $cut_weight_min = trim($_POST["cut_weight_min"]);
+        $cut_weight_max = trim($_POST["cut_weight_max"]);
+        $breed_weight_min = trim($_POST["breed_weight_min"]);
+        $breed_weight_max = trim($_POST["breed_weight_max"]);
+        $cutday_end = $_POST["cutday_end"];
+        $cutday_begin = $_POST["cutday_begin"];
         $stage = isset($_POST["stage_select"]) ? $_POST["stage_select"] : null;
         $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
         $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+        $and_or = isset($_POST["and_or"]) ? $_POST["and_or"] : null;
+            
+        if(is_null($and_or)) $and_or = "and" ;
 
         /* concatenate sql where clause or set default value if not specified */
         if(empty($family)){
-            $family = "true";
+            $family = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $family = "家族 = " . "'{$family}'";
         }
-        
-        // 2/18 新增項目-------------------------------------
         if(empty($male_family)){
-            $male_family = "true";
+            $male_family = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $male_family = "公蝦家族 = " . "'{$male_family}'";
         }
-        //----------------------------------------------------
-
         if(empty($eyetag)){
-            $eyetag = "true";
+            $eyetag = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $eyetag = "眼標 = " . "'{$eyetag}'";
         }
-        if(empty($ablation_date)){
-            $ablation_date = "true";
+
+        // 日期-------------------------------------------------------
+        if(empty($ablation_date_begin)){
+            $ablation_date_begin = ($and_or == "and") ? "true" : "false" ;
         }
         else{
-            $ablation_date = "剪眼日期 = " . "'{$ablation_date}'";
+            $ablation_date_begin = str_replace('-', '', $ablation_date_begin);
+            $ablation_date_begin = "CAST(REPLACE(進入產卵室待產日期, '-', '') AS UNSIGNED) >= {$ablation_date_begin}";
         }
-        if(empty($ablation_weight)){
-            $ablation_weight = "true";
-        }
-        else{
-            $ablation_weight = "剪眼體重 = " . "'{$ablation_weight}'";
-        }
-        if(empty($expectant_date)){
-            $expectant_date = "true";
+        if(empty($ablation_date_end)){
+            $ablation_date_end = ($and_or == "and" || ($ablation_date_begin != "true" && $ablation_date_begin != "false")) ? "true" : "false" ;
         }
         else{
-            $expectant_date = "進產卵室待產日期 = " . "'{$expectant_date}'";
+            $ablation_date_end = str_replace('-', '', $ablation_date_end);
+            $ablation_date_end = "CAST(REPLACE(進入產卵室待產日期, '-', '') AS UNSIGNED) <= {$ablation_date_end}";
         }
-        if(empty($breed_weight)){
-            $breed_weight = "true";
+        if(empty($cutday_begin)){
+            $cutday_begin = ($and_or == "and") ? "true" : "false" ;
         }
         else{
-            $breed_weight = "生產體重 = " . "'{$breed_weight}'";
+            $cutday_begin = str_replace('-', '', $cutday_begin);
+            $cutday_begin = "CAST(REPLACE(剪眼日期, '-', '') AS UNSIGNED) >= {$cutday_begin}";
         }
+        if(empty($cutday_end)){
+            $cutday_end = ($and_or == "and" || ($cutday_begin != "true" && $cutday_begin != "false")) ? "true" : "false" ;
+        }
+        else{
+            $cutday_end = str_replace('-', '', $cutday_end);
+            $cutday_end = "CAST(REPLACE(剪眼日期, '-', '') AS UNSIGNED) <= {$cutday_end}";
+        }
+
+        //重量----------------------------------------------------------------------------
+        // 4/21 最小值為0會錯
+        if(empty($cut_weight_min)){
+            echo "幹" ;
+            $cut_weight_min = ($and_or == "and") ? "true" : "false" ;
+        }
+        else{
+            $cut_weight_min = "剪眼體重 >= " . "'{$cut_weight_min}'" ;
+        }
+        if(empty($cut_weight_max)){
+            $cut_weight_max = ($and_or == "and" || ($cut_weight_min != "true" && $cut_weight_min != "false")) ? "true" : "false" ;
+        }
+        else{
+            $cut_weight_max = "剪眼體重 <= " . "'{$cut_weight_max}'" ;
+        }
+        if(empty($breed_weight_min)){
+            $breed_weight_min = ($and_or == "and") ? "true" : "false" ;
+        }
+        else{
+            $breed_weight_min = "生產體重 >= " . "'{$breed_weight_min}'" ;
+        }
+        if(empty($breed_weight_max)){
+            $breed_weight_max = ($and_or == "and" || ($breed_weight_min != "true" && $breed_weight_min != "false")) ? "true" : "false" ;
+        }
+        else{
+            $breed_weight_max = "生產體重 <= " . "'{$breed_weight_max}'" ;
+        }
+
         if(is_null($stage)){
-            $stage = "true";
+            $stage = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $stage = "卵巢進展階段 = " . "'{$stage}'";
         }
-        if(is_null($sort_key)){
-            $sort_key = "id";
-        }
-        if(is_null($sort_order)){
-            $sort_order = "DESC";
-        }
-
-        // 2/18 新增項目----------
         if(is_null($breed_type)){
-            $breed_type = "true";
+            $breed_type = ($and_or == "and") ? "true" : "false" ;
         }
         else{
             $breed_type = "交配方式 = " . "'{$breed_type}'";
         }
-        //-------------------------
-
         if(is_null($sort_key)){
             $sort_key = "id";
         }
@@ -336,7 +417,29 @@ if (!isset($_SESSION)) {
         }
 
         /* search data from database */
-        $sql = "SELECT * FROM breed WHERE {$family} AND {$male_family} AND {$eyetag} AND {$ablation_date} AND {$ablation_weight} AND {$expectant_date} AND {$breed_weight} AND {$breed_type} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
+        if($and_or == "and") $sql = "SELECT * FROM breed WHERE 
+            BINARY {$family} AND 
+            BINARY {$male_family} AND 
+            BINARY {$eyetag} AND 
+            {$ablation_date_begin} AND {$ablation_date_end} AND 
+            {$cutday_begin} AND {$cutday_end} AND 
+            {$cut_weight_min} AND {$cut_weight_max} AND 
+            {$breed_weight_min} AND {$breed_weight_max} AND 
+            {$breed_type} AND 
+            {$stage} 
+            ORDER BY {$sort_key} {$sort_order}";
+        else $sql = "SELECT * FROM breed WHERE 
+            BINARY {$family} OR 
+            BINARY {$male_family} OR 
+            BINARY {$eyetag} OR 
+            {$ablation_date_begin} AND {$ablation_date_end} OR 
+            {$cutday_begin} AND {$cutday_end} OR 
+            {$cut_weight_min} AND {$cut_weight_max} OR 
+            {$breed_weight_min} AND {$breed_weight_max} OR 
+            {$breed_type} OR 
+            {$stage} 
+            ORDER BY {$sort_key} {$sort_order}";
+        // echo $sql ;
         $result = $mysqli->query($sql);
 
         /* show search result */

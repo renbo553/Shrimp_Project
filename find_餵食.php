@@ -65,19 +65,13 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 起始日期 </div>
+                <div> 查詢方式("及" or "或") </div>
                 <div class="input-group">
                     <?php 
-                        utility_date("start_date", "起始日期");
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 2%"> </div>
-            <div style = "width: 48%">
-                <div> 結束日期 </div>
-                <div class="input-group">
-                    <?php 
-                        utility_date("end_date", "結束日期");
+                        $and_option_array = array();
+                        $and_option_array["及"] = "and";
+                        $and_option_array["或"] = "or";
+                        utility_selectbox("and_or", "查詢方式", $and_option_array);
                     ?>
                 </div>
             </div>
@@ -115,6 +109,30 @@ if (!isset($_SESSION)) {
             <div style = "width: 1%"> </div>
         </div>
 
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 起始日期 </div>
+                <div class="input-group">
+                    <?php 
+                        utility_date("start_date", "起始日期");
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 結束日期 </div>
+                <div class="input-group">
+                    <?php 
+                        utility_date("end_date", "結束日期");
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 10px">
+        </div>
+
         <div class="form-inline" style = "width: 100% ; height: 40px">
             <div style = "width: 1%"> </div>
             <div style = "width: auto"> 
@@ -125,8 +143,7 @@ if (!isset($_SESSION)) {
             <div style = "width: 1%"> </div>
             <div style = "width: auto">
                 <?php
-                    // 放匯出功能做好時的匯出鍵
-                    // utility_button_onclick("export_waterquality.php", "匯出");
+                    utility_button_onclick("export_waterquality.php", "匯出");
                 ?>
             </div>
         </div>
@@ -185,38 +202,33 @@ if (!isset($_SESSION)) {
             $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
             $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
             $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+            $and_or = isset($_POST["and_or"]) ? $_POST["and_or"] : null;
             
+            if(is_null($and_or)) $and_or = "and" ;
+
             /* concatenate sql where clause or set default value if not specified */
-            /*
-            if(empty($date)){
-                $date = "true";
-            }
-            else{
-                $date = "Date = " . "'{$date}'";
-            }*/
-            
             if(empty($start_date)){
-                $start_date = "true";
+                $start_date = ($and_or == "and") ? "true" : "false" ;
             }
             else{
                 $start_date = str_replace('-', '', $start_date);
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = "true";
+                $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
                 $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
             }
             if(is_null($tank)){
-                $tank = "true";
+                $tank = ($and_or == "and") ? "true" : "false" ;
             }
             else{
                 $tank = "Tank = " . "'{$tank}'";
             }
             if(is_null($shrimp)){
-                $shrimp = "true";
+                $shrimp = ($and_or == "and") ? "true" : "false" ;
             }
             else{
                 $shrimp = "shrimp = " . "'{$shrimp}'";
@@ -230,7 +242,8 @@ if (!isset($_SESSION)) {
 
             /* search data from database */
             //$sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
-            $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            if($and_or == "and") $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            else $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} OR {$tank} OR {$shrimp} ORDER BY {$sort_key} {$sort_order}";
             $result = $mysqli->query($sql);
 
             /* show result */
