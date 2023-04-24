@@ -372,7 +372,7 @@ if (!isset($_SESSION)) {
         //重量----------------------------------------------------------------------------
         // 4/21 最小值為0會錯
         if(empty($cut_weight_min)){
-            echo "幹" ;
+            // echo "幹" ;
             $cut_weight_min = ($and_or == "and") ? "true" : "false" ;
         }
         else{

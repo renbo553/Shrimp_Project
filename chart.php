@@ -101,14 +101,30 @@ function create_waterquality_chart($result, $data_array) : void{
             $y_data[] = floatval($row[$data]);
         }
 
+        // set default value
+        $min_date = min($x_data);
+        $max_date = max($x_data);
+        $it = new DateTime(date("Y-m-d", $min_date));
+        while(strtotime($it->format("Y-m-d")) <= $max_date){
+            if(!in_array(strtotime($it->format("Y-m-d")), $x_data)){
+                $x_data[] = strtotime($it->format("Y-m-d"));
+                $y_data[] = floatval('0.0');
+            }
+            $it->modify('+1 day');
+        }
+        array_multisort($x_data, $y_data);
+
         $lplot = new LinePlot($y_data, $x_data);
+        
         //$lplot->mark->SetType(MARK_FILLEDCIRCLE);
         $graph->Add($lplot);
         
         //$lplot->value->show();
+        $lplot->SetLegend($data);
         $lplot->value->SetFormat('%1.2f');
     }
-
+    $graph->legend->SetPos(0.7, 0.075,'center','bottom');
+    $graph->legend->SetFrameWeight(1);
     $graph->Stroke();
 }
 

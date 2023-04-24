@@ -93,7 +93,7 @@ if (!isset($_SESSION)) {
                 $tankid = trim($_POST["hidden_tankid"]) ;
                 $start_date = $_POST["start_date"];
                 $end_date = $_POST["end_date"];
-                $and_or = $_POST["and_or"] ;
+                $and_or = isset($_POST["and_or"]) ? $_POST["and_or"] : "and" ;
                 if($UI_type == "卵巢成熟") search_ovary_process($mysqli , $eye , $start_date , $end_date , $and_or) ;
                 if($UI_type == "生產") search_breed_process($mysqli , $eye , $start_date , $end_date , $and_or) ;
                 if($UI_type == "餵食") search_feed_process($mysqli , $tankid , $start_date , $end_date , $and_or) ;
@@ -197,20 +197,6 @@ if (!isset($_SESSION)) {
         }
 
         function search_breed_process($mysqli , $eye , $start_date , $end_date , $and_or) : void{
-            // if(empty($start_date)){
-            //     $start_date = "true";
-            // }
-            // else{
-            //     $start_date = str_replace('-', '', $start_date);
-            //     $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
-            // }
-            // if(empty($end_date)){
-            //     $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
-            // }
-            // else{
-            //     $end_date = str_replace('-', '', $end_date);
-            //     $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
-            // }
             $eye = "眼標 = " . "'{$eye}'" ;
 
             /* search data from database */

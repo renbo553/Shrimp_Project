@@ -234,7 +234,6 @@ if (!isset($_SESSION)) {
             }
             if(is_null($tank)){
                 echo "<script> Alert('請選擇tankid'); </script>";
-                echo "<script> window.location.href='draw_water.php'; </script>";
                 return;
             }
             else{
@@ -243,7 +242,6 @@ if (!isset($_SESSION)) {
 
             if(count($chart_option) == 0){
                 echo "<script> Alert('請選擇繪製項目(至少一個)'); </script>";
-                echo "<script> window.location.href='draw_water.php'; </script>";
                 return;
             }
             $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank}";
