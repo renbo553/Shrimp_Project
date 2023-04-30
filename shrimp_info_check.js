@@ -87,7 +87,7 @@ function html_show_all_data(formData) {
     var new_html = document.createElement('div') ;
 
     var a_div = document.createElement('div') ;
-    a_div.textContent = "請確認所有資料:\n" + "(紅色眼標表示此資料庫有這個眼標)\n" + "(藍色剪眼日期是會影響到生產資料庫中相同眼標的資料)\n " ;
+    a_div.textContent = "請確認所有資料:\n" + "(紅色為會影響同眼標之生產以及母種蝦資料庫)\n " ;
     new_html.appendChild(a_div) ;
 
     //先去察看母種蝦資料中是否有這個眼標-------------------------------------------------
@@ -150,7 +150,9 @@ function html_show_all_data(formData) {
 
         var first_span = document.createElement('span');
         first_span.textContent = all_data_name[i] ;
-        first_span.style.color = 'black' ;
+        if((all_data_name[i] == "眼標" || all_data_name[i] == "家族" || all_data_name[i] == "剪眼日期") 
+            && (shrimp_info_has_eyetag || breed_has_eyetag)) first_span.style.color = 'red' ;
+        else first_span.style.color = 'black' ;
         append_div.append(first_span) ;
 
         var third_span = document.createElement('span');
@@ -160,8 +162,8 @@ function html_show_all_data(formData) {
 
         var second_span = document.createElement('span');
         second_span.textContent = all_data_num[i] ;
-        if(all_data_name[i] == "眼標" && shrimp_info_has_eyetag == 1) second_span.style.color = 'red' ;
-        else if(all_data_name[i] == "剪眼日期" && breed_has_eyetag == 1) second_span.style.color = 'blue' ;
+        if((all_data_name[i] == "眼標" || all_data_name[i] == "家族" || all_data_name[i] == "剪眼日期") 
+            && (shrimp_info_has_eyetag || breed_has_eyetag)) second_span.style.color = 'red' ;
         else second_span.style.color = 'black' ;
         append_div.append(second_span) ;
 
@@ -323,4 +325,306 @@ function modify_post (formData) {
             });
         },
     });
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+// 客製化查詢之function
+function append_eye() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 眼標 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='eye' id='eye'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_family(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_family() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_1" id="and_or_1">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 家族 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='family' id='family'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_tankid(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_tankid() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_2" id="and_or_2">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> TankID </div>
+            <div class="input-group">
+                <select id="tankid" name="tankid" class="custom-select">
+                    <option value="none" selected disabled hidden></option>
+                    <option value=""></option>
+                    <option value="M1">M1</option>
+                    <option value="M2">M2</option>
+                    <option value="M3">M3</option>
+                    <option value="M4">M4</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_live_or_die(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_live_or_die() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_3" id="and_or_3">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 生存狀態 </div>
+            <div class="input-group">
+                <select id="live_or_die" name="live_or_die" class="custom-select">
+                    <option value="none" selected disabled hidden></option>
+                    <option value=""></option>
+                    <option value="存活">存活</option>
+                    <option value="死亡">死亡</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_weight(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_weight() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_4" id="and_or_4">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 體重最小值 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='weight_min' id='weight_min'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 體重最大值 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='weight_max' id='weight_max'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_cutday(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_cutday() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_5" id="and_or_5">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 剪眼日期(起始) </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='cutday_begin' id='cutday_begin'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 剪眼日期(結束) </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='cutday_end' id='cutday_end'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_birthday(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_birthday() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_6" id="and_or_6">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 出生日期(起始) </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='birthday_begin' id='birthday_begin'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 出生日期(結束) </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='birthday_end' id='birthday_end'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_enterday(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_enterday() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_7" id="and_or_7">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 進蝦日期(起始) </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='enterday_begin' id='enterday_begin'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 進蝦日期(結束) </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='enterday_end' id='enterday_begin'>
+            </div>
+        </div>
+    </div>
+    `;
+
+    return returnHTML;
 }

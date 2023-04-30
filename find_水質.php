@@ -21,112 +21,15 @@ if (!isset($_SESSION)) {
     <?php require_once "header.php" ?>
     <!--//Header-->
 
-    <style>
-        /* span:target */
-        #M1:target,
-        #M2:target{
-        border: solid 1px red;
-        }
-        /*頁籤變換*/
-        #M1:target ~ #tab > ul li a[href$="#M1"],
-        #M2:target ~ #tab > ul li a[href$="#M2"]{
-            border: solid 1px black;
-        }
-
-        /*頁籤內容顯示*/
-        #M1:target ~ #tab > div.tab-content-1,
-        #M2:target ~ #tab > div.tab-content-2{
-            border: solid 1px black;
-        }
-
-        #tab{
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0%);
-        width: auto;
-        background: gray;
-        border: solid 1px #333;
-        }
-        /* 頁籤ul */
-        #tab>ul{
-        overflow: hidden;
-        margin: 0;
-        padding: 10px 20px 0 20px;
-        }
-        #tab>ul>li{
-        list-style-type: none;
-        }
-        #tab>ul>li>a{
-        border: #333;
-        text-decoration: none;
-        font-size: 13px;
-        color: white;
-        float: left;
-        padding: 10px;
-        margin-left: 5px;
-        }
-
-        /*頁籤div內容*/
-        #tab>div {
-        border: #333;
-        clear:both;
-        padding:0 15px;
-        height:0;
-        overflow:hidden;
-        visibility:hidden;
-        -webkit-transition:all .4s ease-in-out;
-        -moz-transition:all .4s ease-in-out;
-        -ms-transition:all .4s ease-in-out;
-        -o-transition:all .4s ease-in-out;
-        transition:all .4s ease-in-out;
-        }
-
-        /* span:target */
-        #M1:target,
-        #M2:target{
-        border: solid 1px red;
-        }
-
-        /*第一筆的底色*/
-        span:target ~ #tab > ul li:first-child a {
-            background: gray;
-            color: #fff;
-        }
-        span:target ~ #tab > div:first-of-type {
-        visibility:hidden;
-        height:0;
-        padding:0 15px;
-        }
-
-        /*頁籤變換&第一筆*/
-        span ~ #tab > ul li:first-child a,
-        #M1:target ~ #tab > ul li a[href$="#M1"],
-        #M2:target ~ #tab > ul li a[href$="#M2"]{
-            background: white ;
-            color: #333 ;
-        }
-        
-        /*頁籤內容顯示&第一筆*/
-        span ~ #tab > div:first-of-type,
-        #M1:target ~ #tab > div.tab-content-1,
-        #M2:target ~ #tab > div.tab-content-2{
-        border: solid 1px black;
-        visibility:visible;
-        height:auto;
-        width: auto;
-        background: #fff;
-        }
-    </style>
-    <!-- table style -->
-
     <!-- table -->
     <div class="tab-content-1"><p>
         <section>
             <!--Search form-->
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post" id = "find_form">
                 <?php require_once "utility.php"; ?>
 
                 <!-- 2/18 修改之UI -->
+	            <hr style="border-width: 1px; border-color: black;">
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>
                     <div style = "width: 48%">
@@ -155,58 +58,14 @@ if (!isset($_SESSION)) {
                     </div>
                     <div style = "width: 1%"> </div>
                 </div>
-                
-                <div class="form-inline" style = "width: 100% ; height: 65px">
-                    <div style = "width: 1%"> </div>
-                    <div style = "width: 48%">
-                        <div> TankID </div>
-                        <div class="input-group">
-                            <?php
-                                $tank_option_array = array();
-                                $tank_option_array["M1"] = "M1";
-                                $tank_option_array["M2"] = "M2";
-                                $tank_option_array["M3"] = "M3";
-                                $tank_option_array["M4"] = "M4";
-                                utility_selectbox("tank_select", "TankID", $tank_option_array);
-                            ?>
-                        </div>
-                    </div>
-                    <div style = "width: 2%"> </div>
-                    <div style = "width: 48%">
-                        <div> 查詢方式("及" or "或") </div>
-                        <div class="input-group">
-                            <?php 
-                                $and_option_array = array();
-                                $and_option_array["及"] = "and";
-                                $and_option_array["或"] = "or";
-                                utility_selectbox("and_or", "查詢方式", $and_option_array);
-                            ?>
-                        </div>
-                    </div>
-                </div>
 
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>
-                    <div style = "width: 48%">
-                        <div> 起始日期 </div>
-                        <div class="input-group">
-                            <?php 
-                                utility_date("start_date", "起始日期");
-                            ?>
-                        </div>
-                    </div>
-                    <div style = "width: 2%"> </div>
-                    <div style = "width: 48%">
-                        <div> 結束日期 </div>
-                        <div class="input-group">
-                            <?php 
-                                utility_date("end_date", "結束日期");
-                            ?>
-                        </div>
-                    </div>
+                    <button type="button" class="btn btn-primary" onclick="continue_tankid(this)">繼續填寫查詢項目</button>
                 </div>
 
-                <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+                <div class="form-inline" style = "width: 100% ; height: 5px">
+                </div>
 
                 <div class="form-inline" style = "width: 100% ; height: 40px">
                     <div style = "width: 1%"> </div>
@@ -222,11 +81,53 @@ if (!isset($_SESSION)) {
                         ?>
                     </div>
                 </div>
-
                 <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
             </form>
             <!--//Search form-->
         </section>
+
+        <script> document.write('<script type="text/javascript" src="water_check.js"></'+'script>'); </script>
+        <script>
+            function continue_tankid(button) {// append 接下來的元素
+                var myForm = $("#find_form")[0];
+                const formInlineElement = button.parentNode;
+                formInlineElement.insertAdjacentHTML(
+                    'afterend',
+                    append_tankid()
+                );
+                formInlineElement.remove();
+            }
+
+            function continue_time(button) {// append 接下來的元素
+                var myForm = $("#find_form")[0];
+                const formInlineElement = button.parentNode;
+                formInlineElement.insertAdjacentHTML(
+                    'afterend',
+                    append_time()
+                );
+                formInlineElement.remove();
+            }
+
+            function continue_ovary(button) {// append 接下來的元素
+                var myForm = $("#find_form")[0];
+                const formInlineElement = button.parentNode;
+                formInlineElement.insertAdjacentHTML(
+                    'afterend',
+                    append_ovary()
+                );
+                formInlineElement.remove();
+            }
+
+            function continue_time(button) {// append 接下來的元素
+                var myForm = $("#find_form")[0];
+                const formInlineElement = button.parentNode;
+                formInlineElement.insertAdjacentHTML(
+                    'afterend',
+                    append_time()
+                );
+                formInlineElement.remove();
+            }
+        </script>
 
         <!--Data table-->
         <?php
@@ -276,33 +177,31 @@ if (!isset($_SESSION)) {
         function search_waterquality_process($mysqli) : void{
             /* fetch post input data */
             //$date = $_POST["date"];
-            $start_date = $_POST["start_date"];
-            $end_date = $_POST["end_date"];
+            $start_date = isset($_POST["start_date"]) ? $_POST["start_date"] : "" ;
+            $end_date = isset($_POST["end_date"]) ? $_POST["end_date"] : "" ;
             $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
             $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
             $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
-            $and_or = isset($_POST["and_or"]) ? $_POST["and_or"] : null;
-            //$chart_option = isset($_POST["chart_select"]) ? $_POST["chart_select"] : null;
-
-            if(is_null($and_or)) $and_or = "and" ;
+            
+            $and_or_1 = isset($_POST["and_or_1"]) ? $_POST["and_or_1"] : "and" ;
 
             /* concatenate sql where clause or set default value if not specified */
             if(empty($start_date)){
-                $start_date = ($and_or == "and") ? "true" : "false" ;
+                $start_date = ($and_or_1 == "and") ? "true" : "false" ;
             }
             else{
                 $start_date = str_replace('-', '', $start_date);
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = ($and_or == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
+                $end_date = ($and_or_1 == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
                 $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
             }
             if(is_null($tank)){
-                $tank = ($and_or == "and") ? "true" : "false" ;
+                $tank = ($and_or_1 == "and") ? "true" : "false" ;
             }
             else{
                 $tank = "TankID = " . "'{$tank}'";
@@ -313,11 +212,13 @@ if (!isset($_SESSION)) {
             if(is_null($sort_order)){
                 $sort_order = "DESC";
             }
+
+            $and_or_1 = strtoupper($and_or_1) ;
             
             /* search data from database */
             //$sql = "SELECT * FROM waterquality WHERE {$date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
-            if($and_or == "and") $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} AND {$tank} ORDER BY {$sort_key} {$sort_order}";
-            else $sql = "SELECT * FROM waterquality WHERE {$start_date} AND {$end_date} OR {$tank} ORDER BY {$sort_key} {$sort_order}" ;
+            $sql = "SELECT * FROM waterquality WHERE {$tank} {$and_or_1} {$start_date} AND {$end_date} ORDER BY {$sort_key} {$sort_order}" ;
+            // echo $sql ;
             $result = $mysqli->query($sql);
 
             /* show result */

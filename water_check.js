@@ -953,3 +953,72 @@ async function modify_put_into_form(data , form_id , is_modify) {
     document.getElementById(form_id).elements["螢光菌Marine"].value = from_data.get("螢光菌Marine") ;
     document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
 }
+
+
+// ---------------------------------------------------------------------------------------------------
+
+// 客製化查詢之function
+function append_tankid() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> TankID </div>
+            <div class="input-group">
+                <select id="tank_select" name="tank_select" class="custom-select">
+                    <option value="none" selected disabled hidden></option>
+                    <option value=""></option>
+                    <option value="M1">M1</option>
+                    <option value="M2">M2</option>
+                    <option value="M3">M3</option>
+                    <option value="M4">M4</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_time(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_time() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_1" id="and_or_1">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 起始日期 </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='start_date' id='start_date'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 結束日期 </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='end_date' id='end_date'>
+            </div>
+        </div>
+    </div>
+    `;
+
+    return returnHTML;
+}
