@@ -247,7 +247,8 @@ class Export_Handler
 
         //
         foreach($result as $row){
-            $this->sheet->setCellValueByColumnAndRow($date_to_column_index[$row["Date"]] + 1 , $eyetag_to_row_index[$row["眼標"]], $row["Stage"]);
+            $d = new Date_tuple($row["Date"]);
+            $this->sheet->setCellValueByColumnAndRow($date_to_column_index[$d->get_date()] + 1 , $eyetag_to_row_index[$row["眼標"]], $row["Stage"]);
         }
 
 
@@ -417,14 +418,14 @@ class Date_Tuple{
     }
     
     public function set_date($date) : void{
-        $this->year = intval(strtok($date, "/"));
-        $this->month = intval(strtok("/"));
-        $this->day = intval(strtok("/"));
+        $this->year = intval(strtok($date, "-"));
+        $this->month = intval(strtok("-"));
+        $this->day = intval(strtok("-"));
         $this->year_array = self::create_year_array($this->year);
     }
     
     public function get_date() : string{
-        return "{$this->year}/{$this->month}/{$this->day}";
+        return "{$this->year}-{$this->month}-{$this->day}";
     }
     
     public function advance() : void{
