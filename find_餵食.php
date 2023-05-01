@@ -14,12 +14,6 @@ if (!isset($_SESSION)) {
     <!--Head-->
 	<?php require_once "head.html"?>
     <!--//Head-->
-    
-    <style>
-        tbody tr:hover{
-                background-color: papayawhip;
-            }
-    </style>
 </head>
 
 <body>
@@ -28,10 +22,11 @@ if (!isset($_SESSION)) {
     <!--//Header-->
 
     <!--Search form-->
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post" id = "find_form">
         <?php require_once "utility.php"; ?>
 
         <!-- 2/18 修改之UI -->
+	    <hr style="border-width: 1px; border-color: black;">
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
@@ -64,55 +59,10 @@ if (!isset($_SESSION)) {
 
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
-            <div style = "width: 48%">
-                <div> 起始日期 </div>
-                <div class="input-group">
-                    <?php 
-                        utility_date("start_date", "起始日期");
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 2%"> </div>
-            <div style = "width: 48%">
-                <div> 結束日期 </div>
-                <div class="input-group">
-                    <?php 
-                        utility_date("end_date", "結束日期");
-                    ?>
-                </div>
-            </div>
+            <button type="button" class="btn btn-primary" onclick="continue_tankid(this)">繼續填寫查詢項目</button>
         </div>
 
-        <div class="form-inline" style = "width: 100% ; height: 65px">
-            <div style = "width: 1%"> </div>
-            <div style = "width: 48%">
-                <div> 蝦缸類別 </div>
-                <div class="input-group">
-                    <?php 
-                        $shrimp_option_array = array();
-                        $shrimp_option_array["公蝦缸"] = "公蝦缸";
-                        $shrimp_option_array["母蝦缸"] = "母蝦缸";
-                        $shrimp_option_array["交配缸"] = "交配缸";
-                        $shrimp_option_array["休養缸"] = "休養缸";
-                        utility_selectbox("shrimp_select", "蝦缸類別", $shrimp_option_array);
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 2%"> </div>
-			<div style = "width: 48%">
-                <div> TankID </div>
-                <div class="input-group">
-                    <?php
-                        $tank_option_array = array();
-                        $tank_option_array["M1"] = "M1";
-                        $tank_option_array["M2"] = "M2";
-                        $tank_option_array["M3"] = "M3";
-                        $tank_option_array["M4"] = "M4";
-                        utility_selectbox("tank_select", "Tank", $tank_option_array);
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 1%"> </div>
+        <div class="form-inline" style = "width: 100% ; height: 5px">
         </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">
@@ -130,8 +80,43 @@ if (!isset($_SESSION)) {
                 ?>
             </div>
         </div>
+        <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
     </form>
     <!--//Search form-->
+
+    <script> document.write('<script type="text/javascript" src="feed_check.js"></'+'script>'); </script>
+    <script>
+        function continue_tankid(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_tankid()
+            );
+            formInlineElement.remove();
+        }
+
+        function continue_shrimp(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_shrimp()
+            );
+            formInlineElement.remove();
+        }
+
+        function continue_time(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_time()
+            );
+            formInlineElement.remove();
+        }
+    </script>
+
 
     <!--Data table-->
     <section>
@@ -179,47 +164,42 @@ if (!isset($_SESSION)) {
         function search_feed_process($mysqli) : void{
             /* fetch post input data */
             //$date = $_POST["date"];
-            $start_date = $_POST["start_date"];
-            $end_date = $_POST["end_date"];
+            $start_date = isset($_POST["start_date"]) ? $_POST["start_date"] : "" ;
+            $end_date = isset($_POST["end_date"]) ? $_POST["end_date"] : "" ;
             $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
             $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
             $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
             $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
-            
+
+            $and_or_1 = isset($_POST["and_or_1"]) ? $_POST["and_or_1"] : "and" ;
+            $and_or_2 = isset($_POST["and_or_2"]) ? $_POST["and_or_2"] : "and" ;
+
             /* concatenate sql where clause or set default value if not specified */
-            /*
-            if(empty($date)){
-                $date = "true";
+            if(is_null($tank)){
+                $tank = ($and_or_1 == "and") ? "true" : "false" ;
             }
             else{
-                $date = "Date = " . "'{$date}'";
-            }*/
-            
+                $tank = "Tank = " . "'{$tank}'";
+            }
+            if(is_null($shrimp)){
+                $shrimp = ($and_or_1 == "and" || $and_or_2 == "and") ? "true" : "false" ;
+            }
+            else{
+                $shrimp = "shrimp = " . "'{$shrimp}'";
+            }
             if(empty($start_date)){
-                $start_date = "true";
+                $start_date = ($and_or_2 == "and") ? "true" : "false" ;
             }
             else{
                 $start_date = str_replace('-', '', $start_date);
                 $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
             }
             if(empty($end_date)){
-                $end_date = "true";
+                $end_date = ($and_or_2 == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
             }
             else{
                 $end_date = str_replace('-', '', $end_date);
                 $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
-            }
-            if(is_null($tank)){
-                $tank = "true";
-            }
-            else{
-                $tank = "Tank = " . "'{$tank}'";
-            }
-            if(is_null($shrimp)){
-                $shrimp = "true";
-            }
-            else{
-                $shrimp = "shrimp = " . "'{$shrimp}'";
             }
             if(is_null($sort_key)){
                 $sort_key = "id";
@@ -228,9 +208,13 @@ if (!isset($_SESSION)) {
                 $sort_order = "DESC";
             }
 
+            $and_or_1 = strtoupper($and_or_1) ;
+            $and_or_2 = strtoupper($and_or_2) ;
+
             /* search data from database */
             //$sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
-            $sql = "SELECT * FROM feed WHERE {$start_date} AND {$end_date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
+            $sql = "SELECT * FROM feed WHERE {$tank} {$and_or_1} {$shrimp} {$and_or_2} {$start_date} AND {$end_date} ORDER BY {$sort_key} {$sort_order}";
+            // echo $sql ;
             $result = $mysqli->query($sql);
 
             /* show result */
@@ -381,7 +365,6 @@ if (!isset($_SESSION)) {
         ?>
     </section>
     <!--//Data table-->
-
 
     <!--Footer-->
     <?php require_once "footer.html" ?>

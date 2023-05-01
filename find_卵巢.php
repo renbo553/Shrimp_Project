@@ -28,10 +28,11 @@ if (!isset($_SESSION)) {
     <!--//Header-->
 
     <!--Search form-->
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post">
+    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method = "post" id = "find_form">
         <?php require_once "utility.php"; ?>
 
         <!-- 2/18 修改之UI -->
+	    <hr style="border-width: 1px; border-color: black;">
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
@@ -42,7 +43,7 @@ if (!isset($_SESSION)) {
                         $sort_option_array["index"] = "id";
                         $sort_option_array["眼標"] = "眼標";
                         $sort_option_array["日期"] = "Date";
-                        $sort_option_array["階段"] = "Stage";
+                        $sort_option_array["卵巢階段"] = "Stage";
                         utility_selectbox("sort_select", "排序項目", $sort_option_array);
                     ?>
                 </div>
@@ -64,59 +65,10 @@ if (!isset($_SESSION)) {
 
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
-            <div style = "width: 48%">
-                <div> 眼標 </div>
-                <div class="input-group">
-                    <?php 
-                        utility_textbox("eyetag_text", "眼標");
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 2%"> </div>
-            <div style = "width: 48%">
-                <div> 起始日期 </div>
-                <div class="input-group">
-                    <?php
-                        utility_date("start_date", "起始日期");
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 1%"> </div>
+            <button type="button" class="btn btn-primary" onclick="continue_eye(this)">繼續填寫查詢項目</button>
         </div>
 
-        <div class="form-inline" style = "width: 100% ; height: 65px">
-            <div style = "width: 1%"> </div>
-            <div style = "width: 48%">
-                <div> 卵巢階段 </div>
-                <div class="input-group">
-                    <?php 
-                        $stage_option_array = array();
-                        $stage_option_array["0"] = "0";
-                        $stage_option_array["0-1"] = "0-Ⅰ";
-                        $stage_option_array["1"] = "Ⅰ";
-                        $stage_option_array["1-2"] = "Ⅰ-Ⅱ";
-                        $stage_option_array["2"] = "Ⅱ";
-                        $stage_option_array["2-3"] = "Ⅱ-Ⅲ";
-                        $stage_option_array["3"] = "Ⅲ";
-                        $stage_option_array["脫殼"] = "脫殼";
-                        $stage_option_array["受精"] = "受精";
-                        $stage_option_array["生產"] = "生產";
-                        $stage_option_array["死亡"] = "死亡";
-                        $stage_option_array["淘汰"] = "淘汰";
-                        utility_selectbox("stage_select", "階段", $stage_option_array);        
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 2%"> </div>
-            <div style = "width: 48%">
-                <div> 結束日期 </div>
-                <div class="input-group">
-                    <?php
-                        utility_date("end_date", "結束日期");
-                    ?>
-                </div>
-            </div>
-            <div style = "width: 1%"> </div>
+        <div class="form-inline" style = "width: 100% ; height: 5px">
         </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">
@@ -133,8 +85,42 @@ if (!isset($_SESSION)) {
                 ?>
             </div>
         </div>
+        <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
     </form>
     <!--//Search form-->
+
+    <script> document.write('<script type="text/javascript" src="ovary_check.js"></'+'script>'); </script>
+    <script>
+        function continue_eye(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_eye()
+            );
+            formInlineElement.remove();
+        }
+
+        function continue_ovary(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_ovary()
+            );
+            formInlineElement.remove();
+        }
+
+        function continue_time(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_time()
+            );
+            formInlineElement.remove();
+        }
+    </script>
 
 
     <!--Data table-->
@@ -181,36 +167,32 @@ if (!isset($_SESSION)) {
 
     function search_ovary_process($mysqli) : void{
         /* fetch post input data */
-        $eyetag = trim($_POST["eyetag_text"]);
-        //$date = $_POST["date"];
-        $start_date = $_POST["start_date"];
-        $end_date = $_POST["end_date"];
+        $eyetag = isset($_POST["eyetag_text"]) ? trim($_POST["eyetag_text"]) : "" ;
+        $start_date = isset($_POST["start_date"]) ? $_POST["start_date"] : "" ;
+        $end_date = isset($_POST["end_date"]) ? $_POST["end_date"] : "" ;
         $stage = isset($_POST["stage_select"]) ? $_POST["stage_select"] : null;
         $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
         $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
-        
+        $and_or_2 = isset($_POST["and_or_2"]) ? $_POST["and_or_2"] : "and" ;
+        $and_or_3 = isset($_POST["and_or_3"]) ? $_POST["and_or_3"] : "and" ;
+
         /* concatenate sql where clause or set default value if not specified */
+
         if(empty($eyetag)){
-            $eyetag = "true";
+            $eyetag = ($and_or_2 == "and") ? "true" : "false" ;
         }
         else{
             $eyetag = "眼標 = " . "'{$eyetag}'";
         }
-        /*if(empty($date)){
-            $date = "true";
-        }
-        else{
-            $date = "Date = " . "'{$date}'";
-        }*/
         if(empty($start_date)){
-            $start_date = "true";
+            $start_date = ($and_or_3 == "and") ? "true" : "false" ;
         }
         else{
             $start_date = str_replace('-', '', $start_date);
             $start_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) >= {$start_date}";
         }
         if(empty($end_date)){
-            $end_date = "true";
+            $end_date = ($and_or_3 == "and" || ($start_date != "true" && $start_date != "false")) ? "true" : "false" ;
         }
         else{
             $end_date = str_replace('-', '', $end_date);
@@ -218,7 +200,7 @@ if (!isset($_SESSION)) {
         }
         
         if(is_null($stage)){
-            $stage = "true";
+            $stage = ($and_or_2 == "and" || $and_or_3 = "and") ? "true" : "false" ;
         }
         else{
             $stage = "Stage = " . "'{$stage}'";
@@ -230,9 +212,13 @@ if (!isset($_SESSION)) {
             $sort_order = "DESC";
         }
 
+        $and_or_2 = strtoupper($and_or_2) ;
+        $and_or_3 = strtoupper($and_or_3) ;
+
         /* search data from database */
         //$sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
-        $sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$start_date} AND {$end_date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
+        $sql = "SELECT * FROM ovary WHERE BINARY {$eyetag} {$and_or_2} {$stage} {$and_or_3} {$start_date} AND {$end_date} ORDER BY {$sort_key} {$sort_order}";
+        echo $sql ;
         $result = $mysqli->query($sql);
 
         /* show search result */

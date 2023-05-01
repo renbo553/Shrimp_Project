@@ -59,7 +59,7 @@ if (!isset($_SESSION)) {
         <div class="big_form"><p>
             <section>
                 <form id="big_form" method="post" enctype="multipart/form-data">
-                    <?php require "big_feed_table.html"?>
+                    <?php require "big_add_feed.html"?>
                 </form>
             </section>
         </p></div>
@@ -67,7 +67,7 @@ if (!isset($_SESSION)) {
         <div class="small_form"><p>
             <section>
                 <form id="small_form" method="post" enctype="multipart/form-data">
-                    <?php require "small_feed_table.html"?>
+                    <?php require "small_add_feed.html"?>
                 </form>
             </section>
         </p></div>

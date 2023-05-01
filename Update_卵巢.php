@@ -32,7 +32,7 @@ if ($fileSize == 0) {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "UPDATE ovary SET 眼標 ='{$eyetag}', Date='{$cleanDate}', Stage='{$ovarystate}' WHERE id = $id";
+    $insertStr = "UPDATE ovary SET 眼標 ='{$eyetag}', Date='{$cleanDate}', Stage='{$ovarystate}',image=''WHERE id = $id";
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";

@@ -9,7 +9,7 @@ if (!isset($_SESSION)) {
 <html lang="zxx">
 
 <head>
-	<title>新增 - 生產</title>
+	<title> 新增 - 生產 </title>
 	<!--Head-->
 	<?php require_once "head.html"?>
     <!--//Head-->
@@ -65,7 +65,7 @@ if (!isset($_SESSION)) {
 		<div class="big_form"><p>
 			<section>
 				<form id="big_form" method="post" enctype="multipart/form-data">
-					<?php require "big_breed_table.html"?>
+					<?php require "big_add_breed.html"?>
 				</form>
 			</section>
 		</p></div>
@@ -73,7 +73,7 @@ if (!isset($_SESSION)) {
 		<div class="small_form"><p>
 			<section>
 				<form id="small_form" method="post" enctype="multipart/form-data">
-					<?php require "small_breed_table.html"?>
+					<?php require "small_add_breed.html"?>
 				</form>
 			</section>
 		</p></div>

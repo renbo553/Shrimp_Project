@@ -185,22 +185,30 @@ function place_picture(target_id , show_picture_id , picture_address) {
     reader.readAsDataURL(document.getElementById(target_id).files[0]);
 }
 
-function modify_put_into_form (data , form_id , is_modify) {
+async function modify_put_into_form(data , form_id , is_modify) {
+    var Filelist ;
+    //show data on 詳細資料_卵巢成熟
     if(is_modify == 1) {
         if(data.get("image") != "") {
-            fetch(data.get("image"))
+            Filelist = fetch(data.get("image"))
                 .then(response => response.blob())
                 .then(blob => {
-                    // 创建新的文件对象
+                    // 創建新的文件對象
                     var files = [
                         new File([blob], data.get("image") + ".jpg" , { type: 'image/jpeg' } )
                     ];
                     
-                    document.getElementById("uploadimage_big").files = new FileListItems(files) ;
-                    document.getElementById("uploadimage_small").files = new FileListItems(files) ;
-                    place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
-                    place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
+                    return new FileListItems(files) ;
+                    
                 });
+                // console.log(Filelist)
+                file = await Filelist.then((value) => {
+                    return value;
+                });
+                document.getElementById("uploadimage_big").files = file ;
+                document.getElementById("uploadimage_small").files = file ;
+                place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
+                place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
         }
     }
     //show data on 修改資料_卵巢
@@ -208,4 +216,112 @@ function modify_put_into_form (data , form_id , is_modify) {
     document.getElementById(form_id).elements["eye"].value = data.get("eye") ;
     document.getElementById(form_id).elements["date"].value = data.get('date') ;
     document.getElementById(form_id).elements["ovarystate"].value = data.get('ovarystate') ;
+}
+
+// ---------------------------------------------------------------------------------------------------
+
+// 客製化查詢之function
+function append_eye() {
+    const returnHTML = 
+    `<div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 眼標 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='eyetag_text' id='eyetag_text'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_ovary(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_ovary() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_2" id="and_or_2">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 卵巢階段 </div>
+            <div class="input-group">
+                <select id="stage_select" name="stage_select" class="custom-select">
+                    <option value="none" selected disabled hidden></option>
+                    <option value="0">0</option>
+                    <option value="0-Ⅰ">0-Ⅰ</option>
+                    <option value="Ⅰ">Ⅰ</option>
+                    <option value="Ⅰ-Ⅱ">Ⅰ-Ⅱ</option>
+                    <option value="Ⅱ">Ⅱ</option>
+                    <option value="Ⅱ-Ⅲ">Ⅱ-Ⅲ</option>
+                    <option value="Ⅲ">Ⅲ</option>
+                    <option value="脫殼">脫殼</option>
+                    <option value="受精">受精</option>
+                    <option value="生產">生產</option>
+                    <option value="死亡">死亡</option>
+                    <option value="淘汰">淘汰</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_time(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_time() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_3" id="and_or_3">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 起始日期 </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='start_date' id='start_date'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 結束日期 </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='end_date' id='end_date'>
+            </div>
+        </div>
+    </div>
+    `;
+
+    return returnHTML;
 }

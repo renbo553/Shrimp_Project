@@ -283,6 +283,7 @@ function html_show_all_data (formData) {
     var food_weight = formData.get('food_weight') ;
     var food_remain = formData.get('food_remain') ;
     var FeedingRatio = formData.get('FeedingRatio') ;
+    var Observation = formData.get('Observation') ;
 
     const map = new Map()
     map.set("TankID" , "TankID") ;
@@ -303,6 +304,7 @@ function html_show_all_data (formData) {
     map.set("food_weight" , "餵食量") ;
     map.set("food_remain" , "殘餌量") ;
     map.set("FeedingRatio" , "FeedingRatio") ;
+    map.set("Observation" , "備註") ;
 
     //用 array 先把超過範圍的資料存起來
     var all_data_name = [] ;
@@ -345,6 +347,11 @@ function html_show_all_data (formData) {
     all_data_num.push(food_weight) ;
     all_data_num.push(food_remain) ;
     all_data_num.push(FeedingRatio) ;
+    
+    if(Observation != "") {
+        all_data_name.push(map.get("Observation")) ;
+        all_data_num.push(Observation) ;
+    }
 
     //建立一個新的html檔來當作提示訊息，append_div為要插入的訊息
     var new_html = document.createElement('div') ;
@@ -416,23 +423,30 @@ function place_picture(target_id , show_picture_id , picture_address) {
     reader.readAsDataURL(document.getElementById(target_id).files[0]);
 }
 
-function modify_put_into_form (data , form_id , is_modify) {
+async function modify_put_into_form (data , form_id , is_modify) {
+    var Filelist ;
     //show data on 詳細資料_餵食
     if(is_modify == 1) {
         if(data.get("image") != "") {
-            fetch(data.get("image"))
+            Filelist = fetch(data.get("image"))
                 .then(response => response.blob())
                 .then(blob => {
-                    // 创建新的文件对象
+                    // 創建新的文件對象
                     var files = [
                         new File([blob], data.get("image") + ".jpg" , { type: 'image/jpeg' } )
                     ];
                     
-                    document.getElementById("uploadimage_big").files = new FileListItems(files) ;
-                    document.getElementById("uploadimage_small").files = new FileListItems(files) ;
-                    place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
-                    place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
+                    return new FileListItems(files) ;
+                    
                 });
+                // console.log(Filelist)
+                file = await Filelist.then((value) => {
+                    return value;
+                });
+                document.getElementById("uploadimage_big").files = file ;
+                document.getElementById("uploadimage_small").files = file ;
+                place_picture("uploadimage_big" , "show_image_big" , data.get("image")) ;
+                place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
         }
     }
     document.getElementById(form_id).elements["select_type"].value = data.get("shrimp") ;
@@ -513,4 +527,115 @@ function modify_data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["FeedingRatio"].value = from_data.get("FeedingRatio") ;
     document.getElementById(form_id).elements["Observation"].value = from_data.get("Observation") ;
     document.getElementById(form_id).elements["eating"].value = from_data.get("eating") ;
+}
+
+
+// ---------------------------------------------------------------------------------------------------
+
+// 客製化查詢之function
+function append_tankid() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> TankID </div>
+            <div class="input-group">
+                <select id="tank_select" name="tank_select" class="custom-select">
+                    <option value="none" selected disabled hidden></option>
+                    <option value=""></option>
+                    <option value="M1">M1</option>
+                    <option value="M2">M2</option>
+                    <option value="M3">M3</option>
+                    <option value="M4">M4</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_shrimp(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_shrimp() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_1" id="and_or_1">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 蝦缸類別 </div>
+            <div class="input-group">
+                <select id="shrimp_select" name="shrimp_select" class="custom-select">
+                    <option value="none" selected disabled hidden></option>
+                    <option value=""></option>
+                    <option value="公蝦缸">公蝦缸</option>
+                    <option value="母蝦缸">母蝦缸</option>
+                    <option value="交配缸">交配缸</option>
+                    <option value="休養缸">休養缸</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_time(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_time() {
+    const returnHTML = 
+    `<div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_2" id="and_or_2">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 起始日期 </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='start_date' id='start_date'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 結束日期 </div>
+            <div class="input-group">
+                <input type='date' class='form-control' name='end_date' id='end_date'>
+            </div>
+        </div>
+    </div>
+    `;
+
+    return returnHTML;
 }

@@ -1,0 +1,165 @@
+<input id="hidden_eye" name="hidden_eye" type="text" class="form-control" style="display:none">
+<input id="hidden_tankid" name="hidden_tankid" type="text" class="form-control" style="display:none">
+                    
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> index </div>
+    <div style = "width: 30%">
+        <input id="id" name="id" type="text" class="form-control" readonly>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 眼標 </div>
+    <div style = "width: 30%">
+        <input id="eye" name="eye" type="text" class="form-control" readonly>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 家族 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-home"></i>
+                </div>
+            </div>
+            <input id="family" name="family" type="text" class="form-control" readonly>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 體重 </div>
+    <div style = "width: 30%">
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    <i class="fa fa-balance-scale"></i>
+                </div>
+            </div>
+            <input id="weight" name="weight" type="text" class="form-control" readonly>
+            <div class="input-group-append">
+                <div class="input-group-text">(g)</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 出生日期 </div>
+    <div style = "width: 30%">
+        <input id="birthday" name="birthday" type="date" class="form-control" disabled="disabled">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 剪眼日期 </div>
+    <div style = "width: 30%">
+        <input id="cutday" name="cutday" type="date" class="form-control" disabled="disabled">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 進蝦日期 </div>
+    <div style = "width: 30%">
+        <input id="enterday" name="enterday" type="date" class="form-control" disabled="disabled">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> tankid </div>
+    <div style = "width: 30%">
+        <select id="location" name="location" class="custom-select" disabled="disabled">
+            <option value=""></option>
+            <option value="M1">M1</option>
+            <option value="M2">M2</option>
+            <option value="M3">M3</option>
+            <option value="M4">M4</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 17%"> 生存狀態 </div>
+    <div style = "width: 30%">
+        <select id="live_or_die" name="live_or_die" class="custom-select" disabled="disabled">
+            <option value=""></option>
+            <option value="存活">存活</option>
+            <option value="死亡">死亡</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 3%"> </div>
+    <button type="button" class="btn btn-primary" onclick="back()">返回查詢</button>
+    <div id="backmsg"></div>
+</div>
+
+
+
+
+
+
+<hr style="border-width: 1px; border-color: black;">
+                    
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 47%"> 
+        <div> 欲查詢的頁面 </div>
+        <select id="UI_type" name="UI_type" class="custom-select">
+            <option value="none" selected disabled hidden></option>
+            <option value=""></option>
+            <option value="卵巢成熟">卵巢成熟</option>
+            <option value="生產">生產</option>
+            <option value="餵食">餵食</option>
+            <option value="水質">水質</option>
+        </select>
+    </div>
+    <div style = "width: 1%"> </div>
+    <div style = "width: 47%"> 
+        <div> 查詢方式("及" or "或") </div>
+        <select id="and_or" name="and_or" class="custom-select">
+            <option value="none" selected disabled hidden></option>
+            <option value=""></option>
+            <option value="and">及</option>
+            <option value="or">或</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <div style = "width: 47%">
+        <div> 起始日期 </div>
+        <div class="input-group">
+            <input type='date' class='form-control' name='start_date' id='start_date'>
+        </div>
+    </div>
+    <div style = "width: 1%"> </div>
+    <div style = "width: 47%">
+        <div> 結束日期 </div>
+        <div class="input-group">
+            <input type='date' class='form-control' name='end_date' id='end_date'>
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 3%"> </div>
+    <button type="submit" class='btn btn-primary' name="submit_button" value="submit">查詢</button>
+</div>

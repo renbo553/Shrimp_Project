@@ -40,7 +40,31 @@ if ($fileSize == 0) {
     /* 定義 SQL 字串的變數 */
     /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
     /* 所以，可以直接設定它是 null */
-    $insertStr = "UPDATE breed SET 眼標 ='{$eyetag}',  家族='{$family}',   剪眼日期='{$cleancutday}',  剪眼體重 ='{$cutweight}',  進產卵室待產日期 ='{$cleanspawningroomdate}',   生產體重='{$spawningweight}',  卵巢進展階段='{$ovarystate}' WHERE id = $id";
+    $insertStr = "UPDATE breed SET 
+        眼標 ='{$eyetag}',
+        家族='{$family}',
+        剪眼日期='{$cleancutday}',
+        剪眼體重 ='{$cutweight}',
+        進產卵室待產日期 ='{$cleanspawningroomdate}',
+        生產體重='{$spawningweight}',
+        卵巢進展階段='{$ovarystate}',
+        公蝦家族='{$male_family}',
+        交配方式='{$mating}',
+        image=''
+        WHERE id = $id";
+    
+    // 上傳的同時要更新母種蝦資料庫的資料
+    // 先看有沒有該種蝦的母種蝦資料庫的資料
+    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
+    $stmt = mysqli_query($link, $sql);
+    if(mysqli_num_rows($stmt) != 0) {
+        $update_breed_str = "UPDATE shrimp_info SET
+            家族='{$family}',
+            剪眼日期='{$cleancutday}'
+            WHERE 眼標 = '$eyetag'";
+        mysqli_query($link, $update_breed_str);
+    }
+    
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
@@ -101,7 +125,31 @@ if ($fileSize == 0) {
         /* 定義 SQL 字串的變數 */
         /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
         /* 所以，可以直接設定它是 null */
-        $insertStr = "UPDATE breed SET 眼標 ='{$eyetag}',  家族='{$family}',   剪眼日期='{$cleancutday}',  剪眼體重 ='{$cutweight}',  進產卵室待產日期 ='{$cleanspawningroomdate}',  卵巢進展階段='{$spawningweight}',  卵巢進展階段='{$ovarystate}', 公蝦家族='{$male_family}', 交配方式='{$mating}', image = '{$target_file}' WHERE id = $id";
+        $insertStr = "UPDATE breed SET 
+            眼標 ='{$eyetag}',
+            家族='{$family}',
+            剪眼日期='{$cleancutday}',
+            剪眼體重 ='{$cutweight}',
+            進產卵室待產日期 ='{$cleanspawningroomdate}',
+            生產體重='{$spawningweight}',
+            卵巢進展階段='{$ovarystate}',
+            公蝦家族='{$male_family}',
+            交配方式='{$mating}', 
+            image = '{$target_file}' 
+            WHERE id = $id";
+        
+        // 上傳的同時要更新母種蝦資料庫的資料
+        // 先看有沒有該種蝦的母種蝦資料庫的資料
+        $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
+        $stmt = mysqli_query($link, $sql);
+        if(mysqli_num_rows($stmt) != 0) {
+            $update_breed_str = "UPDATE shrimp_info SET
+                家族='{$family}',
+                剪眼日期='{$cleancutday}'
+                WHERE 眼標 = '$eyetag'";
+            mysqli_query($link, $update_breed_str);
+        }
+
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

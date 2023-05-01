@@ -1,0 +1,200 @@
+
+<form id="big_form" method="post" enctype="multipart/form-data">
+    <div class="form-inline" style = "width: 100% ; height: 50px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> Index </div>
+        <div style = "width: 17%">
+            <input id="id" name="id" class="form-control" readonly>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 50px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> TankID </div>
+        <div style = "width: 17%">
+            <select id="location" name="location" class="custom-select" disabled="disabled">
+                <option value=""></option>
+                <option value="M1">M1</option>
+                <option value="M2">M2</option>
+                <option value="M3">M3</option>
+                <option value="M4">M4</option>
+            </select>
+        </div>
+
+        <div style = "width: 2%"> </div>
+        <div style = "width: 5%"> 日期 </div>
+        <div style = "width: 17%">
+            <input id="date" name="date" type="date" class="form-control" disabled="disabled">
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> NH4-N </div>
+        <input id="nh4" name="nh4" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="nh4" style = "width: 5%;">(mg/l)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> NO2 </div>
+        <input id="no2" name="no2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="no2" style = "width: 5%;">(mg/l)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> NO3 </div>
+        <input id="no3" name="no3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="no3" style = "width: 5%;">(mg/l)</label>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> O2_1 </div>
+        <input id="O2_1" name="O2_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="O2_1" style = "width: 5%;">(mg/l)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> O2_2 </div>
+        <input id="O2_2" name="O2_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="O2_2" style = "width: 5%;">(mg/l)</label>
+
+        <div style = "width: 2%"> </div>
+        
+        <div style = "width: 5%"> O2_3 </div>
+        <input id="O2_3" name="O2_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="O2_3" style = "width: 5%;">(mg/l)</label>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> pH_1 </div>
+        <input id="pH_1" name="pH_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="pH_1" style = "width: 5%;">(pH值)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> pH_2 </div>
+        <input id="pH_2" name="pH_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="pH_2" style = "width: 5%;">(pH值)</label>
+        
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> pH_3 </div>
+        <input id="pH_3" name="pH_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="pH_3" style = "width: 5%;">(pH值)</label>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> ORP_1 </div>
+        <input id="ORP_1" name="ORP_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="ORP_1" style = "width: 5%;">(mV)</label>
+        
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> ORP_2 </div>
+        <input id="ORP_2" name="ORP_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="ORP_2" style = "width: 5%;">(mV)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> ORP_3 </div>
+        <input id="ORP_3" name="ORP_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="ORP_3" style = "width: 5%;">(mV)</label>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> 水溫_1 </div>
+        <input id="Temp_1" name="Temp_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Temp_1" style = "width: 5%;">(℃)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> 水溫_2 </div>
+        <input id="Temp_2" name="Temp_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Temp_2" style = "width: 5%;">(℃)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> 水溫_3 </div>
+        <input id="Temp_3" name="Temp_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Temp_3" style = "width: 5%;">(℃)</label>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> 鹽度_1 </div>
+        <input id="Salinity_1" name="Salinity_1" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Salinity_1" style = "width: 5%;">(‰)</label>
+        
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> 鹽度_2 </div>
+        <input id="Salinity_2" name="Salinity_2" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Salinity_2" style = "width: 5%;">(‰)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> 鹽度_3 </div>
+        <input id="Salinity_3" name="Salinity_3" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Salinity_3" style = "width: 5%;">(‰)</label>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> 鹼度 </div>
+        <input id="Alkalinity" name="Alkalinity" type="text" class="form-control" style = "width: 12%;" disabled="disabled">
+        <label class="input-group-text" for="Alkalinity" style = "width: 5%;">(ppm)</label>
+
+        <div style = "width: 2%"> </div>
+        
+        <div style = "width: 5%"> Marine </div>
+        <input id="Marine" name="Marine" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+        <label class="input-group-text" for="Marine" style = "width: 6%;">(CFU/ml)</label>
+
+        <div style = "width: 2%"> </div>
+        <div style = "width: 5%"> TCBS </div>
+        <input id="TCBS" name="TCBS" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+        <label class="input-group-text" for="TCBS" style = "width: 6%;">(CFU/ml)</label>
+    </div>
+        
+    <div class="form-inline" style = "width: 100% ; height: 75px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> TCBS綠菌 </div>
+        <input id="TCBS綠菌" name="TCBS綠菌" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+        <label class="input-group-text" for="TCBS綠菌" style = "width: 6%;">(CFU/ml)</label>
+
+        <div style = "width: 2%"> </div>
+        
+        <div style = "width: 5%"> 螢光菌Marine </div>
+        <input id="螢光菌Marine" name="螢光菌Marine" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+        <label class="input-group-text" for="螢光菌Marine" style = "width: 6%;">(CFU/ml)</label>
+
+        <div style = "width: 2%"> </div>
+
+        <div style = "width: 5%"> 螢光菌TCBS </div>
+        <input id="螢光菌TCBS" name="螢光菌TCBS" type="text" class="form-control" style = "width: 11%;" disabled="disabled">
+        <label class="input-group-text" for="螢光菌TCBS" style = "width: 6%;">(CFU/ml)</label>
+
+    </div>
+
+    <div class="form-inline" style = "width: 100%">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 5%"> 備註 </div>
+        <div style = "width: 40%">
+            <textarea id="Note" name="Note" cols="40" rows="5" class="form-control" disabled="disabled"></textarea>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 10px">
+        <div style = "height: 2%"> </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 50px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="back()">返回查詢</button>
+        <div id="backmsg"></div>
+    </div>
+</form>

@@ -127,7 +127,8 @@ if ($fileSize == 0) {
         3_remain='{$remain0300}', 
         3_eating='{$eating0300}',
         Feeding_Ratio='{$FeedingRatio}', 
-        Observation='{$Observation}'
+        Observation='{$Observation}',
+        image=''
         WHERE id = $id";
 
     $result = mysqli_query($link, $insertStr);
