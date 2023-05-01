@@ -126,7 +126,7 @@ if (!isset($_SESSION)) {
             <div style = "width: auto">
                 <?php
                     // 放匯出功能做好時的匯出鍵
-                    // utility_button_onclick("export_waterquality.php", "匯出");
+                    utility_button_onclick("export_feed.php", "匯出");
                 ?>
             </div>
         </div>
