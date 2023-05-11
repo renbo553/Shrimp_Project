@@ -19,16 +19,12 @@ $target_dir = "images/";
 
 $id = filter_input(INPUT_POST, 'id');
 $eyetag = filter_input(INPUT_POST, 'eye');
-$family = filter_input(INPUT_POST, 'family');
 $male_family = filter_input(INPUT_POST, 'male_family');
-$cutday = filter_input(INPUT_POST, 'cutday');
-$cutweight = filter_input(INPUT_POST, 'cutweight');
 $mating = filter_input(INPUT_POST, 'mating');
 $spawningroomdate = filter_input(INPUT_POST, 'spawningroomdate');
 $spawningweight = filter_input(INPUT_POST, 'spawningweight');
 $ovarystate = filter_input(INPUT_POST, 'ovarystate');
 
-$cleancutday = str_replace("/", "", $cutday);
 $cleanspawningroomdate = str_replace("/", "", $spawningroomdate);
 
 $fileType = $_FILES['fileField']['type']; //檔案類型
@@ -42,9 +38,6 @@ if ($fileSize == 0) {
     /* 所以，可以直接設定它是 null */
     $insertStr = "UPDATE breed SET 
         眼標 ='{$eyetag}',
-        家族='{$family}',
-        剪眼日期='{$cleancutday}',
-        剪眼體重 ='{$cutweight}',
         進產卵室待產日期 ='{$cleanspawningroomdate}',
         生產體重='{$spawningweight}',
         卵巢進展階段='{$ovarystate}',
@@ -52,19 +45,7 @@ if ($fileSize == 0) {
         交配方式='{$mating}',
         image=''
         WHERE id = $id";
-    
-    // 上傳的同時要更新母種蝦資料庫的資料
-    // 先看有沒有該種蝦的母種蝦資料庫的資料
-    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
-    $stmt = mysqli_query($link, $sql);
-    if(mysqli_num_rows($stmt) != 0) {
-        $update_breed_str = "UPDATE shrimp_info SET
-            家族='{$family}',
-            剪眼日期='{$cleancutday}'
-            WHERE 眼標 = '$eyetag'";
-        mysqli_query($link, $update_breed_str);
-    }
-    
+
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "修改資料庫成功\n";
@@ -127,9 +108,6 @@ if ($fileSize == 0) {
         /* 所以，可以直接設定它是 null */
         $insertStr = "UPDATE breed SET 
             眼標 ='{$eyetag}',
-            家族='{$family}',
-            剪眼日期='{$cleancutday}',
-            剪眼體重 ='{$cutweight}',
             進產卵室待產日期 ='{$cleanspawningroomdate}',
             生產體重='{$spawningweight}',
             卵巢進展階段='{$ovarystate}',
@@ -137,19 +115,6 @@ if ($fileSize == 0) {
             交配方式='{$mating}', 
             image = '{$target_file}' 
             WHERE id = $id";
-        
-        // 上傳的同時要更新母種蝦資料庫的資料
-        // 先看有沒有該種蝦的母種蝦資料庫的資料
-        $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
-        $stmt = mysqli_query($link, $sql);
-        if(mysqli_num_rows($stmt) != 0) {
-            $update_breed_str = "UPDATE shrimp_info SET
-                家族='{$family}',
-                剪眼日期='{$cleancutday}'
-                WHERE 眼標 = '$eyetag'";
-            mysqli_query($link, $update_breed_str);
-        }
-
         $result = mysqli_query($link, $insertStr);
         if ($result) {
             echo "修改資料庫成功\n";

@@ -17,8 +17,6 @@ header("Content-Type:text/html; charset=utf-8");
 
 $tankid = filter_input(INPUT_POST , "location");
 $date = filter_input(INPUT_POST, 'date');
-$time = filter_input(INPUT_POST , 'time');
-$cleantime = intval($time) ;
 $get_day = date("Y-m-d", strtotime($date . " -1 day")); ;
 $cleanDate = str_replace("/", "", $get_day);
 
@@ -29,7 +27,7 @@ $cnt = date("Y-m-d-H-i-s");
 /* 定義 SQL 字串的變數 */
 /* 因為 crop 表格的第一個欄位是主鍵，而且它是「自動編號」 */
 /* 所以，可以直接設定它是 null */
-$insertStr = "SELECT * FROM feed WHERE Date = \"$cleanDate\" AND Tank = \"$tankid\" AND time = $cleantime" ;
+$insertStr = "SELECT * FROM feed WHERE Date = \"$cleanDate\" AND Tank = \"$tankid\"" ;
 $result = mysqli_query($link, $insertStr);
 $rows = array();
 while ($row = mysqli_fetch_assoc($result)) {
