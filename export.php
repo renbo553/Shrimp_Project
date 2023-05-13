@@ -83,6 +83,8 @@ class Export_Handler
         array("進產卵室待產日期", "進產卵室待產日期", 20),
         array("生產體重", "生產體重", 10),
         array("卵巢進展階段(Stage)", "卵巢進展階段", 20),
+        array("公蝦家族", "公蝦家族", 10),
+        array("交配方式", "交配方式", 10)
     );
     private const FEED_COLUMN_ARRAY_1 = array(
         array("Date", 1),
