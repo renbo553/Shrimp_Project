@@ -137,7 +137,7 @@
 				</div>
 				
 				<!--   other buttons -->
-                <p>已有一個帳號 ? <?php echo '<a href=login>登入</a>'?></p>
+                <p>已有一個帳號 ? 按此進行<?php echo '<a href=login>登入</a>'?></p>
 				<p>沒有帳號嗎 ? 按此進行<?php echo '<a href=register>註冊</a>' ?></p>
 				<!--   End Conrainer  -->
 			</div>
