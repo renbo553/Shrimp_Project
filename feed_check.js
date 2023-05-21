@@ -3,9 +3,6 @@ function check (formData) {
     var TankID = formData.get('location') ;
     var date = formData.get('date') ;
     var tank_type = formData.get('tank_type') ;
-    var time = formData.get('time') ;
-    var work = formData.get('work') ;
-    var else_work = formData.get('else_work') ;
     var male_shrimp = formData.get('male_shrimp') ;
     var female_shrimp = formData.get('female_shrimp') ;
     var dead_male_shrimp = formData.get('dead_male_shrimp') ;
@@ -15,8 +12,36 @@ function check (formData) {
     var avg_male_shrimp = formData.get('avg_male_shrimp') ;
     var avg_female_shrimp = formData.get('avg_female_shrimp') ;
     var total_weight = formData.get('total_weight') ;
-    var food_weight = formData.get('food_weight') ;
-    var food_remain = formData.get('food_remain') ;
+
+    var food0900 = formData.get('food0900') ;
+    var weight0900 = formData.get('weight0900') ;
+    var remain0900 = formData.get('remain0900') ;
+    var else_work_0900 = formData.get('else_work_0900') ;
+    var food1100 = formData.get('food1100') ;
+    var weight1100 = formData.get('weight1100') ;
+    var remain1100 = formData.get('remain1100') ;
+    var else_work_1100 = formData.get('else_work_1100') ;
+    var food1400 = formData.get('food1400') ;
+    var weight1400 = formData.get('weight1400') ;
+    var remain1400 = formData.get('remain1400') ;
+    var else_work_1400 = formData.get('else_work_1400') ;
+    var food1600 = formData.get('food1600') ;
+    var weight1600 = formData.get('weight1600') ;
+    var remain1600 = formData.get('remain1600') ;
+    var else_work_1600 = formData.get('else_work_1600') ;
+    var food1900 = formData.get('food1900') ;
+    var weight1900 = formData.get('weight1900') ;
+    var remain1900 = formData.get('remain1900') ;
+    var else_work_1900 = formData.get('else_work_1900') ;
+    var food2300 = formData.get('food2300') ;
+    var weight2300 = formData.get('weight2300') ;
+    var remain2300 = formData.get('remain2300') ;
+    var else_work_2300 = formData.get('else_work_2300') ;
+    var food0300 = formData.get('food0300') ;
+    var weight0300 = formData.get('weight0300') ;
+    var remain0300 = formData.get('remain0300') ;
+    var else_work_0300 = formData.get('else_work_0300') ;
+
     var FeedingRatio = formData.get('FeedingRatio') ;
 
     const map = new Map()
@@ -54,19 +79,75 @@ function check (formData) {
         show_message += (map.get("tank_type") + '、') ;
         count ++ ;
     }
-    if(work == null || work == "") {
+    if(food0900 == null || food0900 == "") {
         show_message += (map.get("work") + '、') ;
         count ++ ;
     }
     else {
-        if(work == "其他" && (else_work == "" || else_work == null) ) {
+        if(food0900 == "其他" && (else_work_0900 == "" || else_work_0900 == null) ) {
             show_message += (map.get("else_work") + '、') ;
             count ++ ;
         }
     }
-    if(time == null || time == "") {
-        show_message += (map.get("time") + '、') ;
+    if(food1100 == null || food1100 == "") {
+        show_message += (map.get("work") + '、') ;
         count ++ ;
+    }
+    else {
+        if(food1100 == "其他" && (else_work_1100 == "" || else_work_1100 == null) ) {
+            show_message += (map.get("else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1400 == null || food1400 == "") {
+        show_message += (map.get("work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1400 == "其他" && (else_work_1400 == "" || else_work_1400 == null) ) {
+            show_message += (map.get("else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1600 == null || food1600 == "") {
+        show_message += (map.get("work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1600 == "其他" && (else_work_1600 == "" || else_work_1600 == null) ) {
+            show_message += (map.get("else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1900 == null || food1900 == "") {
+        show_message += (map.get("work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1900 == "其他" && (else_work_1900 == "" || else_work_1900 == null) ) {
+            show_message += (map.get("else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food2300 == null || food2300 == "") {
+        show_message += (map.get("work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food2300 == "其他" && (else_work_2300 == "" || else_work_2300 == null) ) {
+            show_message += (map.get("else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food0300 == null || food0300 == "") {
+        show_message += (map.get("work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food0300 == "其他" && (else_work_0300 == "" || else_work_0300 == null) ) {
+            show_message += (map.get("else_work") + '、') ;
+            count ++ ;
+        }
     }
     if(male_shrimp == null || male_shrimp == "") {
         show_message += (map.get("male_shrimp") + '、') ;
@@ -104,11 +185,59 @@ function check (formData) {
         show_message += (map.get("total_weight") + '、') ;
         count ++ ;
     }
-    if(food_weight == null || food_weight == "") {
+    if(weight0900 == null || weight0900 == "") {
         show_message += (map.get("food_weight") + '、') ;
         count ++ ;
     }
-    if(food_remain == null || food_remain == "") {
+    if(remain0900 == null || remain0900 == "") {
+        show_message += (map.get("food_remain") + '、') ;
+        count ++ ;
+    }
+    if(weight1100 == null || weight1100 == "") {
+        show_message += (map.get("food_weight") + '、') ;
+        count ++ ;
+    }
+    if(remain1100 == null || remain1100 == "") {
+        show_message += (map.get("food_remain") + '、') ;
+        count ++ ;
+    }
+    if(weight1400 == null || weight1400 == "") {
+        show_message += (map.get("food_weight") + '、') ;
+        count ++ ;
+    }
+    if(remain1400 == null || remain1400 == "") {
+        show_message += (map.get("food_remain") + '、') ;
+        count ++ ;
+    }
+    if(weight1600 == null || weight1600 == "") {
+        show_message += (map.get("food_weight") + '、') ;
+        count ++ ;
+    }
+    if(remain1600 == null || remain1600 == "") {
+        show_message += (map.get("food_remain") + '、') ;
+        count ++ ;
+    }
+    if(weight1900 == null || weight1900 == "") {
+        show_message += (map.get("food_weight") + '、') ;
+        count ++ ;
+    }
+    if(remain1900 == null || remain1900 == "") {
+        show_message += (map.get("food_remain") + '、') ;
+        count ++ ;
+    }
+    if(weight2300 == null || weight2300 == "") {
+        show_message += (map.get("food_weight") + '、') ;
+        count ++ ;
+    }
+    if(remain2300 == null || remain2300 == "") {
+        show_message += (map.get("food_remain") + '、') ;
+        count ++ ;
+    }
+    if(weight0300 == null || weight0300 == "") {
+        show_message += (map.get("food_weight") + '、') ;
+        count ++ ;
+    }
+    if(remain0300 == null || remain0300 == "") {
         show_message += (map.get("food_remain") + '、') ;
         count ++ ;
     }
@@ -117,7 +246,10 @@ function check (formData) {
         count ++ ;
     }
 
-    if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
+    
+    console.log(show_message) ;
+    // if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
+    if (count != 0) show_message = "尚有資料未寫完，請再注意一下" ;
     else show_message = "" ;
 
     return show_message ;
@@ -162,12 +294,10 @@ function add_check (formData) {
     console.log(formData) ;
     var TankID = formData.get('location') ;
     var date = formData.get('date') ;
-    var time = formData.get('time') ;
 
     const map = new Map()
     map.set("TankID" , "TankID") ;
     map.set("date" , "日期") ;
-    map.set("time" , "時間") ;
 
     // 計算有幾個沒填
     var count = 0 ;
@@ -178,11 +308,6 @@ function add_check (formData) {
     }
     if(date == null || date == "") {
         show_message += (map.get("date") + '、') ;
-        count ++ ;
-    }
-    
-    if(time == null || time == "") {
-        show_message += (map.get("time") + '、') ;
         count ++ ;
     }
 
@@ -224,9 +349,6 @@ function get_before (formData) {
 function put_into_form(before_data_array , form_id) {
     // 將昨日的值放入 html
     document.getElementById(form_id).elements["select_type"].value = before_data_array["shrimp"] ;
-    document.getElementById(form_id).elements["select_time"].value = before_data_array['time'] ;
-    document.getElementById(form_id).elements["select_work"].value = before_data_array["work"] ;
-    document.getElementById(form_id).elements["else_work"].value = before_data_array["else_work"] ;
     document.getElementById(form_id).elements["male_shrimp"].value = before_data_array["No_Shrimp_Male"] ;
     document.getElementById(form_id).elements["female_shrimp"].value = before_data_array["No_Shrimp_Female"] ;
     document.getElementById(form_id).elements["dead_male_shrimp"].value = before_data_array["No_Dead_Male"] ;
@@ -236,8 +358,27 @@ function put_into_form(before_data_array , form_id) {
     document.getElementById(form_id).elements["avg_male_shrimp"].value = before_data_array["Avg_Weight_Male"] ;
     document.getElementById(form_id).elements["avg_female_shrimp"].value = before_data_array["Avg_Weight_Female"] ;
     document.getElementById(form_id).elements["total_weight"].value = before_data_array["Total_Weight"] ;
-    document.getElementById(form_id).elements["food_weight"].value = before_data_array["food_weight"] ;
-    document.getElementById(form_id).elements["food_remain"].value = before_data_array["food_remain"] ;
+    document.getElementById(form_id).elements["food0900"].value = before_data_array["9_species"] ;
+    document.getElementById(form_id).elements["weight0900"].value = before_data_array["9_weight"] ;
+    document.getElementById(form_id).elements["remain0900"].value = before_data_array["9_remain"] ;
+    document.getElementById(form_id).elements["food1100"].value = before_data_array["11_species"] ;
+    document.getElementById(form_id).elements["weight1100"].value = before_data_array["11_weight"] ;
+    document.getElementById(form_id).elements["remain1100"].value = before_data_array["11_remain"] ;
+    document.getElementById(form_id).elements["food1400"].value = before_data_array["14_species"] ;
+    document.getElementById(form_id).elements["weight1400"].value = before_data_array["14_weight"] ;
+    document.getElementById(form_id).elements["remain1400"].value = before_data_array["14_remain"] ;
+    document.getElementById(form_id).elements["food1600"].value = before_data_array["16_species"] ;
+    document.getElementById(form_id).elements["weight1600"].value = before_data_array["16_weight"] ;
+    document.getElementById(form_id).elements["remain1600"].value = before_data_array["16_remain"] ;
+    document.getElementById(form_id).elements["food1900"].value = before_data_array["19_species"] ;
+    document.getElementById(form_id).elements["weight1900"].value = before_data_array["19_weight"] ;
+    document.getElementById(form_id).elements["remain1900"].value = before_data_array["19_remain"] ;
+    document.getElementById(form_id).elements["food2300"].value = before_data_array["23_species"] ;
+    document.getElementById(form_id).elements["weight2300"].value = before_data_array["23_weight"] ;
+    document.getElementById(form_id).elements["remain2300"].value = before_data_array["23_remain"] ;
+    document.getElementById(form_id).elements["food0300"].value = before_data_array["3_species"] ;
+    document.getElementById(form_id).elements["weight0300"].value = before_data_array["3_weight"] ;
+    document.getElementById(form_id).elements["remain0300"].value = before_data_array["3_remain"] ;
     document.getElementById(form_id).elements["FeedingRatio"].value = before_data_array["Feeding_Ratio"] ;
 }
 
@@ -245,9 +386,6 @@ function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["location"].value = from_data.get("location") ;
     document.getElementById(form_id).elements["date"].value = from_data.get("date") ;
     document.getElementById(form_id).elements["select_type"].value = from_data.get("tank_type") ;
-    document.getElementById(form_id).elements["select_time"].value = from_data.get("time") ;
-    document.getElementById(form_id).elements["select_work"].value = from_data.get("work") ;
-    document.getElementById(form_id).elements["else_work"].value = from_data.get("else_work") ;
     document.getElementById(form_id).elements["male_shrimp"].value = from_data.get("male_shrimp") ;
     document.getElementById(form_id).elements["female_shrimp"].value = from_data.get("female_shrimp") ;
     document.getElementById(form_id).elements["dead_male_shrimp"].value = from_data.get("dead_male_shrimp") ;
@@ -257,8 +395,28 @@ function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["avg_male_shrimp"].value = from_data.get("avg_male_shrimp") ;
     document.getElementById(form_id).elements["avg_female_shrimp"].value = from_data.get("avg_female_shrimp") ;
     document.getElementById(form_id).elements["total_weight"].value = from_data.get("total_weight") ;
-    document.getElementById(form_id).elements["food_weight"].value = from_data.get("food_weight") ;
-    document.getElementById(form_id).elements["food_remain"].value = from_data.get("food_remain") ;
+    
+    document.getElementById(form_id).elements["food0900"].value = from_data.get("food0900") ;
+    document.getElementById(form_id).elements["weight0900"].value = from_data.get("weight0900") ;
+    document.getElementById(form_id).elements["remain0900"].value = from_data.get("remain0900") ;
+    document.getElementById(form_id).elements["food1100"].value = from_data.get("food1100") ;
+    document.getElementById(form_id).elements["weight1100"].value = from_data.get("weight1100") ;
+    document.getElementById(form_id).elements["remain1100"].value = from_data.get("remain1100") ;
+    document.getElementById(form_id).elements["food1400"].value = from_data.get("food1400") ;
+    document.getElementById(form_id).elements["weight1400"].value = from_data.get("weight1400") ;
+    document.getElementById(form_id).elements["remain1400"].value = from_data.get("remain1400") ;
+    document.getElementById(form_id).elements["food1600"].value = from_data.get("food1600") ;
+    document.getElementById(form_id).elements["weight1600"].value = from_data.get("weight1600") ;
+    document.getElementById(form_id).elements["remain1600"].value = from_data.get("remain1600") ;
+    document.getElementById(form_id).elements["food1900"].value = from_data.get("food1900") ;
+    document.getElementById(form_id).elements["weight1900"].value = from_data.get("weight1900") ;
+    document.getElementById(form_id).elements["remain1900"].value = from_data.get("remain1900") ;
+    document.getElementById(form_id).elements["food2300"].value = from_data.get("food2300") ;
+    document.getElementById(form_id).elements["weight2300"].value = from_data.get("weight2300") ;
+    document.getElementById(form_id).elements["remain2300"].value = from_data.get("remain2300") ;
+    document.getElementById(form_id).elements["food0300"].value = from_data.get("food0300") ;
+    document.getElementById(form_id).elements["weight0300"].value = from_data.get("weight0300") ;
+    document.getElementById(form_id).elements["remain0300"].value = from_data.get("remain0300") ;
     document.getElementById(form_id).elements["FeedingRatio"].value = from_data.get("FeedingRatio") ;
     document.getElementById(form_id).elements["Observation"].value = from_data.get("Observation") ;
 }
@@ -453,9 +611,6 @@ async function modify_put_into_form (data , form_id , is_modify) {
     document.getElementById(form_id).elements["id"].value = data.get("id") ;
     document.getElementById(form_id).elements["date"].value = data.get("Date") ;
     document.getElementById(form_id).elements["location"].value = data.get('Tank') ;
-    document.getElementById(form_id).elements["select_time"].value = data.get('time') ;
-    document.getElementById(form_id).elements["select_work"].value = data.get("work") ;
-    document.getElementById(form_id).elements["else_work"].value = data.get("else_work") ;
     document.getElementById(form_id).elements["male_shrimp"].value = data.get("No_Shrimp_Male") ;
     document.getElementById(form_id).elements["female_shrimp"].value = data.get("No_Shrimp_Female") ;
     document.getElementById(form_id).elements["dead_male_shrimp"].value = data.get("No_Dead_Male") ;
@@ -465,10 +620,77 @@ async function modify_put_into_form (data , form_id , is_modify) {
     document.getElementById(form_id).elements["avg_male_shrimp"].value = data.get("Avg_Weight_Male") ;
     document.getElementById(form_id).elements["avg_female_shrimp"].value = data.get("Avg_Weight_Female") ;
     document.getElementById(form_id).elements["total_weight"].value = data.get("Total_Weight") ;
-    document.getElementById(form_id).elements["food_weight"].value = data.get("food_weight") ;
-    document.getElementById(form_id).elements["food_remain"].value = data.get("food_remain") ;
-    document.getElementById(form_id).elements["eating"].value = data.get("eating") ;
     document.getElementById(form_id).elements["FeedingRatio"].value = data.get("Feeding_Ratio") ;
+
+    $option = new Set() ;
+    $option.add("Polychaete") ;
+    $option.add("Crab(去殼)") ;
+    $option.add("Squid") ;
+    $option.add("Mussel") ;
+    $option.add("Epsilon") ;
+    $option.add("日本飼料") ;
+    $option.add("Krill") ;
+    $option.add("Clam(母)") ;
+    $option.add("Ezmate(海膽+蟹卵)") ;
+    $option.add("Ezmate(海膽+蟹白)") ;
+    $option.add("Ezmate(海膽+蟹黃)") ;
+    $option.add("Ezmate(海膽)") ;
+    if($option.has(data.get("9_species"))) document.getElementById(form_id).elements["food0900"].value = data.get("9_species") ;
+    else {
+        document.getElementById(form_id).elements["food0900"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_0900"].value = data.get("9_species") ;
+    }
+    if($option.has(data.get("11_species"))) document.getElementById(form_id).elements["food1100"].value = data.get("11_species") ;
+    else {
+        document.getElementById(form_id).elements["food1100"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1100"].value = data.get("11_species") ;
+    }
+    if($option.has(data.get("14_species"))) document.getElementById(form_id).elements["food1400"].value = data.get("14_species") ;
+    else {
+        document.getElementById(form_id).elements["food1400"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1400"].value = data.get("14_species") ;
+    }
+    if($option.has(data.get("16_species"))) document.getElementById(form_id).elements["food1600"].value = data.get("16_species") ;
+    else {
+        document.getElementById(form_id).elements["food1600"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1600"].value = data.get("16_species") ;
+    }
+    if($option.has(data.get("19_species"))) document.getElementById(form_id).elements["food1900"].value = data.get("19_species") ;
+    else {
+        document.getElementById(form_id).elements["food1900"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1900"].value = data.get("19_species") ;
+    }
+    if($option.has(data.get("23_species"))) document.getElementById(form_id).elements["food2300"].value = data.get("23_species") ;
+    else {
+        document.getElementById(form_id).elements["food2300"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_2300"].value = data.get("23_species") ;
+    }
+    if($option.has(data.get("3_species"))) document.getElementById(form_id).elements["food0300"].value = data.get("3_species") ;
+    else {
+        document.getElementById(form_id).elements["food0300"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_0300"].value = data.get("3_species") ;
+    }
+    document.getElementById(form_id).elements["weight0900"].value = data.get("9_weight") ;
+    document.getElementById(form_id).elements["remain0900"].value = data.get("9_remain") ;
+    document.getElementById(form_id).elements["eating0900"].value = data.get("9_eating") ;
+    document.getElementById(form_id).elements["weight1100"].value = data.get("11_weight") ;
+    document.getElementById(form_id).elements["remain1100"].value = data.get("11_remain") ;
+    document.getElementById(form_id).elements["eating1100"].value = data.get("11_eating") ;
+    document.getElementById(form_id).elements["weight1400"].value = data.get("14_weight") ;
+    document.getElementById(form_id).elements["remain1400"].value = data.get("14_remain") ;
+    document.getElementById(form_id).elements["eating1400"].value = data.get("14_eating") ;
+    document.getElementById(form_id).elements["weight1600"].value = data.get("16_weight") ;
+    document.getElementById(form_id).elements["remain1600"].value = data.get("16_remain") ;
+    document.getElementById(form_id).elements["eating1600"].value = data.get("16_eating") ;
+    document.getElementById(form_id).elements["weight1900"].value = data.get("19_weight") ;
+    document.getElementById(form_id).elements["remain1900"].value = data.get("19_remain") ;
+    document.getElementById(form_id).elements["eating1900"].value = data.get("19_eating") ;
+    document.getElementById(form_id).elements["weight2300"].value = data.get("23_weight") ;
+    document.getElementById(form_id).elements["remain2300"].value = data.get("23_remain") ;
+    document.getElementById(form_id).elements["eating2300"].value = data.get("23_eating") ;
+    document.getElementById(form_id).elements["weight0300"].value = data.get("3_weight") ;
+    document.getElementById(form_id).elements["remain0300"].value = data.get("3_remain") ;
+    document.getElementById(form_id).elements["eating0300"].value = data.get("3_eating") ;
     document.getElementById(form_id).elements["Observation"].value = data.get("Observation") ;
 }
 
@@ -510,9 +732,6 @@ function modify_data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["location"].value = from_data.get("location") ;
     document.getElementById(form_id).elements["date"].value = from_data.get("date") ;
     document.getElementById(form_id).elements["select_type"].value = from_data.get("tank_type") ;
-    document.getElementById(form_id).elements["select_time"].value = from_data.get("time") ;
-    document.getElementById(form_id).elements["select_work"].value = from_data.get("work") ;
-    document.getElementById(form_id).elements["else_work"].value = from_data.get("else_work") ;
     document.getElementById(form_id).elements["male_shrimp"].value = from_data.get("male_shrimp") ;
     document.getElementById(form_id).elements["female_shrimp"].value = from_data.get("female_shrimp") ;
     document.getElementById(form_id).elements["dead_male_shrimp"].value = from_data.get("dead_male_shrimp") ;
@@ -522,11 +741,37 @@ function modify_data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["avg_male_shrimp"].value = from_data.get("avg_male_shrimp") ;
     document.getElementById(form_id).elements["avg_female_shrimp"].value = from_data.get("avg_female_shrimp") ;
     document.getElementById(form_id).elements["total_weight"].value = from_data.get("total_weight") ;
-    document.getElementById(form_id).elements["food_weight"].value = from_data.get("food_weight") ;
-    document.getElementById(form_id).elements["food_remain"].value = from_data.get("food_remain") ;
+    
+    document.getElementById(form_id).elements["food0900"].value = from_data.get("food0900") ;
+    document.getElementById(form_id).elements["weight0900"].value = from_data.get("weight0900") ;
+    document.getElementById(form_id).elements["remain0900"].value = from_data.get("remain0900") ;
+    document.getElementById(form_id).elements["eating0900"].value = from_data.get("eating0900") ;
+    document.getElementById(form_id).elements["food1100"].value = from_data.get("food1100") ;
+    document.getElementById(form_id).elements["weight1100"].value = from_data.get("weight1100") ;
+    document.getElementById(form_id).elements["remain1100"].value = from_data.get("remain1100") ;
+    document.getElementById(form_id).elements["eating1100"].value = from_data.get("eating1100") ;
+    document.getElementById(form_id).elements["food1400"].value = from_data.get("food1400") ;
+    document.getElementById(form_id).elements["weight1400"].value = from_data.get("weight1400") ;
+    document.getElementById(form_id).elements["remain1400"].value = from_data.get("remain1400") ;
+    document.getElementById(form_id).elements["eating1400"].value = from_data.get("eating1400") ;
+    document.getElementById(form_id).elements["food1600"].value = from_data.get("food1600") ;
+    document.getElementById(form_id).elements["weight1600"].value = from_data.get("weight1600") ;
+    document.getElementById(form_id).elements["remain1600"].value = from_data.get("remain1600") ;
+    document.getElementById(form_id).elements["eating1600"].value = from_data.get("eating1600") ;
+    document.getElementById(form_id).elements["food1900"].value = from_data.get("food1900") ;
+    document.getElementById(form_id).elements["weight1900"].value = from_data.get("weight1900") ;
+    document.getElementById(form_id).elements["remain1900"].value = from_data.get("remain1900") ;
+    document.getElementById(form_id).elements["eating1900"].value = from_data.get("eating1900") ;
+    document.getElementById(form_id).elements["food2300"].value = from_data.get("food2300") ;
+    document.getElementById(form_id).elements["weight2300"].value = from_data.get("weight2300") ;
+    document.getElementById(form_id).elements["remain2300"].value = from_data.get("remain2300") ;
+    document.getElementById(form_id).elements["eating2300"].value = from_data.get("eating2300") ;
+    document.getElementById(form_id).elements["food0300"].value = from_data.get("food0300") ;
+    document.getElementById(form_id).elements["weight0300"].value = from_data.get("weight0300") ;
+    document.getElementById(form_id).elements["remain0300"].value = from_data.get("remain0300") ;
+    document.getElementById(form_id).elements["eating0300"].value = from_data.get("eating0300") ;
     document.getElementById(form_id).elements["FeedingRatio"].value = from_data.get("FeedingRatio") ;
     document.getElementById(form_id).elements["Observation"].value = from_data.get("Observation") ;
-    document.getElementById(form_id).elements["eating"].value = from_data.get("eating") ;
 }
 
 

@@ -122,7 +122,7 @@ if (!isset($_SESSION)) {
         function all_data_msg(msg , formData) {
             // 為上傳時最後確認的訊息
             Swal.fire({
-                html: msg,
+                title : msg,
                 showCancelButton: true,
                 confirmButtonText: '確認!!!',
                 cancelButtonText: "再確認一下/修改一下",
@@ -143,8 +143,7 @@ if (!isset($_SESSION)) {
 
             var ret_message = check(formData) ;
             if(ret_message == "") {
-                var msg = html_show_all_data(formData) ;
-                all_data_msg(msg , formData) ;
+                all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
             }
             else Alert(ret_message) ;
         }
@@ -215,8 +214,7 @@ if (!isset($_SESSION)) {
 
             var ret_message = check(formData) ;
             if(ret_message == "") {
-                var msg = html_show_all_data(formData) ;
-                all_data_msg(msg , formData) ;
+                all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
             }
             else Alert(ret_message) ;
         }

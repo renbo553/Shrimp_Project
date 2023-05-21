@@ -169,6 +169,16 @@ if (!isset($_SESSION)) {
             );
             formInlineElement.remove();
         }
+
+        function continue_cutweight(button) {// append 接下來的元素
+            var myForm = $("#find_form")[0];
+            const formInlineElement = button.parentNode;
+            formInlineElement.insertAdjacentHTML(
+                'afterend',
+                append_cutweight()
+            );
+            formInlineElement.remove();
+        }
     </script>
 
 
@@ -220,6 +230,10 @@ if (!isset($_SESSION)) {
         $live_or_die = isset($_POST["live_or_die"]) ? $_POST["live_or_die"] : null;
         $weight_min = isset($_POST["weight_min"]) ? $_POST["weight_min"] : "" ;
         $weight_max = isset($_POST["weight_max"]) ? $_POST["weight_max"] : "" ;
+        $cut_weight_min = isset($_POST["cut_weight_min"]) ? $_POST["cut_weight_min"] : "" ;
+        $cut_weight_max = isset($_POST["cut_weight_max"]) ? $_POST["cut_weight_max"] : "" ;
+        $weight_min = isset($_POST["weight_min"]) ? $_POST["weight_min"] : "" ;
+        $weight_max = isset($_POST["weight_max"]) ? $_POST["weight_max"] : "" ;
         $cutday_begin = isset($_POST["cutday_begin"]) ? $_POST["cutday_begin"] : "" ;
         $cutday_end = isset($_POST["cutday_end"]) ? $_POST["cutday_end"] : "" ;
         $birthday_begin = isset($_POST["birthday_begin"]) ? $_POST["birthday_begin"] : "" ;
@@ -236,6 +250,7 @@ if (!isset($_SESSION)) {
         $and_or_5 = isset($_POST["and_or_5"]) ? $_POST["and_or_5"] : "and" ;
         $and_or_6 = isset($_POST["and_or_6"]) ? $_POST["and_or_6"] : "and" ;
         $and_or_7 = isset($_POST["and_or_7"]) ? $_POST["and_or_7"] : "and" ;
+        $and_or_8 = isset($_POST["and_or_8"]) ? $_POST["and_or_8"] : "and" ;
 
         /* concatenate sql where clause or set default value if not specified */
         if(empty($eyetag)){
@@ -267,13 +282,26 @@ if (!isset($_SESSION)) {
             $weight_min = ($and_or_4 == "and" || $and_or_5 == "and") ? "true" : "false" ;
         }
         else{
-            $weight_min = "剪眼體重 >= " . "'{$weight_min}'" ;
+            $weight_min = "體重 >= " . "'{$weight_min}'" ;
         }
         if(empty($weight_max)){
             $weight_max = (($and_or_4 == "and" || $and_or_5 == "and") || ($weight_min != "true" && $weight_min != "false")) ? "true" : "false" ;
         }
         else{
-            $weight_max = "剪眼體重 <= " . "'{$weight_max}'" ;
+            $weight_max = "體重 <= " . "'{$weight_max}'" ;
+        }
+
+        if(empty($cut_weight_min)){
+            $cut_weight_min = ($and_or_8 == "and") ? "true" : "false" ;
+        }
+        else{
+            $cut_weight_min = "剪眼體重 >= " . "'{$cut_weight_min}'" ;
+        }
+        if(empty($cut_weight_max)){
+            $cut_weight_max = (($and_or_8 == "and") || ($cut_weight_min != "true" && $cut_weight_min != "false")) ? "true" : "false" ;
+        }
+        else{
+            $cut_weight_max = "剪眼體重 <= " . "'{$cut_weight_max}'" ;
         }
         //日期-------------------------------------------------------------------------------------
         if(empty($cutday_begin)){
@@ -305,14 +333,14 @@ if (!isset($_SESSION)) {
             $birthday_end = "CAST(REPLACE(出生日期, '-', '') AS UNSIGNED) <= {$birthday_end}";
         }
         if(empty($enterday_begin)){
-            $enterday_begin = ($and_or_7 == "and") ? "true" : "false" ;
+            $enterday_begin = ($and_or_7 == "and" || $and_or_8 == "and") ? "true" : "false" ;
         }
         else{
             $enterday_begin = str_replace('-', '', $enterday_begin);
             $enterday_begin = "CAST(REPLACE(進蝦日期, '-', '') AS UNSIGNED) >= {$enterday_begin}";
         }
         if(empty($enterday_end)){
-            $enterday_end = ($and_or_7 == "and" || ($enterday_begin != "true" && $enterday_begin != "false")) ? "true" : "false" ;
+            $enterday_end = (($and_or_7 == "and" || $and_or_8 == "and") || ($enterday_begin != "true" && $enterday_begin != "false")) ? "true" : "false" ;
         }
         else{
             $enterday_end = str_replace('-', '', $enterday_end);
@@ -337,7 +365,8 @@ if (!isset($_SESSION)) {
             {$weight_min} AND {$weight_max} {$and_or_5}
             {$cutday_begin} AND {$cutday_end} {$and_or_6}
             {$birthday_begin} AND {$birthday_end} {$and_or_7}
-            {$enterday_begin} AND {$enterday_end} 
+            {$enterday_begin} AND {$enterday_end} {$and_or_8}
+            {$cut_weight_min} AND {$cut_weight_max}
             ORDER BY {$sort_key} {$sort_order}";
         // echo $sql ;
         $result = $mysqli->query($sql);
@@ -376,6 +405,7 @@ if (!isset($_SESSION)) {
                     '&family='.$row["家族"].
                     '&birthday='.$row["出生日期"].
                     '&cutday='.$row["剪眼日期"].
+                    '&cutweight='.$row["剪眼體重"].
                     '&enterday='.$row["進蝦日期"]. 
                     '&tankid='.$row["tankid"] .
                     '&weight='.$row["體重"] .
@@ -385,6 +415,7 @@ if (!isset($_SESSION)) {
                     '&eye='.$row["眼標"].
                     '&family='.$row["家族"].
                     '&birthday='.$row["出生日期"].
+                    '&cutweight='.$row["剪眼體重"].
                     '&cutday='.$row["剪眼日期"].
                     '&enterday='.$row["進蝦日期"]. 
                     '&tankid='.$row["tankid"] .
@@ -401,6 +432,7 @@ if (!isset($_SESSION)) {
                     '&eye='.$row["眼標"].
                     '&family='.$row["家族"].
                     '&birthday='.$row["出生日期"].
+                    '&cutweight='.$row["剪眼體重"].
                     '&cutday='.$row["剪眼日期"].
                     '&enterday='.$row["進蝦日期"]. 
                     '&tankid='.$row["tankid"] .
@@ -411,6 +443,7 @@ if (!isset($_SESSION)) {
                     '&eye='.$row["眼標"].
                     '&family='.$row["家族"].
                     '&birthday='.$row["出生日期"].
+                    '&cutweight='.$row["剪眼體重"].
                     '&cutday='.$row["剪眼日期"].
                     '&enterday='.$row["進蝦日期"]. 
                     '&tankid='.$row["tankid"] .

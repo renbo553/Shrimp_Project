@@ -21,6 +21,7 @@ $eyetag = filter_input(INPUT_POST, 'eye');
 $family = filter_input(INPUT_POST, 'family');
 $birthday = filter_input(INPUT_POST, 'birthday');
 $cutday = filter_input(INPUT_POST, 'cutday');
+$cutweight = filter_input(INPUT_POST, 'cutweight');
 $enterday = filter_input(INPUT_POST, 'enterday');
 $live_or_die = filter_input(INPUT_POST, 'live_or_die');
 $weight = filter_input(INPUT_POST, 'weight');
@@ -98,41 +99,18 @@ else {
     $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
     // sql query string
     $stmt = mysqli_query($link, $sql);
-    $insertStr = "" ;
-    if(mysqli_num_rows($stmt) == 0) $insertStr = "INSERT INTO shrimp_info VALUES 
+    $insertStr = "INSERT INTO shrimp_info VALUES 
         (null, 
         '" . $eyetag . "', 
         '" . $family . "', 
         '" . $weight . "', 
+        '" . $cutweight . "',
         '" . $tank . "', 
         '" . $cleancutday . "', 
-        '" .  $cleanbirthday . "',
-        '" .  $cleanenterday . "',
+        '" . $cleanbirthday . "',
+        '" . $cleanenterday . "',
         '" . $live_or_die . "', 
         '" . $target_file . "');";
-    else $insertStr = "UPDATE shrimp_info SET 
-        眼標 ='{$eyetag}', 
-        家族='{$family}',
-        體重 = '{$weight}', 
-        生存狀態 = '{$live_or_die}' , 
-        出生日期='{$cleanbirthday}', 
-        剪眼日期='{$cleancutday}', 
-        進蝦日期='{$cleanenterday}', 
-        tankid='{$tank}' , 
-        image='{$target_file}' 
-        WHERE 眼標 = '$eyetag'";
-
-    // 上傳的同時要更新生產的資料
-    // 先看有沒有該種蝦的生產紀錄
-    $sql = "SELECT 眼標 FROM breed WHERE 眼標 = '$eyetag'" ;
-    $stmt = mysqli_query($link, $sql);
-    if(mysqli_num_rows($stmt) != 0) {
-        $update_breed_str = "UPDATE breed SET
-            家族='{$family}',
-            剪眼日期='{$cleancutday}'
-            WHERE 眼標 = '$eyetag'";
-        mysqli_query($link, $update_breed_str);
-    }
     $result = mysqli_query($link, $insertStr);
     if ($result) {
         echo "新增資料庫成功\n";

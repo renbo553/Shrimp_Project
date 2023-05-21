@@ -21,6 +21,7 @@ $id = filter_input(INPUT_POST, 'id');
 $eyetag = filter_input(INPUT_POST, 'eye');
 $family = filter_input(INPUT_POST, 'family');
 $birthday = filter_input(INPUT_POST, 'birthday');
+$cutweight = filter_input(INPUT_POST, 'cutweight');
 $cutday = filter_input(INPUT_POST, 'cutday');
 $enterday = filter_input(INPUT_POST, 'enterday');
 $live_or_die = filter_input(INPUT_POST, 'live_or_die');
@@ -46,18 +47,18 @@ if ($fileSize == 0) {
         生存狀態 = '{$live_or_die}' , 
         出生日期='{$cleanbirthday}', 
         剪眼日期='{$cleancutday}', 
-        進蝦日期='{$cleanenterday}', 
+        進蝦日期='{$cleanenterday}',
+        剪眼體重='{$cutweight}',
         tankid='{$tank}',
         image='' 
         WHERE id = $id";
     
-    // 上傳的同時要更新生產的資料
-    // 先看有沒有該種蝦的生產紀錄
-    $sql = "SELECT 眼標 FROM breed WHERE 眼標 = '$eyetag'" ;
+    // 上傳的同時要更新生產的資料中的剪眼日期與體重
+    $sql = "SELECT * FROM breed WHERE 眼標 = '$eyetag'" ;
     $stmt = mysqli_query($link, $sql);
     if(mysqli_num_rows($stmt) != 0) {
         $update_breed_str = "UPDATE breed SET
-            家族='{$family}',
+            剪眼體重='{$cutweight}',
             剪眼日期='{$cleancutday}'
             WHERE 眼標 = '{$eyetag}'";
         mysqli_query($link, $update_breed_str);
@@ -128,19 +129,19 @@ if ($fileSize == 0) {
             體重 = '{$weight}', 
             生存狀態 = '{$live_or_die}' , 
             出生日期='{$cleanbirthday}', 
-            剪眼日期='{$cleancutday}', 
+            剪眼日期='{$cleancutday}',
+            剪眼體重='{$cutweight}',
             進蝦日期='{$cleanenterday}', 
             tankid='{$tank}' , 
             image='{$target_file}' 
             WHERE id = $id";
         
-        // 上傳的同時要更新生產的資料
-        // 先看有沒有該種蝦的生產紀錄
-        $sql = "SELECT 眼標 FROM breed WHERE 眼標 = '$eyetag'" ;
+        // 上傳的同時要更新生產的資料中的剪眼日期與體重
+        $sql = "SELECT * FROM breed WHERE 眼標 = '$eyetag'" ;
         $stmt = mysqli_query($link, $sql);
         if(mysqli_num_rows($stmt) != 0) {
             $update_breed_str = "UPDATE breed SET
-                家族='{$family}',
+                剪眼體重='{$cutweight}',
                 剪眼日期='{$cleancutday}'
                 WHERE 眼標 = '{$eyetag}'";
             mysqli_query($link, $update_breed_str);

@@ -1,32 +1,22 @@
 function check (formData) {
     // 2/20 空值檢查--------------------------------------------
-    var cutday = formData.get('cutday') ;
     var spawningroomdate = formData.get('spawningroomdate') ;
-    var family = formData.get('family') ;
-    var cutweight = formData.get('cutweight') ;
     var spawningweight = formData.get('spawningweight') ;
     var male_family = formData.get('male_family') ;
     var ovary_state = formData.get('ovarystate') ;
     var mating = formData.get('mating') ;
     var eye = formData.get('eye') ;
     const map = new Map()
-    map.set("cutday" , "剪眼日期") ;
-    map.set("family" , "家族") ;
     map.set("spawningroomdate" , "進產卵室待產日期") ;
     map.set("male_family" , "公蝦家族") ;
     map.set("ovary_state" , "卵巢進展階段") ;
     map.set("eye" , "眼標") ;
     map.set("mating" , "交配方式") ;
     map.set("spawningweight" , "生產體重") ;
-    map.set("cutweight" , "剪眼體重") ;
 
     // 計算有幾個沒填
     var count = 0 ;
     var show_message = "資訊尚未填寫完成，請填入:\n" ;
-    if(cutday == null || cutday == "") {
-        show_message += (map.get("cutday") + '、') ;
-        count ++ ;
-    }
     if(ovary_state == null || ovary_state == "") {
         show_message += (map.get("ovary_state") + '、') ;
         count ++ ;
@@ -35,16 +25,8 @@ function check (formData) {
         show_message += (map.get("eye") + '、') ;
         count ++ ;
     }
-    if(family == null || family == "") {
-        show_message += (map.get("family") + '、') ;
-        count ++ ;
-    }
     if(spawningroomdate == null || spawningroomdate == "") {
         show_message += (map.get("spawningroomdate") + '、') ;
-        count ++ ;
-    }
-    if(cutweight == null || cutweight == "") {
-        show_message += (map.get("cutweight") + '、') ;
         count ++ ;
     }
     if(spawningweight == null || spawningweight == "") {
@@ -68,63 +50,30 @@ function check (formData) {
 
 function html_show_all_data(formData) {
     // 3/17 show html在sweetalert2
-    var cutday = formData.get('cutday') ;
     var spawningroomdate = formData.get('spawningroomdate') ;
-    var family = formData.get('family') ;
-    var cutweight = formData.get('cutweight') ;
     var spawningweight = formData.get('spawningweight') ;
     var male_family = formData.get('male_family') ;
     var ovary_state = formData.get('ovarystate') ;
     var mating = formData.get('mating') ;
     var eye = formData.get('eye') ;
     const map = new Map()
-    map.set("cutday" , "剪眼日期") ;
-    map.set("family" , "家族") ;
     map.set("spawningroomdate" , "進產卵室待產日期") ;
     map.set("male_family" , "公蝦家族") ;
     map.set("ovary_state" , "卵巢進展階段") ;
     map.set("eye" , "眼標") ;
     map.set("mating" , "交配方式") ;
     map.set("spawningweight" , "生產體重") ;
-    map.set("cutweight" , "剪眼體重") ;
 
     //用 array 先把超過範圍的資料存起來
-    var all_data_name = ["眼標" , "家族" , "公蝦家族" , "生產體重" , "剪眼體重" , "卵巢進展階段" , "交配方式" , "剪眼日期" , "進產卵室待產日期"] ;
-    var all_data_num = [eye , family , male_family , spawningweight , cutweight , ovary_state , mating  , cutday , spawningroomdate] ;
+    var all_data_name = ["眼標" , "公蝦家族" , "生產體重" , "卵巢進展階段" , "交配方式" , "進產卵室待產日期"] ;
+    var all_data_num = [eye , male_family , spawningweight , ovary_state , mating  , spawningroomdate] ;
 
     //建立一個新的html檔來當作提示訊息，append_div為要插入的訊息
     var new_html = document.createElement('div') ;
 
     var a_div = document.createElement('div') ;
-    a_div.textContent = "請確認所有資料:\n(紅色為會影響同眼標之生產以及母種蝦資料庫)\n " ;
+    a_div.textContent = "請確認所有資料:\n " ;
     new_html.appendChild(a_div) ;
-
-    //先去察看母種蝦資料中是否有這個眼標-------------------------------------------------
-    var shrimp_info_has_eyetag = 0 ;
-    $.ajax({
-        url: 'check_eyetag.php?eye='+eye+'&UI_type='+"shrimp_info",
-        type: 'POST',
-        // data: {'eye' : eye},
-        cache: false,
-        dataType: 'json',
-        async: false,
-        //下面兩者一定要false
-        processData: false,
-        contentType: false,
-
-        success: function(backData) {
-            shrimp_info_has_eyetag = backData ;
-        },
-        error: function() {
-            Swal.fire({
-                title: backData,
-                confirmButtonText: "確認",
-            }).then((result) => {
-                $('#backmsg').html("取得資料失敗...");
-            });
-        },
-    });
-    //----------------------------------------------------------------------
 
     //append 所有資料上去
     for(var i = 0 ; i < all_data_name.length ; i ++ ) {
@@ -132,10 +81,7 @@ function html_show_all_data(formData) {
 
         var first_span = document.createElement('span');
         first_span.textContent = all_data_name[i] ;
-
-        if((all_data_name[i] == "眼標" || all_data_name[i] == "家族" || all_data_name[i] == "剪眼日期") 
-            && (shrimp_info_has_eyetag || breed_has_eyetag)) first_span.style.color = 'red' ;
-        else first_span.style.color = 'black' ;
+        first_span.style.color = 'black' ;
         append_div.append(first_span) ;
 
         var third_span = document.createElement('span');
@@ -145,9 +91,7 @@ function html_show_all_data(formData) {
 
         var second_span = document.createElement('span');
         second_span.textContent = all_data_num[i] ;
-        if((all_data_name[i] == "眼標" || all_data_name[i] == "家族" || all_data_name[i] == "剪眼日期") 
-            && (shrimp_info_has_eyetag || breed_has_eyetag)) second_span.style.color = 'red' ;
-        else second_span.style.color = 'black' ;
+        second_span.style.color = 'black' ;
         append_div.append(second_span) ;
 
         // 設定div中span的比例
@@ -201,11 +145,8 @@ function post (formData) {
 
 function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
-    document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
     document.getElementById(form_id).elements["male_family"].value = from_data.get("male_family") ;
-    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
     document.getElementById(form_id).elements["spawningweight"].value = from_data.get("spawningweight") ;
-    document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
     document.getElementById(form_id).elements["spawningroomdate"].value = from_data.get("spawningroomdate") ;
     document.getElementById(form_id).elements["ovarystate"].value = from_data.get("ovarystate") ;
     document.getElementById(form_id).elements["mating"].value = from_data.get("mating") ;
@@ -265,11 +206,8 @@ async function modify_put_into_form(data , form_id , is_modify) {
         }
     }
     document.getElementById(form_id).elements["id"].value = data.get("id") ;
-    document.getElementById(form_id).elements["family"].value = data.get("family") ;
     document.getElementById(form_id).elements["male_family"].value = data.get('male_family') ;
     document.getElementById(form_id).elements["eye"].value = data.get('eye') ;
-    document.getElementById(form_id).elements["cutday"].value = data.get("cutday") ;
-    document.getElementById(form_id).elements["cutweight"].value = data.get("cutweight") ;
     document.getElementById(form_id).elements["spawningroomdate"].value = data.get("spawningroomdate") ;
     document.getElementById(form_id).elements["spawningweight"].value = data.get("spawningweight") ;
     document.getElementById(form_id).elements["ovarystate"].value = data.get("ovarystate") ;
@@ -328,41 +266,6 @@ function append_eye() {
 
     <div class="form-inline" style = "width: 100% ; height: 65px">
         <div style = "width: 1%"> </div>
-        <button type="button" class="btn btn-primary" onclick="continue_family(this)">繼續填寫查詢項目</button>
-    </div>
-    `;
-
-    return returnHTML;
-}
-
-function append_family() {
-    const returnHTML = 
-    `
-    <div class="form-inline" style="width: 100%; height: 65px">
-        <div style="width: 1%"></div>
-        <div style="width: 48%">
-            <div>查詢方式("及" or "或")</div>
-            <div class="input-group">
-                <select class='form-control' name="and_or_1" id="and_or_1">
-                    <option value="and">及</option>
-                    <option value="or">或</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 65px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 48%">
-            <div> 家族 </div>
-            <div class="input-group">
-                <input type='text' class='form-control' name='family_text' id='family_text'>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 65px">
-        <div style = "width: 1%"> </div>
         <button type="button" class="btn btn-primary" onclick="continue_male_family(this)">繼續填寫查詢項目</button>
     </div>
     `;
@@ -378,7 +281,7 @@ function append_male_family() {
         <div style="width: 48%">
             <div>查詢方式("及" or "或")</div>
             <div class="input-group">
-                <select class='form-control' name="and_or_2" id="and_or_2">
+                <select class='form-control' name="and_or_1" id="and_or_1">
                     <option value="and">及</option>
                     <option value="or">或</option>
                 </select>
@@ -413,7 +316,7 @@ function append_mating() {
         <div style="width: 48%">
             <div>查詢方式("及" or "或")</div>
             <div class="input-group">
-                <select class='form-control' name="and_or_3" id="and_or_3">
+                <select class='form-control' name="and_or_2" id="and_or_2">
                     <option value="and">及</option>
                     <option value="or">或</option>
                 </select>
@@ -453,7 +356,7 @@ function append_ovary() {
         <div style="width: 48%">
             <div>查詢方式("及" or "或")</div>
             <div class="input-group">
-                <select class='form-control' name="and_or_4" id="and_or_4">
+                <select class='form-control' name="and_or_3" id="and_or_3">
                     <option value="and">及</option>
                     <option value="or">或</option>
                 </select>
@@ -464,7 +367,7 @@ function append_ovary() {
     <div class="form-inline" style = "width: 100% ; height: 65px">
         <div style = "width: 1%"> </div>
         <div style = "width: 48%">
-            <div> 交配方式 </div>
+            <div> 卵巢進展階段 </div>
             <div class="input-group">
                 <select id="stage_select" name="stage_select" class="custom-select">
                     <option value="none" selected disabled hidden></option>
@@ -477,47 +380,6 @@ function append_ovary() {
                     <option value="2-3">2-3</option>
                     <option value="3">3</option>
                 </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 65px">
-        <div style = "width: 1%"> </div>
-        <button type="button" class="btn btn-primary" onclick="continue_cutweight(this)">繼續填寫查詢項目</button>
-    </div>
-    `;
-
-    return returnHTML;
-}
-
-function append_cutweight() {
-    const returnHTML = 
-    `<div class="form-inline" style="width: 100%; height: 65px">
-        <div style="width: 1%"></div>
-        <div style="width: 48%">
-            <div>查詢方式("及" or "或")</div>
-            <div class="input-group">
-                <select class='form-control' name="and_or_5" id="and_or_5">
-                    <option value="and">及</option>
-                    <option value="or">或</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 65px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 48%">
-            <div> 剪眼體重最小值 </div>
-            <div class="input-group">
-                <input type='text' class='form-control' name='cut_weight_min' id='cut_weight_min'>
-            </div>
-        </div>
-        <div style = "width: 2%"> </div>
-        <div style = "width: 48%">
-            <div> 剪眼體重最大值 </div>
-            <div class="input-group">
-                <input type='text' class='form-control' name='cut_weight_max' id='cut_weight_max'>
             </div>
         </div>
     </div>
@@ -538,7 +400,7 @@ function append_breedweight() {
         <div style="width: 48%">
             <div>查詢方式("及" or "或")</div>
             <div class="input-group">
-                <select class='form-control' name="and_or_6" id="and_or_6">
+                <select class='form-control' name="and_or_4" id="and_or_4">
                     <option value="and">及</option>
                     <option value="or">或</option>
                 </select>
@@ -565,47 +427,6 @@ function append_breedweight() {
 
     <div class="form-inline" style = "width: 100% ; height: 65px">
         <div style = "width: 1%"> </div>
-        <button type="button" class="btn btn-primary" onclick="continue_cutday(this)">繼續填寫查詢項目</button>
-    </div>
-    `;
-
-    return returnHTML;
-}
-
-function append_cutday() {
-    const returnHTML = 
-    `<div class="form-inline" style="width: 100%; height: 65px">
-        <div style="width: 1%"></div>
-        <div style="width: 48%">
-            <div>查詢方式("及" or "或")</div>
-            <div class="input-group">
-                <select class='form-control' name="and_or_7" id="and_or_7">
-                    <option value="and">及</option>
-                    <option value="or">或</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 65px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 48%">
-            <div> 剪眼日期(起始) </div>
-            <div class="input-group">
-                <input type='date' class='form-control' name='cutday_begin' id='cutday_begin'>
-            </div>
-        </div>
-        <div style = "width: 2%"> </div>
-        <div style = "width: 48%">
-            <div> 剪眼日期(結束) </div>
-            <div class="input-group">
-                <input type='date' class='form-control' name='cutday_end' id='cutday_end'>
-            </div>
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 65px">
-        <div style = "width: 1%"> </div>
         <button type="button" class="btn btn-primary" onclick="continue_ablation_date(this)">繼續填寫查詢項目</button>
     </div>
     `;
@@ -620,7 +441,7 @@ function append_ablation_date() {
         <div style="width: 48%">
             <div>查詢方式("及" or "或")</div>
             <div class="input-group">
-                <select class='form-control' name="and_or_8" id="and_or_8">
+                <select class='form-control' name="and_or_5" id="and_or_5">
                     <option value="and">及</option>
                     <option value="or">或</option>
                 </select>

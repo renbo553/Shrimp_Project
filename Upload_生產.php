@@ -18,14 +18,26 @@ header("Content-Type:text/html; charset=utf-8");
 $target_dir = "images/";
 
 $eyetag = filter_input(INPUT_POST, 'eye');
-$family = filter_input(INPUT_POST, 'family');
-$cutday = filter_input(INPUT_POST, 'cutday');
-$cutweight = filter_input(INPUT_POST, 'cutweight');
 $spawningroomdate = filter_input(INPUT_POST, 'spawningroomdate');
 $spawningweight = filter_input(INPUT_POST, 'spawningweight');
 $ovarystate = filter_input(INPUT_POST, 'ovarystate');
 $male_family = filter_input(INPUT_POST, 'male_family');
 $mating = filter_input(INPUT_POST, 'mating');
+
+$family = "" ;
+$cutday = "" ;
+$cutweight = "" ;
+
+
+
+// 先查找該種蝦的資料
+$sql = "SELECT * FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
+$stmt = mysqli_query($link, $sql);
+while ($row = $stmt->fetch_assoc()) {
+    $family = $row["家族"] ;
+    $cutday = $row["剪眼日期"] ;
+    $cutweight = $row["剪眼體重"] ;
+}
 
 $cleancutday = str_replace("/", "", $cutday);
 $cleanspawningroomdate = str_replace("/", "", $spawningroomdate);
@@ -98,7 +110,7 @@ else {
         (null, 
         '" . $family . "',
         '" . $eyetag .  "', 
-        '" . $cleancutday . "', 
+        '" . $cutday . "', 
         '" . $cutweight . "', 
         '" . $cleanspawningroomdate . "', 
         '" . $spawningweight . "', 
@@ -106,18 +118,6 @@ else {
         '" . $male_family . "', 
         '" . $mating . "', 
         '" . $target_file . "');";
-
-    // 上傳的同時要更新母種蝦資料庫的資料
-    // 先看有沒有該種蝦的母種蝦資料庫的資料
-    $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
-    $stmt = mysqli_query($link, $sql);
-    if(mysqli_num_rows($stmt) != 0) {
-        $update_breed_str = "UPDATE shrimp_info SET
-            家族='{$family}',
-            剪眼日期='{$cleancutday}'
-            WHERE 眼標 = '$eyetag'";
-        mysqli_query($link, $update_breed_str);
-    }
 
     $result = mysqli_query($link, $insertStr);
     if ($result) {

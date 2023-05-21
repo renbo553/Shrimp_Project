@@ -4,12 +4,10 @@ function check (formData) {
     var birthday = formData.get('birthday') ;
     var family = formData.get('family') ;
     var weight = formData.get('weight') ;
-    var cutday = formData.get('cutday') ;
     var enterday = formData.get('enterday') ;
     var location = formData.get('location') ;
     var live_or_die = formData.get('live_or_die') ;
     const map = new Map()
-    map.set("cutday" , "剪眼日期") ;
     map.set("family" , "家族") ;
     map.set("eye" , "眼標") ;
     map.set("birthday" , "出生日期") ;
@@ -21,10 +19,6 @@ function check (formData) {
     // 計算有幾個沒填
     var count = 0 ;
     var show_message = "資訊尚未填寫完成，請填入:\n" ;
-    if(cutday == null || cutday == "") {
-        show_message += (map.get("cutday") + '、') ;
-        count ++ ;
-    }
     if(eye == null || eye == "") {
         show_message += (map.get("eye") + '、') ;
         count ++ ;
@@ -67,6 +61,7 @@ function html_show_all_data(formData) {
     var family = formData.get('family') ;
     var weight = formData.get('weight') ;
     var cutday = formData.get('cutday') ;
+    var cutweight = formData.get('cutweight') ;
     var enterday = formData.get('enterday') ;
     var location = formData.get('location') ;
     var live_or_die = formData.get('live_or_die') ;
@@ -76,73 +71,20 @@ function html_show_all_data(formData) {
     map.set("eye" , "眼標") ;
     map.set("birthday" , "出生日期") ;
     map.set("weight" , "體重") ;
+    map.set("cutweight" , "剪眼體重") ;
     map.set("enterday" , "進蝦時間") ;
     map.set("location" , "tankid") ;
     map.set("live_or_die" , "生存狀態") ;
 
-    var all_data_name = ["眼標" , "家族" , "體重" , "tankid" , "剪眼日期" , "出生日期" , "進蝦時間" , "生存狀態"] ;
-    var all_data_num = [eye , family , weight , location , cutday , birthday  , enterday , live_or_die] ;
+    var all_data_name = ["眼標" , "家族" , "體重" , "tankid" , "剪眼體重" , "剪眼日期" , "出生日期" , "進蝦時間" , "生存狀態"] ;
+    var all_data_num = [eye , family , weight , location , cutweight , cutday , birthday  , enterday , live_or_die] ;
 
     //建立一個新的html檔來當作提示訊息，append_div為要插入的訊息
     var new_html = document.createElement('div') ;
 
     var a_div = document.createElement('div') ;
-    a_div.textContent = "請確認所有資料:\n" + "(紅色為會影響同眼標之生產以及母種蝦資料庫)\n " ;
+    a_div.textContent = "請確認所有資料:\n" ;
     new_html.appendChild(a_div) ;
-
-    //先去察看母種蝦資料中是否有這個眼標-------------------------------------------------
-    var shrimp_info_has_eyetag = 0 ;
-    $.ajax({
-        url: 'check_eyetag.php?eye='+eye+'&UI_type='+"shrimp_info",
-        type: 'POST',
-        // data: {'eye' : eye},
-        cache: false,
-        dataType: 'json',
-        async: false,
-        //下面兩者一定要false
-        processData: false,
-        contentType: false,
-
-        success: function(backData) {
-            shrimp_info_has_eyetag = backData ;
-        },
-        error: function() {
-            Swal.fire({
-                title: backData,
-                confirmButtonText: "確認",
-            }).then((result) => {
-                $('#backmsg').html("取得資料失敗...");
-            });
-        },
-    });
-    //----------------------------------------------------------------------
-
-    //再去察看breed中是否有這個眼標-------------------------------------------------
-    var breed_has_eyetag = 0 ;
-    $.ajax({
-        url: 'check_eyetag.php?eye='+eye+'&UI_type='+"breed",
-        type: 'POST',
-        // data: {'eye' : eye},
-        cache: false,
-        dataType: 'json',
-        async: false,
-        //下面兩者一定要false
-        processData: false,
-        contentType: false,
-
-        success: function(backData) {
-            breed_has_eyetag = backData ;
-        },
-        error: function() {
-            Swal.fire({
-                title: backData,
-                confirmButtonText: "確認",
-            }).then((result) => {
-                $('#backmsg').html("取得資料失敗...");
-            });
-        },
-    });
-    //----------------------------------------------------------------------
 
     //append 所有資料上去
     for(var i = 0 ; i < all_data_name.length ; i ++ ) {
@@ -150,9 +92,7 @@ function html_show_all_data(formData) {
 
         var first_span = document.createElement('span');
         first_span.textContent = all_data_name[i] ;
-        if((all_data_name[i] == "眼標" || all_data_name[i] == "家族" || all_data_name[i] == "剪眼日期") 
-            && (shrimp_info_has_eyetag || breed_has_eyetag)) first_span.style.color = 'red' ;
-        else first_span.style.color = 'black' ;
+        first_span.style.color = 'black' ;
         append_div.append(first_span) ;
 
         var third_span = document.createElement('span');
@@ -162,9 +102,7 @@ function html_show_all_data(formData) {
 
         var second_span = document.createElement('span');
         second_span.textContent = all_data_num[i] ;
-        if((all_data_name[i] == "眼標" || all_data_name[i] == "家族" || all_data_name[i] == "剪眼日期") 
-            && (shrimp_info_has_eyetag || breed_has_eyetag)) second_span.style.color = 'red' ;
-        else second_span.style.color = 'black' ;
+        second_span.style.color = 'black' ;
         append_div.append(second_span) ;
 
         // 設定div中span的比例
@@ -220,6 +158,7 @@ function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["eye"].value = from_data.get("eye") ;
     document.getElementById(form_id).elements["family"].value = from_data.get("family") ;
     document.getElementById(form_id).elements["cutday"].value = from_data.get("cutday") ;
+    document.getElementById(form_id).elements["cutweight"].value = from_data.get("cutweight") ;
     document.getElementById(form_id).elements["birthday"].value = from_data.get("birthday") ;
     document.getElementById(form_id).elements["enterday"].value = from_data.get("enterday") ;
     document.getElementById(form_id).elements["weight"].value = from_data.get("weight") ;
@@ -287,6 +226,7 @@ async function modify_put_into_form(data , form_id , is_modify) {
     document.getElementById(form_id).elements["family"].value = data.get("family") ;
     document.getElementById(form_id).elements["enterday"].value = data.get('enterday') ;
     document.getElementById(form_id).elements["eye"].value = data.get('eye') ;
+    document.getElementById(form_id).elements["cutweight"].value = data.get("cutweight") ;
     document.getElementById(form_id).elements["cutday"].value = data.get("cutday") ;
     document.getElementById(form_id).elements["weight"].value = data.get("weight") ;
     document.getElementById(form_id).elements["location"].value = data.get("tankid") ;
@@ -621,6 +561,48 @@ function append_enterday() {
             <div> 進蝦日期(結束) </div>
             <div class="input-group">
                 <input type='date' class='form-control' name='enterday_end' id='enterday_begin'>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <button type="button" class="btn btn-primary" onclick="continue_cutweight(this)">繼續填寫查詢項目</button>
+    </div>
+    `;
+
+    return returnHTML;
+}
+
+function append_cutweight() {
+    const returnHTML = 
+    `
+    <div class="form-inline" style="width: 100%; height: 65px">
+        <div style="width: 1%"></div>
+        <div style="width: 48%">
+            <div>查詢方式("及" or "或")</div>
+            <div class="input-group">
+                <select class='form-control' name="and_or_8" id="and_or_8">
+                    <option value="and">及</option>
+                    <option value="or">或</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-inline" style = "width: 100% ; height: 65px">
+        <div style = "width: 1%"> </div>
+        <div style = "width: 48%">
+            <div> 剪眼體重最小值 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='cut_weight_min' id='cut_weight_min'>
+            </div>
+        </div>
+        <div style = "width: 2%"> </div>
+        <div style = "width: 48%">
+            <div> 剪眼體重最大值 </div>
+            <div class="input-group">
+                <input type='text' class='form-control' name='cut_weight_max' id='cut_weight_max'>
             </div>
         </div>
     </div>

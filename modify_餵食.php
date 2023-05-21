@@ -151,7 +151,7 @@ if (!isset($_SESSION)) {
 
 				// 例如，這裡使用 SweetAlert 插件來創建一個自定義的彈出框
 				Swal.fire({
-					html: msg,
+					title : msg,
 					showCancelButton: true,
 					confirmButtonText: '仍要上傳',
 					cancelButtonText: "再確認一下/修改一下",
@@ -171,7 +171,7 @@ if (!isset($_SESSION)) {
 				var formData = new FormData(myForm);
 
 				var ret_message = check(formData) ;
-				if(ret_message == "") all_data_msg(html_show_all_data(formData) , formData) ;
+				if(ret_message == "") all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
 				else Alert(ret_message) ;
 			}
 
@@ -243,7 +243,7 @@ if (!isset($_SESSION)) {
 				var formData = new FormData(myForm);
 
 				var ret_message = check(formData) ;
-				if(ret_message == "") all_data_msg(html_show_all_data(formData) , formData) ;
+				if(ret_message == "") all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
 				else Alert(ret_message) ;
 			}
 
