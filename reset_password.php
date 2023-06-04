@@ -28,10 +28,10 @@
             return;
         }
         require_once "check_password_strong.php" ;
-        $meter_value = password_strong($password) ;
+        $meter_value = password_strong($new_password) ;
         if($meter_value < 2) {
             $msg = "修改失敗  :  密碼強度不夠";
-            utility_window_msg($msg, null);
+            utility_window_msg($meter_value, null);
             return;
         }
         if(strcmp($new_confirm_password , $new_password) != 0) {

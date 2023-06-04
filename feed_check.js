@@ -358,28 +358,77 @@ function put_into_form(before_data_array , form_id) {
     document.getElementById(form_id).elements["avg_male_shrimp"].value = before_data_array["Avg_Weight_Male"] ;
     document.getElementById(form_id).elements["avg_female_shrimp"].value = before_data_array["Avg_Weight_Female"] ;
     document.getElementById(form_id).elements["total_weight"].value = before_data_array["Total_Weight"] ;
-    document.getElementById(form_id).elements["food0900"].value = before_data_array["9_species"] ;
+    // document.getElementById(form_id).elements["food0900"].value = before_data_array["9_species"] ;
     document.getElementById(form_id).elements["weight0900"].value = before_data_array["9_weight"] ;
     document.getElementById(form_id).elements["remain0900"].value = before_data_array["9_remain"] ;
-    document.getElementById(form_id).elements["food1100"].value = before_data_array["11_species"] ;
+    // document.getElementById(form_id).elements["food1100"].value = before_data_array["11_species"] ;
     document.getElementById(form_id).elements["weight1100"].value = before_data_array["11_weight"] ;
     document.getElementById(form_id).elements["remain1100"].value = before_data_array["11_remain"] ;
-    document.getElementById(form_id).elements["food1400"].value = before_data_array["14_species"] ;
+    // document.getElementById(form_id).elements["food1400"].value = before_data_array["14_species"] ;
     document.getElementById(form_id).elements["weight1400"].value = before_data_array["14_weight"] ;
     document.getElementById(form_id).elements["remain1400"].value = before_data_array["14_remain"] ;
-    document.getElementById(form_id).elements["food1600"].value = before_data_array["16_species"] ;
+    // document.getElementById(form_id).elements["food1600"].value = before_data_array["16_species"] ;
     document.getElementById(form_id).elements["weight1600"].value = before_data_array["16_weight"] ;
     document.getElementById(form_id).elements["remain1600"].value = before_data_array["16_remain"] ;
-    document.getElementById(form_id).elements["food1900"].value = before_data_array["19_species"] ;
+    // document.getElementById(form_id).elements["food1900"].value = before_data_array["19_species"] ;
     document.getElementById(form_id).elements["weight1900"].value = before_data_array["19_weight"] ;
     document.getElementById(form_id).elements["remain1900"].value = before_data_array["19_remain"] ;
-    document.getElementById(form_id).elements["food2300"].value = before_data_array["23_species"] ;
+    // document.getElementById(form_id).elements["food2300"].value = before_data_array["23_species"] ;
     document.getElementById(form_id).elements["weight2300"].value = before_data_array["23_weight"] ;
     document.getElementById(form_id).elements["remain2300"].value = before_data_array["23_remain"] ;
-    document.getElementById(form_id).elements["food0300"].value = before_data_array["3_species"] ;
+    // document.getElementById(form_id).elements["food0300"].value = before_data_array["3_species"] ;
     document.getElementById(form_id).elements["weight0300"].value = before_data_array["3_weight"] ;
     document.getElementById(form_id).elements["remain0300"].value = before_data_array["3_remain"] ;
     document.getElementById(form_id).elements["FeedingRatio"].value = before_data_array["Feeding_Ratio"] ;
+
+    $option = new Set() ;
+    $option.add("Polychaete") ;
+    $option.add("Crab(去殼)") ;
+    $option.add("Squid") ;
+    $option.add("Mussel") ;
+    $option.add("Epsilon") ;
+    $option.add("日本飼料") ;
+    $option.add("Krill") ;
+    $option.add("Clam(母)") ;
+    $option.add("Ezmate(海膽+蟹卵)") ;
+    $option.add("Ezmate(海膽+蟹白)") ;
+    $option.add("Ezmate(海膽+蟹黃)") ;
+    $option.add("Ezmate(海膽)") ;
+    if($option.has(before_data_array["9_species"])) document.getElementById(form_id).elements["food0900"].value = before_data_array["9_species"] ;
+    else {
+        document.getElementById(form_id).elements["food0900"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_0900"].value = before_data_array["9_species"] ;
+    }
+    if($option.has(before_data_array["11_species"])) document.getElementById(form_id).elements["food1100"].value = before_data_array["11_species"] ;
+    else {
+        document.getElementById(form_id).elements["food1100"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1100"].value = before_data_array["11_species"] ;
+    }
+    if($option.has(before_data_array["14_species"])) document.getElementById(form_id).elements["food1400"].value = before_data_array["14_species"]
+    else {
+        document.getElementById(form_id).elements["food1400"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1400"].value = before_data_array["14_species"]
+    }
+    if($option.has(before_data_array["16_species"])) document.getElementById(form_id).elements["food1600"].value = before_data_array["16_species"]
+    else {
+        document.getElementById(form_id).elements["food1600"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1600"].value = before_data_array["16_species"] ;
+    }
+    if($option.has(before_data_array["19_species"])) document.getElementById(form_id).elements["food1900"].value = before_data_array["19_species"];
+    else {
+        document.getElementById(form_id).elements["food1900"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_1900"].value = before_data_array["19_species"] ;
+    }
+    if($option.has(before_data_array["23_species"])) document.getElementById(form_id).elements["food2300"].value = before_data_array["23_species"] ;
+    else {
+        document.getElementById(form_id).elements["food2300"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_2300"].value = before_data_array["23_species"] ;
+    }
+    if($option.has(before_data_array["3_species"])) document.getElementById(form_id).elements["food0300"].value = before_data_array["3_species"] ;
+    else {
+        document.getElementById(form_id).elements["food0300"].value = "其他" ;
+        document.getElementById(form_id).elements["else_work_0300"].value = before_data_array["3_species"] ;
+    }
 }
 
 function data_transfer(from_data , form_id) {

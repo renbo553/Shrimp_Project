@@ -67,12 +67,12 @@ if (!isset($_SESSION)) {
 	<div>
         <div class="big_form">
 			<section>
-				<? require_once "big_view_water.html" ?>
+				<?php require_once "big_view_water.html" ?>
 			</section>
         </div>
         <div class="small_form">
             <section>
-				<? require_once "small_view_water.html" ?>
+				<?php require_once "small_view_water.html" ?>
             </section>
         </div>
     </div>

@@ -35,8 +35,8 @@
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->SMTPAuth = true;
         $mail->Username = 'shrimpicdsa@gmail.com';
-        $mail->Password = 'fcggrxtoatilvavd';
-        $mail->setFrom('shrimpicdsa@gmail.com', 'shrimp65534');
+        $mail->Password = 'xstmmbsboafgflyh';
+        $mail->setFrom('shrimpicdsa@gmail.com', 'shrimpshrimp');
         $mail->addAddress($email);
         if($register_or_modify == 1) {
             $mail->Subject = 'modify password';
