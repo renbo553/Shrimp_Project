@@ -88,7 +88,7 @@
             
             /*send mail to check identification*/
             require_once "sendmail.php" ;
-            makemail($email , $username , 1) ;
+            makemail($email , $username , "" , 1) ;
         }
     }
 ?>

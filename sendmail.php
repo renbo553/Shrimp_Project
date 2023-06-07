@@ -4,13 +4,18 @@
     require_once "utility.php" ;
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\SMTP;
-    function makemail($email , $username , $register_or_modify) {
+    function makemail($email , $username , $password , $register_or_modify) {
         //$register_or_modify 預設為註冊(註冊為0，修改密碼為1)
         if($register_or_modify == 0)
-            $url = "http://localhost/Shrimp_Project-main/register_email.php?email=" .$email; //構造URL
+            $url = "http://localhost/Shrimp_Project-main/register_email.php?email=" .$email. "&username=" .$username. "&password=" .$password; //構造URL
         else
-            $url = "http://localhost/Shrimp_Project-main/reset_password.php?email=" .$email; //構造URL
-        $time = date('Y/m/d H:i');
+            $url = "http://localhost/Shrimp_Project-main/reset_password.php?email=" .$email. "&username=" .$username. "&password=" .$password; //構造URL
+        
+            // Get the current date and time in the Taiwan time zone
+        $now = new DateTime();
+        $now->setTimeZone(new DateTimeZone('Asia/Taipei'));
+        $time = $now->format('Y/m/d H:i');
+
         $result = sendmail($time,$email,$username,$url,$register_or_modify);
         if ($result==true){ //郵件發送成功
             $msg = '系統已向您的郵箱發送了一封郵件，請登錄到您的郵箱以收取信件！' ;

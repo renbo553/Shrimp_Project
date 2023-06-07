@@ -62,15 +62,13 @@ function register_process($mysqli) :void{
 	if($email == '') {
 		// confirm email is empty
 		$msg = "註冊失敗  :  Please enter your email.";
-		$url = "modify_password";
-		utility_window_msg($msg, $url);
+		utility_window_msg($msg, null);
 		return ;
 	}
 	if(!filter_var ( $email , FILTER_VALIDATE_EMAIL )){
 		// confirm email is not valid
 		$msg = "註冊失敗  :  請填寫正確的郵箱！";
-		$url = "modify_password";
-		utility_window_msg($msg, $url);
+		utility_window_msg($msg, null);
 		return ;
 	}
 	
@@ -123,11 +121,12 @@ function register_process($mysqli) :void{
     }
     
     /*send mail to check identification*/
-    setcookie("username" , $username) ;
-    setcookie("password" , $password) ;
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    // setcookie("username" , $username) ;
+    // setcookie("password" , $password) ;
     setcookie("email" , $email) ;
 	require_once "sendmail.php" ;
-    makemail($email , $username , 0) ;
+    makemail($email , $username , $password , 0) ;
 }
 
 
