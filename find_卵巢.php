@@ -218,7 +218,7 @@ if (!isset($_SESSION)) {
         /* search data from database */
         //$sql = "SELECT * FROM ovary WHERE {$eyetag} AND {$date} AND {$stage} ORDER BY {$sort_key} {$sort_order}";
         $sql = "SELECT * FROM ovary WHERE BINARY {$eyetag} {$and_or_2} {$stage} {$and_or_3} {$start_date} AND {$end_date} ORDER BY {$sort_key} {$sort_order}";
-        echo $sql ;
+        // echo $sql ;
         $result = $mysqli->query($sql);
 
         /* show search result */

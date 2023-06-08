@@ -924,34 +924,34 @@ async function modify_put_into_form(data , form_id , is_modify) {
                 place_picture("uploadimage_small" , "show_image_small" , data.get("image")) ;
         }
     }
-    document.getElementById(form_id).elements["id"].value = from_data.get("id") ;
-    document.getElementById(form_id).elements["location"].value = from_data.get("Tank") ;
-    document.getElementById(form_id).elements["date"].value = from_data.get('Date') ;
-    document.getElementById(form_id).elements["nh4"].value = from_data.get('nh4') ;
-    document.getElementById(form_id).elements["no2"].value = from_data.get('no2') ;
-    document.getElementById(form_id).elements["no3"].value = from_data.get("no3") ;
-    document.getElementById(form_id).elements["Salinity_1"].value = from_data.get("Salinity_1") ;
-    document.getElementById(form_id).elements["Salinity_2"].value = from_data.get("Salinity_2") ;
-    document.getElementById(form_id).elements["Salinity_3"].value = from_data.get("Salinity_3") ;
-    document.getElementById(form_id).elements["pH_1"].value = from_data.get("pH_1") ;
-    document.getElementById(form_id).elements["pH_2"].value = from_data.get("pH_2") ;
-    document.getElementById(form_id).elements["pH_3"].value = from_data.get("pH_3") ;
-    document.getElementById(form_id).elements["O2_1"].value = from_data.get("O2_1") ;
-    document.getElementById(form_id).elements["O2_2"].value = from_data.get("O2_2") ;
-    document.getElementById(form_id).elements["O2_3"].value = from_data.get("O2_3") ;
-    document.getElementById(form_id).elements["ORP_1"].value = from_data.get("ORP_1") ;
-    document.getElementById(form_id).elements["ORP_2"].value = from_data.get("ORP_2") ;
-    document.getElementById(form_id).elements["ORP_3"].value = from_data.get("ORP_3") ;
-    document.getElementById(form_id).elements["Temp_1"].value = from_data.get("Temp_1") ;
-    document.getElementById(form_id).elements["Temp_2"].value = from_data.get("Temp_2") ;
-    document.getElementById(form_id).elements["Temp_3"].value = from_data.get("Temp_3") ;
-    document.getElementById(form_id).elements["Alkalinity"].value = from_data.get("Alkalinity") ;
-    document.getElementById(form_id).elements["TCBS"].value = from_data.get("TCBS") ;
-    document.getElementById(form_id).elements["TCBS綠菌"].value = from_data.get("TCBS綠菌") ;
-    document.getElementById(form_id).elements["Marine"].value = from_data.get("Marine") ;
-    document.getElementById(form_id).elements["螢光菌TCBS"].value = from_data.get("螢光菌TCBS") ;
-    document.getElementById(form_id).elements["螢光菌Marine"].value = from_data.get("螢光菌Marine") ;
-    document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
+    document.getElementById(form_id).elements["id"].value = data.get("id") ;
+    document.getElementById(form_id).elements["location"].value = data.get("Tank") ;
+    document.getElementById(form_id).elements["date"].value = data.get('Date') ;
+    document.getElementById(form_id).elements["nh4"].value = data.get('nh4') ;
+    document.getElementById(form_id).elements["no2"].value = data.get('no2') ;
+    document.getElementById(form_id).elements["no3"].value = data.get("no3") ;
+    document.getElementById(form_id).elements["Salinity_1"].value = data.get("Salinity_1") ;
+    document.getElementById(form_id).elements["Salinity_2"].value = data.get("Salinity_2") ;
+    document.getElementById(form_id).elements["Salinity_3"].value = data.get("Salinity_3") ;
+    document.getElementById(form_id).elements["pH_1"].value = data.get("pH_1") ;
+    document.getElementById(form_id).elements["pH_2"].value = data.get("pH_2") ;
+    document.getElementById(form_id).elements["pH_3"].value = data.get("pH_3") ;
+    document.getElementById(form_id).elements["O2_1"].value = data.get("O2_1") ;
+    document.getElementById(form_id).elements["O2_2"].value = data.get("O2_2") ;
+    document.getElementById(form_id).elements["O2_3"].value = data.get("O2_3") ;
+    document.getElementById(form_id).elements["ORP_1"].value = data.get("ORP_1") ;
+    document.getElementById(form_id).elements["ORP_2"].value = data.get("ORP_2") ;
+    document.getElementById(form_id).elements["ORP_3"].value = data.get("ORP_3") ;
+    document.getElementById(form_id).elements["Temp_1"].value = data.get("Temp_1") ;
+    document.getElementById(form_id).elements["Temp_2"].value = data.get("Temp_2") ;
+    document.getElementById(form_id).elements["Temp_3"].value = data.get("Temp_3") ;
+    document.getElementById(form_id).elements["Alkalinity"].value = data.get("Alkalinity") ;
+    document.getElementById(form_id).elements["TCBS"].value = data.get("TCBS") ;
+    document.getElementById(form_id).elements["TCBS綠菌"].value = data.get("TCBS綠菌") ;
+    document.getElementById(form_id).elements["Marine"].value = data.get("Marine") ;
+    document.getElementById(form_id).elements["螢光菌TCBS"].value = data.get("螢光菌TCBS") ;
+    document.getElementById(form_id).elements["螢光菌Marine"].value = data.get("螢光菌Marine") ;
+    document.getElementById(form_id).elements["Note"].value = data.get("Note") ;
 }
 
 

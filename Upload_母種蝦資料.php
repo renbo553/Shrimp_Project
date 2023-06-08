@@ -99,19 +99,61 @@ else {
     $sql = "SELECT 眼標 FROM shrimp_info WHERE 眼標 = '$eyetag'" ;
     // sql query string
     $stmt = mysqli_query($link, $sql);
-    $insertStr = "INSERT INTO shrimp_info VALUES 
-        (null, 
-        '" . $eyetag . "', 
-        '" . $family . "', 
-        '" . $weight . "', 
-        '" . $cutweight . "',
-        '" . $tank . "', 
-        '" . $cleancutday . "', 
-        '" . $cleanbirthday . "',
-        '" . $cleanenterday . "',
-        '" . $live_or_die . "', 
-        '" . $target_file . "');";
-    $result = mysqli_query($link, $insertStr);
+    if(mysqli_num_rows($stmt) != 0) {
+        $update = "UPDATE shrimp_info SET
+            眼標='{$eyetag}',
+            家族='{$family}',
+            體重='{$weight}', 
+            剪眼體重='{$cutweight}',
+            tankid='{$tank}',
+            剪眼日期='{$cleancutday}', 
+            出生日期='{$cleanbirthday}',
+            進蝦日期='{$cleanenterday}',
+            生存狀態='{$live_or_die}', 
+            image='{$target_file}'
+            WHERE 眼標 = '{$eyetag}'";
+        // echo $update ;
+        $result = mysqli_query($link, $update);
+
+        // 上傳的同時要更新生產的資料中的剪眼日期與體重
+        $sql = "SELECT * FROM breed WHERE 眼標 = '$eyetag'" ;
+        $stmt = mysqli_query($link, $sql);
+        if(mysqli_num_rows($stmt) != 0) {
+            $update_breed_str = "UPDATE breed SET
+                家族='{$family}',
+                剪眼體重='{$cutweight}',
+                剪眼日期='{$cleancutday}'
+                WHERE 眼標 = '{$eyetag}'";
+            mysqli_query($link, $update_breed_str);
+        }
+    }
+    else {
+        $insertStr = "INSERT INTO shrimp_info VALUES 
+            (null, 
+            '" . $eyetag . "', 
+            '" . $family . "', 
+            '" . $weight . "', 
+            '" . $cutweight . "',
+            '" . $tank . "', 
+            '" . $cleancutday . "', 
+            '" . $cleanbirthday . "',
+            '" . $cleanenterday . "',
+            '" . $live_or_die . "', 
+            '" . $target_file . "');";
+        $result = mysqli_query($link, $insertStr);
+
+        // 上傳的同時要更新生產的資料中的剪眼日期與體重
+        $sql = "SELECT * FROM breed WHERE 眼標 = '$eyetag'" ;
+        $stmt = mysqli_query($link, $sql);
+        if(mysqli_num_rows($stmt) != 0) {
+            $update_breed_str = "UPDATE breed SET
+                家族='{$family}',
+                剪眼體重='{$cutweight}',
+                剪眼日期='{$cleancutday}'
+                WHERE 眼標 = '{$eyetag}'";
+            mysqli_query($link, $update_breed_str);
+        }
+    }
     if ($result) {
         echo "新增資料庫成功\n";
     } else {

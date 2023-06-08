@@ -108,8 +108,8 @@ else {
     /* 所以，可以直接設定它是 null */
     $insertStr = "INSERT INTO breed VALUES 
         (null, 
-        '" . $family . "',
         '" . $eyetag .  "', 
+        '" . $family . "',
         '" . $cutday . "', 
         '" . $cutweight . "', 
         '" . $cleanspawningroomdate . "', 

@@ -441,12 +441,34 @@ if (!isset($_SESSION)) {
                     '&Avg_Weight_Male='. $row["Avg_Weight_Male"].
                     '&Avg_Weight_Female='. $row["Avg_Weight_Female"].
                     '&Total_Weight='. $row["Total_Weight"].
-                    '&time='. $row["time"].
-                    '&work='. $row["work"].
-                    '&else_work='. $row["else_work"].
-                    '&food_weight='. $row["food_weight"].
-                    '&food_remain='. $row["food_remain"].
-                    '&eating='. $row["eating"].
+                    '&9_species='. $row["9_species"].
+                    '&9_weight='. $row["9_weight"].
+                    '&9_remain='. $row["9_remain"].
+                    '&9_eating='. $row["9_eating"].
+                    '&11_species='. $row["11_species"].
+                    '&11_weight='. $row["11_weight"].
+                    '&11_remain='. $row["11_remain"].
+                    '&11_eating='. $row["11_eating"].
+                    '&14_species='. $row["14_species"].
+                    '&14_weight='. $row["14_weight"].
+                    '&14_remain='. $row["14_remain"].
+                    '&14_eating='. $row["14_eating"].
+                    '&16_species='. $row["16_species"].
+                    '&16_weight='. $row["16_weight"].
+                    '&16_remain='. $row["16_remain"].
+                    '&16_eating='. $row["16_eating"].
+                    '&19_species='. $row["19_species"].
+                    '&19_weight='. $row["19_weight"].
+                    '&19_remain='. $row["19_remain"].
+                    '&19_eating='. $row["19_eating"].
+                    '&23_species='. $row["23_species"].
+                    '&23_weight='. $row["23_weight"].
+                    '&23_remain='. $row["23_remain"].
+                    '&23_eating='. $row["23_eating"].
+                    '&3_species='. $row["3_species"].
+                    '&3_weight='. $row["3_weight"].
+                    '&3_remain='. $row["3_remain"].
+                    '&3_eating='. $row["3_eating"].
                     '&Feeding_Ratio='.$row["Feeding_Ratio"].
                     '&Observation='.$row["Observation"].
                     '&image=' . $row["image"].
@@ -464,12 +486,34 @@ if (!isset($_SESSION)) {
                     '&Avg_Weight_Male='. $row["Avg_Weight_Male"].
                     '&Avg_Weight_Female='. $row["Avg_Weight_Female"].
                     '&Total_Weight='. $row["Total_Weight"].
-                    '&time='. $row["time"].
-                    '&work='. $row["work"].
-                    '&else_work='. $row["else_work"].
-                    '&food_weight='. $row["food_weight"].
-                    '&food_remain='. $row["food_remain"].
-                    '&eating='. $row["eating"].
+                    '&9_species='. $row["9_species"].
+                    '&9_weight='. $row["9_weight"].
+                    '&9_remain='. $row["9_remain"].
+                    '&9_eating='. $row["9_eating"].
+                    '&11_species='. $row["11_species"].
+                    '&11_weight='. $row["11_weight"].
+                    '&11_remain='. $row["11_remain"].
+                    '&11_eating='. $row["11_eating"].
+                    '&14_species='. $row["14_species"].
+                    '&14_weight='. $row["14_weight"].
+                    '&14_remain='. $row["14_remain"].
+                    '&14_eating='. $row["14_eating"].
+                    '&16_species='. $row["16_species"].
+                    '&16_weight='. $row["16_weight"].
+                    '&16_remain='. $row["16_remain"].
+                    '&16_eating='. $row["16_eating"].
+                    '&19_species='. $row["19_species"].
+                    '&19_weight='. $row["19_weight"].
+                    '&19_remain='. $row["19_remain"].
+                    '&19_eating='. $row["19_eating"].
+                    '&23_species='. $row["23_species"].
+                    '&23_weight='. $row["23_weight"].
+                    '&23_remain='. $row["23_remain"].
+                    '&23_eating='. $row["23_eating"].
+                    '&3_species='. $row["3_species"].
+                    '&3_weight='. $row["3_weight"].
+                    '&3_remain='. $row["3_remain"].
+                    '&3_eating='. $row["3_eating"].
                     '&Feeding_Ratio='.$row["Feeding_Ratio"].
                     '&Observation='.$row["Observation"].
                     '&image=' . $row["image"].
@@ -492,12 +536,34 @@ if (!isset($_SESSION)) {
                     '&Avg_Weight_Male='. $row["Avg_Weight_Male"].
                     '&Avg_Weight_Female='. $row["Avg_Weight_Female"].
                     '&Total_Weight='. $row["Total_Weight"].
-                    '&time='. $row["time"].
-                    '&work='. $row["work"].
-                    '&else_work='. $row["else_work"].
-                    '&food_weight='. $row["food_weight"].
-                    '&food_remain='. $row["food_remain"].
-                    '&eating='. $row["eating"].
+                    '&9_species='. $row["9_species"].
+                    '&9_weight='. $row["9_weight"].
+                    '&9_remain='. $row["9_remain"].
+                    '&9_eating='. $row["9_eating"].
+                    '&11_species='. $row["11_species"].
+                    '&11_weight='. $row["11_weight"].
+                    '&11_remain='. $row["11_remain"].
+                    '&11_eating='. $row["11_eating"].
+                    '&14_species='. $row["14_species"].
+                    '&14_weight='. $row["14_weight"].
+                    '&14_remain='. $row["14_remain"].
+                    '&14_eating='. $row["14_eating"].
+                    '&16_species='. $row["16_species"].
+                    '&16_weight='. $row["16_weight"].
+                    '&16_remain='. $row["16_remain"].
+                    '&16_eating='. $row["16_eating"].
+                    '&19_species='. $row["19_species"].
+                    '&19_weight='. $row["19_weight"].
+                    '&19_remain='. $row["19_remain"].
+                    '&19_eating='. $row["19_eating"].
+                    '&23_species='. $row["23_species"].
+                    '&23_weight='. $row["23_weight"].
+                    '&23_remain='. $row["23_remain"].
+                    '&23_eating='. $row["23_eating"].
+                    '&3_species='. $row["3_species"].
+                    '&3_weight='. $row["3_weight"].
+                    '&3_remain='. $row["3_remain"].
+                    '&3_eating='. $row["3_eating"].
                     '&Feeding_Ratio='.$row["Feeding_Ratio"].
                     '&Observation='.$row["Observation"].
                     '">詳細</a></td>
@@ -514,12 +580,34 @@ if (!isset($_SESSION)) {
                     '&Avg_Weight_Male='. $row["Avg_Weight_Male"].
                     '&Avg_Weight_Female='. $row["Avg_Weight_Female"].
                     '&Total_Weight='. $row["Total_Weight"].
-                    '&time='. $row["time"].
-                    '&work='. $row["work"].
-                    '&else_work='. $row["else_work"].
-                    '&food_weight='. $row["food_weight"].
-                    '&food_remain='. $row["food_remain"].
-                    '&eating='. $row["eating"].
+                    '&9_species='. $row["9_species"].
+                    '&9_weight='. $row["9_weight"].
+                    '&9_remain='. $row["9_remain"].
+                    '&9_eating='. $row["9_eating"].
+                    '&11_species='. $row["11_species"].
+                    '&11_weight='. $row["11_weight"].
+                    '&11_remain='. $row["11_remain"].
+                    '&11_eating='. $row["11_eating"].
+                    '&14_species='. $row["14_species"].
+                    '&14_weight='. $row["14_weight"].
+                    '&14_remain='. $row["14_remain"].
+                    '&14_eating='. $row["14_eating"].
+                    '&16_species='. $row["16_species"].
+                    '&16_weight='. $row["16_weight"].
+                    '&16_remain='. $row["16_remain"].
+                    '&16_eating='. $row["16_eating"].
+                    '&19_species='. $row["19_species"].
+                    '&19_weight='. $row["19_weight"].
+                    '&19_remain='. $row["19_remain"].
+                    '&19_eating='. $row["19_eating"].
+                    '&23_species='. $row["23_species"].
+                    '&23_weight='. $row["23_weight"].
+                    '&23_remain='. $row["23_remain"].
+                    '&23_eating='. $row["23_eating"].
+                    '&3_species='. $row["3_species"].
+                    '&3_weight='. $row["3_weight"].
+                    '&3_remain='. $row["3_remain"].
+                    '&3_eating='. $row["3_eating"].
                     '&Feeding_Ratio='.$row["Feeding_Ratio"].
                     '&Observation='.$row["Observation"].
                     '&image=' . $row["image"].
@@ -527,7 +615,6 @@ if (!isset($_SESSION)) {
                     <td><a href="delete?id=' . $row['id'] . '&type=feed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
                 }
             }
-
             echo "</tbody></table>";
             echo "<br>";
             // echo "<br>顯示資料（MYSQLI_ASSOC，欄位名稱）：<br>";
@@ -542,7 +629,6 @@ if (!isset($_SESSION)) {
             echo "<table style='text-align:center;' align='center' width='90%'  border='1px solid gray' text-align='center'>";
             echo "<thead>
                 <th>Index</th>
-                <th>家族</th>
                 <th>眼標</th>
                 <th>紙本資料</th>
                 </thead><tbody>";
@@ -552,14 +638,11 @@ if (!isset($_SESSION)) {
             {
                 if(strlen($row["image"]) > 0)
                 {
-                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>",$row["id"], $row["家族"], $row["眼標"], $row["image"]);
+                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>",$row["id"], $row["眼標"], $row["image"]);
                     echo '<td><a href="view_生產?
-                        &id=' . $row['id'] . 
-                        '&family=' .$row["家族"] .  
+                        &id=' . $row['id'] .
                         '&male_family=' .$row["公蝦家族"] . 
-                        '&eye=' . $row["眼標"] . 
-                        '&cutday=' . $row["剪眼日期"] . 
-                        '&cutweight=' . $row["剪眼體重"] . 
+                        '&eye=' . $row["眼標"] .
                         '&spawningroomdate=' . $row["進產卵室待產日期"] . 
                         '&spawningweight=' . $row["生產體重"] . 
                         '&ovarystate=' . $row["卵巢進展階段"] . 
@@ -567,29 +650,23 @@ if (!isset($_SESSION)) {
                         '&image=' . $row["image"]  .
                         '">詳細</a></td>
                         <td><a href="modify_生產?
-                        &id=' . $row['id'] . 
-                        '&family=' .$row["家族"] .  
+                        &id=' . $row['id'] .  
                         '&male_family=' .$row["公蝦家族"] . 
-                        '&eye=' . $row["眼標"] . 
-                        '&cutday=' . $row["剪眼日期"] . 
-                        '&cutweight=' . $row["剪眼體重"] . 
+                        '&eye=' . $row["眼標"] .  
                         '&spawningroomdate=' . $row["進產卵室待產日期"] . 
                         '&spawningweight=' . $row["生產體重"] . 
                         '&ovarystate=' . $row["卵巢進展階段"] . 
                         '&breed_type=' . $row["交配方式"] .
                         '&image=' . $row["image"]  .
                         '">修改</a></td>
-                      <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
+                    <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
                 }
                 else{
-                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> </td>",$row["id"], $row["家族"], $row["眼標"] , $row["image"]);
+                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> </td>",$row["id"], $row["眼標"], $row["image"]);
                     echo '<td><a href="view_生產?
                         &id=' . $row['id'] . 
-                        '&family=' .$row["家族"] .  
                         '&male_family=' .$row["公蝦家族"] . 
                         '&eye=' . $row["眼標"] . 
-                        '&cutday=' . $row["剪眼日期"] . 
-                        '&cutweight=' . $row["剪眼體重"] . 
                         '&spawningroomdate=' . $row["進產卵室待產日期"] . 
                         '&spawningweight=' . $row["生產體重"] . 
                         '&ovarystate=' . $row["卵巢進展階段"] . 
@@ -598,20 +675,17 @@ if (!isset($_SESSION)) {
                         '">詳細</a></td>
                         <td><a href="modify_生產?
                         &id=' . $row['id'] . 
-                        '&family=' .$row["家族"] .  
                         '&male_family=' .$row["公蝦家族"] . 
                         '&eye=' . $row["眼標"] . 
-                        '&cutday=' . $row["剪眼日期"] . 
-                        '&cutweight=' . $row["剪眼體重"] . 
                         '&spawningroomdate=' . $row["進產卵室待產日期"] . 
                         '&spawningweight=' . $row["生產體重"] . 
                         '&ovarystate=' . $row["卵巢進展階段"] . 
                         '&breed_type=' . $row["交配方式"] .
                         '&image=' . $row["image"]  .
                         '">修改</a></td>
-                      <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';    
+                    <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';    
                 }   
-    
+
             }
             echo "</tbody></table>";
             echo "<br>";

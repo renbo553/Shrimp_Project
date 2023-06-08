@@ -58,6 +58,7 @@ if ($fileSize == 0) {
     $stmt = mysqli_query($link, $sql);
     if(mysqli_num_rows($stmt) != 0) {
         $update_breed_str = "UPDATE breed SET
+            家族='{$family}',
             剪眼體重='{$cutweight}',
             剪眼日期='{$cleancutday}'
             WHERE 眼標 = '{$eyetag}'";
@@ -141,6 +142,7 @@ if ($fileSize == 0) {
         $stmt = mysqli_query($link, $sql);
         if(mysqli_num_rows($stmt) != 0) {
             $update_breed_str = "UPDATE breed SET
+                家族='{$family}',
                 剪眼體重='{$cutweight}',
                 剪眼日期='{$cleancutday}'
                 WHERE 眼標 = '{$eyetag}'";
