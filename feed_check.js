@@ -390,9 +390,9 @@ function put_into_form(before_data_array , form_id) {
     $option.add("日本飼料") ;
     $option.add("Krill") ;
     $option.add("Clam(母)") ;
-    $option.add("Ezmate(海膽+蟹卵)") ;
-    $option.add("Ezmate(海膽+蟹白)") ;
-    $option.add("Ezmate(海膽+蟹黃)") ;
+    $option.add("Ezmate(海膽、蟹卵)") ;
+    $option.add("Ezmate(海膽、蟹白)") ;
+    $option.add("Ezmate(海膽、蟹黃)") ;
     $option.add("Ezmate(海膽)") ;
     if($option.has(before_data_array["9_species"])) document.getElementById(form_id).elements["food0900"].value = before_data_array["9_species"] ;
     else {
@@ -687,9 +687,9 @@ async function modify_put_into_form (data , form_id , is_modify) {
     $option.add("日本飼料") ;
     $option.add("Krill") ;
     $option.add("Clam(母)") ;
-    $option.add("Ezmate(海膽+蟹卵)") ;
-    $option.add("Ezmate(海膽+蟹白)") ;
-    $option.add("Ezmate(海膽+蟹黃)") ;
+    $option.add("Ezmate(海膽、蟹卵)") ;
+    $option.add("Ezmate(海膽、蟹白)") ;
+    $option.add("Ezmate(海膽、蟹黃)") ;
     $option.add("Ezmate(海膽)") ;
     if($option.has(data.get("9_species"))) document.getElementById(form_id).elements["food0900"].value = data.get("9_species") ;
     else {
