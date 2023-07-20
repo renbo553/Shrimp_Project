@@ -80,7 +80,7 @@ if (!isset($_SESSION)) {
             <div style = "width: auto">
                 <?php
                     // 未作
-                    utility_button_onclick("export_shrimp_info.php", "匯出");
+                    //utility_button_onclick("export_shrimp_info.php", "匯出");
                 ?>
             </div>
         </div>
