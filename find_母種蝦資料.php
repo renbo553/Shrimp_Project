@@ -76,6 +76,7 @@ if (!isset($_SESSION)) {
                     utility_button("submit", "查詢");
                 ?>
             </div>
+            <!--
             <div style = "width: 1%"> </div>
             <div style = "width: auto">
                 <?php
@@ -83,6 +84,7 @@ if (!isset($_SESSION)) {
                     //utility_button_onclick("export_shrimp_info.php", "匯出");
                 ?>
             </div>
+          -->
         </div>
         <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
     </form>
