@@ -232,7 +232,7 @@ class Export_Handler
         for($col = 1; $col < 10; ++$col)
             $this->sheet->getColumnDimensionByColumn($col)->setWidth(UNIT_WIDTH * 10);
         // set horizontal alignment
-        //$this->sheet->getStyleByColumn('A1:' . stringFromColumn)->getAlignment()->setHorizontal('center');
+        $this->sheet->getStyle('A1:' . 'XFD'. $row_index)->getAlignment()->setHorizontal('center');
         // set border range, type and color
         //$this->sheet->getStyle(reset($column_index_array) . '1' . ':' . end($column_index_array) . ($row_index))->getBorders()->getAllBorders()->setBorderStyle(Border::BORDER_MEDIUM)->setColor(new Color(BORDER_COLOR));
 
