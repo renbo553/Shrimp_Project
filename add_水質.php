@@ -166,12 +166,9 @@ if (!isset($_SESSION)) {
             var formData = new FormData(myForm);
 
             var ret_message = check(formData) ;
-            if(ret_message == "") {
-                var msg = html_get(formData) ;
-                if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
-                else myAlert(msg , formData) ;
-            }
-            else Alert(ret_message) ;
+            var msg = html_get(formData) ;
+            if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
+            else myAlert(msg , formData) ;
         }
 
         //取得昨天資料
@@ -239,12 +236,9 @@ if (!isset($_SESSION)) {
             var formData = new FormData(myForm);
 
             var ret_message = check(formData) ;
-            if(ret_message == "") {
-                var msg = html_get(formData) ;
-                if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
-                else myAlert(msg , formData) ;
-            }
-            else Alert(ret_message) ;
+            var msg = html_get(formData) ;
+            if(msg == null) all_data_msg(html_show_all_data(formData) , formData) ;
+            else myAlert(msg , formData) ;
         }
 
         //取得昨天資料

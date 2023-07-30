@@ -48,21 +48,44 @@ function check (formData) {
     map.set("TankID" , "TankID") ;
     map.set("date" , "日期") ;
     map.set("tank_type" , "蝦缸資訊") ;
-    map.set("work" , "工作/餵食項目") ;
-    map.set("else_work" , "其他工作/餵食項目") ;
     map.set("time" , "時間") ;
     map.set("male_shrimp" , "公蝦數量") ;
     map.set("female_shrimp" , "母蝦數量") ;
     map.set("dead_male_shrimp" , "死亡公蝦數量") ;
     map.set("dead_female_shrimp" , "死亡母蝦數量") ;
-    map.set("peeling_male_shrimp" , "脫皮公蝦數量") ;
-    map.set("peeling_female_shrimp" , "脫皮母蝦數量") ;
+    map.set("peeling_male_shrimp" , "蛻皮公蝦數量") ;
+    map.set("peeling_female_shrimp" , "蛻皮母蝦數量") ;
     map.set("avg_male_shrimp" , "公蝦均重") ;
     map.set("avg_female_shrimp" , "母蝦均重") ;
-    map.set("total_weight" , "總重") ;
-    map.set("food_weight" , "餵食量") ;
-    map.set("food_remain" , "殘餌量") ;
-    map.set("FeedingRatio" , "FeedingRatio") ;
+    map.set("0900work" , "09:00工作/餵食項目") ;
+    map.set("0900else_work" , "09:00其他工作/餵食項目") ;
+    map.set("1100work" , "11:00工作/餵食項目") ;
+    map.set("1100else_work" , "11:00其他工作/餵食項目") ;
+    map.set("1400work" , "14:00工作/餵食項目") ;
+    map.set("1400else_work" , "14:00其他工作/餵食項目") ;
+    map.set("1600work" , "16:00工作/餵食項目") ;
+    map.set("1600else_work" , "16:00其他工作/餵食項目") ;
+    map.set("1900work" , "19:00工作/餵食項目") ;
+    map.set("1900else_work" , "19:00其他工作/餵食項目") ;
+    map.set("2300work" , "23:00工作/餵食項目") ;
+    map.set("2300else_work" , "23:00其他工作/餵食項目") ;
+    map.set("0300work" , "03:00工作/餵食項目") ;
+    map.set("0300else_work" , "03:00其他工作/餵食項目") ;
+
+    map.set("0900food_weight" , "09:00餵食量") ;
+    map.set("0900food_remain" , "09:00殘餌量") ;
+    map.set("1100food_weight" , "11:00餵食量") ;
+    map.set("1100food_remain" , "11:00殘餌量") ;
+    map.set("1400food_weight" , "14:00餵食量") ;
+    map.set("1400food_remain" , "14:00殘餌量") ;
+    map.set("1600food_weight" , "16:00餵食量") ;
+    map.set("1600food_remain" , "16:00殘餌量") ;
+    map.set("1900food_weight" , "19:00餵食量") ;
+    map.set("1900food_remain" , "19:00殘餌量") ;
+    map.set("2300food_weight" , "23:00餵食量") ;
+    map.set("2300food_remain" , "23:00殘餌量") ;
+    map.set("0300food_weight" , "03:00餵食量") ;
+    map.set("0300food_remain" , "03:00殘餌量") ;
 
     // 計算有幾個沒填
     var count = 0 ;
@@ -78,76 +101,6 @@ function check (formData) {
     if(tank_type == null || tank_type == "") {
         show_message += (map.get("tank_type") + '、') ;
         count ++ ;
-    }
-    if(food0900 == null || food0900 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food0900 == "其他" && (else_work_0900 == "" || else_work_0900 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
-    }
-    if(food1100 == null || food1100 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food1100 == "其他" && (else_work_1100 == "" || else_work_1100 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
-    }
-    if(food1400 == null || food1400 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food1400 == "其他" && (else_work_1400 == "" || else_work_1400 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
-    }
-    if(food1600 == null || food1600 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food1600 == "其他" && (else_work_1600 == "" || else_work_1600 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
-    }
-    if(food1900 == null || food1900 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food1900 == "其他" && (else_work_1900 == "" || else_work_1900 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
-    }
-    if(food2300 == null || food2300 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food2300 == "其他" && (else_work_2300 == "" || else_work_2300 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
-    }
-    if(food0300 == null || food0300 == "") {
-        show_message += (map.get("work") + '、') ;
-        count ++ ;
-    }
-    else {
-        if(food0300 == "其他" && (else_work_0300 == "" || else_work_0300 == null) ) {
-            show_message += (map.get("else_work") + '、') ;
-            count ++ ;
-        }
     }
     if(male_shrimp == null || male_shrimp == "") {
         show_message += (map.get("male_shrimp") + '、') ;
@@ -181,75 +134,135 @@ function check (formData) {
         show_message += (map.get("avg_female_shrimp") + '、') ;
         count ++ ;
     }
-    if(total_weight == null || total_weight == "") {
-        show_message += (map.get("total_weight") + '、') ;
+    if(food0900 == null || food0900 == "") {
+        show_message += (map.get("0900work") + '、') ;
         count ++ ;
     }
+    else {
+        if(food0900 == "其他" && (else_work_0900 == "" || else_work_0900 == null) ) {
+            show_message += (map.get("0900else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1100 == null || food1100 == "") {
+        show_message += (map.get("1100work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1100 == "其他" && (else_work_1100 == "" || else_work_1100 == null) ) {
+            show_message += (map.get("1100else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1400 == null || food1400 == "") {
+        show_message += (map.get("1400work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1400 == "其他" && (else_work_1400 == "" || else_work_1400 == null) ) {
+            show_message += (map.get("1400else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1600 == null || food1600 == "") {
+        show_message += (map.get("1600work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1600 == "其他" && (else_work_1600 == "" || else_work_1600 == null) ) {
+            show_message += (map.get("1600else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food1900 == null || food1900 == "") {
+        show_message += (map.get("1900work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food1900 == "其他" && (else_work_1900 == "" || else_work_1900 == null) ) {
+            show_message += (map.get("1900else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food2300 == null || food2300 == "") {
+        show_message += (map.get("2300work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food2300 == "其他" && (else_work_2300 == "" || else_work_2300 == null) ) {
+            show_message += (map.get("2300else_work") + '、') ;
+            count ++ ;
+        }
+    }
+    if(food0300 == null || food0300 == "") {
+        show_message += (map.get("0300work") + '、') ;
+        count ++ ;
+    }
+    else {
+        if(food0300 == "其他" && (else_work_0300 == "" || else_work_0300 == null) ) {
+            show_message += (map.get("0300else_work") + '、') ;
+            count ++ ;
+        }
+    }
     if(weight0900 == null || weight0900 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("0900food_weight") + '、') ;
         count ++ ;
     }
     if(remain0900 == null || remain0900 == "") {
-        show_message += (map.get("food_remain") + '、') ;
+        show_message += (map.get("0900food_remain") + '、') ;
         count ++ ;
     }
     if(weight1100 == null || weight1100 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("1100food_weight") + '、') ;
         count ++ ;
     }
     if(remain1100 == null || remain1100 == "") {
-        show_message += (map.get("food_remain") + '、') ;
+        show_message += (map.get("1100food_remain") + '、') ;
         count ++ ;
     }
     if(weight1400 == null || weight1400 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("1400food_weight") + '、') ;
         count ++ ;
     }
     if(remain1400 == null || remain1400 == "") {
-        show_message += (map.get("food_remain") + '、') ;
+        show_message += (map.get("1400food_remain") + '、') ;
         count ++ ;
     }
     if(weight1600 == null || weight1600 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("1600food_weight") + '、') ;
         count ++ ;
     }
     if(remain1600 == null || remain1600 == "") {
-        show_message += (map.get("food_remain") + '、') ;
+        show_message += (map.get("1600food_remain") + '、') ;
         count ++ ;
     }
     if(weight1900 == null || weight1900 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("1900food_weight") + '、') ;
         count ++ ;
     }
     if(remain1900 == null || remain1900 == "") {
-        show_message += (map.get("food_remain") + '、') ;
+        show_message += (map.get("1900food_remain") + '、') ;
         count ++ ;
     }
     if(weight2300 == null || weight2300 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("2300food_weight") + '、') ;
         count ++ ;
     }
     if(remain2300 == null || remain2300 == "") {
-        show_message += (map.get("food_remain") + '、') ;
+        show_message += (map.get("2300food_remain") + '、') ;
         count ++ ;
     }
     if(weight0300 == null || weight0300 == "") {
-        show_message += (map.get("food_weight") + '、') ;
+        show_message += (map.get("0300food_weight") + '、') ;
         count ++ ;
     }
     if(remain0300 == null || remain0300 == "") {
-        show_message += (map.get("food_remain") + '、') ;
-        count ++ ;
-    }
-    if(FeedingRatio == null || FeedingRatio == "") {
-        show_message += (map.get("FeedingRatio") + '、') ;
+        show_message += (map.get("0300food_remain") + '、') ;
         count ++ ;
     }
 
     
-    console.log(show_message) ;
-    // if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
-    if (count != 0) show_message = "尚有資料未寫完，請再注意一下" ;
+    if(count != 0) show_message = show_message.slice(0 , show_message.length - 1) ;
     else show_message = "" ;
 
     return show_message ;
@@ -382,18 +395,13 @@ function put_into_form(before_data_array , form_id) {
     document.getElementById(form_id).elements["FeedingRatio"].value = before_data_array["Feeding_Ratio"] ;
 
     $option = new Set() ;
-    $option.add("Polychaete") ;
-    $option.add("Crab(去殼)") ;
-    $option.add("Squid") ;
-    $option.add("Mussel") ;
-    $option.add("Epsilon") ;
-    $option.add("日本飼料") ;
-    $option.add("Krill") ;
-    $option.add("Clam(母)") ;
-    $option.add("Ezmate(海膽、蟹卵)") ;
-    $option.add("Ezmate(海膽、蟹白)") ;
-    $option.add("Ezmate(海膽、蟹黃)") ;
-    $option.add("Ezmate(海膽)") ;
+    $option.add("紅蟲") ;
+    $option.add("小卷") ;
+    $option.add("淡菜") ;
+    $option.add("南極蝦") ;
+    $option.add("扇貝") ;
+    $option.add("螃蟹（去殼）") ;
+    $option.add("自製飼料") ;
     if($option.has(before_data_array["9_species"])) document.getElementById(form_id).elements["food0900"].value = before_data_array["9_species"] ;
     else {
         document.getElementById(form_id).elements["food0900"].value = "其他" ;
@@ -510,8 +518,8 @@ function html_show_all_data (formData) {
     map.set("female_shrimp" , "母蝦數量") ;
     map.set("dead_male_shrimp" , "死亡公蝦數量") ;
     map.set("dead_female_shrimp" , "死亡母蝦數量") ;
-    map.set("peeling_male_shrimp" , "脫皮公蝦數量") ;
-    map.set("peeling_female_shrimp" , "脫皮母蝦數量") ;
+    map.set("peeling_male_shrimp" , "蛻皮公蝦數量") ;
+    map.set("peeling_female_shrimp" , "蛻皮母蝦數量") ;
     map.set("avg_male_shrimp" , "公蝦均重") ;
     map.set("avg_female_shrimp" , "母蝦均重") ;
     map.set("total_weight" , "總重") ;
@@ -691,6 +699,14 @@ async function modify_put_into_form (data , form_id , is_modify) {
     $option.add("Ezmate(海膽、蟹白)") ;
     $option.add("Ezmate(海膽、蟹黃)") ;
     $option.add("Ezmate(海膽)") ;
+
+    $option.add("紅蟲") ;
+    $option.add("小卷") ;
+    $option.add("淡菜") ;
+    $option.add("南極蝦") ;
+    $option.add("扇貝") ;
+    $option.add("螃蟹（去殼）") ;
+    $option.add("自製飼料") ;
     if($option.has(data.get("9_species"))) document.getElementById(form_id).elements["food0900"].value = data.get("9_species") ;
     else {
         document.getElementById(form_id).elements["food0900"].value = "其他" ;

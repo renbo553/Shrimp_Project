@@ -84,6 +84,65 @@ if (!isset($_SESSION)) {
     <script>
         document.write('<script type="text/javascript" src="feed_check.js"></'+'script>');
         
+        // 計算總重之function
+        function total_weight_calculate() {
+            var width = document.documentElement.clientWidth ;
+            var form_id ;
+            if(width < 1024) form_id = "small_form" ;
+            else form_id = "big_form" ;
+            var male_shrimp = document.getElementById(form_id).elements["male_shrimp"] ;
+            var female_shrimp = document.getElementById(form_id).elements["female_shrimp"] ;
+            var avg_male_shrimp = document.getElementById(form_id).elements["avg_male_shrimp"] ;
+            var avg_female_shrimp = document.getElementById(form_id).elements["avg_female_shrimp"] ;
+
+            if(male_shrimp.value == "" || female_shrimp.value == "" 
+                || avg_male_shrimp.value == "" || avg_female_shrimp.value == "") { document.getElementById(form_id).elements["total_weight"].value = "" ;}
+            else document.getElementById(form_id).elements["total_weight"].value = 
+                parseInt(male_shrimp.value) * parseFloat(avg_male_shrimp.value) + parseInt(female_shrimp.value) * parseFloat(avg_female_shrimp.value) ;
+
+            feeding_ratio_calculate() ;
+        }
+
+        // 計算feeding ratio之function
+        function feeding_ratio_calculate() {
+            var width = document.documentElement.clientWidth ;
+            var form_id ;
+            if(width < 1024) form_id = "small_form" ;
+            else form_id = "big_form" ;
+            var total_weight = document.getElementById(form_id).elements["total_weight"] ;
+            var weight0900 = document.getElementById(form_id).elements["weight0900"] ;
+            var remain0900 = document.getElementById(form_id).elements["remain0900"] ;
+            var weight1100 = document.getElementById(form_id).elements["weight1100"] ;
+            var remain1100 = document.getElementById(form_id).elements["remain1100"] ;
+            var weight1400 = document.getElementById(form_id).elements["weight1400"] ;
+            var remain1400 = document.getElementById(form_id).elements["remain1400"] ;
+            var weight1600 = document.getElementById(form_id).elements["weight1600"] ;
+            var remain1600 = document.getElementById(form_id).elements["remain1600"] ;
+            var weight1900 = document.getElementById(form_id).elements["weight1900"] ;
+            var remain1900 = document.getElementById(form_id).elements["remain1900"] ;
+            var weight2300 = document.getElementById(form_id).elements["weight2300"] ;
+            var remain2300 = document.getElementById(form_id).elements["remain2300"] ;
+            var weight0300 = document.getElementById(form_id).elements["weight0300"] ;
+            var remain0300 = document.getElementById(form_id).elements["remain0300"] ;
+            
+            if(total_weight.value == "" ||
+                weight0900.value == "" || remain0900.value == "" ||
+                weight1100.value == "" || remain1100.value == "" ||
+                weight1400.value == "" || remain1400.value == "" ||
+                weight1600.value == "" || remain1600.value == "" ||
+                weight1900.value == "" || remain1900.value == "" ||
+                weight2300.value == "" || remain2300.value == "" ||
+                weight0300.value == "" || remain0300.value == "" ) document.getElementById(form_id).elements["FeedingRatio"].value = "" ;
+            else {
+                document.getElementById(form_id).elements["FeedingRatio"].value = 
+                    ((((parseInt(weight0900.value) - parseInt(remain0900.value)) + (parseInt(weight1100.value) - parseInt(remain1100.value))
+                    + (parseInt(weight1400.value) - parseInt(remain1400.value)) + (parseInt(weight1600.value) - parseInt(remain1600.value)) 
+                    + (parseInt(weight1900.value) - parseInt(remain1900.value)) + (parseInt(weight2300.value) - parseInt(remain2300.value))
+                    + (parseInt(weight0300.value) - parseInt(remain0300.value))) / parseFloat(total_weight.value)) * 100).toFixed(1) ;
+                    document.getElementById(form_id).elements["FeedingRatio"].value = parseFloat(document.getElementById(form_id).elements["FeedingRatio"].value).toFixed(2) ;
+                }
+        }
+
         // 在頁面加載完成後執行初始化操作
         window.onload = function() {
             // 獲取要應用動畫的div元素

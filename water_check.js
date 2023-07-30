@@ -1,5 +1,5 @@
+// 新增時的空值檢查--------------------------------------------
 function check (formData) {
-    // 2/20 空值檢查--------------------------------------------
     var TankID = formData.get('location')
     var date = formData.get('date') ;
     var nh4 = formData.get('nh4') ;
@@ -175,8 +175,8 @@ function check (formData) {
     //----------------------------------------------------------
 }
 
+// 展示該注意的資料在sweetalert2
 function html_get (formData) {
-    // 3/17 show html在sweetalert2
     var date = formData.get('date') ;
     var nh4 = formData.get('nh4') ;
     var no2 = formData.get('no2') ;
@@ -235,122 +235,265 @@ function html_get (formData) {
     var data_num = [] ;
     var count = 0 ;
 
-    if(parseInt(no2) < 0 || parseInt(no2) > 0.5) {
+    if(no2 == "") {
+        data_name.push(map.get("no2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(no2) < 0 || parseInt(no2) > 0.5) {
         data_name.push(map.get("no2")) ;
         data_num.push(no2) ;
         count ++ ;
     }
-    if(parseInt(no3) < 0 || parseInt(no3) > 500) {
+
+    if(no3 == "") {
+        data_name.push(map.get("no3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(no3) < 0 || parseInt(no3) > 500) {
         data_name.push(map.get("no3")) ;
         data_num.push(no3) ;
         count ++ ;
     }
-    if(parseInt(pH_1) < 6 || parseInt(pH_1) > 8) {
+
+    if(pH_1 == "") {
+        data_name.push(map.get("pH_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(pH_1) < 6 || parseInt(pH_1) > 8) {
         data_name.push(map.get("pH_1")) ;
         data_num.push(pH_1) ;
         count ++ ;
     }
-    if(parseInt(pH_2) < 6 || parseInt(pH_2) > 8) {
+
+    if(pH_2 == "") {
+        data_name.push(map.get("pH_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(pH_2) < 6 || parseInt(pH_2) > 8) {
         data_name.push(map.get("pH_2")) ;
         data_num.push(pH_2) ;
         count ++ ;
     }
-    if(parseInt(pH_3) < 6 || parseInt(pH_3) > 8) {
+
+    if(pH_3 == "") {
+        data_name.push(map.get("pH_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(pH_3) < 6 || parseInt(pH_3) > 8) {
         data_name.push(map.get("pH_3")) ;
         data_num.push(pH_3) ;
         count ++ ;
     }
-    if(parseInt(O2_1) < 2 || parseInt(O2_1) > 6) {
+
+    if(O2_1 == "") {
+        data_name.push(map.get("O2_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(O2_1) < 2 || parseInt(O2_1) > 6) {
         data_name.push(map.get("O2_1")) ;
         data_num.push(O2_1) ;
         count ++ ;
     }
-    if(parseInt(O2_2) < 2 || parseInt(O2_2) > 6) {
+
+    if(O2_2 == "") {
+        data_name.push(map.get("O2_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(O2_2) < 2 || parseInt(O2_2) > 6) {
         data_name.push(map.get("O2_2")) ;
         data_num.push(O2_2) ;
         count ++ ;
     }
-    if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
+
+    if(O2_3 == "") {
+        data_name.push(map.get("O2_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
         data_name.push(map.get("O2_3")) ;
         data_num.push(O2_3) ;
         count ++ ;
     }
-    if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
+
+    if(nh4 == "") {
+        data_name.push(map.get("nh4")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
         data_name.push(map.get("nh4")) ;
         data_num.push(nh4) ;
         count ++ ;
     }
-    if(parseInt(TCBS) < 0 || parseInt(TCBS) > 5000) {
+    
+    if(TCBS == "") {
+        data_name.push(map.get("TCBS")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(TCBS) < 0 || parseInt(TCBS) > 5000) {
         data_name.push(map.get("TCBS")) ;
         data_num.push(TCBS) ;
         count ++ ;
     }
-    if(parseInt(ORP_1) < 0 || parseInt(ORP_1) > 500) {
+    
+    if(ORP_1 == "") {
+        data_name.push(map.get("ORP_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(ORP_1) < 0 || parseInt(ORP_1) > 500) {
         data_name.push(map.get("ORP_1")) ;
         data_num.push(ORP_1) ;
         count ++ ;
     }
-    if(parseInt(ORP_2) < 0 || parseInt(ORP_2) > 500) {
+    
+    if(ORP_2 == "") {
+        data_name.push(map.get("ORP_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(ORP_2) < 0 || parseInt(ORP_2) > 500) {
         data_name.push(map.get("ORP_2")) ;
         data_num.push(ORP_2) ;
         count ++ ;
     }
-    if(parseInt(ORP_3) < 0 || parseInt(ORP_3) > 500) {
+
+    if(ORP_3 == "") {
+        data_name.push(map.get("ORP_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(ORP_3) < 0 || parseInt(ORP_3) > 500) {
         data_name.push(map.get("ORP_3")) ;
         data_num.push(ORP_3) ;
         count ++ ;
     }
-    if(parseInt(Marine) < 0 || parseInt(Marine) > 10000) {
+    
+    if(Marine == "") {
+        data_name.push(map.get("Marine")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Marine) < 0 || parseInt(Marine) > 10000) {
         data_name.push(map.get("Marine")) ;
         data_num.push(Marine) ;
         count ++ ;
     }
-    if(parseInt(Temp_1) < 25 || parseInt(Temp_1) > 33) {
+
+    if(Temp_1 == "") {
+        data_name.push(map.get("Temp_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Temp_1) < 25 || parseInt(Temp_1) > 33) {
         data_name.push(map.get("Temp_1")) ;
         data_num.push(Temp_1) ;
         count ++ ;
     }
-    if(parseInt(Temp_2) < 25 || parseInt(Temp_2) > 33) {
+    
+    if(Temp_2 == "") {
+        data_name.push(map.get("Temp_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Temp_2) < 25 || parseInt(Temp_2) > 33) {
         data_name.push(map.get("Temp_2")) ;
         data_num.push(Temp_2) ;
         count ++ ;
     }
-    if(parseInt(Temp_3) < 25 || parseInt(Temp_3) > 33) {
+    
+    if(Temp_3 == "") {
+        data_name.push(map.get("Temp_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Temp_3) < 25 || parseInt(Temp_3) > 33) {
         data_name.push(map.get("Temp_3")) ;
         data_num.push(Temp_3) ;
         count ++ ;
     }
-    if(parseInt(TCBS綠菌) < 0 || parseInt(TCBS綠菌) > 5000) {
+    
+    if(TCBS綠菌 == "") {
+        data_name.push(map.get("TCBS綠菌")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(TCBS綠菌) < 0 || parseInt(TCBS綠菌) > 5000) {
         data_name.push(map.get("TCBS綠菌")) ;
         data_num.push(TCBS綠菌) ;
         count ++ ;
     }
-    if(parseInt(螢光菌TCBS) < 0 || parseInt(螢光菌TCBS) > 5000) {
+    
+    if(螢光菌TCBS == "") {
+        data_name.push(map.get("螢光菌TCBS")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(螢光菌TCBS) < 0 || parseInt(螢光菌TCBS) > 5000) {
         data_name.push(map.get("螢光菌TCBS")) ;
         data_num.push(螢光菌TCBS) ;
         count ++ ;
     }
-    if(parseInt(Salinity_1) < 20 || parseInt(Salinity_1) > 40) {
+
+    if(Salinity_1 == "") {
+        data_name.push(map.get("Salinity_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Salinity_1) < 20 || parseInt(Salinity_1) > 40) {
         data_name.push(map.get("Salinity_1")) ;
         data_num.push(Salinity_1) ;
         count ++ ;
     }
-    if(parseInt(Salinity_2) < 20 || parseInt(Salinity_2) > 40) {
+
+    if(Salinity_2 == "") {
+        data_name.push(map.get("Salinity_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Salinity_2) < 20 || parseInt(Salinity_2) > 40) {
         data_name.push(map.get("Salinity_2")) ;
         data_num.push(Salinity_2) ;
         count ++ ;
     }
-    if(parseInt(Salinity_3) < 20 || parseInt(Salinity_3) > 40) {
+
+    if(Salinity_3 == "") {
+        data_name.push(map.get("Salinity_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Salinity_3) < 20 || parseInt(Salinity_3) > 40) {
         data_name.push(map.get("Salinity_3")) ;
         data_num.push(Salinity_3) ;
         count ++ ;
     }
-    if(parseInt(Alkalinity) < 0 || parseInt(Alkalinity) > 200) {
+
+    if(Alkalinity == "") {
+        data_name.push(map.get("Alkalinity")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Alkalinity) < 0 || parseInt(Alkalinity) > 200) {
         data_name.push(map.get("Alkalinity")) ;
         data_num.push(Alkalinity) ;
         count ++ ;
     }
-    if(parseInt(螢光菌Marine) < 0 || parseInt(螢光菌Marine) > 10000) {
+
+    if(螢光菌Marine == "") {
+        data_name.push(map.get("螢光菌Marine")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(螢光菌Marine) < 0 || parseInt(螢光菌Marine) > 10000) {
         data_name.push(map.get("螢光菌Marine")) ;
         data_num.push(螢光菌Marine) ;
         count ++ ;
@@ -388,10 +531,10 @@ function html_get (formData) {
             // 設定div中span的比例
             append_div.style.display = "flex" ;
             append_div.style.justifyContent = "center" ;
-            append_div.style.alignItems = "cneter" ;
-            append_div.firstElementChild.style.flexBasis = "25%" ;
+            append_div.style.alignItems = "center" ;
+            append_div.firstElementChild.style.flexBasis = "35%" ;
             append_div.firstElementChild.style.textAlign = "center" ;
-            append_div.lastElementChild.style.flexBasis = "25%" ;
+            append_div.lastElementChild.style.flexBasis = "35%" ;
             append_div.lastElementChild.style.textAlign = "center" ;
 
             new_html.append(append_div) ;
@@ -402,6 +545,7 @@ function html_get (formData) {
     return new_html ;
 }
 
+// 展示要新增的資料在sweetalert2
 function html_show_all_data (formData) {
     // 3/17 show html在sweetalert2
     var TankID = formData.get('location') ;
@@ -691,6 +835,7 @@ function html_show_all_data (formData) {
     return new_html ;
 }
 
+// 上傳
 window.post = function (formData) {
     $.ajax({
         url: 'Upload_水質.php',
@@ -724,8 +869,8 @@ window.post = function (formData) {
     });
 }
 
+// 獲取前一天資料，檢查空缺--------------------------------------------
 function add_check (formData) {
-    // 3/5 獲取前一天資料--------------------------------------------
     var TankID = formData.get('location') ;
     var date = formData.get('date') ;
 
@@ -752,6 +897,7 @@ function add_check (formData) {
     //----------------------------------------------------------
 }
 
+// 取得前一天資料
 function get_before (formData) {
     var ret_data ;
     $.ajax({
@@ -780,8 +926,8 @@ function get_before (formData) {
     return ret_data ;
 }
 
+// 將昨日的值放入 html
 function put_into_form(before_data_array , form_id) {
-    // 將昨日的值放入 html
     document.getElementById(form_id).elements["nh4"].value = before_data_array["NH4_N"] ;
     document.getElementById(form_id).elements["no2"].value = before_data_array['NO2'] ;
     document.getElementById(form_id).elements["no3"].value = before_data_array["NO3"] ;
@@ -808,6 +954,7 @@ function put_into_form(before_data_array , form_id) {
     document.getElementById(form_id).elements["螢光菌Marine"].value = before_data_array["螢光菌Marine"] ;
 }
 
+// 頁面大小轉換之資料傳輸
 function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["location"].value = from_data.get("location") ;
     document.getElementById(form_id).elements["date"].value = from_data.get('date') ;
@@ -838,6 +985,7 @@ function data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["Note"].value = from_data.get("Note") ;
 }
 
+// 上傳
 function modify_post(formData) {
     $.ajax({
         url: 'Update_水質.php',

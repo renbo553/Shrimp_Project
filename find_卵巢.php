@@ -65,8 +65,85 @@ if (!isset($_SESSION)) {
 
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
-            <button type="button" class="btn btn-primary" onclick="continue_eye(this)">繼續填寫查詢項目</button>
+            <div style = "width: 48%">
+                <div> 眼標 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='eyetag_text' id='eyetag_text'>
+                </div>
+            </div>
         </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_2" id="and_or_2">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 卵巢階段 </div>
+                <div class="input-group">
+                    <select id="stage_select" name="stage_select" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value="0">0</option>
+                        <option value="0-Ⅰ">0-Ⅰ</option>
+                        <option value="Ⅰ">Ⅰ</option>
+                        <option value="Ⅰ-Ⅱ">Ⅰ-Ⅱ</option>
+                        <option value="Ⅱ">Ⅱ</option>
+                        <option value="Ⅱ-Ⅲ">Ⅱ-Ⅲ</option>
+                        <option value="Ⅲ">Ⅲ</option>
+                        <option value="脫殼">脫殼</option>
+                        <option value="受精">受精</option>
+                        <option value="生產">生產</option>
+                        <option value="死亡">死亡</option>
+                        <option value="淘汰">淘汰</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_3" id="and_or_3">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 起始日期 </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='start_date' id='start_date'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 結束日期 </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='end_date' id='end_date'>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <button type="button" class="btn btn-primary" onclick="continue_eye(this)">繼續填寫查詢項目</button>
+        </div> -->
 
         <div class="form-inline" style = "width: 100% ; height: 5px">
         </div>

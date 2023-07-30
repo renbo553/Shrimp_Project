@@ -61,12 +61,166 @@ if (!isset($_SESSION)) {
             </div>
         </div>
 
+
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
-            <button type="button" class="btn btn-primary" onclick="continue_eye(this)">繼續填寫查詢項目</button>
+            <div style = "width: 48%">
+                <div> 眼標 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='eyetag_text' id='eyetag_text'>
+                </div>
+            </div>
         </div>
 
-        <div class="form-inline" style = "width: 100% ; height: 5px"> </div>
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_1" id="and_or_1">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 公蝦家族 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='male_family_text' id='male_family_text'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_2" id="and_or_2">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 交配方式 </div>
+                <div class="input-group">
+                    <select id="breed_type_select" name="breed_type_select" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value=""></option>
+                        <option value="自然交配">自然交配</option>
+                        <option value="人工授精">人工授精</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_3" id="and_or_3">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 卵巢進展階段 </div>
+                <div class="input-group">
+                    <select id="stage_select" name="stage_select" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value=""></option>
+                        <option value="0">0</option>
+                        <option value="0-1">0-1</option>
+                        <option value="1">1</option>
+                        <option value="1-2">1-2</option>
+                        <option value="2">2</option>
+                        <option value="2-3">2-3</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_4" id="and_or_4">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 生產體重最小值 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='breed_weight_min' id='breed_weight_min'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 生產體重最大值 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='breed_weight_max' id='breed_weight_max'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_5" id="and_or_5">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 進入產卵室待產日期(起始) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='ablation_date_begin' id='ablation_date_begin'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 進入產卵室待產日期(結束) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='ablation_date_end' id='ablation_date_end'>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <button type="button" class="btn btn-primary" onclick="continue_eye(this)">繼續填寫查詢項目</button>
+        </div> -->
+
+        <div class="form-inline" style = "width: 100% ; height: 25px"> </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">
             <div style = "width: 1%"> </div>
@@ -314,6 +468,11 @@ if (!isset($_SESSION)) {
         echo "<thead>
             <th>Index</th>
             <th>眼標</th>
+            <th>公蝦家族</th>
+            <th>生產體重</th>
+            <th>待產日期</th>
+            <th>卵巢階段</th>
+            <th>交配方式</th>
             <th>紙本資料</th>
             </thead><tbody>";
         // echo "<br>顯示資料（MYSQLI_NUM，欄位數）：<br>";
@@ -322,18 +481,19 @@ if (!isset($_SESSION)) {
         {
             if(strlen($row["image"]) > 0)
             {
-                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>",$row["id"], $row["眼標"], $row["image"]);
-                echo '<td><a href="view_生產?
-                    &id=' . $row['id'] .
-                    '&male_family=' .$row["公蝦家族"] . 
-                    '&eye=' . $row["眼標"] .
-                    '&spawningroomdate=' . $row["進產卵室待產日期"] . 
-                    '&spawningweight=' . $row["生產體重"] . 
-                    '&ovarystate=' . $row["卵巢進展階段"] . 
-                    '&breed_type=' . $row["交配方式"] .
-                    '&image=' . $row["image"]  .
-                    '">詳細</a></td>
-                    <td><a href="modify_生產?
+                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>",$row["id"], $row["眼標"], $row["公蝦家族"] , $row["生產體重"], $row["進產卵室待產日期"] ,$row["卵巢進展階段"] , $row["交配方式"] , $row["image"]);
+                echo 
+                    // '<td><a href="view_生產?
+                    // &id=' . $row['id'] .
+                    // '&male_family=' .$row["公蝦家族"] . 
+                    // '&eye=' . $row["眼標"] .
+                    // '&spawningroomdate=' . $row["進產卵室待產日期"] . 
+                    // '&spawningweight=' . $row["生產體重"] . 
+                    // '&ovarystate=' . $row["卵巢進展階段"] . 
+                    // '&breed_type=' . $row["交配方式"] .
+                    // '&image=' . $row["image"]  .
+                    // '">詳細</a></td>
+                    '<td><a href="modify_生產?
                     &id=' . $row['id'] .  
                     '&male_family=' .$row["公蝦家族"] . 
                     '&eye=' . $row["眼標"] .  
@@ -346,18 +506,19 @@ if (!isset($_SESSION)) {
                   <td><a href="delete?id=' . $row['id'] . '&type=breed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
             }
             else{
-                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> </td>",$row["id"], $row["眼標"], $row["image"]);
-                echo '<td><a href="view_生產?
-                    &id=' . $row['id'] . 
-                    '&male_family=' .$row["公蝦家族"] . 
-                    '&eye=' . $row["眼標"] . 
-                    '&spawningroomdate=' . $row["進產卵室待產日期"] . 
-                    '&spawningweight=' . $row["生產體重"] . 
-                    '&ovarystate=' . $row["卵巢進展階段"] . 
-                    '&breed_type=' . $row["交配方式"] .
-                    '&image=' . $row["image"]  .
-                    '">詳細</a></td>
-                    <td><a href="modify_生產?
+                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> %s </td><td> </td>",$row["id"], $row["眼標"], $row["公蝦家族"] , $row["生產體重"], $row["進產卵室待產日期"] ,$row["卵巢進展階段"] , $row["交配方式"] , $row["image"]);
+                echo 
+                    // '<td><a href="view_生產?
+                    // &id=' . $row['id'] . 
+                    // '&male_family=' .$row["公蝦家族"] . 
+                    // '&eye=' . $row["眼標"] . 
+                    // '&spawningroomdate=' . $row["進產卵室待產日期"] . 
+                    // '&spawningweight=' . $row["生產體重"] . 
+                    // '&ovarystate=' . $row["卵巢進展階段"] . 
+                    // '&breed_type=' . $row["交配方式"] .
+                    // '&image=' . $row["image"]  .
+                    // '">詳細</a></td>
+                    '<td><a href="modify_生產?
                     &id=' . $row['id'] . 
                     '&male_family=' .$row["公蝦家族"] . 
                     '&eye=' . $row["眼標"] . 
