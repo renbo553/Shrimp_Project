@@ -40,7 +40,7 @@ function waterqualit_diagram_process($mysqli) : void{
 function create_waterquality_chart($result, $data_array) : void{    
     // create a graph and setup margin
     $graph = new Graph(CHART_WIDTH, CHART_HEIGHT);
-    $graph->SetMargin(50, 60, 40, 80);
+    $graph->SetMargin(65, 60, 40, 80);
     $graph->SetMarginColor('white');
 
     // graph title
@@ -88,7 +88,7 @@ function create_waterquality_chart($result, $data_array) : void{
     foreach($data_array as $data)
         $y_title .= ' ' . $data . $unit_array[$data];
     $graph->yaxis->title->Set($y_title);
-    $graph->yaxis->title->SetMargin(5);
+    $graph->yaxis->title->SetMargin(20);
     $graph->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL, 11);
 
     // add lines

@@ -32,7 +32,7 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 排序項目 </div>
+                <div> 排序項目1 </div>
                 <div class="input-group">
                     <?php
                         $sort_option_array = array();
@@ -43,19 +43,83 @@ if (!isset($_SESSION)) {
                         $sort_option_array["卵巢進展階段"] = "卵巢進展階段";
                         $sort_option_array["公蝦家族"] = "公蝦家族" ;
                         $sort_option_array["交配方式"] = "交配方式" ;
-                        utility_selectbox("sort_select", "排序項目", $sort_option_array);        
+                        utility_selectbox("sort_select1", "排序項目1", $sort_option_array);        
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
 			<div style = "width: 48%">
-                <div> 排序方式 </div>
+                <div> 排序方式1 </div>
                 <div class="input-group">
                     <?php    
                         $order_option_array = array();
                         $order_option_array["升序"] = "ASC";
                         $order_option_array["降序"] = "DESC";
-                        utility_selectbox("order_select", "排序方式", $order_option_array);        
+                        utility_selectbox("order_select1", "排序方式1", $order_option_array);        
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目2 </div>
+                <div class="input-group">
+                    <?php
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["眼標"] = "眼標";
+                        $sort_option_array["進入產卵室待產日期"] = "進產卵室待產日期";
+                        $sort_option_array["生產體重"] = "生產體重";
+                        $sort_option_array["卵巢進展階段"] = "卵巢進展階段";
+                        $sort_option_array["公蝦家族"] = "公蝦家族" ;
+                        $sort_option_array["交配方式"] = "交配方式" ;
+                        utility_selectbox("sort_select2", "排序項目2", $sort_option_array);        
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式2 </div>
+                <div class="input-group">
+                    <?php    
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select2", "排序方式2", $order_option_array);        
+                    ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目3 </div>
+                <div class="input-group">
+                    <?php
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["眼標"] = "眼標";
+                        $sort_option_array["進入產卵室待產日期"] = "進產卵室待產日期";
+                        $sort_option_array["生產體重"] = "生產體重";
+                        $sort_option_array["卵巢進展階段"] = "卵巢進展階段";
+                        $sort_option_array["公蝦家族"] = "公蝦家族" ;
+                        $sort_option_array["交配方式"] = "交配方式" ;
+                        utility_selectbox("sort_select3", "排序項目3", $sort_option_array);        
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式3 </div>
+                <div class="input-group">
+                    <?php    
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select3", "排序方式3", $order_option_array);        
                     ?>
                 </div>
             </div>
@@ -204,8 +268,12 @@ if (!isset($_SESSION)) {
         $breed_weight_max = isset($_POST["breed_weight_max"]) ? trim($_POST["breed_weight_max"]) : "" ;
         $ablation_date_begin = isset($_POST["ablation_date_begin"]) ? $_POST["ablation_date_begin"] : "" ;
         $ablation_date_end = isset($_POST["ablation_date_end"]) ? $_POST["ablation_date_end"] : "" ;
-        $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
-        $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+        $sort_key1 = isset($_POST["sort_select1"]) ? $_POST["sort_select1"] : null;
+        $sort_order1 = isset($_POST["order_select1"]) ? $_POST["order_select1"] : null;
+        $sort_key2 = isset($_POST["sort_select2"]) ? $_POST["sort_select2"] : null;
+        $sort_order2 = isset($_POST["order_select2"]) ? $_POST["order_select2"] : null;
+        $sort_key3 = isset($_POST["sort_select3"]) ? $_POST["sort_select3"] : null;
+        $sort_order3 = isset($_POST["order_select3"]) ? $_POST["order_select3"] : null;
 
         $and_or_1 = isset($_POST["and_or_1"]) ? $_POST["and_or_1"] : "and" ;
         $and_or_2 = isset($_POST["and_or_2"]) ? $_POST["and_or_2"] : "and" ;
@@ -269,11 +337,23 @@ if (!isset($_SESSION)) {
         }
 
         
-        if(is_null($sort_key)){
-            $sort_key = "id";
+        if(is_null($sort_key1)){
+            $sort_key1 = "id";
         }
-        if(is_null($sort_order)){
-            $sort_order = "DESC";
+        if(is_null($sort_order1)){
+            $sort_order1 = "DESC";
+        }
+        if(is_null($sort_key2)){
+            $sort_key2 = "id";
+        }
+        if(is_null($sort_order2)){
+            $sort_order2 = "DESC";
+        }
+        if(is_null($sort_key3)){
+            $sort_key3 = "id";
+        }
+        if(is_null($sort_order3)){
+            $sort_order3 = "DESC";
         }
 
         /* search data from database */
@@ -284,7 +364,7 @@ if (!isset($_SESSION)) {
             {$stage} {$and_or_4}
             {$breed_weight_min} AND {$breed_weight_max} {$and_or_5}
             {$ablation_date_begin} AND {$ablation_date_end} 
-            ORDER BY {$sort_key} {$sort_order}";
+            ORDER BY {$sort_key1} {$sort_order1}, {$sort_key2} {$sort_order2}, {$sort_key3} {$sort_order3}";
         // echo $sql ;
         $result = $mysqli->query($sql);
 

@@ -30,7 +30,7 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
-                <div> 排序項目 </div>
+                <div> 排序項目1 </div>
                 <div class="input-group">
                     <?php 
                         $sort_option_array = array();
@@ -38,19 +38,79 @@ if (!isset($_SESSION)) {
                         $sort_option_array["日期"] = "Date";
                         $sort_option_array["Tank"] = "Tank";
                         $sort_option_array["蝦缸類別"] = "shrimp";
-                        utility_selectbox("sort_select", "排序項目", $sort_option_array);
+                        utility_selectbox("sort_select1", "排序項目1", $sort_option_array);
                     ?>
                 </div>
             </div>
             <div style = "width: 2%"> </div>
 			<div style = "width: 48%">
-                <div> 排序方式 </div>
+                <div> 排序方式1 </div>
                 <div class="input-group">
                     <?php 
                         $order_option_array = array();
                         $order_option_array["升序"] = "ASC";
                         $order_option_array["降序"] = "DESC";
-                        utility_selectbox("order_select", "排序方式", $order_option_array);
+                        utility_selectbox("order_select1", "排序方式1", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目2 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select2", "排序項目2", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式2 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select2", "排序方式2", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目3 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select3", "排序項目3", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式3 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select3", "排序方式3", $order_option_array);
                     ?>
                 </div>
             </div>
@@ -167,8 +227,12 @@ if (!isset($_SESSION)) {
             $end_date = isset($_POST["end_date"]) ? $_POST["end_date"] : "" ;
             $tank = isset($_POST["tank_select"]) ? $_POST["tank_select"] : null;
             $shrimp = isset($_POST["shrimp_select"]) ? $_POST["shrimp_select"] : null;
-            $sort_key = isset($_POST["sort_select"]) ? $_POST["sort_select"] : null;
-            $sort_order = isset($_POST["order_select"]) ? $_POST["order_select"] : null;
+            $sort_key1 = isset($_POST["sort_select1"]) ? $_POST["sort_select1"] : null;
+            $sort_order1 = isset($_POST["order_select1"]) ? $_POST["order_select1"] : null;
+            $sort_key2 = isset($_POST["sort_select2"]) ? $_POST["sort_select2"] : null;
+            $sort_order2 = isset($_POST["order_select2"]) ? $_POST["order_select2"] : null;
+            $sort_key3 = isset($_POST["sort_select3"]) ? $_POST["sort_select3"] : null;
+            $sort_order3 = isset($_POST["order_select3"]) ? $_POST["order_select3"] : null;
 
             $and_or_1 = isset($_POST["and_or_1"]) ? $_POST["and_or_1"] : "and" ;
             $and_or_2 = isset($_POST["and_or_2"]) ? $_POST["and_or_2"] : "and" ;
@@ -200,11 +264,23 @@ if (!isset($_SESSION)) {
                 $end_date = str_replace('-', '', $end_date);
                 $end_date = "CAST(REPLACE(Date, '-', '') AS UNSIGNED) <= {$end_date}";
             }
-            if(is_null($sort_key)){
-                $sort_key = "id";
+            if(is_null($sort_key1)){
+                $sort_key1 = "id";
             }
-            if(is_null($sort_order)){
-                $sort_order = "DESC";
+            if(is_null($sort_order1)){
+                $sort_order1 = "DESC";
+            }
+            if(is_null($sort_key2)){
+                $sort_key2 = "id";
+            }
+            if(is_null($sort_order2)){
+                $sort_order2 = "DESC";
+            }
+            if(is_null($sort_key3)){
+                $sort_key3 = "id";
+            }
+            if(is_null($sort_order3)){
+                $sort_order3 = "DESC";
             }
 
             $and_or_1 = strtoupper($and_or_1) ;
@@ -212,7 +288,7 @@ if (!isset($_SESSION)) {
 
             /* search data from database */
             //$sql = "SELECT * FROM feed WHERE {$date} AND {$tank} AND {$shrimp} ORDER BY {$sort_key} {$sort_order}";
-            $sql = "SELECT * FROM feed WHERE {$tank} {$and_or_1} {$shrimp} {$and_or_2} {$start_date} AND {$end_date} ORDER BY {$sort_key} {$sort_order}";
+            $sql = "SELECT * FROM feed WHERE {$tank} {$and_or_1} {$shrimp} {$and_or_2} {$start_date} AND {$end_date} ORDER BY {$sort_key1} {$sort_order1}, {$sort_key2} {$sort_order2}, {$sort_key3} {$sort_order3}";
             // echo $sql ;
             $result = $mysqli->query($sql);
 
