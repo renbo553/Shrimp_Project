@@ -62,11 +62,250 @@ if (!isset($_SESSION)) {
             </div>
         </div>
 
-        <div class="form-inline" style = "width: 100% ; height: 65px">
+        <!-- <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <button type="button" class="btn btn-primary" onclick="continue_eye(this)">繼續填寫查詢項目</button>
+        </div> -->
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 眼標 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='eye' id='eye'>
+                </div>
+            </div>
         </div>
 
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_1" id="and_or_1">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 家族 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='family' id='family'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_2" id="and_or_2">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> TankID </div>
+                <div class="input-group">
+                    <select id="tankid" name="tankid" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                        <option value="M3">M3</option>
+                        <option value="M4">M4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_3" id="and_or_3">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 生存狀態 </div>
+                <div class="input-group">
+                    <select id="live_or_die" name="live_or_die" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value="存活">存活</option>
+                        <option value="死亡">死亡</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_4" id="and_or_4">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 體重最小值 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='weight_min' id='weight_min'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 體重最大值 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='weight_max' id='weight_max'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_5" id="and_or_5">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 剪眼日期(起始) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='cutday_begin' id='cutday_begin'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 剪眼日期(結束) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='cutday_end' id='cutday_end'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_6" id="and_or_6">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 出生日期(起始) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='birthday_begin' id='birthday_begin'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 出生日期(結束) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='birthday_end' id='birthday_end'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_7" id="and_or_7">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 進蝦日期(起始) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='enterday_begin' id='enterday_begin'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 進蝦日期(結束) </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='enterday_end' id='enterday_begin'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_8" id="and_or_8">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 剪眼體重最小值 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='cut_weight_min' id='cut_weight_min'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 剪眼體重最大值 </div>
+                <div class="input-group">
+                    <input type='text' class='form-control' name='cut_weight_max' id='cut_weight_max'>
+                </div>
+            </div>
+        </div>
+        
         <div class="form-inline" style = "width: 100% ; height: 5px"> </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">
@@ -76,15 +315,6 @@ if (!isset($_SESSION)) {
                     utility_button("submit", "查詢");
                 ?>
             </div>
-            <!--
-            <div style = "width: 1%"> </div>
-            <div style = "width: auto">
-                <?php
-                    // 未作
-                    //utility_button_onclick("export_shrimp_info.php", "匯出");
-                ?>
-            </div>
-          -->
         </div>
         <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
     </form>

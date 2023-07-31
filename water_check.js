@@ -668,126 +668,270 @@ function html_show_all_data (formData) {
         all_data_num.push(Note) ;
     }
 
+    //用 array 先把超過範圍的資料存起來
     var data_name = [] ;
     var data_num = [] ;
     var count = 0 ;
 
-    if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
-        data_name.push(map.get("nh4")) ;
-        data_num.push(nh4) ;
+    if(no2 == "") {
+        data_name.push(map.get("no2")) ;
+        data_num.push("空") ;
         count ++ ;
     }
-    if(parseInt(no2) < 0 || parseInt(no2) > 0.5) {
+    else if(parseInt(no2) < 0 || parseInt(no2) > 0.5) {
         data_name.push(map.get("no2")) ;
         data_num.push(no2) ;
         count ++ ;
     }
-    if(parseInt(no3) < 0 || parseInt(no3) > 500) {
+
+    if(no3 == "") {
+        data_name.push(map.get("no3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(no3) < 0 || parseInt(no3) > 500) {
         data_name.push(map.get("no3")) ;
         data_num.push(no3) ;
         count ++ ;
     }
-    if(parseInt(Salinity_1) < 20 || parseInt(Salinity_1) > 40) {
-        data_name.push(map.get("Salinity_1")) ;
-        data_num.push(Salinity_1) ;
+
+    if(pH_1 == "") {
+        data_name.push(map.get("pH_1")) ;
+        data_num.push("空") ;
         count ++ ;
     }
-    if(parseInt(Salinity_2) < 20 || parseInt(Salinity_2) > 40) {
-        data_name.push(map.get("Salinity_2")) ;
-        data_num.push(Salinity_2) ;
-        count ++ ;
-    }
-    if(parseInt(Salinity_3) < 20 || parseInt(Salinity_3) > 40) {
-        data_name.push(map.get("Salinity_3")) ;
-        data_num.push(Salinity_3) ;
-        count ++ ;
-    }
-    if(parseInt(pH_1) < 6 || parseInt(pH_1) > 8) {
+    else if(parseInt(pH_1) < 6 || parseInt(pH_1) > 8) {
         data_name.push(map.get("pH_1")) ;
         data_num.push(pH_1) ;
         count ++ ;
     }
-    if(parseInt(pH_2) < 6 || parseInt(pH_2) > 8) {
+
+    if(pH_2 == "") {
+        data_name.push(map.get("pH_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(pH_2) < 6 || parseInt(pH_2) > 8) {
         data_name.push(map.get("pH_2")) ;
         data_num.push(pH_2) ;
         count ++ ;
     }
-    if(parseInt(pH_3) < 6 || parseInt(pH_3) > 8) {
+
+    if(pH_3 == "") {
+        data_name.push(map.get("pH_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(pH_3) < 6 || parseInt(pH_3) > 8) {
         data_name.push(map.get("pH_3")) ;
         data_num.push(pH_3) ;
         count ++ ;
     }
-    if(parseInt(O2_1) < 2 || parseInt(O2_1) > 6) {
+
+    if(O2_1 == "") {
+        data_name.push(map.get("O2_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(O2_1) < 2 || parseInt(O2_1) > 6) {
         data_name.push(map.get("O2_1")) ;
         data_num.push(O2_1) ;
         count ++ ;
     }
-    if(parseInt(O2_2) < 2 || parseInt(O2_2) > 6) {
+
+    if(O2_2 == "") {
+        data_name.push(map.get("O2_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(O2_2) < 2 || parseInt(O2_2) > 6) {
         data_name.push(map.get("O2_2")) ;
         data_num.push(O2_2) ;
         count ++ ;
     }
-    if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
+
+    if(O2_3 == "") {
+        data_name.push(map.get("O2_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
         data_name.push(map.get("O2_3")) ;
         data_num.push(O2_3) ;
         count ++ ;
     }
-    if(parseInt(ORP_1) < 0 || parseInt(ORP_1) > 500) {
-        data_name.push(map.get("ORP_1")) ;
-        data_num.push(ORP_1) ;
+
+    if(nh4 == "") {
+        data_name.push(map.get("nh4")) ;
+        data_num.push("空") ;
         count ++ ;
     }
-    if(parseInt(ORP_2) < 0 || parseInt(ORP_2) > 500) {
-        data_name.push(map.get("ORP_2")) ;
-        data_num.push(ORP_2) ;
+    else if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
+        data_name.push(map.get("nh4")) ;
+        data_num.push(nh4) ;
         count ++ ;
     }
-    if(parseInt(ORP_3) < 0 || parseInt(ORP_3) > 500) {
-        data_name.push(map.get("ORP_3")) ;
-        data_num.push(ORP_3) ;
+    
+    if(TCBS == "") {
+        data_name.push(map.get("TCBS")) ;
+        data_num.push("空") ;
         count ++ ;
     }
-    if(parseInt(Temp_1) < 25 || parseInt(Temp_1) > 33) {
-        data_name.push(map.get("Temp_1")) ;
-        data_num.push(Temp_1) ;
-        count ++ ;
-    }
-    if(parseInt(Temp_2) < 25 || parseInt(Temp_2) > 33) {
-        data_name.push(map.get("Temp_2")) ;
-        data_num.push(Temp_2) ;
-        count ++ ;
-    }
-    if(parseInt(Temp_3) < 25 || parseInt(Temp_3) > 33) {
-        data_name.push(map.get("Temp_3")) ;
-        data_num.push(Temp_3) ;
-        count ++ ;
-    }
-    if(parseInt(Alkalinity) < 0 || parseInt(Alkalinity) > 200) {
-        data_name.push(map.get("Alkalinity")) ;
-        data_num.push(Alkalinity) ;
-        count ++ ;
-    }
-    if(parseInt(TCBS) < 0 || parseInt(TCBS) > 5000) {
+    else if(parseInt(TCBS) < 0 || parseInt(TCBS) > 5000) {
         data_name.push(map.get("TCBS")) ;
         data_num.push(TCBS) ;
         count ++ ;
     }
-    if(parseInt(TCBS綠菌) < 0 || parseInt(TCBS綠菌) > 5000) {
-        data_name.push(map.get("TCBS綠菌")) ;
-        data_num.push(TCBS綠菌) ;
+    
+    if(ORP_1 == "") {
+        data_name.push(map.get("ORP_1")) ;
+        data_num.push("空") ;
         count ++ ;
     }
-    if(parseInt(Marine) < 0 || parseInt(Marine) > 10000) {
+    else if(parseInt(ORP_1) < 0 || parseInt(ORP_1) > 500) {
+        data_name.push(map.get("ORP_1")) ;
+        data_num.push(ORP_1) ;
+        count ++ ;
+    }
+    
+    if(ORP_2 == "") {
+        data_name.push(map.get("ORP_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(ORP_2) < 0 || parseInt(ORP_2) > 500) {
+        data_name.push(map.get("ORP_2")) ;
+        data_num.push(ORP_2) ;
+        count ++ ;
+    }
+
+    if(ORP_3 == "") {
+        data_name.push(map.get("ORP_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(ORP_3) < 0 || parseInt(ORP_3) > 500) {
+        data_name.push(map.get("ORP_3")) ;
+        data_num.push(ORP_3) ;
+        count ++ ;
+    }
+    
+    if(Marine == "") {
+        data_name.push(map.get("Marine")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Marine) < 0 || parseInt(Marine) > 10000) {
         data_name.push(map.get("Marine")) ;
         data_num.push(Marine) ;
         count ++ ;
     }
-    if(parseInt(螢光菌TCBS) < 0 || parseInt(螢光菌TCBS) > 5000) {
+
+    if(Temp_1 == "") {
+        data_name.push(map.get("Temp_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Temp_1) < 25 || parseInt(Temp_1) > 33) {
+        data_name.push(map.get("Temp_1")) ;
+        data_num.push(Temp_1) ;
+        count ++ ;
+    }
+    
+    if(Temp_2 == "") {
+        data_name.push(map.get("Temp_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Temp_2) < 25 || parseInt(Temp_2) > 33) {
+        data_name.push(map.get("Temp_2")) ;
+        data_num.push(Temp_2) ;
+        count ++ ;
+    }
+    
+    if(Temp_3 == "") {
+        data_name.push(map.get("Temp_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Temp_3) < 25 || parseInt(Temp_3) > 33) {
+        data_name.push(map.get("Temp_3")) ;
+        data_num.push(Temp_3) ;
+        count ++ ;
+    }
+    
+    if(TCBS綠菌 == "") {
+        data_name.push(map.get("TCBS綠菌")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(TCBS綠菌) < 0 || parseInt(TCBS綠菌) > 5000) {
+        data_name.push(map.get("TCBS綠菌")) ;
+        data_num.push(TCBS綠菌) ;
+        count ++ ;
+    }
+    
+    if(螢光菌TCBS == "") {
+        data_name.push(map.get("螢光菌TCBS")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(螢光菌TCBS) < 0 || parseInt(螢光菌TCBS) > 5000) {
         data_name.push(map.get("螢光菌TCBS")) ;
         data_num.push(螢光菌TCBS) ;
         count ++ ;
     }
-    if(parseInt(螢光菌Marine) < 0 || parseInt(螢光菌Marine) > 10000) {
+
+    if(Salinity_1 == "") {
+        data_name.push(map.get("Salinity_1")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Salinity_1) < 20 || parseInt(Salinity_1) > 40) {
+        data_name.push(map.get("Salinity_1")) ;
+        data_num.push(Salinity_1) ;
+        count ++ ;
+    }
+
+    if(Salinity_2 == "") {
+        data_name.push(map.get("Salinity_2")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Salinity_2) < 20 || parseInt(Salinity_2) > 40) {
+        data_name.push(map.get("Salinity_2")) ;
+        data_num.push(Salinity_2) ;
+        count ++ ;
+    }
+
+    if(Salinity_3 == "") {
+        data_name.push(map.get("Salinity_3")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Salinity_3) < 20 || parseInt(Salinity_3) > 40) {
+        data_name.push(map.get("Salinity_3")) ;
+        data_num.push(Salinity_3) ;
+        count ++ ;
+    }
+
+    if(Alkalinity == "") {
+        data_name.push(map.get("Alkalinity")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(Alkalinity) < 0 || parseInt(Alkalinity) > 200) {
+        data_name.push(map.get("Alkalinity")) ;
+        data_num.push(Alkalinity) ;
+        count ++ ;
+    }
+
+    if(螢光菌Marine == "") {
+        data_name.push(map.get("螢光菌Marine")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(螢光菌Marine) < 0 || parseInt(螢光菌Marine) > 10000) {
         data_name.push(map.get("螢光菌Marine")) ;
         data_num.push(螢光菌Marine) ;
         count ++ ;
@@ -815,7 +959,8 @@ function html_show_all_data (formData) {
         append_div.append(third_span) ;
 
         var second_span = document.createElement('span');
-        second_span.textContent = all_data_num[i] ;
+        if(data_name.indexOf(all_data_name[i]) != -1) second_span.textContent = "空" ;
+        else second_span.textContent = all_data_num[i] ;
         if(data_name.indexOf(all_data_name[i]) != -1) second_span.style.color = 'red' ;
         else second_span.style.color = 'black' ;
         append_div.append(second_span) ;
