@@ -265,12 +265,12 @@ function append_ovary() {
                 <select id="stage_select" name="stage_select" class="custom-select">
                     <option value="none" selected disabled hidden></option>
                     <option value="0">0</option>
-                    <option value="0-Ⅰ">0-Ⅰ</option>
-                    <option value="Ⅰ">Ⅰ</option>
-                    <option value="Ⅰ-Ⅱ">Ⅰ-Ⅱ</option>
-                    <option value="Ⅱ">Ⅱ</option>
-                    <option value="Ⅱ-Ⅲ">Ⅱ-Ⅲ</option>
-                    <option value="Ⅲ">Ⅲ</option>
+                    <option value="0-1">0-1</option>
+                    <option value="1">1</option>
+                    <option value="1-2">1-2</option>
+                    <option value="2">2</option>
+                    <option value="2-3">2-3</option>
+                    <option value="3">3</option>
                     <option value="脫殼">脫殼</option>
                     <option value="受精">受精</option>
                     <option value="生產">生產</option>

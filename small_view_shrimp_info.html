@@ -97,7 +97,7 @@
     <div style = "width: 30%"> tankid </div>
     <div style = "width: 40%">
         <select id="location" name="location" class="custom-select" disabled="disabled">
-            <option value=""></option>
+            <option value="none" selected disabled hidden></option>
             <option value="M1">M1</option>
             <option value="M2">M2</option>
             <option value="M3">M3</option>
@@ -111,7 +111,7 @@
     <div style = "width: 30%"> 生存狀態 </div>
     <div style = "width: 40%">
         <select id="live_or_die" name="live_or_die" class="custom-select" disabled="disabled">
-            <option value=""></option>
+            <option value="none" selected disabled hidden></option>
             <option value="存活">存活</option>
             <option value="死亡">死亡</option>
         </select>
@@ -139,8 +139,7 @@
     <div style = "width: 47%"> 
         <div> 欲查詢的頁面 </div>
         <select id="UI_type" name="UI_type" class="custom-select">
-            <option value="none" selected disabled hidden></option>
-            <option value=""></option>
+            
             <option value="卵巢成熟">卵巢成熟</option>
             <option value="生產">生產</option>
             <option value="餵食">餵食</option>

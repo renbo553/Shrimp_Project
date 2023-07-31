@@ -65,17 +65,23 @@ if (!isset($_SESSION)) {
     </style>
 
 	<div>
-        <div class="big_form">
-        <section>
-			<?php require_once "big_view_feed.html" ?>
-        </section>
-        </div>
-
-        <div class="small_form">
-            <section>
-				<?php require_once "small_view_feed.html" ?>
+        <!– 頁籤的內容區塊 –>
+        <!-- 大螢幕 -->
+        <div class="big_form"><p>
+			<section>
+                <form id="big_form" method="post" enctype="multipart/form-data">
+                    <?php require_once "small_view_feed.html"?>
+				</form>
             </section>
-        </div>
+        </p></div>
+        <!-- 小螢幕 -->
+        <div class="small_form"><p>
+			<section>
+                <form id="small_form" method="post" enctype="multipart/form-data">
+                    <?php require_once "small_view_feed.html"?>
+				</form>
+			</section>
+        </p></div>
     </div>
 
 	<script>

@@ -83,7 +83,6 @@ if (!isset($_SESSION)) {
 
     <script>
         document.write('<script type="text/javascript" src="feed_check.js"></'+'script>');
-        
         // 在頁面加載完成後執行初始化操作
         window.onload = function() {
             // 獲取要應用動畫的div元素

@@ -351,7 +351,6 @@ function append_tankid() {
             <div class="input-group">
                 <select id="tankid" name="tankid" class="custom-select">
                     <option value="none" selected disabled hidden></option>
-                    <option value=""></option>
                     <option value="M1">M1</option>
                     <option value="M2">M2</option>
                     <option value="M3">M3</option>

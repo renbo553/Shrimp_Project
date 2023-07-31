@@ -321,6 +321,7 @@ if (!isset($_SESSION)) {
                 <th>Index</th>
                 <th>日期</th>
                 <th>Tank</th>
+                <th>Feeding Ratio</th>
                 <th>紙本資料</th>
                 </thead><tbody>";
             // echo "<br>顯示資料（MYSQLI_NUM，欄位數）：<br>";
@@ -330,7 +331,7 @@ if (!isset($_SESSION)) {
             {
                 if(strlen($row["image"]) > 0)
                 {
-                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["Tank"], $row["image"]);
+                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["Tank"], $row["Feeding_Ratio"], $row["image"]);
                     echo '<td><a href="view_餵食?id=' . $row['id'] .
                     '&Date='.$row["Date"].
                     '&Tank='. $row["Tank"].
@@ -425,7 +426,7 @@ if (!isset($_SESSION)) {
                 }
                 else
                 {
-                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> </td>", $row["id"], $row["Date"], $row["Tank"], $row["image"]);
+                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> </td>", $row["id"], $row["Date"], $row["Tank"], $row["Feeding_Ratio"], $row["image"]);
                     echo '<td><a href="view_餵食?id=' . $row['id'] .
                     '&Date='.$row["Date"].
                     '&Tank='. $row["Tank"].
