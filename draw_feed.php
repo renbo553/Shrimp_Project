@@ -133,26 +133,19 @@ if (!isset($_SESSION)) {
     <div class="feeding_ratio"><p>
         <section>
             <form id = "feeding_ratio" method="post" enctype="multipart/form-data">
-                <?php require_once "utility.php"; ?>
-
-                <!-- 2/18 修改之UI -->
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>
                     <div style = "width: 48%">
                         <div> 起始日期 </div>
                         <div class="input-group">
-                            <?php 
-                                utility_date("start_date", "起始日期");
-                            ?>
+                            <input type='date' class='form-control' name='start_date' id='start_date'>
                         </div>
                     </div>
                     <div style = "width: 2%"> </div>
                     <div style = "width: 48%">
                         <div> 結束日期 </div>
                         <div class="input-group">
-                            <?php 
-                                utility_date("end_date", "結束日期");
-                            ?>
+                            <input type='date' class='form-control' name='end_date' id='end_date'>
                         </div>
                     </div>
                 </div>
@@ -160,46 +153,37 @@ if (!isset($_SESSION)) {
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>
                     <div style = "width: 48%">
-                        <div> TankID </div>
-                        <div class="input-group">
-                            <?php
-                                $tank_option_array = array();
-                                $tank_option_array["M1"] = "M1";
-                                $tank_option_array["M2"] = "M2";
-                                $tank_option_array["M3"] = "M3";
-                                $tank_option_array["M4"] = "M4";
-                                utility_selectbox("tank_select", "TankID", $tank_option_array);
-                            ?>
-                        </div>
+                        <div> tankid </div>
+                        <select id="tankid" name="tankid" class="custom-select">
+                            <option value="none" selected disabled hidden></option>
+                            <option value="M1">M1</option>
+                            <option value="M2">M2</option>
+                            <option value="M3">M3</option>
+                            <option value="M4">M4</option>
+                        </select>
                     </div>
                 </div>
 
                 <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+
+                <div class="form-inline" style = "width: 100% ; height: 40px"> (註:手機查看時請拿橫的比較好查看) </div>
 
                 <div class="form-inline" style = "width: 100% ; height: 40px">
                     <div style = "width: 1%"> </div>
                     <div style = "width: auto"> 
-                        <?php
-                            utility_button("submit", "查詢");
-                        ?>
-                    </div>
-                    <div style = "width: 1%"> </div>
-                    <div style = "width: auto">
-                        <?php
-                            // feeding ratio 繪製
-                            // utility_button_onclick("???.php", "匯出");
-                        ?>
+                        <button type="button" class="btn btn-primary" onclick="draw_feeding_ratio()">繪製</button>
                     </div>
                 </div>
 
                 <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+
+                <div id = "canvasContainer1"> </div>
             </form>
         </section>
     </p></div>
     <div class="tank_analysis"><p>
         <section>
             <form id = "tank_analysis" method="post" enctype="multipart/form-data">
-                <?php require_once "utility.php"; ?>
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>
                     <div style = "width: 48%">
@@ -238,37 +222,132 @@ if (!isset($_SESSION)) {
 
                 <div class="form-inline" style = "width: 100% ; height: 10px"> </div>
 
-                <div id = "canvasContainer"> </div>
+                <div id = "canvasContainer2"> </div>
             </form>
         </section>
     </p></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script>
-        function draw_barchart() {
-            const canvas_item = document.getElementById('chart') ;
-            const canvasContainer = document.getElementById("canvasContainer") ;
+        function draw_feeding_ratio() {
+            var start_date = document.getElementById("start_date").value ;
+            var end_date = document.getElementById("end_date").value ;
+            var tankid = document.getElementById("tankid").value ;
+            var formData = new FormData(document.getElementById("feeding_ratio"));
+
+            // if(start_date == "") { Alert("請選擇起始日期") ; return ; }
+            // if(end_date == "") { Alert("請輸入結束日期") ; return ; }
+            // if(tankid == "" || tankid == "none") { Alert("請選擇tankid") ; return ; }
+
+            const canvas_item = document.getElementById('chart1') ;
+            const canvasContainer = document.getElementById("canvasContainer1") ;
             if(canvas_item) {
                 canvasContainer.removeChild(canvas_item);
             }
-
             const canvas = document.createElement('canvas');
-            canvas.setAttribute("id", "chart");
-            canvas.width = 350;
-            canvas.height = 400;
+            canvas.setAttribute("id", "chart1");
+            // canvas.width = 350;
+            // canvas.height = 400;
             canvasContainer.appendChild(canvas);
 
-            var ctx = document.getElementById('chart').getContext('2d');
+            var ctx = document.getElementById('chart1').getContext('2d');
+            var chart_title = "feeding ratio分析折線圖" ;
+            // ctx.clearRect(0, 0, 350 , 400);
+
+            var ret_data ;
+            $.ajax({
+                url: 'linechart.php',
+                type: 'POST',
+                data: formData,
+                cache: false,
+                dataType: 'json',
+                async: false,
+                //下面兩者一定要false
+                processData: false,
+                contentType: false,
+
+                success: function(backData) {
+                    ret_data = backData ;
+                },
+                error: function() {
+                    Swal.fire({
+                        title: backData,
+                        confirmButtonText: "確認",
+                    }).then((result) => {
+                        $('#backmsg').html("取得資料失敗...");
+                    });
+                },
+            });
+
+            var day_array = [] ;
+            var feeding_ratio_array = [] ;
+            for(var i = 0 ; i < ret_data.length ; i ++ ) {
+                day_array.push(ret_data[i]["Date"]) ;
+                feeding_ratio_array.push(ret_data[i]["Feeding_Ratio"]) ;
+            }
+
+            var ctx = document.getElementById('chart1').getContext('2d');
+            
+            var chart1 = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: day_array ,
+                    datasets: [{
+                        label:"feeding_ratio" ,
+                        data: feeding_ratio_array,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        lineTension: 0,
+                    }]
+                },
+                options: {
+                    // 在這裡設置圖表的大小
+                    // responsive: false, // 禁止響應式，使得指定的寬度和高度生效
+                    // maintainAspectRatio: false, // 不保持長寬比，這樣可以更精確地控制大小
+                    // // 設置寬度和高度
+                    // width: 400,
+                    // height: 300,
+                    title: {
+                        display: true,
+                        text: chart_title
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true // 將y軸最小值強制設置為0
+                            }
+                        }]
+                    },
+                }
+            });
+        }
+
+        function draw_barchart() {
             var year = document.getElementById("year").value ;
             var month = document.getElementById("month").value ;
             var type = document.getElementById("type").value ;
-            var chart_title = year + "年" + month + "月各缸" + type + "總數" ;
-
-            ctx.clearRect(0, 0, 350 , 400);
-
-            // var myForm = $("#tank_analysis")[0];
             var formData = new FormData(document.getElementById("tank_analysis"));
 
+            if(year == "") { Alert("請輸入年份") ; return ; }
+            if(month == "") { Alert("請輸入月份") ; return ; }
+            if(type == "" || type == "none") { Alert("請選擇分析項目") ; return ; }
+
+            
+            const canvas_item = document.getElementById('chart2') ;
+            const canvasContainer = document.getElementById("canvasContainer2") ;
+            if(canvas_item) {
+                canvasContainer.removeChild(canvas_item);
+            }
+            const canvas = document.createElement('canvas');
+            canvas.setAttribute("id", "chart2");
+            canvas.width = 350;
+            canvas.height = 400;
+            canvasContainer.appendChild(canvas);
+            
+            
+            var ctx = document.getElementById('chart2').getContext('2d');
+            var chart_title = year + "年" + month + "月各缸" + type + "總數" ;
+            ctx.clearRect(0, 0, 350 , 400);
             let num = [] ;
             let tank_array = ["M1" , "M2" , "M3" , "M4"] ;
 
@@ -345,6 +424,13 @@ if (!isset($_SESSION)) {
                     title: {
                         display: true,
                         text: chart_title
+                    },
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true // 將y軸最小值強制設置為0
+                            }
+                        }]
                     },
                     // plugins: {
                     //     datalabels: {

@@ -144,7 +144,15 @@ if (!isset($_SESSION)) {
             if(ret_message == "") {
                 all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
             }
-            else Alert(ret_message) ;
+            else {
+                Swal.fire({
+                    title: ret_message,
+                    confirmButtonText: "確認",
+                    didClose: (e) => {
+                        focus(ret_message) ;
+                    }
+                    });
+            }
         }
 
         //取得昨天資料
@@ -215,7 +223,15 @@ if (!isset($_SESSION)) {
             if(ret_message == "") {
                 all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
             }
-            else Alert(ret_message) ;
+            else {
+                Swal.fire({
+                    title: ret_message,
+                    confirmButtonText: "確認",
+                    didClose: (e) => {
+                        focus(ret_message) ;
+                    }
+                    });
+            }
         }
 
         //取得昨天資料

@@ -97,5 +97,18 @@
 			</div>
 		</div>
 	</div>
-	<div id = "google_translate_element"></div>
+
+	<!-- <select id="language-selector">
+		<option value="zh-TW">中文（繁體）</option>
+		<option value="en">English</option>
+		<option value="ja">日本語</option>
+		<option value="fr">Français</option>
+		<option value="th">ไทย</option>
+		<option value="ko">한국어</option>
+		<option value="de">Deutsch</option>
+		<option value="vi">Tiếng Việt</option>
+		<option value="all">其他</option>
+	</select> -->
+	<!-- <div class="form-inline" style = "width: 100% ; height: 30px"> 選擇語言 </div> -->
+	<div class="form-inline" style = "width: 100% ; height: 40px" id = "google_translate_element"></div>
 </header>
