@@ -172,7 +172,15 @@ if (!isset($_SESSION)) {
 
 				var ret_message = check(formData) ;
 				if(ret_message == "") all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
-				else Alert(ret_message) ;
+				else {
+					Swal.fire({
+						title: ret_message,
+						confirmButtonText: "確認",
+						didClose: (e) => {
+							focus(ret_message) ;
+						}
+						});
+				}
 			}
 
 			var imageProc_big = function(input) {
@@ -244,7 +252,15 @@ if (!isset($_SESSION)) {
 
 				var ret_message = check(formData) ;
 				if(ret_message == "") all_data_msg("請確認好所有想輸入的資料哦!" , formData) ;
-				else Alert(ret_message) ;
+				else {
+					Swal.fire({
+						title: ret_message,
+						confirmButtonText: "確認",
+						didClose: (e) => {
+							focus(ret_message) ;
+						}
+						});
+				}
 			}
 
 			var imageProc_small = function(input) {

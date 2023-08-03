@@ -41,7 +41,6 @@ function check (formData) {
     var weight0300 = formData.get('weight0300') ;
     var remain0300 = formData.get('remain0300') ;
     var else_work_0300 = formData.get('else_work_0300') ;
-
     var FeedingRatio = formData.get('FeedingRatio') ;
 
     const map = new Map()
@@ -846,7 +845,64 @@ function modify_data_transfer(from_data , form_id) {
     document.getElementById(form_id).elements["Observation"].value = from_data.get("Observation") ;
 }
 
+// focus在沒填的位置
+function focus(ret_message) {
+    var width = document.documentElement.clientWidth ;
+    var form_id ;
+    if(width < 1024) form_id = "small_form" ;
+    else form_id = "big_form" ;
 
+    var temp = ret_message.split('\n') ;
+    var ret_split = temp[1].split('、') ;
+    const first = ret_split[0] ;
+
+    const map = new Map() ;
+
+    map.set("TankID" , "location") ;
+    map.set("日期" , "date") ;
+    map.set("蝦缸資訊" , "tank_type") ;
+    map.set("公蝦數量" , "male_shrimp") ;
+    map.set("母蝦數量" , "female_shrimp") ;
+    map.set("死亡公蝦數量" , "dead_male_shrimp") ;
+    map.set("死亡母蝦數量" , "dead_female_shrimp") ;
+    map.set("蛻皮公蝦數量" , "peeling_male_shrimp") ;
+    map.set("蛻皮母蝦數量" , "peeling_female_shrimp") ;
+    map.set("公蝦均重" , "avg_male_shrimp") ;
+    map.set("母蝦均重" , "avg_female_shrimp") ;
+    map.set("09:00工作/餵食項目" , "food0900") ;
+    map.set("09:00其他工作/餵食項目" , "else_work_0900") ;
+    map.set("11:00工作/餵食項目" , "food1100") ;
+    map.set("11:00其他工作/餵食項目" , "else_work_1100") ;
+    map.set("14:00工作/餵食項目" , "food1400") ;
+    map.set("14:00其他工作/餵食項目" , "else_work_1400") ;
+    map.set("16:00工作/餵食項目" , "food1600") ;
+    map.set("16:00其他工作/餵食項目" , "else_work_1600") ;
+    map.set("19:00工作/餵食項目" , "food1900") ;
+    map.set("19:00其他工作/餵食項目" , "else_work_1900") ;
+    map.set("23:00工作/餵食項目" , "food2300") ;
+    map.set("23:00其他工作/餵食項目" , "else_work_2300") ;
+    map.set("03:00工作/餵食項目" , "food0300") ;
+    map.set("03:00其他工作/餵食項目" , "else_work_0300") ;
+
+    map.set("09:00餵食量" , "weight0900") ;
+    map.set("09:00殘餌量" , "remain0900") ;
+    map.set("11:00餵食量" , "weight1100") ;
+    map.set("11:00殘餌量" , "remain1100") ;
+    map.set("14:00餵食量" , "weight1400") ;
+    map.set("14:00殘餌量" , "remain1400") ;
+    map.set("16:00餵食量" , "weight1600") ;
+    map.set("16:00殘餌量" , "remain1600") ;
+    map.set("19:00餵食量" , "weight1900") ;
+    map.set("19:00殘餌量" , "remain1900") ;
+    map.set("23:00餵食量" , "weight2300") ;
+    map.set("23:00殘餌量" , "remain2300") ;
+    map.set("03:00餵食量" , "weight0300") ;
+    map.set("03:00殘餌量" , "remain0300") ;
+    
+    //console.log(document.getElementById(form_id).elements[map.get(first)]) ;
+    document.getElementById(form_id).elements[map.get(first)].focus() ;
+    //.select() ;
+}
 
 // 計算總重之function
 function total_weight_calculate() {
