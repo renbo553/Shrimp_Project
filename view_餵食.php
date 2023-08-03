@@ -70,7 +70,7 @@ if (!isset($_SESSION)) {
         <div class="big_form"><p>
 			<section>
                 <form id="big_form" method="post" enctype="multipart/form-data">
-                    <?php require_once "small_view_feed.html"?>
+                    <?php require_once "big_view_feed.html"?>
 				</form>
             </section>
         </p></div>

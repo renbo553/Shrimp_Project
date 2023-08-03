@@ -253,10 +253,10 @@ if (!isset($_SESSION)) {
 
             while ($row = $result->fetch_assoc())
             {
-                if(strlen($row["image"]) > 0)
-                {
-                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["Tank"], $row["Feeding_Ratio"], $row["image"]);
-                    echo '<td><a href="view_餵食?id=' . $row['id'] .
+                if(strlen($row["image"]) > 0) printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>", $row["id"], $row["Date"], $row["Tank"], $row["Feeding_Ratio"], $row["image"]);
+                else printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> </td>", $row["id"], $row["Date"], $row["Tank"], $row["Feeding_Ratio"], $row["image"]);
+                if($row["Date"] < "2023-07-01") {
+                echo '<td><a href="view_餵食?id=' . $row['id'] .
                     '&Date='.$row["Date"].
                     '&Tank='. $row["Tank"].
                     '&shrimp='. $row["shrimp"].
@@ -301,7 +301,11 @@ if (!isset($_SESSION)) {
                     '&Observation='.$row["Observation"].
                     '&image=' . $row["image"].
                     '">詳細</a></td>
-                    <td><a href="modify_餵食?id=' . $row['id'] .
+                    <td></td>
+                    <td><a href="delete?id=' . $row['id'] . '&type=feed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
+                }
+                else {
+                echo '<td><a href="view_餵食?id=' . $row['id'] .
                     '&Date='.$row["Date"].
                     '&Tank='. $row["Tank"].
                     '&shrimp='. $row["shrimp"].
@@ -345,55 +349,6 @@ if (!isset($_SESSION)) {
                     '&Feeding_Ratio='.$row["Feeding_Ratio"].
                     '&Observation='.$row["Observation"].
                     '&image=' . $row["image"].
-                    '">修改</a></td>
-                    <td><a href="delete?id=' . $row['id'] . '&type=feed" onclick="return confirm(\'確定要刪除ID : '.$row['id'].' 嗎?\');">刪除</a></td>';
-                }
-                else
-                {
-                    printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> %s </td><td> %s </td><td> </td>", $row["id"], $row["Date"], $row["Tank"], $row["Feeding_Ratio"], $row["image"]);
-                    echo '<td><a href="view_餵食?id=' . $row['id'] .
-                    '&Date='.$row["Date"].
-                    '&Tank='. $row["Tank"].
-                    '&shrimp='. $row["shrimp"].
-                    '&No_Shrimp_Male='. $row["No_Shrimp_Male"].
-                    '&No_Shrimp_Female='. $row["No_Shrimp_Female"].
-                    '&No_Dead_Male='. $row["No_Dead_Male"].
-                    '&No_Dead_Female='. $row["No_Dead_Female"].
-                    '&No_Moults_Male='. $row["No_Moults_Male"] .
-                    '&No_Moults_Female='. $row["No_Moults_Female"].
-                    '&Avg_Weight_Male='. $row["Avg_Weight_Male"].
-                    '&Avg_Weight_Female='. $row["Avg_Weight_Female"].
-                    '&Total_Weight='. $row["Total_Weight"].
-                    '&9_species='. $row["9_species"].
-                    '&9_weight='. $row["9_weight"].
-                    '&9_remain='. $row["9_remain"].
-                    '&9_eating='. $row["9_eating"].
-                    '&11_species='. $row["11_species"].
-                    '&11_weight='. $row["11_weight"].
-                    '&11_remain='. $row["11_remain"].
-                    '&11_eating='. $row["11_eating"].
-                    '&14_species='. $row["14_species"].
-                    '&14_weight='. $row["14_weight"].
-                    '&14_remain='. $row["14_remain"].
-                    '&14_eating='. $row["14_eating"].
-                    '&16_species='. $row["16_species"].
-                    '&16_weight='. $row["16_weight"].
-                    '&16_remain='. $row["16_remain"].
-                    '&16_eating='. $row["16_eating"].
-                    '&19_species='. $row["19_species"].
-                    '&19_weight='. $row["19_weight"].
-                    '&19_remain='. $row["19_remain"].
-                    '&19_eating='. $row["19_eating"].
-                    '&23_species='. $row["23_species"].
-                    '&23_weight='. $row["23_weight"].
-                    '&23_remain='. $row["23_remain"].
-                    '&23_eating='. $row["23_eating"].
-                    '&3_species='. $row["3_species"].
-                    '&3_weight='. $row["3_weight"].
-                    '&3_remain='. $row["3_remain"].
-                    '&3_eating='. $row["3_eating"].
-                    '&Feeding_Ratio='.$row["Feeding_Ratio"].
-                    '&Observation='.$row["Observation"].
                     '">詳細</a></td>
                     <td><a href="modify_餵食?id=' . $row['id'] .
                     '&Date='.$row["Date"].

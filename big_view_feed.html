@@ -1,491 +1,568 @@
 
-<form id="big_form" method="post" enctype="multipart/form-data">
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> Index </div>
-        <div style = "width: 18%">
-            <input id="id" name="id" class="form-control" disabled="disabled">
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> Index </div>
+    <div style = "width: 18%">
+        <input id="id" name="id" class="form-control" disabled="disabled">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> TankID </div>
+    <div style = "width: 18%">
+        <select id="location" name="location" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="M1">M1</option>
+            <option value="M2">M2</option>
+            <option value="M3">M3</option>
+            <option value="M4">M4</option>
+        </select>
+    </div>
+    <div style = "width: 2%"> </div>
+    <div style = "width: 10%"> 蝦缸資訊 </div>
+    <div style = "width: 18%">
+        <select id="select_type" name="tank_type" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="公蝦缸">公蝦缸</option>
+            <option value="母蝦缸">母蝦缸</option>
+            <option value="交配缸">交配缸</option>
+            <option value="休養缸">休養缸</option>
+        </select>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 100px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 日期 </div>
+    <div style = "width: 18%">
+        <input id="date" name="date" type="date" disabled="disabled">
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 公蝦數量 </div>
+    <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="male_shrimp" style = "width: auto;">隻</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 母蝦數量 </div>
+    <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="female_shrimp" style = "width: auto;">隻</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 死亡公蝦數量 </div>
+    <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="dead_female_shrimp" style = "width: auto;">隻</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 死亡母蝦數量 </div>
+    <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="dead_female_shrimp" style = "width: auto;">隻</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 蛻皮公蝦數量 </div>
+    <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="peeling_male_shrimp" style = "width: auto;">隻</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 蛻皮母蝦數量 </div>
+    <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="peeling_female_shrimp" style = "width: auto;">隻</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 公蝦均重 </div>
+    <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="avg_male_shrimp" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 母蝦均重 </div>
+    <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="avg_female_shrimp" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 總重 </div>
+    <input id="total_weight" name="total_weight" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="total_weight" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 09:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 09:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food0900" name="food0900" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
+
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_0900" name="else_work_0900" placeholder="其他" type="text" class="form-control" disabled="disabled">
         </div>
     </div>
+</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> TankID </div>
-        <div style = "width: 18%">
-            <select id="location" name="location" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="M1">M1</option>
-                <option value="M2">M2</option>
-                <option value="M3">M3</option>
-                <option value="M4">M4</option>
-            </select>
-        </div>
-        <div style = "width: 2%"> </div>
-        <div style = "width: 10%"> 蝦缸資訊 </div>
-        <div style = "width: 18%">
-            <select id="select_type" name="tank_type" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="公蝦缸">公蝦缸</option>
-                <option value="母蝦缸">母蝦缸</option>
-                <option value="交配缸">交配缸</option>
-                <option value="休養缸">休養缸</option>
-            </select>
-        </div>
-    </div>
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight0900" name="weight0900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight0900" style = "width: auto;">(g)</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 100px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 日期 </div>
-        <div style = "width: 18%">
-            <input id="date" name="date" type="date" disabled="disabled">
-        </div>
-    </div>
+    <div style = "width: 2%"> </div>
 
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 公蝦數量 </div>
-        <input id="male_shrimp" name="male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="male_shrimp" style = "width: auto;">隻</div>
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain0900" name="remain0900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain0900" style = "width: auto;">(g)</div>
 
-        <div style = "width: 2%"> </div>
+    <div style = "width: 2%"> </div>
 
-        <div style = "width: 10%"> 母蝦數量 </div>
-        <input id="female_shrimp" name="female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="female_shrimp" style = "width: auto;">隻</div>
-    </div>
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating0900" name="eating0900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating0900" style = "width: auto;">(g)</div>
+</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 死亡公蝦數量 </div>
-        <input id="dead_male_shrimp" name="dead_male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="dead_female_shrimp" style = "width: auto;">隻</div>
-    
-        <div style = "width: 2%"> </div>
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
 
-        <div style = "width: 10%"> 死亡母蝦數量 </div>
-        <input id="dead_female_shrimp" name="dead_female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="dead_female_shrimp" style = "width: auto;">隻</div>
-    </div>
 
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 蛻皮公蝦數量 </div>
-        <input id="peeling_male_shrimp" name="peeling_male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="peeling_male_shrimp" style = "width: auto;">隻</div>
-    
-        <div style = "width: 2%"> </div>
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 11:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 11:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food1100" name="food1100" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
 
-        <div style = "width: 10%"> 蛻皮母蝦數量 </div>
-        <input id="peeling_female_shrimp" name="peeling_female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="peeling_female_shrimp" style = "width: auto;">隻</div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 公蝦均重 </div>
-        <input id="avg_male_shrimp" name="avg_male_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="avg_male_shrimp" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-
-        <div style = "width: 10%"> 母蝦均重 </div>
-        <input id="avg_female_shrimp" name="avg_female_shrimp" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="avg_female_shrimp" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-
-        <div style = "width: 10%"> 總重 </div>
-        <input id="total_weight" name="total_weight" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="total_weight" style = "width: auto;">(g)</div>
-    </div>
- 
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food0900" name="food0900" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="紅蟲">紅蟲</option>
-                <option value="小卷">小卷</option>
-                <option value="淡菜">淡菜</option>
-                <option value="南極蝦">南極蝦</option>
-                <option value="扇貝">扇貝</option>
-                <option value="螃蟹（去殼）">螃蟹（去殼）</option>
-                <option value="自製飼料">自製飼料</option>
-
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_0900" name="else_work_0900" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_1100" name="else_work_1100" placeholder="其他" type="text" class="form-control" disabled="disabled">
         </div>
     </div>
+</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight0900" name="weight0900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight0900" style = "width: auto;">(g)</div>
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight1100" name="weight1100" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight1100" style = "width: auto;">(g)</div>
 
-        <div style = "width: 2%"> </div>
+    <div style = "width: 2%"> </div>
 
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain0900" name="remain0900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain0900" style = "width: auto;">(g)</div>
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain1100" name="remain1100" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain1100" style = "width: auto;">(g)</div>
 
-        <div style = "width: 2%"> </div>
+    <div style = "width: 2%"> </div>
 
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating0900" name="eating0900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating0900" style = "width: auto;">(g)</div>
-    </div>
-    
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating1100" name="eating1100" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating1100" style = "width: auto;">(g)</div>
+</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food1100" name="food1100" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_1100" name="else_work_1100" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 14:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 14:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food1400" name="food1400" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
+
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_1400" name="else_work_1400" placeholder="其他" type="text" class="form-control" disabled="disabled">
         </div>
     </div>
-    
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight1100" name="weight1100" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight1100" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-    
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain1100" name="remain1100" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain1100" style = "width: auto;">(g)</div>
+</div>
 
-        <div style = "width: 2%"> </div>
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight1400" name="weight1400" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight1400" style = "width: auto;">(g)</div>
 
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating1100" name="eating1100" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating1100" style = "width: auto;">(g)</div>
-    </div>
+    <div style = "width: 2%"> </div>
 
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain1400" name="remain1400" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain1400" style = "width: auto;">(g)</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food1400" name="food1400" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_1400" name="else_work_1400" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating1400" name="eating1400" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating1400" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 16:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 16:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food1600" name="food1600" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
+
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_1600" name="else_work_1600" placeholder="其他" type="text" class="form-control" disabled="disabled">
         </div>
     </div>
-    
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight1400" name="weight1400" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight1400" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-    
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain1400" name="remain1400" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain1400" style = "width: auto;">(g)</div>
+</div>
 
-        <div style = "width: 2%"> </div>
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight1600" name="weight1600" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight1600" style = "width: auto;">(g)</div>
 
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating1400" name="eating1400" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating1400" style = "width: auto;">(g)</div>
-    </div>
+    <div style = "width: 2%"> </div>
 
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain1600" name="remain1600" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain1600" style = "width: auto;">(g)</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food1600" name="food1600" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_1600" name="else_work_1600" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating1600" name="eating1600" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating1600" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+
+
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 19:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 19:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food1900" name="food1900" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
+
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_1900" name="else_work_1900" placeholder="其他" type="text" class="form-control" disabled="disabled">
         </div>
     </div>
+</div>
     
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight1600" name="weight1600" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight1600" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-    
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain1600" name="remain1600" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain1600" style = "width: auto;">(g)</div>
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight1900" name="weight1900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight1900" style = "width: auto;">(g)</div>
 
-        <div style = "width: 2%"> </div>
+    <div style = "width: 2%"> </div>
 
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating1600" name="eating1600" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating1600" style = "width: auto;">(g)</div>
-    </div>
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain1900" name="remain1900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain1900" style = "width: auto;">(g)</div>
 
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
+    <div style = "width: 2%"> </div>
 
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food1900" name="food1900" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_1900" name="else_work_1900" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating1900" name="eating1900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating1900" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+
+
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 23:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 23:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food2300" name="food2300" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
+
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_2300" name="else_work_2300" placeholder="其他" type="text" class="form-control" disabled="disabled">
         </div>
     </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight2300" name="weight2300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight2300" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain2300" name="remain2300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain2300" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating2300" name="eating2300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating2300" style = "width: auto;">(g)</div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 10px">
+    <div style = "height: 2%"> </div>
+</div>
+
+
+
+<div style="background-color: gray ; color: white ; text-align : center ; height: 40px; line-height: 40px ;"> 03:00 </div>
+<div class="form-inline" style = "width: 100% ; height: 10px"> </div>
+<!-- 03:00 -->
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 工作/餵食項目 </div>
+    <div style = "width: 18%">
+        <select id="food0300" name="food0300" class="custom-select" disabled="disabled">
+            <option value="none" selected disabled hidden></option>
+            <option value="紅蟲">紅蟲</option>
+            <option value="小卷">小卷</option>
+            <option value="淡菜">淡菜</option>
+            <option value="南極蝦">南極蝦</option>
+            <option value="扇貝">扇貝</option>
+            <option value="螃蟹（去殼）">螃蟹（去殼）</option>
+            <option value="自製飼料">自製飼料</option>
+
+            <option value="Polychaete">Polychaete</option>
+            <option value="Crab(去殼)">Crab(去殼)</option>
+            <option value="Squid">Squid</option>
+            <option value="Mussel">Mussel</option>
+            <option value="Epsilon">Epsilon</option>
+            <option value="日本飼料">日本飼料</option>
+            <option value="Krill">Krill</option>
+            <option value="Clam(母)">Clam(母)</option>
+            <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
+            <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
+            <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
+            <option value="Ezmate(海膽)">Ezmate(海膽)</option>
+            <option value="其他">其他</option>
+            <!-- 需確認選 "其他" 需填值 -->
+        </select>
+        <div class="input-group">
+            <input id="else_work_0300" name="else_work_0300" placeholder="其他" type="text" class="form-control" disabled="disabled">
+        </div>
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> 餵食量 </div>
+    <input id="weight0300" name="weight0300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="weight0300" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 殘餌量 </div>
+    <input id="remain0300" name="remain0300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="remain0300" style = "width: auto;">(g)</div>
+
+    <div style = "width: 2%"> </div>
+
+    <div style = "width: 10%"> 食餌量 </div>
+    <input id="eating0300" name="eating0300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="eating0300" style = "width: auto;">(g)</div>
+</div>
+
+
+<div class="form-inline" style = "width: 100% ; height: 5px">
+    <div style = "height: 2%"> </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 75px">
+    <div style = "width: 1%"> </div>
+    <div style = "width: 10%"> Feeding Ratio </div>
+    <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
+    <div class="input-group-text" for="FeedingRatio" style = "width: auto;">(%)</div>
+
+    <div style = "width: 2%"> </div>
+    <div style = "width: 10%"> Observation </div>
+    <div style = "width: 40%">
+        <textarea id="Observation" name="Observation" cols="40" rows="5"class="form-control" disabled="disabled"></textarea>      
+    </div>
+</div>
+
+<div class="form-inline" style = "width: 100% ; height: 5px">
+    <div style = "height: 2%"> </div>
+</div>
         
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight1900" name="weight1900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight1900" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-    
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain1900" name="remain1900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain1900" style = "width: auto;">(g)</div>
+<div class="form-inline" style = "width: 100% ; height: 50px">
+    <div style = "width: 1%"> </div>
+    <button type="button" onclick="back()" class="btn btn-primary">返回查詢</button>
+    <div id="backmsg"></div>
+</div>
 
-        <div style = "width: 2%"> </div>
-
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating1900" name="eating1900" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating1900" style = "width: auto;">(g)</div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food2300" name="food2300" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_2300" name="else_work_2300" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
-        </div>
-    </div>
-    
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight2300" name="weight2300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight2300" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-    
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain2300" name="remain2300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain2300" style = "width: auto;">(g)</div>
-
-        <div style = "width: 2%"> </div>
-
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating2300" name="eating2300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating2300" style = "width: auto;">(g)</div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 10px">
-        <div style = "height: 2%"> </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 工作/餵食項目 </div>
-        <div style = "width: 18%">
-            <select id="food0300" name="food0300" class="custom-select" disabled="disabled">
-                <option value="none" selected disabled hidden></option>
-                <option value="Polychaete">Polychaete</option>
-                <option value="Crab(去殼)">Crab(去殼)</option>
-                <option value="Squid">Squid</option>
-                <option value="Mussel">Mussel</option>
-                <option value="Epsilon">Epsilon</option>
-                <option value="日本飼料">日本飼料</option>
-                <option value="Krill">Krill</option>
-                <option value="Clam(母)">Clam(母)</option>
-                <option value="Ezmate(海膽、蟹卵)">Ezmate(海膽、蟹卵)</option>
-                <option value="Ezmate(海膽、蟹白)">Ezmate(海膽、蟹白)</option>
-                <option value="Ezmate(海膽、蟹黃)">Ezmate(海膽、蟹黃)</option>
-                <option value="Ezmate(海膽)">Ezmate(海膽)</option>
-                <option value="其他">其他</option>
-                <!-- 需確認選 "其他" 需填值 -->
-            </select>
-            <div class="input-group">
-                <input id="else_work_0300" name="else_work_0300" placeholder="其他" type="text" class="form-control" disabled="disabled">
-            </div>
-        </div>
-    </div>
-    
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> 餵食量 </div>
-        <input id="weight0300" name="weight0300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="weight0300" style = "width: auto;">(g)</div>
-    
-        <div style = "width: 2%"> </div>
-    
-        <div style = "width: 10%"> 殘餌量 </div>
-        <input id="remain0300" name="remain0300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="remain0300" style = "width: auto;">(g)</div>
-
-        <div style = "width: 2%"> </div>
-
-        <div style = "width: 10%"> 食餌量 </div>
-        <input id="eating0300" name="eating0300" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="eating0300" style = "width: auto;">(g)</div>
-    </div>
-
-
-    <div class="form-inline" style = "width: 100% ; height: 5px">
-        <div style = "height: 2%"> </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 75px">
-        <div style = "width: 1%"> </div>
-        <div style = "width: 10%"> Feeding Ratio </div>
-        <input id="FeedingRatio" name="FeedingRatio" type="text" class="form-control" style = "width: 15%;" disabled="disabled">
-        <div class="input-group-text" for="FeedingRatio" style = "width: auto;">(%)</div>
-
-        <div style = "width: 2%"> </div>
-        <div style = "width: 10%"> Observation </div>
-        <div style = "width: 40%">
-            <textarea id="Observation" name="Observation" cols="40" rows="5"class="form-control" disabled="disabled"></textarea>      
-        </div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 5px">
-        <div style = "height: 2%"> </div>
-    </div>
-            
-    <div class="form-inline" style = "width: 100% ; height: 50px">
-        <div style = "width: 1%"> </div>
-        <button type="button" onclick="back()" class="btn btn-primary">返回查詢</button>
-        <div id="backmsg"></div>
-    </div>
-
-    <div class="form-inline" style = "width: 100% ; height: 5px">
-        <div style = "height: 2%"> </div>
-    </div>
-</form>
+<div class="form-inline" style = "width: 100% ; height: 5px">
+    <div style = "height: 2%"> </div>
+</div>
