@@ -44,7 +44,12 @@ function create_waterquality_chart($result, $data_array) : void{
     $graph->SetMarginColor('white');
 
     // graph title
-    $graph->title->Set('Water Quality');
+    $tank_id = '';
+    foreach($result as $row){
+        $tank_id = $row['TankID'];
+        break;
+    }
+    $graph->title->Set('Water Quality-' . $tank_id);
     $graph->title->SetFont(FF_ARIAL, FS_BOLD, 12);
 
     // x-axis title
@@ -107,8 +112,8 @@ function create_waterquality_chart($result, $data_array) : void{
         $it = new DateTime(date("Y-m-d", $min_date));
         while(strtotime($it->format("Y-m-d")) <= $max_date){
             if(!in_array(strtotime($it->format("Y-m-d")), $x_data)){
-                $x_data[] = strtotime($it->format("Y-m-d"));
-                $y_data[] = floatval('0.0');
+                //$x_data[] = strtotime($it->format("Y-m-d"));
+                //$y_data[] = floatval('0.0');
             }
             $it->modify('+1 day');
         }
