@@ -235,9 +235,9 @@ if (!isset($_SESSION)) {
             var tankid = document.getElementById("tankid").value ;
             var formData = new FormData(document.getElementById("feeding_ratio"));
 
-            // if(start_date == "") { Alert("請選擇起始日期") ; return ; }
-            // if(end_date == "") { Alert("請輸入結束日期") ; return ; }
-            // if(tankid == "" || tankid == "none") { Alert("請選擇tankid") ; return ; }
+            if(start_date == "") { Alert("請選擇起始日期") ; return ; }
+            if(end_date == "") { Alert("請輸入結束日期") ; return ; }
+            if(tankid == "" || tankid == "none") { Alert("請選擇tankid") ; return ; }
 
             const canvas_item = document.getElementById('chart1') ;
             const canvasContainer = document.getElementById("canvasContainer1") ;
@@ -251,7 +251,7 @@ if (!isset($_SESSION)) {
             canvasContainer.appendChild(canvas);
 
             var ctx = document.getElementById('chart1').getContext('2d');
-            var chart_title = "feeding ratio分析折線圖" ;
+            var chart_title = "feeding ratio分析折線圖" + "(" + tankid + ")" ;
             // ctx.clearRect(0, 0, 350 , 400);
 
             var ret_data ;
@@ -313,6 +313,10 @@ if (!isset($_SESSION)) {
                     },
                     scales: {
                         yAxes: [{
+                            scaleLabel: {
+                                display: true,
+                                labelString: 'Feeding ratio(%)',
+                            },
                             ticks: {
                                 beginAtZero: true // 將y軸最小值強制設置為0
                             }
