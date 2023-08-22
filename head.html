@@ -10,13 +10,51 @@
 function googleTranslateElementInit() {
 	new google.translate.TranslateElement({pageLanguage: 'zh-TW' , 
 										includedLanguages: 'zh-TW,en,ja,fr,th,ko,de,vi',
-										layout: google.translate.TranslateElement.InlineLayout.SIMPLE, 
-										autoDisplay: true
+										layout: google.translate.TranslateElement.InlineLayout.SIMPLE, // 顯示為簡單模式
+										autoDisplay: false // 不要自動顯示翻譯工具欄
 									}, 'google_translate_element');
 }
 </script>
 <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"> </script>
 
+<!-- <script type="text/javascript">
+function googleTranslateElementInit() {
+	// 定義支援的語言代碼，除了 "all" 之外
+	var supportedLanguages = 'en,ja,fr,th,ko,de,vi';
+
+	// 初始時，設定支援的語言
+	setSupportedLanguages(supportedLanguages);
+
+	// 監聽下拉式選單變更事件
+	var selector = document.getElementById('language-selector');
+	selector.addEventListener('change', function () {
+	var selectedLanguage = selector.value; // 取得所選語言代碼
+
+	// 如果選擇的是 "all"，彈出第二個下拉式選單來選擇更多語言
+	if (selectedLanguage === 'all') {
+		var moreLanguages = prompt('請輸入更多語言代碼，以逗號分隔：');
+		if (moreLanguages) {
+		setSupportedLanguages(supportedLanguages + ',' + moreLanguages);
+		} else {
+		selector.value = 'zh-TW'; // 若取消，重新設定回原本語言
+		}
+	} else {
+		setSupportedLanguages(selectedLanguage);
+	}
+	});
+}
+
+// 函式：設定支援的語言
+function setSupportedLanguages(languages) {
+	new google.translate.TranslateElement({
+	pageLanguage: 'zh-TW', // 頁面原始語言設為中文（繁體）
+	includedLanguages: languages, // 設定所選語言代碼
+	layout: google.translate.TranslateElement.InlineLayout.SIMPLE, // 顯示為簡單模式
+	autoDisplay: false // 不要自動顯示翻譯工具欄
+	}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
 
 
 <script type="application/x-javascript">
