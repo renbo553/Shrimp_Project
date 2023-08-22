@@ -40,11 +40,16 @@ function waterqualit_diagram_process($mysqli) : void{
 function create_waterquality_chart($result, $data_array) : void{    
     // create a graph and setup margin
     $graph = new Graph(CHART_WIDTH, CHART_HEIGHT);
-    $graph->SetMargin(50, 60, 40, 80);
+    $graph->SetMargin(65, 60, 40, 80);
     $graph->SetMarginColor('white');
 
     // graph title
-    $graph->title->Set('Water Quality');
+    $tank_id = '';
+    foreach($result as $row){
+        $tank_id = $row['TankID'];
+        break;
+    }
+    $graph->title->Set('Water Quality-' . $tank_id);
     $graph->title->SetFont(FF_ARIAL, FS_BOLD, 12);
 
     // x-axis title
@@ -88,7 +93,7 @@ function create_waterquality_chart($result, $data_array) : void{
     foreach($data_array as $data)
         $y_title .= ' ' . $data . $unit_array[$data];
     $graph->yaxis->title->Set($y_title);
-    $graph->yaxis->title->SetMargin(5);
+    $graph->yaxis->title->SetMargin(20);
     $graph->yaxis->title->SetFont(FF_ARIAL, FS_NORMAL, 11);
 
     // add lines
@@ -107,8 +112,8 @@ function create_waterquality_chart($result, $data_array) : void{
         $it = new DateTime(date("Y-m-d", $min_date));
         while(strtotime($it->format("Y-m-d")) <= $max_date){
             if(!in_array(strtotime($it->format("Y-m-d")), $x_data)){
-                $x_data[] = strtotime($it->format("Y-m-d"));
-                $y_data[] = floatval('0.0');
+                //$x_data[] = strtotime($it->format("Y-m-d"));
+                //$y_data[] = floatval('0.0');
             }
             $it->modify('+1 day');
         }
