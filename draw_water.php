@@ -29,6 +29,7 @@ if (!isset($_SESSION)) {
                 <?php require_once "utility.php"; ?>
 
                 <!-- 2/18 修改之UI -->
+                <hr style="border-width: 1px; border-color: black;">
                 <!-- 4/10 radio button -->
                 <div class="form-inline" style = "width: 100% ; height: 65px">
                     <div style = "width: 1%"> </div>

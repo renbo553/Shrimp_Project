@@ -119,10 +119,140 @@ if (!isset($_SESSION)) {
 
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
-            <button type="button" class="btn btn-primary" onclick="continue_tankid(this)">繼續填寫查詢項目</button>
+            <div style = "width: 48%">
+                <div> 排序項目2 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select2", "排序項目2", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式2 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select2", "排序方式2", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
         </div>
 
-        <div class="form-inline" style = "width: 100% ; height: 5px">
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目3 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select3", "排序項目3", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式3 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select3", "排序方式3", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> TankID </div>
+                <div class="input-group">
+                    <select id="tank_select" name="tank_select" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value="M1">M1</option>
+                        <option value="M2">M2</option>
+                        <option value="M3">M3</option>
+                        <option value="M4">M4</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_1" id="and_or_1">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 蝦缸類別 </div>
+                <div class="input-group">
+                    <select id="shrimp_select" name="shrimp_select" class="custom-select">
+                        <option value="none" selected disabled hidden></option>
+                        <option value="公蝦缸">公蝦缸</option>
+                        <option value="母蝦缸">母蝦缸</option>
+                        <option value="交配缸">交配缸</option>
+                        <option value="休養缸">休養缸</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style="width: 100%; height: 65px">
+            <div style="width: 1%"></div>
+            <div style="width: 48%">
+                <div>查詢方式("及" or "或")</div>
+                <div class="input-group">
+                    <select class='form-control' name="and_or_2" id="and_or_2">
+                        <option value="and">及</option>
+                        <option value="or">或</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 起始日期 </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='start_date' id='start_date'>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+            <div style = "width: 48%">
+                <div> 結束日期 </div>
+                <div class="input-group">
+                    <input type='date' class='form-control' name='end_date' id='end_date'>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 25px">
         </div>
 
         <div class="form-inline" style = "width: 100% ; height: 40px">

@@ -700,7 +700,7 @@ if (!isset($_SESSION)) {
      *      result: sql select query result
      */
 
-    function show_shrimp_info_result($result) : void{
+     function show_shrimp_info_result($result) : void{
         echo "資料表有 " . $result->num_rows . " 筆資料<br>";
 
         // --- 顯示資料 --- //
@@ -708,6 +708,12 @@ if (!isset($_SESSION)) {
         echo "<thead>
             <th>Index</th>
             <th>眼標</th>
+            <th>家族</th>
+            <th>體重</th>
+            <th>剪眼體重</th>
+            <th>出生日期</th>
+            <th>剪眼日期</th>
+            <th>進蝦日期</th>
             <th>紙本資料</th>
             </thead><tbody>";
         // echo "<br>顯示資料（MYSQLI_NUM，欄位數）：<br>";
@@ -715,7 +721,11 @@ if (!isset($_SESSION)) {
         while ($row = $result->fetch_assoc()){
             if(strlen($row["image"]) > 0)
             {
-                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>",$row["id"], $row["眼標"], $row["image"]);
+                printf("<tr><td style='height:50px;'> %s </td><td>  
+                    %s </td><td>  %s </td><td>  %s </td><td>  %s </td><td>  
+                    %s </td><td>  %s </td><td> %s </td><td> <a href=%s target='_blank'>查看</a> </td>"
+                    ,$row["id"], $row["眼標"], $row["家族"], $row["體重"], $row["剪眼體重"], $row["出生日期"],
+                    $row["剪眼日期"], $row["進蝦日期"], $row["image"]);
                 echo '<td><a href="view_母種蝦資料?id=' . $row['id'] .
                     '&eye='.$row["眼標"].
                     '&family='.$row["家族"].
@@ -743,7 +753,11 @@ if (!isset($_SESSION)) {
             }
             else
             {
-                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td> </td>",$row["id"], $row["眼標"]);
+                printf("<tr><td style='height:50px;'> %s </td><td> %s </td><td>
+                    %s </td><td>  %s </td><td>  %s </td><td>  %s </td><td>  
+                    %s </td><td>  %s </td><td> </td>"
+                    ,$row["id"], $row["眼標"], $row["家族"], $row["體重"], $row["剪眼體重"], $row["出生日期"],
+                    $row["剪眼日期"], $row["進蝦日期"]);
                 echo '<td><a href="view_母種蝦資料?id=' . $row['id'] . 
                     '&eye='.$row["眼標"].
                     '&family='.$row["家族"].

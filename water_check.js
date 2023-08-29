@@ -257,6 +257,17 @@ function html_get (formData) {
         count ++ ;
     }
 
+    if(nh4 == "") {
+        data_name.push(map.get("nh4")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
+        data_name.push(map.get("nh4")) ;
+        data_num.push(nh4) ;
+        count ++ ;
+    }
+
     if(pH_1 == "") {
         data_name.push(map.get("pH_1")) ;
         data_num.push("空") ;
@@ -320,17 +331,6 @@ function html_get (formData) {
     else if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
         data_name.push(map.get("O2_3")) ;
         data_num.push(O2_3) ;
-        count ++ ;
-    }
-
-    if(nh4 == "") {
-        data_name.push(map.get("nh4")) ;
-        data_num.push("空") ;
-        count ++ ;
-    }
-    else if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
-        data_name.push(map.get("nh4")) ;
-        data_num.push(nh4) ;
         count ++ ;
     }
     
@@ -613,6 +613,7 @@ function html_show_all_data (formData) {
     all_data_name.push(map.get("date")) ;
     all_data_name.push(map.get("no2")) ;
     all_data_name.push(map.get("no3")) ;
+    all_data_name.push(map.get("nh4")) ;
     all_data_name.push(map.get("pH_1")) ;
     all_data_name.push(map.get("pH_2")) ;
     all_data_name.push(map.get("pH_3")) ;
@@ -623,7 +624,6 @@ function html_show_all_data (formData) {
     all_data_name.push(map.get("ORP_1")) ;
     all_data_name.push(map.get("ORP_2")) ;
     all_data_name.push(map.get("ORP_3")) ;
-    all_data_name.push(map.get("nh4")) ;
     all_data_name.push(map.get("Marine")) ;
     all_data_name.push(map.get("TCBS綠菌")) ;
     all_data_name.push(map.get("Alkalinity")) ;
@@ -640,6 +640,7 @@ function html_show_all_data (formData) {
     all_data_num.push(date) ;
     all_data_num.push(no2) ;
     all_data_num.push(no3) ;
+    all_data_num.push(nh4) ;
     all_data_num.push(pH_1) ;
     all_data_num.push(pH_2) ;
     all_data_num.push(pH_3) ;
@@ -650,7 +651,6 @@ function html_show_all_data (formData) {
     all_data_num.push(ORP_1) ;
     all_data_num.push(ORP_2) ;
     all_data_num.push(ORP_3) ;
-    all_data_num.push(nh4) ;
     all_data_num.push(Marine) ;
     all_data_num.push(TCBS綠菌) ;
     all_data_num.push(Alkalinity) ;
@@ -692,6 +692,17 @@ function html_show_all_data (formData) {
     else if(parseInt(no3) < 0 || parseInt(no3) > 500) {
         data_name.push(map.get("no3")) ;
         data_num.push(no3) ;
+        count ++ ;
+    }
+
+    if(nh4 == "") {
+        data_name.push(map.get("nh4")) ;
+        data_num.push("空") ;
+        count ++ ;
+    }
+    else if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
+        data_name.push(map.get("nh4")) ;
+        data_num.push(nh4) ;
         count ++ ;
     }
 
@@ -758,17 +769,6 @@ function html_show_all_data (formData) {
     else if(parseInt(O2_3) < 2 || parseInt(O2_3) > 6) {
         data_name.push(map.get("O2_3")) ;
         data_num.push(O2_3) ;
-        count ++ ;
-    }
-
-    if(nh4 == "") {
-        data_name.push(map.get("nh4")) ;
-        data_num.push("空") ;
-        count ++ ;
-    }
-    else if(parseInt(nh4) < 0 || parseInt(nh4) > 0.5) {
-        data_name.push(map.get("nh4")) ;
-        data_num.push(nh4) ;
         count ++ ;
     }
     
@@ -959,7 +959,7 @@ function html_show_all_data (formData) {
         append_div.append(third_span) ;
 
         var second_span = document.createElement('span');
-        if(data_name.indexOf(all_data_name[i]) != -1) second_span.textContent = "空" ;
+        if(data_name.indexOf(all_data_name[i]) != -1) second_span.textContent = data_num[data_name.indexOf(all_data_name[i])] ;
         else second_span.textContent = all_data_num[i] ;
         if(data_name.indexOf(all_data_name[i]) != -1) second_span.style.color = 'red' ;
         else second_span.style.color = 'black' ;
