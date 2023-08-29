@@ -120,6 +120,66 @@ if (!isset($_SESSION)) {
         <div class="form-inline" style = "width: 100% ; height: 65px">
             <div style = "width: 1%"> </div>
             <div style = "width: 48%">
+                <div> 排序項目2 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select2", "排序項目2", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式2 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select2", "排序方式2", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
+                <div> 排序項目3 </div>
+                <div class="input-group">
+                    <?php 
+                        $sort_option_array = array();
+                        $sort_option_array["index"] = "id";
+                        $sort_option_array["日期"] = "Date";
+                        $sort_option_array["Tank"] = "Tank";
+                        $sort_option_array["蝦缸類別"] = "shrimp";
+                        utility_selectbox("sort_select3", "排序項目3", $sort_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 2%"> </div>
+			<div style = "width: 48%">
+                <div> 排序方式3 </div>
+                <div class="input-group">
+                    <?php 
+                        $order_option_array = array();
+                        $order_option_array["升序"] = "ASC";
+                        $order_option_array["降序"] = "DESC";
+                        utility_selectbox("order_select3", "排序方式3", $order_option_array);
+                    ?>
+                </div>
+            </div>
+            <div style = "width: 1%"> </div>
+        </div>
+
+        <div class="form-inline" style = "width: 100% ; height: 65px">
+            <div style = "width: 1%"> </div>
+            <div style = "width: 48%">
                 <div> TankID </div>
                 <div class="input-group">
                     <select id="tank_select" name="tank_select" class="custom-select">

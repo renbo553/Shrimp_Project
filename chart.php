@@ -121,7 +121,7 @@ function create_waterquality_chart($result, $data_array) : void{
 
         $lplot = new LinePlot($y_data, $x_data);
         
-        //$lplot->mark->SetType(MARK_FILLEDCIRCLE);
+        $lplot->mark->SetType(MARK_FILLEDCIRCLE);
         $graph->Add($lplot);
         
         //$lplot->value->show();
